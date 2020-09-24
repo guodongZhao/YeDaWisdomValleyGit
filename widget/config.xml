@@ -1,33 +1,63 @@
- <widget id="A6021923307939"  version="0.0.1">
-    <name>智汇谷3</name>
-    <description>
-        Example For APICloud.
-    </description>
-    <author email="developer@apicloud.com" href="http://www.apicloud.com">
-        Developer
-    </author>
-    <content src="html/login.html" />
-    <access origin="*" />
-    <preference name="pageBounce" value="false"/>
-	<preference name="appBackground" value="rgba(255,255,255,1)"/>
-	<preference name="windowBackground" value="rgba(0,0,0,0.0)"/>
-	<preference name="frameBackgroundColor" value="rgba(0,0,0,0.0)"/>
-	<preference name="hScrollBarEnabled" value="false"/>
-	<preference name="vScrollBarEnabled" value="false"/>
-	<preference name="autoLaunch" value="true"/>
-	<preference name="fullScreen" value="false"/>
-	<preference name="autoUpdate" value="true" />
-	<preference name="smartUpdate" value="false" />
-	<preference name="debug" value="true"/>
-	<preference name="statusBarAppearance" value="true"/>
-	<permission name="readPhoneState" />
-	<permission name="camera" />
-	<permission name="record" />
-	<permission name="location" />
-	<permission name="fileSystem" />
-	<permission name="internet" />
-	<permission name="bootCompleted" />
-	<permission name="hardware" /><preference name="softInputMode" value="pan"/>
+ <widget id="A6155466852354"  version="0.0.1">
+
+    <name>智汇谷3</name>
+
+    <description>
+
+        Example For APICloud.
+
+    </description>
+
+    <author email="developer@apicloud.com" href="http://www.apicloud.com">
+
+        Developer
+
+    </author>
+
+    <content src="html/login.html" />
+
+    <access origin="*" />
+
+    <preference name="pageBounce" value="false"/>
+
+	<preference name="appBackground" value="rgba(255,255,255,1)"/>
+
+	<preference name="windowBackground" value="rgba(0,0,0,0.0)"/>
+
+	<preference name="frameBackgroundColor" value="rgba(0,0,0,0.0)"/>
+
+	<preference name="hScrollBarEnabled" value="false"/>
+
+	<preference name="vScrollBarEnabled" value="false"/>
+
+	<preference name="autoLaunch" value="true"/>
+
+	<preference name="fullScreen" value="false"/>
+
+	<preference name="autoUpdate" value="true" />
+
+	<preference name="smartUpdate" value="false" />
+
+	<preference name="debug" value="true"/>
+
+	<preference name="statusBarAppearance" value="true"/>
+
+	<permission name="readPhoneState" />
+
+	<permission name="camera" />
+
+	<permission name="record" />
+
+	<permission name="location" />
+
+	<permission name="fileSystem" />
+
+	<permission name="internet" />
+
+	<permission name="bootCompleted" />
+
+	<permission name="hardware" />
+<preference name="softInputMode" value="pan"/>
 <preference name="appCertificateVerify" value="false" />
 <preference name="checkSslTrusted" value="false" />
 <feature name="wxPay">
@@ -42,4 +72,4 @@
      <param name="app_key" value="88e35f1e6a95ba5e86bca5bd" />
      <param name="channel" value="" />
  </feature>
-</widget>
+</widget>
