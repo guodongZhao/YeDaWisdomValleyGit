@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="format-detection" content="telephone=no"><!-- 禁止IPHONE识别手机号码 -->
+<meta name="viewport" content="width=device-width,user-scalable=no, initial-scale=1">
+<title>访客</title>
+<!-- css -->
+<link rel="stylesheet" type="text/css" href="../css/frozenui.css">
+<link rel="stylesheet" type="text/css" href="css/index.css">
+<link rel="stylesheet" type="text/css" href="css/mui.min.css" />
+<link href="css/foundation-datepicker.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="../css/aui.css">
+
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/aui-toast.js"></script>
+<script type="text/javascript" src="../script/H.js"></script>
+<script type="text/javascript" src="../script/jquery.js"></script>
+<script type="text/javascript" src="../script/yuming.js"></script>
+<style>
+.module-content{padding-top: 44px;padding-bottom: 50px;}
+.fklist{margin: 10px;}
+.fklist li{background: #fff;border-radius:5px;padding: 10px;margin-bottom: 10px;position: relative;}
+.fklist li a{display: flex;justify-content: space-between;}
+.fklist li span{width: 50px;font-size: 14px;}
+.fklist li h3{font-size: 14px;color: #000;margin-bottom: 10px;width: 100%;}
+.fklist li h4{color: #666;font-size: 12px;}
+.fklist li p{color: #999;font-size: 12px;border-top: 1px solid #f1f1f1;margin-top: 10px;padding-top: 10px;}
+.tianjia{position: fixed;right: 10px;width: 36px;height: 36px;bottom: 65px;}
+.tianjia img{width: 100%;}
+.zhuan{
+	display: none;
+	margin: 0 auto;
+}
+#ding{
+  width: 100%;
+  height: 50px;
+  background: white;
+  position: relative;
+  line-height: 50px;
+  box-sizing: border-box;
+  display: flex;
+}
+.ding{
+  flex: 1;
+  font-size: 14px;
+  text-align: center;
+  position: relative;
+}
+.ding1{
+width: 20px;height: 2px;
+position: absolute;
+left: 50%;
+margin-left: -10px;
+bottom: 8px;
+background:#4989F6;
+display: none;
+}
+.dingac{
+  color: #4989F6;
+}
+.dingac .ding1{
+  display: block;
+}
+.ks{
+  position: absolute;
+  width: 100px;
+  bottom: 12px;
+  left: 100px;
+  height: 30px;
+  line-height: 30px;
+  font-size: 12px;
+}
+.ks input{
+  position: absolute;
+  height: 20px;
+  line-height: 20px;
+  font-size: 12px;
+  color: #464646;
+  left: 50px;
+  top: 5px;
+  outline: none;
+  border: none;
+  padding: 0;
+  text-indent: 0;
+  background: rgba(0,0,0,0)
+}
+.js input{
+  position: absolute;
+  height: 20px;
+  line-height: 20px;
+  font-size: 12px;
+  color: #464646;
+  left: 50px;
+  top: 5px;
+  outline: none;
+  border: none;
+  padding: 0;
+  text-indent: 0;
+  background: rgba(0,0,0,0)
+}
+.js{  height: 30px;  line-height: 30px;  font-size: 12px;
+  position: absolute;
+  width: 100px;
+  bottom: 12px;
+  left: 230px;
+}
+.dj{
+  text-align:right;width:60px;height:20px;position:absolute;right:10px;top:10px;line-height:20px;
+}
+
+
+.qd{
+  height: 40px;
+  width: 100%;
+  position: relative;
+  line-height: 40px;
+  font-size: 14px;
+  text-align: center;
+  color: #464646;
+  border-top: 0.5px solid #EDEDED;
+}
+.qd1{
+  width: 50%;
+  height: 40px;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+    border-right: 0.5px solid #EDEDED;
+}
+.qd2{
+  width: 50%;
+  height: 40px;
+  position: absolute;
+  right: 0;
+  bottom: 0
+}
+#bz,#bz2{
+  width: 90%;
+  height: 50px;
+  line-height: 50px;
+  font-size: 14px;
+  color: #464646;
+  display: block;
+  margin: 0 auto;
+  border: none;
+  position: relative;
+  top: -15px;
+}
+.tg{
+  height: 20px;
+  line-height: 20px;
+  font-size: 14px;
+    width: 35px!important;
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+text-align:right;
+
+}
+.jj{
+  height: 20px;
+  line-height: 20px;
+  font-size: 14px;
+  width: 35px!important;
+  position: absolute;
+  right: 50px;
+  bottom: 10px;
+  text-align:right;
+
+}
+</style>
+</head>
+<body style="background: #f7f7f7;">
+  <div class="ui-dialog" id="dialog">
+          <div class="ui-dialog-cnt">
+              <div class="ui-dialog-bd">
+                  <p>确定要通过审核吗？</p>
+              </div>
+ <input type="text" name="" placeholder="备注" id="bz">
+              <div class="qd">
+                <div class="qd1" onclick="quxiao()">
+取消
+                </div>
+                <div class="qd2"  onclick="queding()">
+确定
+                </div>
+              </div>
+          </div>
+      </div>
+      <div class="ui-dialog" id="dialog2">
+              <div class="ui-dialog-cnt">
+                  <div class="ui-dialog-bd">
+                      <p>确定要拒绝吗？</p>
+                  </div>
+     <input type="text" name="" placeholder="备注" id="bz2">
+                  <div class="qd">
+                    <div class="qd1" onclick="quxiao2()">
+    取消
+                    </div>
+                    <div class="qd2"  onclick="queding2()">
+    确定
+                    </div>
+                  </div>
+              </div>
+          </div>
+	<header id="headj">
+		<a >
+			<img src="images/back_jt.png" onclick="api.closeWin()" />
+			<span onclick="api.closeWin()">办公管理</span>
+      <div class="ks" style="display:none">
+        开始日期 <input type="date" name="" id="ksdate">
+      </div>
+      <div class="js"  style="display:none">
+        截止日期 <input type="date" name="" id="jsdate">
+      </div>
+			<img src="./images/search.png" id="jgsou" style="height:20px;width:20px;position:absolute;right:5%;bottom:15px;">
+		</a>
+	</header>
+<div class="module-content" id="ge">
+  <div id="ding">
+    <div class="ding dingac" onclick="renwu(1,this)" id="tt1">
+      我的任务
+      <div class="ding1">
+
+      </div>
+    </div>
+    <div class="ding " onclick="renwu(2,this)" id="tt2">
+      待办任务
+      <div class="ding1">
+
+      </div>
+    </div>
+    <div class="ding " onclick="renwu(3,this)" id="tt3">
+      已办任务
+      <div class="ding1">
+
+      </div>
+    </div>
+  </div>
+	<ul class="fklist" id="jmenjin">
+		<!--<li><a href="#">
+			<div>
+				<h3>业达物业集团</h3>
+				<h4>王经理</h4>
+			</div>
+			<span style="color: #00B168;">已通过</span>
+		</a>
+		<p>2019-12-12</p>
+		</li>
+		<li><a href="#">
+			<div>
+				<h3>业达物业集团</h3>
+				<h4>王经理</h4>
+			</div>
+			<span style="color: #FF3A5F;">待审核</span>
+		</a>
+		<p>2019-12-12</p>
+		</li>
+		<li><a href="#">
+			<div>
+				<h3>业达物业集团</h3>
+				<h4>王经理</h4>
+			</div>
+			<span style="color: #007AFF;">已结束</span>
+		</a>
+		<p>2019-12-12</p>
+	</li>-->
+	</ul>
+</div>
+<img src="../image/zhuan.gif" id="zhuan" style="height:20px;width:auto;margin-top:10px;margin-bottom:10px;" class="zhuan">
+<div id="ddd">
+
+</div>
+<div class="foot_menu" style="display:none">
+	<ul>
+		<li>
+			<a href="index.html">
+				<i><img src="images/menu_icon01.png"></i>
+				<span>首 页</span>
+			</a>
+		</li>
+		<li class="cur">
+			<a href="shequ.html">
+				<i><img src="images/menu_icon02_r.png"></i>
+				<span>社 区</span>
+			</a>
+		</li>
+		<li>
+			<a href="news.html">
+				<i><img src="images/menu_icon03.png"></i>
+				<span>消 息</span>
+			</a>
+		</li>
+		<li>
+			<a href="user.html">
+				<i><img src="images/menu_icon04.png"></i>
+				<span>我 的</span>
+			</a>
+		</li>
+	</ul>
+</div>
+</body>
+</html>
+<script type="text/javascript">
+arr=[]
+page=0
+type=1
+ksdate=''
+jsdate=''
+apiready = function () {
+$api.fixStatusBar(document.getElementById('headj'));
+document.getElementById('headj').style.height=(50+api.safeArea.top)+'px'
+document.getElementById('ge').style.marginTop=(5+api.safeArea.top)+'px'
+api.addEventListener({
+    name: 'sxrw'
+}, function(ret, err){
+  showDefault()
+	page=0;
+	zb()
+});
+if(api.pageParam.id==1){
+  $("#tt1").trigger("click");
+}
+if(api.pageParam.id==2){
+  $("#tt2").trigger("click");
+}
+if(api.pageParam.id==3){
+  $("#tt3").trigger("click");
+}
+document.getElementById('ksdate').onchange=function(){
+  ksdate=document.getElementById('ksdate').value
+  page=0
+  showDefault()
+  zb()
+}
+document.getElementById('jsdate').onchange=function(){
+  jsdate=document.getElementById('jsdate').value
+  page=0
+  showDefault()
+  zb()
+}
+    // $("#dialog").addClass("show");
+/*获取当前时间*/
+   var time = new Date();
+   /*格式化日，如果小于9，则补0*/
+   var day = ("0" + time.getDate()).slice(-2);
+   /*格式化月，如果小于9，则补0*/
+   var month = ("0" + (time.getMonth() + 1)).slice(-2);
+   /*拼接日期*/
+   var today = time.getFullYear() + "-" + (month) + "-" + (day);
+   /*完成赋值操作*/
+   ksdate=today
+   jsdate=today
+   document.getElementById("ksdate").value=today
+   document.getElementById("jsdate").value=today
+  // alert( document.getElementById("jsdate").value)
+$api.setStorage('j',0)
+showDefault()
+api.addEventListener({
+    name: 'sx'
+}, function(ret, err){
+	page=0;
+  showDefault()
+  zb()
+});
+
+/*
+请求地址：/learun/adms/task/getmytask
+类型：GET
+请求参数：
+参数名称	类型	备注	必须
+loginMark	String	设备标识，必须具有唯一性	是
+token	String	验证码，从登录后返回信息中获取	是
+pageno	String	当前页码	是
+pagesize	String	每页记录数	是
+startdate	String	开始日期	是
+enddate	String	截止日期	是
+category	String	1我的流程、2待办任务、3已办任务	是
+*/
+document.getElementById('jgsou').onclick=function(){
+	api.openWin({
+	    name: 'soubg',
+	    url: './soubg.html',
+	    pageParam: {
+	        tp: 1
+	    }
+	});
+
+}
+function zb(){
+	if(api.pageParam.ks){
+		ksdate=api.pageParam.ks
+	}
+	if(api.pageParam.js){
+	jsdate=api.pageParam.js
+	}
+//alert(ksdate)
+//alert(jsdate)
+page++
+if(page==1){
+//alert(riqi)
+//alert()
+/*console.log(JSON.stringify({"loginMark": api.deviceId,
+"token": $api.getStorage('token'),
+pageno:page,
+pagesize:10,
+username:$api.getStorage('info').realName,
+startdate	:ksdate,
+enddate	:jsdate,
+category	:1}))*/
+
+ api.ajax({
+	 url: yuming+'/learun/adms/task/getmytask',//+api.deviceId+'&token='+$api.getStorage('token')+'&pageno=1&'+'pagesize=100&startdate='+ksdate+'&enddate='+jsdate+'&category='+type,
+			 method: 'get',
+			 data:{values: {
+"loginMark": api.deviceId,
+"token": $api.getStorage('token'),
+pageno:page,
+pagesize:10,
+//username:$api.getStorage('info').realName,
+startdate	:ksdate,
+enddate	:jsdate,
+category	:type
+						 }}
+			}, function(ret) {
+//alert(JSON.stringify(ret))
+toast.hide()
+api.refreshHeaderLoadDone()
+				for (var i = 0; i < document.getElementsByClassName('zhuan').length; i++) {
+				 document.getElementsByClassName('zhuan')[i].style.display='none'
+			 }
+			 if(ret){
+			 if(1){
+
+
+if(ret.data){
+var html='';
+for (var i = 0; i <ret.data.list.length; i++) {
+  html+='<li  onclick="fwxq(this)" data-id="'+ret.data.list[i].F_Id+'" data-id2="'+ret.data.list[i].F_SchemeCode+'"><a >'
+html+=	'	<div>'
+  html+=	'	<h3 >'+ret.data.list[i].F_SchemeName
+
+  html+='</h3>'
+
+  html+=	'	<h4>'+ret.data.list[i].F_CreateUserName+'</h4>'
+    html+=	'	<h4>'+ret.data.list[i].F_Description+'</h4>'
+if(ret.data.list[i].F_ProcessLevel==0){    html+='<span style="color:#62E54D;" class="dj">普通<span>'}
+
+if(ret.data.list[i].F_ProcessLevel==1){    html+='<span style="color:#F2B721;" class="dj">重要<span>'}
+if(ret.data.list[i].F_ProcessLevel==2){    html+='<span style="color:#F54831;" class="dj">紧急<span>'}
+    html+='</div>'
+//html+=	'	<span style="color: #00B168;">已通过</span>'
+html+='	</a>'
+html+=	'<p>'+ret.data.list[i].F_CreateDate.split(':')[0]+':'+ret.data.list[i].F_CreateDate.split(':')[1]
+if(type==2){    html+='<span style="color:#F54831;" class="vv jj" onclick="jujue(this)" data-id="'+ret.data.list[i].F_TaskId+'"  >拒绝</span><span style="color:#62E54D;" onclick="tongguo(this)" data-id="'+ret.data.list[i].F_TaskId+'"  class="vv tg">通过</span>'}
+html+='</p>'
+html+='	</li>'
+}
+html+='<div class="xiala"></div>'
+document.getElementById('jmenjin').innerHTML=html;
+$('.vv').click(function(e){
+
+　　e.stopPropagation();
+
+})
+}else {
+ document.getElementById('jmenjin').innerHTML='<img src="../image/zanwu.png"style="width:100px;height:100px;display:block;margin:0 auto;margin-top:160px;margin-bottom:100px;">'
+}
+
+			 }else {
+
+		 toast.hide()
+			 }
+
+
+		 }else {
+
+			/* api.toast({
+			 msg: '网络错误',
+			 duration: 2000,
+			 location: 'middle'
+	 });*/
+		 }
+toast.hide()
+			})
+}else {
+ api.ajax({
+   url: yuming+'/learun/adms/task/getmytask',
+       method: 'get',
+       data:{values: {
+
+
+         "loginMark": api.deviceId,
+         "token": $api.getStorage('token'),
+         pageno:page,
+         pagesize:10,
+      //   username:$api.getStorage('info').realName,
+         startdate	:ksdate,
+         enddate	:jsdate,
+        category	:type
+					}}
+}, function(ret) {
+				for (var i = 0; i < document.getElementsByClassName('zhuan').length; i++) {
+				 document.getElementsByClassName('zhuan')[i].style.display='none'
+			 }
+			 if(ret){
+			 if(1){
+
+
+         if(ret.data.list&&ret.data.list.length>0){
+         var html='';
+         for (var i = 0; i <ret.data.list.length; i++) {
+           html+='<li  onclick="fwxq(this)" data-id="'+ret.data.list[i].F_Id+'" data-id2="'+ret.data.list[i].F_SchemeCode+'"><a >'
+         html+=	'	<div>'
+           html+=	'	<h3 >'+ret.data.list[i].F_SchemeName
+
+           html+='</h3>'
+
+           html+=	'	<h4>'+ret.data.list[i].F_CreateUserName+'</h4>'
+             html+=	'	<h4>'+ret.data.list[i].F_Description+'</h4>'
+         if(ret.data.list[i].F_ProcessLevel==0){    html+='<span style="color:#62E54D;" class="dj">普通<span>'}
+
+         if(ret.data.list[i].F_ProcessLevel==1){    html+='<span style="color:#F2B721;" class="dj">重要<span>'}
+         if(ret.data.list[i].F_ProcessLevel==2){    html+='<span style="color:#F54831;" class="dj">紧急<span>'}
+             html+='</div>'
+         //html+=	'	<span style="color: #00B168;">已通过</span>'
+         html+='	</a>'
+         html+=	'<p>'+ret.data.list[i].F_CreateDate.split(':')[0]+':'+ret.data.list[i].F_CreateDate.split(':')[1]
+         if(type==2){    html+='<span style="color:#F54831;" class="vv jj" onclick="jujue(this)" data-id="'+ret.data.list[i].F_TaskId+'"  >拒绝</span><span style="color:#62E54D;" onclick="tongguo(this)" data-id="'+ret.data.list[i].F_TaskId+'"  class="vv tg">通过</span>'}
+         html+='</p>'
+         html+='	</li>'
+         }
+
+html+='<div class="xiala"></div>'
+document.getElementsByClassName('xiala')[page-2].innerHTML=html
+	$api.setStorage('j',0)
+  $('.vv').click(function(e){
+
+  　　e.stopPropagation();
+
+  })
+}else {
+ //document.getElementById('content').innerHTML='<img src="../image/zanwu.png"style="width:100px;height:100px;display:block;margin:0 auto;margin-top:100px;">'
+}
+
+			 }
+
+
+		 }else {
+
+			/* api.toast({
+			 msg: '网络错误',
+			 duration: 2000,
+			 location: 'middle'
+	 });*/
+		 }
+toast.hide()
+			})
+
+
+}
+
+}
+zb()
+api.addEventListener({
+name:'scrolltobottom',
+extra:{
+		threshold:0           //设置距离底部多少距离时触发，默认值为0，数字类型
+}
+}, function(ret, err){
+
+if($api.getStorage('j')==0){
+$api.setStorage('j',1)
+//alert(1)
+ var zhuan=document.getElementById('zhuan').cloneNode(true);
+ zhuan.style.display='block'
+ document.getElementById('ddd').appendChild(zhuan)
+
+zb()
+}
+});
+
+
+}
+function fwxq(data){
+	//alert(JSON.stringify(arr[data]))
+	api.openWin({
+	    name: 'rwxq',
+	    url: './rwxq.html',
+	    pageParam: {
+	      id:data.getAttribute('data-id'),
+          id2:data.getAttribute('data-id2')
+	    }
+	});
+
+}
+function renwu(data,th){
+  var ding=document.getElementsByClassName('ding');
+  for (var i = 0; i < ding.length; i++) {
+    ding[i].classList.remove('dingac')
+  }
+  th.classList.add('dingac')
+  type=data
+  page=0
+  api.sendEvent({
+      name: 'sx',
+      extra: {
+          key1: 'value1',
+          key2: 'value2'
+      }
+  });
+
+}
+function tongguo(data){
+
+  id=data.getAttribute('data-id')
+    $("#dialog").addClass("show");
+}
+function jujue(data){
+
+  id=data.getAttribute('data-id')
+    $("#dialog2").addClass("show");
+}
+function queding(data){
+/*
+求地址：/learun/adms/task/audit
+类型：POST
+请求参数：
+参数名称	类型	备注	必须
+loginMark	String	设备标识，必须具有唯一性	是
+token	String	验证码，从登录后返回信息中获取	是
+taskid	String	任务id（获取任务列表接口中返回）	是
+verifytype	String	1同意，2不同意	是
+description	String	备注意见	否
+*/
+showDefault()
+//alert(id)
+      $("#dialog").removeClass("show");
+			api.ajax({
+		    url: yuming+'/learun/adms/task/audit',
+		        method: 'post',
+		        data:{values: {
+		          "loginMark": api.deviceId,
+		          "token": $api.getStorage('token'),
+		        taskid	:id,
+		        verifytype:1,
+						description:document.getElementById('bz').value
+		              }}
+		       }, function(ret) {
+		 //alert(JSON.stringify(ret))
+toast.hide()
+		         for (var i = 0; i < document.getElementsByClassName('zhuan').length; i++) {
+		          document.getElementsByClassName('zhuan')[i].style.display='none'
+		        }
+		        if(ret){
+		        if(ret.code==200){
+							api.toast({
+							 msg:'审核通过!',
+							 duration: 2000,
+							 location: 'middle'
+							});
+api.sendEvent({
+    name: 'sxrw',
+    extra: {
+        key1: 'value1',
+        key2: 'value2'
+    }
+});
+
+
+
+		        }else {
+		          api.toast({
+		           msg:ret.info,
+		           duration: 2000,
+		           location: 'middle'
+		          });
+		      toast.hide()
+		        }
+
+
+		      }else {
+
+		       /* api.toast({
+		        msg: '网络错误',
+		        duration: 2000,
+		        location: 'middle'
+		    });*/
+		      }
+		 toast.hide()
+		       })
+}
+function queding2(data){
+
+showDefault()
+      $("#dialog2").removeClass("show");
+			api.ajax({
+		    url: yuming+'/learun/adms/task/audit',
+		        method: 'post',
+		        data:{values: {
+		          "loginMark": api.deviceId,
+		          "token": $api.getStorage('token'),
+		        taskid	:id,
+		        verifytype:2,
+						description:document.getElementById('bz').value
+		              }}
+		       }, function(ret) {
+		 //alert(JSON.stringify(ret))
+toast.hide()
+		         for (var i = 0; i < document.getElementsByClassName('zhuan').length; i++) {
+		          document.getElementsByClassName('zhuan')[i].style.display='none'
+		        }
+		        if(ret){
+		        if(ret.code==200){
+							api.toast({
+							 msg:'审核拒绝!',
+							 duration: 2000,
+							 location: 'middle'
+							});
+						api.sendEvent({
+						    name: 'sxrw',
+						    extra: {
+						        key1: 'value1',
+						        key2: 'value2'
+						    }
+						});
+
+
+
+		        }else {
+		          api.toast({
+		           msg:ret.info,
+		           duration: 2000,
+		           location: 'middle'
+		          });
+		      toast.hide()
+		        }
+
+
+		      }else {
+
+		       /* api.toast({
+		        msg: '网络错误',
+		        duration: 2000,
+		        location: 'middle'
+		    });*/
+		      }
+		 toast.hide()
+		       })
+}
+function quxiao(data){
+
+
+    $("#dialog").removeClass("show");
+}
+function quxiao2(data){
+
+
+    $("#dialog2").removeClass("show");
+}
+</script>

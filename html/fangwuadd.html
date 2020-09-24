@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="format-detection" content="telephone=no"><!-- 禁止IPHONE识别手机号码 -->
+<meta name="viewport" content="width=device-width,user-scalable=no, initial-scale=1">
+<title>添加房屋</title>
+<!-- css -->
+<link rel="stylesheet" type="text/css" href="css/index.css">
+<link rel="stylesheet" type="text/css" href="css/mui.min.css" />
+<link href="css/foundation-datepicker.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="../css/aui.css">
+<link rel="stylesheet" type="text/css" href="../css/re.css">
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/aui-toast.js"></script>
+<script type="text/javascript" src="../script/H.js"></script>
+<script type="text/javascript" src="../script/jquery.js"></script>
+<script type="text/javascript" src="../script/yuming.js"></script>
+<style>
+.module-content{padding-top: 44px;padding-bottom: 50px;}
+.hybt{color: #000;font-size: 16px;line-height: 40px;}
+.hyxz{background: #f4f4f4;border-top-left-radius: 10px;border-top-right-radius: 10px;padding: 10px 15px;}
+
+.yyr{border-radius: 10px;overflow: hidden;}
+.yyr li{display: flex;background: #fff;align-items: center;padding:5px 10px;border-bottom: 1px solid #f1f1f1;}
+.yyr li:last-child{border-bottom: 0;}
+.yyr li span{font-size: 14px;color: #333;width: 130px;}
+.yyr li select{font-size: 14px;}
+.yyr li input{border: 0;font-size: 14px;color: #000;}
+.yyr li p{line-height: 21px; width: 100%; height: 40px;padding: 10px 15px;display: flex;align-items: center;}
+.yyr li label{margin-right: 20px;}
+.yyr li label input{margin-right: 5px;}
+.yyr p{line-height: 44px;color: #000;font-size: 14px;}
+.hyxz textarea{border-radius: 10px;border: 0;color: #000;font-size: 14px;}
+.hyxz textarea::-webkit-input-placeholder{color: #333;}
+.tjsq{display: block;text-align: center; line-height: 40px;margin-top: 10px; color:#fff;font-size: 14px; border-radius: 10px;background: linear-gradient(to right, #367ff8 , #556dff);}
+</style>
+</head>
+<body style="background: #f7f7f7;">
+	<header id="headj">
+		<a>
+			<img src="images/back_jt.png" onclick="api.closeWin()" />
+			<span onclick="api.closeWin()">添加房屋</span>
+		</a>
+	</header>
+<div class="module-content" id="ge">
+	<div class="hyxz">
+		<ul class="yyr" id="ct">
+		<!--	<li><span>房屋类型</span><select><option>租赁</option><option>分配</option></select></li>
+			<li><span>房屋序号</span><input type="text" placeholder="请填写房屋序号" /></li>
+			<li style="display:none"><span>数据区分序号</span><input type="text" placeholder="请填写数据区分序号" /></li>
+			<li><span>承租方</span><input type="text" placeholder="请填写承租人" /></li>
+			<li><span>交付钥匙</span><p><label><input type="radio" name="key" checked="checked" />是</label><label><input type="radio" name="key" />否</label></p></li>
+			<li><span>开始时间</span><input type="text" placeholder="请选择开始时间" value="12/12/2019" id="demo-1" /></li>
+			<li><span>结束时间</span><input type="text" placeholder="请选择结束时间" value="12/12/2019" id="demo-2"></li>
+-->
+		</ul>
+		<p class="hybt">备注</p>
+		<textarea placeholder="" id="bz"></textarea>
+
+	<a class="tjsq" onclick="tijiao()">添加提交</a>
+
+	</div>
+</div>
+
+<div class="foot_menu" style="display:none">
+	<ul>
+		<li>
+			<a href="index.html">
+				<i><img src="images/menu_icon01.png"></i>
+				<span>首 页</span>
+			</a>
+		</li>
+		<li class="cur">
+			<a href="wuye.html">
+				<i><img src="images/menu_icon02.png"></i>
+				<span>智 能</span>
+			</a>
+		</li>
+		<li>
+			<a href="news.html">
+				<i><img src="images/menu_icon03.png"></i>
+				<span>消 息</span>
+			</a>
+		</li>
+		<li>
+			<a href="user.html">
+				<i><img src="images/menu_icon04.png"></i>
+				<span>我 的</span>
+			</a>
+		</li>
+	</ul>
+</div>
+</body>
+<script src="js/jquery-1.11.3.min.js"></script>
+<script src="js/foundation-datepicker.js"></script>
+<script src="js/locales/foundation-datepicker.zh-CN.js"></script>
+<script>
+$('#demo-1').fdatepicker();
+$('#demo-2').fdatepicker();
+</script>
+</html>
+<script type="text/javascript">
+//alert(1)
+apiready = function () {
+	//alert(JSON.stringify(api.pageParam.arr))
+$api.fixStatusBar(document.getElementById('headj'));
+document.getElementById('headj').style.height=(50+api.safeArea.top)+'px'
+document.getElementById('ge').style.marginTop=(5+api.safeArea.top)+'px'
+
+
+
+function xt(){
+	api.ajax({
+					 url: yuming+'/learun/adms/newuser/getcompany',
+					 method: 'get',
+					 data:{values: {
+
+
+	"loginMark": api.deviceId,
+	"token": $api.getStorage('token')
+
+
+							}}
+			 }, function(ret) {
+
+//alert(JSON.stringify(ret))
+
+			 if(ret){
+			 if(ret.code==200){
+
+				toast.hide()
+var html=''
+for (var i = 0; i < ret.data.length; i++) {
+if(1){
+html+='<option value="'+ret.data[i].areaId+'">'+ret.data[i].areaName+'</option>'
+}
+
+}
+htmlx=''
+htmlx+= 	'<li><span>房屋类型</span><select id="lx"><option value="租赁">租赁</option><option value="分配">分配</option></select></li>'
+htmlx+='	<li><span>房间序号</span><input type="text"  placeholder="请填写房间序号" id="roomid"/></li>'
+	htmlx+='	<li style="display:none"><span>数据区分序号</span><input type="text" placeholder="请填写数据区分序号" id="companyid"/></li>'
+	htmlx+='	<li><span>承租方</span><select id="czf">'+html+'</select></li>'
+	htmlx+='	<li><span>交付钥匙</span><p><label><input type="radio" name="key" checked="checked" value="1" id="isHaveKey1" />是</label><label><input type="radio" value="2" id="isHaveKey2" name="key" />否</label></p></li>'
+	htmlx+='	<li><span>开始时间</span><input type="date" placeholder="请选择开始时间"  id="starttime"/></li>'
+	htmlx+='	<li><span>结束时间</span><input type="date"  placeholder="请选择结束时间" id="endtime"></li>'
+
+
+document.getElementById('ct').innerHTML=htmlx
+
+	 }else {
+		 toast.hide()
+		 api.toast({
+		 msg: ret.info,
+		 duration: 2000,
+		 location: 'middle'
+ });
+	 }
+
+			 }else {
+
+					toast.hide()
+				 api.toast({
+				 msg: '网络错误',
+				 duration: 2000,
+				 location: 'middle'
+		 });
+			 }
+
+			 })
+
+
+
+}
+xt()
+
+//showDefault()
+}
+jy=0
+function tijiao(){
+  //alert(document.getElementById('nyr').value)
+/*14.4修改房间租赁信息
+请求地址：/learun/adms/Roomlease/updateroomlease类型：POST
+请求参数：
+参数名称	类型	备注	必须
+loginMark	String	设备标识，必须具有唯一性	是
+token	String	验证码，从登录后返回信息中获取	是
+id	int	房间租赁主键	是
+companyid	String	数据区分序号	是
+tenantryid	String	承租方序号	是
+starttime	DateTime?	开始时间	是
+endtime	DateTime?	结束时间	是
+roomid	Int	房间序号	是
+remark	String	备注	否
+isHaveKey	String	是否交付钥匙	是	否*/
+ish=1
+if(document.getElementById('isHaveKey1').checked){
+	ish=1
+}else {
+	ish=2
+}
+	if(jy==0){
+		jy=1
+		showDefault()
+		if(document.getElementById('lx').value=='租赁'){
+			api.ajax({
+						 url: yuming+'/learun/adms/Roomlease/addroomlease',
+						 method: 'post',
+						 data:{values: {
+               "loginMark": api.deviceId,
+               "token": $api.getStorage('token'),
+								companyid	:document.getElementById('companyid').value,
+	 						tenantryid:document.getElementById('czf').value,
+	 						starttime	:document.getElementById('starttime').value,
+	 						endtime	:document.getElementById('endtime').value,
+	 						roomids	:document.getElementById('roomid').value,
+	 						remark:document.getElementById('bz').value,
+	 						isHaveKey	:ish
+
+
+								}}
+				 }, function(ret) {
+
+	//alert(JSON.stringify(ret))
+	 toast.hide()
+				 if(ret){
+				 if(ret.code==200){
+					 api.sendEvent({
+					     name: 'sx',
+					     extra: {
+					         key1: 'value1',
+					         key2: 'value2'
+					     }
+					 });
+
+					 api.toast({
+					 msg: '提交成功!',
+					 duration: 2000,
+					 location: 'middle'
+					 });
+					toast.hide()
+jy=0
+		 }else {
+       jy=0
+			 toast.hide()
+			 api.toast({
+			 msg: ret.info,
+			 duration: 2000,
+			 location: 'middle'
+	 });
+		 }
+
+				 }else {
+
+						toast.hide()
+					 api.toast({
+					 msg: '网络错误',
+					 duration: 2000,
+					 location: 'middle'
+			 });
+				 }
+
+			 })}else {
+				 api.ajax({
+ 								 url: yuming+'/learun/adms/Roomdistribution/addroomdistribution',
+ 								 method: 'post',
+ 								 data:{values: {
+ 		               "loginMark": api.deviceId,
+ 		               "token": $api.getStorage('token'),
+ 									// id	:api.pageParam.arr.id,
+ 			 						companyid	:document.getElementById('companyid').value,
+ 			 						distributionid:document.getElementById('czf').value,
+ 			 						starttime	:document.getElementById('starttime').value,
+ 			 						endtime	:document.getElementById('endtime').value,
+ 			 						roomids	:document.getElementById('roomid').value,
+ 			 						remark:document.getElementById('bz').value,
+ 			 						isHaveKey	:ish
+
+
+ 										}}
+ 						 }, function(ret) {
+
+ 			//alert(JSON.stringify(ret))
+ 			 toast.hide()
+ 						 if(ret){
+ 						 if(ret.code==200){
+ 							 api.sendEvent({
+ 							     name: 'sx',
+ 							     extra: {
+ 							         key1: 'value1',
+ 							         key2: 'value2'
+ 							     }
+ 							 });
+
+ 							 api.toast({
+ 							 msg: '提交成功!',
+ 							 duration: 2000,
+ 							 location: 'middle'
+ 							 });
+ 							toast.hide()
+ 		jy=0
+ 				 }else {
+ 		       jy=0
+ 					 toast.hide()
+ 					 api.toast({
+ 					 msg: ret.info,
+ 					 duration: 2000,
+ 					 location: 'middle'
+ 			 });
+ 				 }
+
+ 						 }else {
+
+ 								toast.hide()
+ 							 api.toast({
+ 							 msg: '网络错误',
+ 							 duration: 2000,
+ 							 location: 'middle'
+ 					 });
+ 						 }
+
+ 						 })
+			 }
+	}
+}
+function shanchu(data){
+
+
+    $("#dialog").addClass("show");
+}
+function quxiao(data){
+
+
+    $("#dialog").removeClass("show");
+}
+function queding(){
+  $("#dialog").removeClass("show");
+  //alert(document.getElementById('nyr').value)
+//  return
+  /*求地址：/learun/adms/watermeter/updatewatermeter
+  类型：POST
+  请求参数：
+  参数名称	类型	备注	必须
+  id	int	序号	是
+  dvalue	String	电表读数	是
+  year	String	年	是
+  month	String	月	是
+  day	String	日	是
+  companyid	String	数据区分序号	否
+  costitemid	int	成本项目ID	否
+  remark	String	备注	否
+  newvalue	String	本次表读数	是
+  userno	String	业主编号	否
+  status	String	电表状态(1:正常,0:异常)只有0或1	是
+  commadd	String	电表编号	是
+  lastvalue	String	上次表读数	否
+  lastdate	String	上次表读日期	否
+  newdate	String	本次表读日期	是*/
+	if(jy==0){
+		jy=1
+		showDefault()
+		api.ajax({
+						 url: yuming+'/learun/adms/Electricitymeter/delelectricitymeter',
+						 method: 'post',
+						 data:{values: {
+               "loginMark": api.deviceId,
+               "token": $api.getStorage('token'),
+               id	:api.pageParam.id,
+
+
+								}}
+				 }, function(ret) {
+
+	//alert(JSON.stringify(ret))
+	 toast.hide()
+				 if(ret){
+				 if(ret.code==200){
+					 api.toast({
+					 msg: '删除成功!',
+					 duration: 2000,
+					 location: 'middle'
+					 });
+					toast.hide()
+          api.sendEvent({
+              name: 'sx',
+              extra: {
+                  key1: 'value1',
+                  key2: 'value2'
+              }
+          });
+
+          setTimeout(function(){
+            api.closeWin();
+
+          },1000)
+
+jy=0
+		 }else {
+       jy=0
+			 toast.hide()
+			 api.toast({
+			 msg: ret.info,
+			 duration: 2000,
+			 location: 'middle'
+	 });
+		 }
+
+				 }else {
+
+						toast.hide()
+					 api.toast({
+					 msg: '网络错误',
+					 duration: 2000,
+					 location: 'middle'
+			 });
+				 }
+
+				 })
+	}
+}
+</script>

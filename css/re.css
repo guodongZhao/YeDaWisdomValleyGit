@@ -1,0 +1,95 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+input:-ms-input-placeholder{color:#C9C9C9;}/* Internet Explorer 10+ */
+input::-webkit-input-placeholder{color:#C9C9C9;}/* WebKit browsers */
+input::-moz-placeholder{color:#C9C9C9;}/* Mozilla Firefox 4 to 18 */
+input:-moz-placeholder{color:#C9C9C9;}/* Mozilla Firefox 19+ */
+textarea::-webkit-input-placeholder{
+	color:#C9C9C9;
+}
+ .scale-border{
+      left: 5%;
+        height:1px;
+        position:relative;
+       line-height: 30px;
+       font-size: 14px;
+        width: 90%;
+
+
+    }
+		.shanchu{
+			z-index: 98!important;
+		}
+    .border{
+        -webkit-transform:scale(0.1);
+        transform:scale(0.1);
+        position:absolute;
+        border-bottom:1px solid #333;
+        top:-500%;
+        right:-500%;
+        bottom:-500%;
+        left:-500%;
+        border-radius: 0px;
+
+    }
+		.zhuan{
+			clear: both;
+			margin: 0 auto;
+			display: none;
+		}
+		.shu{
+			width: 1px;
+			height: 100%;
+			background: linear-gradient(to right, #F9F9F9 54%, #C6C6C6 55%);
+		}
+		.aby{
+			width: 1px;
+			height: 100%;
+			background: linear-gradient(to right, #F9F9F9 54%, #C6C6C6 55%);
+			position: absolute;
+			right: 0;
+			top: 0;
+		}
+		.abz{
+			width: 1px;
+			height: 100%;
+			background: linear-gradient(to right, #F9F9F9 54%, #C6C6C6 55%);
+			position: absolute;
+			left: 0;
+			top: 0;
+		}
+		.xixian{
+			width: 100%;
+			height: 1px;
+			background: linear-gradient(to bottom, #F9F9F9 54%, #C6C6C6 55%);
+		}
+		.abtxixian{	width: 100%;
+			height: 1px;
+			background: linear-gradient(to bottom, #F9F9F9 54%, #C6C6C6 55%);
+		  position: absolute;
+		  left: 0;
+		  top: 0;
+		}
+		.abbxixian{	width: 100%;
+			height: 1px;
+			background: linear-gradient(to bottom, #F9F9F9 54%, #C6C6C6 55%);
+		  position: absolute;
+		  left: 0;
+		  bottom: 0;
+		}
+    input{
+    	outline: none;
+    	border: none;
+    	caret-color:#05A7EA;
+    }
+    .fen{
+    	width: 100%;
+    	height: 10px;;
+    	background: #EDEDED;
+
+    }
+body,html{
+	background: white
+}

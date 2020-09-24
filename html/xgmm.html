@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="format-detection" content="telephone=no"><!-- 禁止IPHONE识别手机号码 -->
+<meta name="viewport" content="width=device-width,user-scalable=no, initial-scale=1">
+<title>注册</title>
+<!-- css -->
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+<link rel="stylesheet" type="text/css" href="css/index.css">
+<link rel="stylesheet" type="text/css" href="../css/aui.css">
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/aui-toast.js"></script>
+<script type="text/javascript" src="../script/H.js"></script>
+<script type="text/javascript" src="../script/jquery.js"></script>
+<script type="text/javascript" src="../script/yuming.js"></script>
+<style>
+	.login-h2{
+		font-size: 26px;
+		color: #000;
+		font-weight: bold;
+		margin:1rem 20px;
+	}
+	.login-ul{
+		margin: 20px;
+	}
+	.login-ul li{
+		display: flex;
+		justify-content: ;
+		align-items: center;
+		font-size: 16px;
+		border-bottom: 1px solid #ddd;
+		line-height: 50px;
+		height: 50px;
+		margin-top: 10px;
+	}
+	.login-ul li input{border: none;color: 333;}
+	.login-ul li input::-webkit-input-placeholder{color: #999;}
+	.dlbtn{
+		display: block;
+		color: #fff;
+		border-radius: 25px;
+		margin:1rem 10px 0.5rem;
+		background: #007AFF;
+		text-align: center;
+		line-height: 40px;
+		font-size: 14px;
+	}
+	.login-reg{margin:0 20px;text-align: right;}
+	.login-reg a{color: #007AFF;}
+	.zhuce{margin: 0.4rem;color: #999;font-size: 12px;text-align: center;}
+	.zhuce a{color: #007AFF;}
+</style>
+</head>
+<body>
+	<header id="headj">
+		<a ><img src="images/back_jt.png" onclick="api.closeWin()"/><span onclick="api.closeWin()">修改密码</span></a>
+
+	</header>
+	<div class="module-content"  id="ge">
+		<h2 class="login-h2"></h2>
+		<ul class="login-ul">
+
+			<li>
+				<input type="password" placeholder="请输入原密码" id="pass1" style="width:100%"/>
+			</li>
+      <li>
+				<input type="password" placeholder="请输入新密码" id="pass2"  style="width:100%"/>
+			</li>
+			<li>
+				<input type="password" placeholder="请再次输入新密码" id="pass3"  style="width:100%"/>
+			</li>
+		</ul>
+		<a class="dlbtn" id="denglu"  onclick="tijiao()">修改</a>
+	</div>
+</body>
+</html>
+<script>
+
+    apiready = function () {
+$api.fixStatusBar(document.getElementById('headj'));
+document.getElementById('ge').style.marginTop=(60+parseInt(api.safeArea.top))+'px'
+
+}
+jy=0
+function tijiao(){
+	var pass1= document.getElementById('pass1').value;
+	var pass2= document.getElementById('pass2').value;
+  	var pass3= document.getElementById('pass3').value;
+if(!pass1){
+  api.toast({
+  msg: '请输入原密码!',
+  duration: 2000,
+  location: 'middle'
+  });
+  return
+}
+if(!pass2){
+  api.toast({
+  msg: '请输入新密码!',
+  duration: 2000,
+  location: 'middle'
+  });
+  return
+}
+if(pass2!=pass3){
+  api.toast({
+  msg: '新密码两次输入不同!',
+  duration: 2000,
+  location: 'middle'
+  });
+  return
+}
+/*
+/learun/adms/usercenter/usercenter类型：POST
+请求参数：
+参数名称	类型	备注	必须
+loginMark	String	设备标识，必须具有唯一性	是
+token	String	验证码，从登录后返回信息中获取	是
+OldPassword	String	原密码	是
+password	String	新密码	是
+*/
+	if(jy==0){
+		jy=1
+		showDefault()
+		api.ajax({
+						 url: yuming+'/learun/adms/usercenter/usercenter',
+						 method: 'post',
+						 data:{values: {
+
+
+		"loginMark": api.deviceId,
+		"token": $api.getStorage('token'),
+    OldPassword:pass1,
+    password:pass2
+
+
+								}}
+				 }, function(ret) {
+
+	//alert(JSON.stringify(ret))
+	 toast.hide()
+   jy=0
+				 if(ret){
+				 if(ret.code==200){
+					 api.toast({
+					 msg: '修改成功!',
+					 duration: 2000,
+					 location: 'middle'
+					 });
+					toast.hide()
+jy=0
+		 }else {
+			 toast.hide()
+			 api.toast({
+			 msg: ret.info,
+			 duration: 2000,
+			 location: 'middle'
+	 });
+		 }
+
+				 }else {
+
+						toast.hide()
+					 api.toast({
+					 msg: '网络错误',
+					 duration: 2000,
+					 location: 'middle'
+			 });
+				 }
+
+				 })
+	}
+}
+</script>

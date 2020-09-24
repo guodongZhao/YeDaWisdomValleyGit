@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="format-detection" content="telephone=no"><!-- 禁止IPHONE识别手机号码 -->
+<meta name="viewport" content="width=device-width,user-scalable=no, initial-scale=1">
+<title>报修</title>
+<!-- css -->
+  <link rel="stylesheet" type="text/css" href="../css/frozenui.css"/>
+<link rel="stylesheet" type="text/css" href="css/index.css">
+<link rel="stylesheet" type="text/css" href="css/mui.min.css" />
+<link href="css/foundation-datepicker.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="../css/aui.css">
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/aui-toast.js"></script>
+<script type="text/javascript" src="../script/H.js"></script>
+<script type="text/javascript" src="../script/jquery.js"></script>
+<script type="text/javascript" src="../script/yuming.js"></script>
+<style>
+.module-content{padding-top: 44px;padding-bottom: 50px;}
+.hybt{color: #000;font-size: 16px;line-height: 40px;}
+.hyxz{background: #f4f4f4;border-top-left-radius: 10px;border-top-right-radius: 10px;padding: 10px 15px;}
+
+.yyr{border-radius: 10px;overflow: hidden;}
+.yyr li{display: flex;background: #fff;align-items: center;padding:5px 10px;}
+.yyr li span{font-size: 14px;color: #333;width: 80px;}
+.yyr li select{font-size: 14px;}
+.yyr li input{border: 0;font-size: 14px;color: #000;}
+.yyr p{line-height: 44px;color: #000;font-size: 14px;}
+.hyxz textarea{border-radius: 10px;border: 0;color: #000;font-size: 14px;}
+.hyxz textarea::-webkit-input-placeholder{color: #333;}
+.tjsq{display: block;text-align: center; line-height: 40px;margin-top: 10px; color:#fff;font-size: 14px; border-radius: 10px;background: linear-gradient(to right, #367ff8 , #556dff);}
+#pzt{
+display: block;
+margin: 0 auto;
+width: 94%;
+margin: 0 auto;
+height: auto;
+margin-top: 20px;
+margin-bottom: 20px;
+}
+
+#pzt .pzw{
+float: left;
+ height: 80px;
+ width: 80px;
+ margin-right: 20px;
+ margin-bottom: 10px;
+ position: relative;
+}
+#pzt .pzwo{
+float: left;
+ height: 80px;
+ width: 80px;
+ margin-right: 20px;
+ margin-bottom: 10px;
+ position: relative;
+}
+#pzt .pzc{
+position: absolute;
+z-index: 1;
+width: 30px;
+height: 30px;
+left: -10px;
+top: -10px;
+}
+#pzt img{
+width: 100%;
+height: 100%;
+border-radius: 10px;
+}
+#lizi{
+display: none;
+}
+.qd{
+  height: 40px;
+  width: 100%;
+  position: relative;
+  line-height: 40px;
+  font-size: 14px;
+  text-align: center;
+  color: #464646;
+  border-top: 0.5px solid #EDEDED;
+}
+.qd1{
+  width: 50%;
+  height: 40px;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+    border-right: 0.5px solid #EDEDED;
+}
+.qd2{
+  width: 50%;
+  height: 40px;
+  position: absolute;
+  right: 0;
+  bottom: 0
+}
+</style>
+</head>
+<body style="background: #f7f7f7;">
+	<header  id="headj">
+		<a >
+			<img src="images/back_jt.png" onclick="api.closeWin()" />
+			<span onclick="api.closeWin()">报修</span>
+		</a>
+	</header>
+<div class="module-content" id="ge">
+	<div class="hyxz">
+		<ul class="yyr">
+			<li><span>设备类型</span><input type="text" placeholder="请填写设备类型" id="deviceType" /></li>
+			<li><span>设备名称</span><input type="text" placeholder="请填写设备名称" id="deviceName"/></li>
+			<li><span>设备地点</span><input type="text" placeholder="请填写设备地点" id="devicePlace" /></li>
+			<li><span>报修人</span><input type="text" placeholder="请填写报修人" id="reporter"/></li>
+			<li><span>联系电话</span><input type="text" placeholder="请填写报修人电话" id="repairerTelephone"/></li>
+			<li><span>报修时间</span><input type="date" placeholder="请选择报修时间"  id="repairTime"/></li>
+			<li><span>录入人</span><input type="text" placeholder="请填写录入人" id="inputPerson"/></li>
+			<li><span>录入时间</span><input type="date" placeholder="请选择录入时间" id="inputTime"></li>
+			<li><span>处理状态</span><select id="operationResult"><option value="0">待修理</option><option value="1">已修理</option></select></li>
+      <li><span>处理人</span><input type="text"  placeholder="请填写处理人" id="operationer"/></li>
+			<li><span>处理时间</span><input type="date"  placeholder="请填写处理时间" id="operationTime"></li>
+
+		</ul>
+		<p class="hybt">故障描述</p>
+		<textarea placeholder="" id="faultDescription"></textarea>
+		<p class="hybt">处理描述</p>
+		<textarea placeholder="" id="operationDesc"></textarea>
+			<p class="hybt">上传图片</p>
+		<div id="content1" style="margin-top:10px;">
+		  <div id="pzt" style="clear:both">
+		    <div class="pzw" id="lizi">
+		          <img src="../image/tianjiatu.png"  class="pz"/>
+		          <img src="../image/cha.png"  class="pzc"/>
+		      </div>
+		    <div class="pzwo" id="pz">
+		  <img src="../image/tianjiatu.png"  class="pz" style="border-radius:0;"/>
+		  </div>
+
+		  </div>
+		</div>
+		<div class="ui-dialog" id="dialog2">
+		        <div class="ui-dialog-cnt">
+		            <div class="ui-dialog-bd">
+		                <p>确定要删除图片？</p>
+		            </div>
+
+								<div class="qd">
+									<div class="qd1" onclick="quxiao()">
+	取消
+									</div>
+									<div class="qd2"  onclick="qdsc()">
+	确定
+									</div>
+								</div>
+		        </div>
+		    </div>
+	<a class="tjsq" onclick="tijiao()" style="margin-top:50px;clear:both;text-align:center">提交</a>
+	</div>
+</div>
+
+<div class="foot_menu" style="display:none">
+	<ul>
+		<li>
+			<a href="index.html">
+				<i><img src="images/menu_icon01.png"></i>
+				<span>首 页</span>
+			</a>
+		</li>
+		<li class="cur">
+			<a href="shequ.html">
+				<i><img src="images/menu_icon02_r.png"></i>
+				<span>社 区</span>
+			</a>
+		</li>
+		<li>
+			<a href="news.html">
+				<i><img src="images/menu_icon03.png"></i>
+				<span>消 息</span>
+			</a>
+		</li>
+		<li>
+			<a href="user.html">
+				<i><img src="images/menu_icon04.png"></i>
+				<span>我 的</span>
+			</a>
+		</li>
+	</ul>
+</div>
+</body>
+<script src="js/jquery-1.11.3.min.js"></script>
+<script src="js/foundation-datepicker.js"></script>
+<script src="js/locales/foundation-datepicker.zh-CN.js"></script>
+<script>
+$('#demo-1').fdatepicker();
+$('#demo-2').fdatepicker();
+</script>
+</html>
+<script type="text/javascript">
+tubase64=''
+base=''
+arrtu=[]
+strtu=''
+n=0
+pd=[]
+mtn1=0
+mtn2=0
+tuid=''
+tuidarr=[]
+  arrlx=[]
+  flid=''
+apiready = function () {
+$api.fixStatusBar(document.getElementById('headj'));
+document.getElementById('headj').style.height=(50+api.safeArea.top)+'px'
+document.getElementById('ge').style.marginTop=(5+api.safeArea.top)+'px'
+var time = new Date();
+/*格式化日，如果小于9，则补0*/
+var day = ("0" + time.getDate()).slice(-2);
+/*格式化月，如果小于9，则补0*/
+var month = ("0" + (time.getMonth() + 1)).slice(-2);
+/*拼接日期*/
+var today = time.getFullYear() + "-" + (month) + "-" + (day);
+/*完成赋值操作*/
+ksdate=today
+jsdate=today
+document.getElementById("inputTime").value=today
+document.getElementById("operationTime").value=today
+document.getElementById("repairTime").value=today
+pdtid=0
+document.getElementById('pz').onclick=function(){
+  if(api.systemType=='android') {
+    if(confirmPer('storage')){
+
+    }else {
+      return
+    }
+  }
+  var UIAlbumBrowser = api.require('UIAlbumBrowser');
+UIAlbumBrowser.open({
+max: 9,
+type:'image',
+styles: {
+bg: '#fff',
+mark: {
+icon: '',
+position: 'bottom_left',
+size: 20
+},
+nav: {
+bg: 'rgba(0,0,0,0.6)',
+titleColor: '#fff',
+titleSize: 18,
+cancelColor: '#fff',
+cancelSize: 16,
+finishColor: '#fff',
+finishSize: 16
+}
+},
+rotation: true
+}, function(ret) {
+/*
+android        //Android系统
+win            //Windows系统
+wp             //Windows Phone系统
+示例代码
+var systemType = api.systemType
+*/
+if (ret) {
+//    alert(JSON.stringify(ret));
+if(ret.eventType=='confirm'){
+if(api.systemType=='android'){
+for (var i = 0; i < ret.list.length; i++) {
+  tttt=ret.list[i].path
+
+
+showDefault()
+pdtid=1
+//  alert(tubase64)
+api.ajax({
+  url: yuming2 + '/upImg/upimg/upImg',
+  method: 'post',
+  headers: {
+      'XX-Token': $api.getStorage('token'),
+      'XX-Device-Type': 'android'
+  },
+  data: {
+      values: {
+        //  uid: $api.getStorage('id')
+      },
+      files:{
+        file:tttt
+      }
+  }
+     }, function(ret) {
+
+pdtid=0
+toast.hide()
+if(ret){
+if(ret.code==1){
+pd.push(1)
+/*  api.toast({
+msg: '上传成功'
+});*/
+tuidarr.push(yuming2+'/upload/'+ret.msg.filepath)
+n++
+kl=	document.getElementById('lizi').cloneNode(true);
+kl.setAttribute('id','l'+n)
+kl.getElementsByClassName('pz')[0].setAttribute('src',yuming2+'/upload/'+ret.msg.filepath)
+console.log(yuming2+'/upload/'+ret.msg.filepath)
+if(1){
+//   alert(JSON.stringify(ret))
+document.getElementById('pzt').insertBefore(kl,document.getElementById('pz'))
+}else {
+document.getElementById('pzt').insertBefore(kl,document.getElementById('pz'))
+document.getElementById('pz').style.display='none'
+
+
+}
+var pzc=document.getElementsByClassName('pzc');
+for (var i = 0; i < pzc.length; i++) {
+  !function(i){
+      pzc[i].onclick=function(){
+        mtn1=i-1
+        mtn2=i
+        $("#dialog2").addClass("show");
+      }
+  }(i)
+
+}
+}else {
+api.toast({
+msg: ret.msg
+});
+}
+
+}else {
+api.toast({
+msg: '网络错误'
+});
+}
+     })
+
+
+}
+}else {
+for (var i = 0; i < ret.list.length; i++) {
+  var UIAlbumBrowser = api.require('UIAlbumBrowser');
+UIAlbumBrowser.transPath({
+path: ret.list[i].path
+}, function(ret, err) {
+if (ret) {
+//alert(JSON.stringify(ret));
+tttt=ret.path
+
+
+showDefault()
+pdtid=1
+//  alert(tubase64)
+api.ajax({
+  url: yuming2 + '/upImg/upimg/upImg',
+method: 'post',
+headers: {
+  'XX-Token': $api.getStorage('token'),
+  'XX-Device-Type': 'android'
+},
+data: {
+  values: {
+    //  uid: $api.getStorage('id')
+  },
+  files:{
+    file:tttt
+  }
+}
+ }, function(ret) {
+//  alert(JSON.stringify(ret))
+pdtid=0
+toast.hide()
+if(ret){
+if(ret.code==1){
+pd.push(1)
+/*  api.toast({
+msg: '上传成功'
+});*/
+n++
+kl=	document.getElementById('lizi').cloneNode(true);
+kl.setAttribute('id','l'+n)
+kl.getElementsByClassName('pz')[0].setAttribute('src',yuming2+'/upload/'+ret.msg.filepath)
+
+tuidarr.push(yuming2+'/upload/'+ret.msg.filepath)
+
+
+
+if(1){
+
+document.getElementById('pzt').insertBefore(kl,document.getElementById('pz'))
+}else {
+document.getElementById('pzt').insertBefore(kl,document.getElementById('pz'))
+document.getElementById('pz').style.display='none'
+
+
+}
+var pzc=document.getElementsByClassName('pzc');
+for (var i = 0; i < pzc.length; i++) {
+!function(i){
+  pzc[i].onclick=function(){
+    mtn1=i-1
+    mtn2=i
+    $("#dialog2").addClass("show");
+  }
+}(i)
+
+}
+}else {
+api.toast({
+msg: ret.msg
+});
+}
+
+}else {
+api.toast({
+msg: '网络错误'
+});
+}
+ })
+} else {
+//alert(JSON.stringify(err));
+}
+});
+
+}
+/*
+var UIAlbumBrowser = api.require('UIAlbumBrowser');
+UIAlbumBrowser.transPath({
+path: ''
+}, function(ret, err) {
+if (ret) {
+alert(JSON.stringify(ret));
+} else {
+alert(JSON.stringify(err));
+}
+});
+*/
+}
+}
+}
+});
+
+}
+var pzc=document.getElementsByClassName('pzc');
+ for (var i = 0; i < pzc.length; i++) {
+   !function(i){
+       pzc[i].onclick=function(){
+         mtn1=i-1
+         mtn2=i
+         $("#dialog2").addClass("show");
+       }
+   }(i)
+
+ }
+}
+jy=0
+function tijiao(){
+/*	var gsv= document.getElementById('gs').value;
+	var bmv= document.getElementById('bm').value;
+	var ryv= document.getElementById('ry').value;
+	var ryxzv= document.getElementById('ryxz').value;
+	var demo1v= document.getElementById('demo-1').value;
+	var demo2v= document.getElementById('demo-2').value;
+	var demo3v= document.getElementById('demo-3').value;
+	var lfrsv= document.getElementById('lfrs').value;
+	var fkxmv= document.getElementById('fkxm').value;
+	var gzdwv= document.getElementById('gzdw').value;
+	var lxdhv= document.getElementById('lxdh').value;
+	var lfmdv= document.getElementById('lfmd').value;
+	var fwclv= document.getElementById('fwcl').value;
+	var clsv= document.getElementById('cls').value;
+	var bz= document.getElementById('bz').value;*/
+	pics=''
+	for (var i = 0; i < tuidarr.length; i++) {
+	  if(i==tuidarr.length-1){pics+=tuidarr[i]}else {
+	  	pics+=tuidarr[i]+','
+	  }
+	}
+	if(jy==0){
+		jy=1
+		showDefault()
+		/*
+		：/learun/adms/devicerepair/adddevicerepair
+类型：POST
+请求参数：
+参数名称	类型	备注	必须
+loginMark	String	设备标识，必须具有唯一性	是
+token	String	验证码，从登录后返回信息中获取	是
+deviceType	String	设备类型	是
+deviceName	String	设备名称	是
+devicePlace	String	设备地点	是
+faultDescription	String	故障描述	是
+reporter	String	报修人	是
+repairerTelephone	String	报修人电话	是
+repairTime	DateTime	报修时间	是
+inputPerson	String	录入人	是
+inputTime	DateTime	录入时间	是
+operationer	String	处理人	是
+operationTime	DateTime	处理时间	是
+operationDesc	String	处理描述	是
+operationResult	Int	处理结果 0:未处理完成，1:已处理完成 注：只能为0或1	是
+		*/
+    //alert(pics)
+    //return
+		api.ajax({
+						 url: yuming+'/learun/adms/devicerepair/adddevicerepair',
+						 method: 'post',
+						 data:{values: {
+
+
+		"loginMark": api.deviceId,
+		"token": $api.getStorage('token'),
+		deviceType:document.getElementById('deviceType').value,
+		deviceName	:document.getElementById('deviceName').value,
+		devicePlace	:document.getElementById('devicePlace').value,
+		faultDescription	:document.getElementById('faultDescription').value,
+		reporter:document.getElementById('reporter').value,
+		repairerTelephone	:document.getElementById('repairerTelephone').value,
+		repairTime:document.getElementById('repairTime').value,
+		inputPerson	:document.getElementById('inputPerson').value,
+		inputTime	:document.getElementById('inputTime').value,
+		operationer	:document.getElementById('operationer').value,
+		operationTime	:document.getElementById('operationTime').value,
+		operationDesc:document.getElementById('operationDesc').value,
+		operationResult	:document.getElementById('operationResult').value,
+picture:pics
+
+								}}
+				 }, function(ret) {
+jy=0
+//	alert(JSON.stringify(ret))
+	 toast.hide()
+				 if(ret){
+				 if(ret.code==200){
+					 api.toast({
+					 msg: '提交成功!',
+					 duration: 2000,
+					 location: 'middle'
+					 });
+					toast.hide()
+
+setTimeout(function(){
+	api.closeWin();
+
+},1000)
+		 }else {
+			 toast.hide()
+			 api.toast({
+			 msg: ret.info,
+			 duration: 2000,
+			 location: 'middle'
+	 });
+		 }
+
+				 }else {
+
+						toast.hide()
+					 api.toast({
+					 msg: '网络错误',
+					 duration: 2000,
+					 location: 'middle'
+			 });
+				 }
+
+				 })
+	}
+}
+function quxiao(){
+
+    $("#dialog2").removeClass("show");
+
+}
+function qdsc(){
+pd.pop()
+arrtu.splice(mtn1,1)
+tuidarr.splice(mtn1,1)
+var pzw=document.getElementsByClassName('pzw')
+var parent=document.getElementById("pzt");
+//alert(mtn2)
+parent.removeChild(pzw[mtn2]);
+//pzw[mtn2].style.display='none'
+//alert(mtn2)
+if(pd.length<3){
+document.getElementById('pz').style.display='block'
+}
+$("#dialog2").removeClass("show");
+var pzc=document.getElementsByClassName('pzc');
+  for (var i = 0; i < pzc.length; i++) {
+    !function(i){
+        pzc[i].onclick=function(){
+          mtn1=i-1
+          mtn2=i
+          $("#dialog2").addClass("show");
+        }
+    }(i)
+
+  }
+}
+</script>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="format-detection" content="telephone=no"><!-- 禁止IPHONE识别手机号码 -->
+<meta name="viewport" content="width=device-width,user-scalable=no, initial-scale=1">
+<title>添加地址</title>
+<!-- css -->
+<link rel="stylesheet" type="text/css" href="css/index.css">
+<link rel="stylesheet" type="text/css" href="css/mui.min.css" />
+<link href="css/foundation-datepicker.css" rel="stylesheet" type="text/css">
+<style>
+.module-content{padding-top: 44px;padding-bottom: 50px;}
+.userinfo{}
+.userinfo li{background:#fff; display: flex;align-items: center;justify-content: space-between;padding: 10px;border-bottom: 1px solid #f1f1f1;}
+.userinfo li i{display: inline-block;width: 16px;height: 16px;margin-left: 10px; background: url(images/gray_arr.png) no-repeat right;background-size: 8px;}
+.userinfo li span{font-size: 14px;color: #333;}
+.userinfo li p{display: flex;align-items: center;}
+.userinfo li p input{border: none;text-align: right;font-size: 14px;color: #333;padding: 0;}
+.userinfo li img{width: 36px;height: 36px;border-radius: 20px;}
+.userinfo li textarea{border: none;font-size: 14px;color: #333;padding: 0;}
+.moren{margin-top: 10px;background: #fff;padding: 10px;display: flex;align-items: center;line-height: 30px;}
+.moren input{margin-right: 10px;}
+.tjsq{display: block;text-align: center; line-height: 40px;margin:20px 10px; color:#fff;font-size: 14px; border-radius: 10px;background: linear-gradient(to right, #367ff8 , #556dff);}
+</style>
+</head>
+<body style="background: #f7f7f7;">
+	<header>
+		<a href="javascript:history.back(-1)">
+			<img src="images/back_jt.png" />
+			<span onclick="api.closeWin()">添加地址</span>
+		</a>
+	</header>
+<div class="module-content">
+	<ul class="userinfo">
+			<li><span>收货人</span>
+				<p>
+					<input type="text" name="" id="" placeholder="请输入收货人姓名" value="" />
+				</p>
+			</li>
+			<li><span>电话</span>
+				<p>
+					<input type="text" name="" id="" placeholder="请输入联系人电话" value="" />
+				</p>
+			</li>
+			<li><span>所在地区</span>
+				<p>
+					<input type="text" name="" id="" value="" />
+					<i></i>
+				</p>
+			</li>
+			<li>
+				<textarea placeholder="详细地址：如道路、门牌号、小区、单元等"></textarea>
+			</li>
+		</ul>
+		<div class="moren">
+			<input type="radio" />
+			<label>设置为默认地址</label>
+		</div>
+	<a class="tjsq" >确定</a>
+</div>
+
+<div class="foot_menu">
+	<ul>
+		<li>
+			<a href="index.html">
+				<i><img src="images/menu_icon01.png"></i>
+				<span>首 页</span>
+			</a>
+		</li>
+		<li class="cur">
+			<a href="wuye.html">
+				<i><img src="images/menu_icon02.png"></i>
+				<span>智 能</span>
+			</a>
+		</li>
+		<li>
+			<a href="news.html">
+				<i><img src="images/menu_icon03.png"></i>
+				<span>消 息</span>
+			</a>
+		</li>
+		<li>
+			<a href="user.html">
+				<i><img src="images/menu_icon04.png"></i>
+				<span>我 的</span>
+			</a>
+		</li>
+	</ul>
+</div>
+</body>
+<script src="js/jquery-1.11.3.min.js"></script>
+<script src="js/foundation-datepicker.js"></script>
+<script src="js/locales/foundation-datepicker.zh-CN.js"></script>
+<script>
+$('#demo-1').fdatepicker();
+$('#demo-2').fdatepicker();
+</script>
+</html>

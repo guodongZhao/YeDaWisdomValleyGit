@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="format-detection" content="telephone=no"><!-- 禁止IPHONE识别手机号码 -->
+<meta name="viewport" content="width=device-width,user-scalable=no, initial-scale=1">
+<title>修改巡检</title>
+<!-- css -->
+<link rel="stylesheet" type="text/css" href="css/index.css">
+<link rel="stylesheet" type="text/css" href="css/mui.min.css" />
+<link href="css/foundation-datepicker.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="../css/aui.css">
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/aui-toast.js"></script>
+<script type="text/javascript" src="../script/H.js"></script>
+<script type="text/javascript" src="../script/jquery.js"></script>
+<script type="text/javascript" src="../script/yuming.js"></script>
+<style>
+.module-content{padding-top: 24px;padding-bottom: 50px;}
+.hybt{color: #000;font-size: 16px;line-height: 40px;}
+.hyxz{background: #f4f4f4;border-top-left-radius: 10px;border-top-right-radius: 10px;padding: 10px 15px;}
+
+.yyr{border-radius: 10px;overflow: hidden;padding: 10px;background: #fff;}
+.yyr li{display: flex;align-items: center;padding: 5px 0; border-bottom: 1px solid #f1f1f1;}
+.yyr li:last-child{border-bottom: 0;}
+.yyr li span{font-size: 14px;color: #333;width: 80px;}
+.yyr li select{font-size: 14px;}
+.yyr li input{border: 0;font-size: 14px;color: #000;}
+.yyr p{line-height: 44px;color: #000;font-size: 14px;}
+.hyxz textarea{border-radius: 10px;border: 0;color: #000;font-size: 14px;}
+.hyxz textarea::-webkit-input-placeholder{color: #333;}
+.tjsq{display: block;text-align: center; line-height: 40px;margin-top: 10px; color:#fff;font-size: 14px; border-radius: 10px;background: linear-gradient(to right, #367ff8 , #556dff);}
+</style>
+</head>
+<body style="background: #f7f7f7;">
+	<header id="headj">
+		<a>
+			<img src="images/back_jt.png" onclick="api.closeWin()" />
+			<span onclick="api.closeWin()">修改巡检</span>
+		</a>
+	</header>
+
+	<div class="module-content" id="ge">
+		<div class="hyxz">
+			<!--<p class="hybt">访问申请</p>-->
+			<ul class="yyr" id="ct">
+
+			</ul>
+	<a class="tjsq" onclick="tijiao()">更新</a>
+	</div>
+</div>
+
+<div class="foot_menu" style="display:none">
+	<ul>
+		<li>
+			<a href="index.html">
+				<i><img src="images/menu_icon01.png"></i>
+				<span>首 页</span>
+			</a>
+		</li>
+		<li class="cur">
+			<a href="wuye.html">
+				<i><img src="images/menu_icon02.png"></i>
+				<span>智 能</span>
+			</a>
+		</li>
+		<li>
+			<a href="news.html">
+				<i><img src="images/menu_icon03.png"></i>
+				<span>消 息</span>
+			</a>
+		</li>
+		<li>
+			<a href="user.html">
+				<i><img src="images/menu_icon04.png"></i>
+				<span>我 的</span>
+			</a>
+		</li>
+	</ul>
+</div>
+</body>
+
+</html>
+<script type="text/javascript">
+//alert(1)
+apiready = function () {
+	//alert(JSON.stringify(api.pageParam.arr))
+$api.fixStatusBar(document.getElementById('headj'));
+document.getElementById('headj').style.height=(50+api.safeArea.top)+'px'
+document.getElementById('ge').style.marginTop=(5+api.safeArea.top)+'px'
+
+
+
+function xt(){
+	html=''
+  html+=  '<li><span>设备序号</span><input type="text" value="'+api.pageParam.arr.id+'" id="id"  /></li>'
+//alert()
+if(api.pageParam.arr.inspectionDate){	html+=  '<li><span>巡检日期</span><input type="date"  value="'+api.pageParam.arr.inspectionDate.split(' ')[0]+'"  id="inspectionDate" /></li>'}else {
+html+=  '<li><span>巡检日期</span><input type="date"   id="inspectionDate" /></li>'
+}
+html+='<li><span>巡检地点</span><input type="text" value="'+isnul(api.pageParam.arr.inspectionSite)+'"  id="inspectionSite" /></li>'
+html+='<li><span>巡检设备</span><input type="text" value="'+isnul(api.pageParam.arr.inspectionEquipment)+'"  id="inspectionEquipment" /></li>'
+		html+='<li><span>巡检项目</span><input type="text" value="'+isnul(api.pageParam.arr.inspectionItems)+'"  id="inspectionItems" /></li>'
+		html+='  <li><span>巡检结果</span><input type="text" value="'+isnul(api.pageParam.arr.inspectionResults)+'" id="inspectionResults" /></li>'
+		if(api.pageParam.arr.ResultTime){	html+=  '<li><span>实际检查时间</span><input type="date"  value="'+api.pageParam.arr.ResultTime.split(' ')[0]+'"  id="ResultTime" /></li>'}else {
+		html+=  '<li><span>实际检查时间</span><input type="date"   id="ResultTime" /></li>'
+		}
+	html+='<li><span>巡检人</span><input type="text" value="'+api.pageParam.arr.inspector+'"  id="inspector" /></li>'
+	html+='  <li><span>备注</span><input type="text" value="'+api.pageParam.arr.remarks+'" id="remarks" /></li>'
+	html+='  <li><span>录入人</span><input type="text" value="'+isnul(api.pageParam.arr.inputPerson)+'"  id="inputPerson" /></li>'
+	if(api.pageParam.arr.inputTime){	html+=  '<li><span>录入时间</span><input type="date"  value="'+api.pageParam.arr.inputTime.split(' ')[0]+'"  id="inputTime" /></li>'}else {
+	html+=  '<li><span>录入时间</span><input type="date"   id="inputTime" /></li>'
+}
+html+='  <li><span>检查状态</span><select class="ss" id="inspectstatus"  value="'+api.pageParam.arr.inspectstatus+'">'+
+'  <option value="">全部</option>'+
+'  <option value="0">应检</option>'+
+'    <option value="1">已检</option>'+
+'</select></li>'
+
+	document.getElementById('ct').innerHTML=html
+	document.getElementById('inspectstatus').value=api.pageParam.arr.inspectstatus
+
+}
+xt()
+
+//showDefault()
+}
+jy=0
+function tijiao(){
+  //alert(document.getElementById('nyr').value)
+/*// ：/learun/adms/deviceinspection/updatedeviceinspection
+类型：POST
+请求参数：
+参数名称	类型	备注	必须
+loginMark	String	设备标识，必须具有唯一性	是
+token	String	验证码，从登录后返回信息中获取	是
+id	int	序号	是
+inspectionDate	DateTime	巡检日期	否
+inspectionSite	String	巡检地点	否
+inspectionEquipment	String	巡检设备	否
+inspectionItems	String	巡检项目	否
+inspectionResults	String	巡检结果	否
+ResultTime	DateTime	实际检查时间	否
+inspector	String	巡检人	否
+remarks	string	备注	否
+inputPerson	string	录入人	否
+inputTime	DateTime	录入时间	否
+inspectstatus	int	是否已经检查（0:应检 1:已检）	否*/
+	if(jy==0){
+		jy=1
+		showDefault()
+		api.ajax({
+						 url: yuming+'/learun/adms/deviceinspection/updatedeviceinspection',
+						 method: 'post',
+						 data:{values: {
+               "loginMark": api.deviceId,
+               "token": $api.getStorage('token'),
+							 id	:document.getElementById('id').value,
+ 							inspectionDate:document.getElementById('inspectionDate').value,
+ 							inspectionSite:document.getElementById('inspectionSite').value,
+ 							inspectionEquipment:document.getElementById('inspectionEquipment').value,
+ 							inspectionItems:document.getElementById('inspectionItems').value,
+ 							inspectionResults	:document.getElementById('inspectionResults').value,
+ 							ResultTime:document.getElementById('ResultTime').value,
+ 							inspector	:document.getElementById('inspector').value,
+ 							remarks	:document.getElementById('remarks').value,
+ 							inputPerson	:document.getElementById('inputPerson').value,
+ 							inputTime	:document.getElementById('inputTime').value,
+ 							inspectstatus	:document.getElementById('inspectstatus').value,
+
+
+								}}
+				 }, function(ret) {
+
+	//alert(JSON.stringify(ret))
+	 toast.hide()
+				 if(ret){
+				 if(ret.code==200){
+					 api.sendEvent({
+					     name: 'sxrw',
+					     extra: {
+					         key1: 'value1',
+					         key2: 'value2'
+					     }
+					 });
+
+					 api.toast({
+					 msg: '提交成功!',
+					 duration: 2000,
+					 location: 'middle'
+					 });
+					toast.hide()
+jy=0
+		 }else {
+       jy=0
+			 toast.hide()
+			 api.toast({
+			 msg: ret.info,
+			 duration: 2000,
+			 location: 'middle'
+	 });
+		 }
+
+				 }else {
+
+						toast.hide()
+					 api.toast({
+					 msg: '网络错误',
+					 duration: 2000,
+					 location: 'middle'
+			 });
+				 }
+
+				 })
+	}
+}
+function shanchu(data){
+
+
+    $("#dialog").addClass("show");
+}
+function quxiao(data){
+
+
+    $("#dialog").removeClass("show");
+}
+function queding(){
+  $("#dialog").removeClass("show");
+  //alert(document.getElementById('nyr').value)
+//  return
+  /*求地址：/learun/adms/watermeter/updatewatermeter
+  类型：POST
+  请求参数：
+  参数名称	类型	备注	必须
+  id	int	序号	是
+  dvalue	String	电表读数	是
+  year	String	年	是
+  month	String	月	是
+  day	String	日	是
+  companyid	String	数据区分序号	否
+  costitemid	int	成本项目ID	否
+  remark	String	备注	否
+  newvalue	String	本次表读数	是
+  userno	String	业主编号	否
+  status	String	电表状态(1:正常,0:异常)只有0或1	是
+  commadd	String	电表编号	是
+  lastvalue	String	上次表读数	否
+  lastdate	String	上次表读日期	否
+  newdate	String	本次表读日期	是*/
+	if(jy==0){
+		jy=1
+		showDefault()
+		api.ajax({
+						 url: yuming+'/learun/adms/Electricitymeter/delelectricitymeter',
+						 method: 'post',
+						 data:{values: {
+               "loginMark": api.deviceId,
+               "token": $api.getStorage('token'),
+               id	:api.pageParam.id,
+
+
+								}}
+				 }, function(ret) {
+
+	//alert(JSON.stringify(ret))
+	 toast.hide()
+				 if(ret){
+				 if(ret.code==200){
+					 api.toast({
+					 msg: '删除成功!',
+					 duration: 2000,
+					 location: 'middle'
+					 });
+					toast.hide()
+          api.sendEvent({
+              name: 'sxrw',
+              extra: {
+                  key1: 'value1',
+                  key2: 'value2'
+              }
+          });
+
+          setTimeout(function(){
+            api.closeWin();
+
+          },1000)
+
+jy=0
+		 }else {
+       jy=0
+			 toast.hide()
+			 api.toast({
+			 msg: ret.info,
+			 duration: 2000,
+			 location: 'middle'
+	 });
+		 }
+
+				 }else {
+
+						toast.hide()
+					 api.toast({
+					 msg: '网络错误',
+					 duration: 2000,
+					 location: 'middle'
+			 });
+				 }
+
+				 })
+	}
+}
+</script>

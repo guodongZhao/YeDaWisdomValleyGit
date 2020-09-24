@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="format-detection" content="telephone=no"><!-- 禁止IPHONE识别手机号码 -->
+<meta name="viewport" content="width=device-width,user-scalable=no, initial-scale=1">
+<title>访客</title>
+<!-- css -->
+<link rel="stylesheet" type="text/css" href="css/index.css">
+<link rel="stylesheet" type="text/css" href="css/mui.min.css" />
+<link href="css/foundation-datepicker.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="../css/aui.css">
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/aui-toast.js"></script>
+<script type="text/javascript" src="../script/H.js"></script>
+<script type="text/javascript" src="../script/jquery.js"></script>
+<script type="text/javascript" src="../script/yuming.js"></script>
+<style>
+.module-content{padding-top: 44px;padding-bottom: 50px;}
+.hybt{color: #000;font-size: 16px;line-height: 40px;}
+.hyxz{background: #f4f4f4;border-top-left-radius: 10px;border-top-right-radius: 10px;padding: 10px 15px;}
+
+.yyr{border-radius: 10px;overflow: hidden;padding: 10px;background: #fff;}
+.yyr li{display: flex;align-items: center;padding: 5px 0; border-bottom: 1px solid #f1f1f1;}
+.yyr li span{font-size: 14px;color: #333;width: 80px;}
+.yyr li select{font-size: 14px;}
+.yyr li input{border: 0;font-size: 14px;color: #000;}
+.yyr p{line-height: 44px;color: #000;font-size: 14px;}
+.hyxz textarea{border-radius: 10px;border: 0;color: #000;font-size: 14px;}
+.hyxz textarea::-webkit-input-placeholder{color: #333;}
+.tjsq{display: block;text-align: center; line-height: 40px;margin-top: 10px; color:#fff;font-size: 14px; border-radius: 10px;background: linear-gradient(to right, #367ff8 , #556dff);}
+</style>
+</head>
+<body style="background: #f7f7f7;">
+	<header id="headj">
+		<a >
+			<img src="images/back_jt.png" onclick="api.closeWin()" />
+			<span onclick="api.closeWin()">访问申请</span>
+		</a>
+	</header>
+<div class="module-content" id="ge">
+	<div class="hyxz">
+		<!--<p class="hybt">访问申请</p>-->
+		<ul class="yyr" id="ct">
+			<li><span>被访公司</span><select id="gs"></select></li>
+			<li><span>被访部门</span><select id="bm"></select></li>
+			<li><span>被访人员</span><select id="ry"></select></li>
+			<li><span>人员性质</span><input type="text" placeholder="请填写人员性质" id="ryxz" /></li>
+			<li><span>来访日期</span><input type="text" placeholder="请选择来访日期" value="12/12/2019" id="demo-1" /></li>
+			<li><span>到达时间</span><input type="text" placeholder="请选择到达时间" value="12/12/2019" id="demo-2" /></li>
+			<li><span>离开时间</span><input type="text" placeholder="请选择离开时间" value="12/12/2019" id="demo-3" /></li>
+			<li><span>来访人数</span><input type="text" placeholder="请填写来访人数"  id="lfrs" /></li>
+			<li><span>访客姓名</span><input type="text" placeholder="请填写访客姓名" id="fkxm" /></li>
+			<li><span>工作单位</span><input type="text" placeholder="请填写工作单位" id="gzdw" /></li>
+			<li><span>联系电话</span><input type="text" placeholder="请填写联系电话" id="lxdh"/></li>
+			<li><span>来访目的</span><input type="text" placeholder="请填写来访目的" id="lfmd"/></li>
+			<li><span>访问车辆</span><input type="text" placeholder="请填写访问车辆" id="fwcl"/></li>
+			<li><span>车辆数</span><input type="text" placeholder="请填写车辆数" id="cls"/></li>
+			<li><span>备注</span><input type="text" placeholder="请填写备注" id="bz"/></li>
+		</ul>
+	<!--<a class="tjsq" onclick="tijiao()">提交申请</a>-->
+	</div>
+</div>
+
+<div class="foot_menu" style="display:none">
+	<ul>
+		<li>
+			<a href="index.html">
+				<i><img src="images/menu_icon01.png"></i>
+				<span>首 页</span>
+			</a>
+		</li>
+		<li class="cur">
+			<a href="shequ.html">
+				<i><img src="images/menu_icon02_r.png"></i>
+				<span>社 区</span>
+			</a>
+		</li>
+		<li>
+			<a href="news.html">
+				<i><img src="images/menu_icon03.png"></i>
+				<span>消 息</span>
+			</a>
+		</li>
+		<li>
+			<a href="user.html">
+				<i><img src="images/menu_icon04.png"></i>
+				<span>我 的</span>
+			</a>
+		</li>
+	</ul>
+</div>
+</body>
+<script src="js/jquery-1.11.3.min.js"></script>
+<script src="js/foundation-datepicker.js"></script>
+<script src="js/locales/foundation-datepicker.zh-CN.js"></script>
+<script>
+$('#demo-1').fdatepicker();
+$('#demo-2').fdatepicker();
+$('#demo-3').fdatepicker();
+</script>
+</html>
+<script type="text/javascript">
+apiready = function () {
+$api.fixStatusBar(document.getElementById('headj'));
+document.getElementById('headj').style.height=(50+api.safeArea.top)+'px'
+document.getElementById('ge').style.marginTop=(5+api.safeArea.top)+'px'
+//alert(JSON.stringify(api.pageParam.arr))
+/*
+F_RealName	String	被访人
+cf	String	被访公司
+df	String	被访部门
+Purposeofthevisit	String	来访目的
+Dateofvisit	DateTime	来访日期
+Arrivaltime	DateTime	到达时间
+Timeofdeparture	DateTime	离开时间
+Personnelnature	String	人员性质
+Numberofvisitors	String	来访人数
+Licenseplate	String	车辆号码
+Numberofvehicles	String	车辆数
+Name	String	姓名
+Workunit	String	工作单位
+Contactnumber	String	联系电话
+Remarks	String	备注
+*/
+function xt(){
+  html=''
+
+  html+=  '<li><span>被访公司</span><input type="text" value="'+api.pageParam.arr.cf+'" readonly="readonly" id="gs" /></li>'
+  html+=  '<li><span>被访部门</span><input type="text" value="'+api.pageParam.arr.df+'" readonly="readonly" id="bm" /></li>'
+  html+=  '<li><span>被访人员</span><input type="text"  value="'+api.pageParam.arr.F_RealName+'" readonly="readonly" id="ry" /></li>'
+    html+='<li><span>人员性质</span><input type="text" value="'+api.pageParam.arr.Personnelnature+'" readonly="readonly" id="ryxz" /></li>'
+    html+='<li><span>来访日期</span><input type="text" value="'+api.pageParam.arr.Dateofvisit+'" readonly="readonly" id="demo-1" /></li>'
+  html+='  <li><span>到达时间</span><input type="text" value="'+api.pageParam.arr.Arrivaltime+'" readonly="readonly" id="demo-2" /></li>'
+  html+='  <li><span>离开时间</span><input type="text" value="'+api.pageParam.arr.Timeofdeparture+'" readonly="readonly" id="demo-3" /></li>'
+    html+='<li><span>来访人数</span><input type="text" value="'+api.pageParam.arr.Numberofvisitors+'" readonly="readonly"  id="lfrs" /></li>'
+  html+='  <li><span>访客姓名</span><input type="text" value="'+api.pageParam.arr.Name+'" readonly="readonly" id="fkxm" /></li>'
+  html+='  <li><span>工作单位</span><input type="text" value="'+api.pageParam.arr.Workunit+'" readonly="readonly" id="gzdw" /></li>'
+  html+='  <li><span>联系电话</span><input type="text" value="'+api.pageParam.arr.Contactnumber+'" readonly="readonly" id="lxdh"/></li>'
+  html+='  <li><span>来访目的</span><input type="text" value="'+api.pageParam.arr.Purposeofthevisit+'" readonly="readonly" id="lfmd"/></li>'
+  html+='  <li><span>访问车辆</span><input type="text" value="'+api.pageParam.arr.Licenseplate+'" readonly="readonly" id="fwcl"/></li>'
+  html+='  <li><span>车辆数</span><input type="text" value="'+api.pageParam.arr.Numberofvehicles+'" readonly="readonly" id="cls"/></li>'
+  html+='  <li><span>备注</span><input type="text" value="'+api.pageParam.arr.Remarks+'" readonly="readonly" id="bz"/></li>'
+  document.getElementById('ct').innerHTML=html
+}
+xt()
+
+//showDefault()
+function zb(){
+	api.ajax({
+					 url: yuming+'/learun/adms/newuser/getcompany',
+					 method: 'get',
+					 data:{values: {
+
+
+	"loginMark": api.deviceId,
+	"token": $api.getStorage('token')
+
+
+							}}
+			 }, function(ret) {
+
+//alert(JSON.stringify(ret))
+
+			 if(ret){
+			 if(ret.code==200){
+
+				toast.hide()
+var html=''
+for (var i = 0; i < ret.data.length; i++) {
+if(1){
+html+='<option value="'+ret.data[i].areaId+'">'+ret.data[i].areaName+'</option>'
+}
+
+}
+document.getElementById('gs').innerHTML=html
+zb1()
+	 }else {
+		 toast.hide()
+		 api.toast({
+		 msg: ret.info,
+		 duration: 2000,
+		 location: 'middle'
+ });
+	 }
+
+			 }else {
+
+					toast.hide()
+				 api.toast({
+				 msg: '网络错误',
+				 duration: 2000,
+				 location: 'middle'
+		 });
+			 }
+
+			 })
+}
+//zb()
+function zb1(){
+	api.ajax({
+					 url: yuming+'/learun/adms/newuser/getdepartment',
+					 method: 'get',
+					 data:{values: {
+
+
+	"loginMark": api.deviceId,
+	"token": $api.getStorage('token'),
+	F_CompanyId:document.getElementById('gs').value
+
+
+							}}
+			 }, function(ret) {
+
+//alert(JSON.stringify(ret))
+
+			 if(ret){
+			 if(ret.code==200){
+
+				toast.hide()
+var html=''
+for (var i = 0; i < ret.data.length; i++) {
+if(1){
+html+='<option value="'+ret.data[i].areaId+'">'+ret.data[i].areaName+'</option>'
+}
+
+}
+document.getElementById('bm').innerHTML=html
+zb2()
+	 }else {
+		 toast.hide()
+		 api.toast({
+		 msg: ret.info,
+		 duration: 2000,
+		 location: 'middle'
+ });
+	 }
+
+			 }else {
+
+					toast.hide()
+				 api.toast({
+				 msg: '网络错误',
+				 duration: 2000,
+				 location: 'middle'
+		 });
+			 }
+
+			 })
+}
+function zb2(){
+	api.ajax({
+					 url: yuming+'/learun/adms/newuser/getuser',
+					 method: 'get',
+					 data:{values: {
+
+
+	"loginMark": api.deviceId,
+	"token": $api.getStorage('token'),
+	F_DepartmentId:document.getElementById('bm').value
+
+
+							}}
+			 }, function(ret) {
+
+//alert(JSON.stringify(ret))
+
+			 if(ret){
+			 if(ret.code==200){
+
+				toast.hide()
+var html=''
+for (var i = 0; i < ret.data.length; i++) {
+if(1){
+html+='<option value="'+ret.data[i].areaId+'">'+ret.data[i].areaName+'</option>'
+}
+
+}
+document.getElementById('ry').innerHTML=html
+	 }else {
+		 toast.hide()
+		 api.toast({
+		 msg: ret.info,
+		 duration: 2000,
+		 location: 'middle'
+ });
+	 }
+
+			 }else {
+
+					toast.hide()
+				 api.toast({
+				 msg: '网络错误',
+				 duration: 2000,
+				 location: 'middle'
+		 });
+			 }
+
+			 })
+}
+document.getElementById('gs').onchange=function(){
+	//alert(document.getElementById('gs').value)
+	/*
+	请求地址：/learun/adms/newuser/getdepartment
+	类型：GET
+	请求参数：
+	参数名称	类型	备注	必须
+	loginMark	String	设备标识，必须具有唯一性	是
+	token	String	验证码，从登录后返回信息中获取	是
+	F_CompanyId	String	公司id	是
+	*/
+	api.ajax({
+					 url: yuming+'/learun/adms/newuser/getdepartment',
+					 method: 'get',
+					 data:{values: {
+
+
+	"loginMark": api.deviceId,
+	"token": $api.getStorage('token'),
+	F_CompanyId:document.getElementById('gs').value
+
+
+							}}
+			 }, function(ret) {
+
+//alert(JSON.stringify(ret))
+
+			 if(ret){
+			 if(ret.code==200){
+
+				toast.hide()
+var html=''
+for (var i = 0; i < ret.data.length; i++) {
+if(1){
+html+='<option value="'+ret.data[i].areaId+'">'+ret.data[i].areaName+'</option>'
+}
+
+}
+document.getElementById('bm').innerHTML=html
+api.ajax({
+				 url: yuming+'/learun/adms/newuser/getuser',
+				 method: 'get',
+				 data:{values: {
+
+
+"loginMark": api.deviceId,
+"token": $api.getStorage('token'),
+F_DepartmentId:document.getElementById('bm').value
+
+
+						}}
+		 }, function(ret) {
+
+//alert(JSON.stringify(ret))
+
+		 if(ret){
+		 if(ret.code==200){
+
+			toast.hide()
+var html=''
+for (var i = 0; i < ret.data.length; i++) {
+if(1){
+html+='<option value="'+ret.data[i].areaId+'">'+ret.data[i].areaName+'</option>'
+}
+
+}
+document.getElementById('ry').innerHTML=html
+ }else {
+	 document.getElementById('ry').innerHTML=''
+	 toast.hide()
+	/* api.toast({
+	 msg: ret.info,
+	 duration: 2000,
+	 location: 'middle'
+});*/
+ }
+
+		 }else {
+
+				toast.hide()
+			 api.toast({
+			 msg: '网络错误',
+			 duration: 2000,
+			 location: 'middle'
+	 });
+		 }
+
+		 })
+	 }else {
+		 toast.hide()
+		 api.toast({
+		 msg: ret.info,
+		 duration: 2000,
+		 location: 'middle'
+ });
+	 }
+
+			 }else {
+
+					toast.hide()
+				 api.toast({
+				 msg: '网络错误',
+				 duration: 2000,
+				 location: 'middle'
+		 });
+			 }
+
+			 })
+}
+document.getElementById('bm').onchange=function(){
+	//alert(document.getElementById('gs').value)
+	/*
+	/learun/adms/newuser/getuser
+类型：GET
+请求参数：
+参数名称	类型	备注	必须
+loginMark	String	设备标识，必须具有唯一性	是
+token	String	验证码，从登录后返回信息中获取	是
+F_DepartmentId	String	部门id	是
+	*/
+	api.ajax({
+					 url: yuming+'/learun/adms/newuser/getuser',
+					 method: 'get',
+					 data:{values: {
+
+
+	"loginMark": api.deviceId,
+	"token": $api.getStorage('token'),
+	F_DepartmentId:document.getElementById('bm').value
+
+
+							}}
+			 }, function(ret) {
+
+//alert(JSON.stringify(ret))
+
+			 if(ret){
+			 if(ret.code==200){
+
+				toast.hide()
+var html=''
+for (var i = 0; i < ret.data.length; i++) {
+if(1){
+html+='<option value="'+ret.data[i].areaId+'">'+ret.data[i].areaName+'</option>'
+}
+
+}
+document.getElementById('ry').innerHTML=html
+	 }else {
+		 toast.hide()
+		 api.toast({
+		 msg: ret.info,
+		 duration: 2000,
+		 location: 'middle'
+ });
+	 }
+
+			 }else {
+
+					toast.hide()
+				 api.toast({
+				 msg: '网络错误',
+				 duration: 2000,
+				 location: 'middle'
+		 });
+			 }
+
+			 })
+}
+}
+jy=0
+function tijiao(){
+	var gsv= document.getElementById('gs').value;
+	var bmv= document.getElementById('bm').value;
+	var ryv= document.getElementById('ry').value;
+	var ryxzv= document.getElementById('ryxz').value;
+	var demo1v= document.getElementById('demo-1').value;
+	var demo2v= document.getElementById('demo-2').value;
+	var demo3v= document.getElementById('demo-3').value;
+	var lfrsv= document.getElementById('lfrs').value;
+	var fkxmv= document.getElementById('fkxm').value;
+	var gzdwv= document.getElementById('gzdw').value;
+	var lxdhv= document.getElementById('lxdh').value;
+	var lfmdv= document.getElementById('lfmd').value;
+	var fwclv= document.getElementById('fwcl').value;
+	var clsv= document.getElementById('cls').value;
+	var bz= document.getElementById('bz').value;
+	if(jy==0){
+		jy=1
+		showDefault()
+		api.ajax({
+						 url: yuming+'/learun/adms/visitormanagementList/vmadd',
+						 method: 'post',
+						 data:{values: {
+
+
+		"loginMark": api.deviceId,
+		"token": $api.getStorage('token'),
+		Respondents	:ryv,
+Companiesinterviewed	:gsv,
+RespondentDepartments		:bmv,
+Purposeofthevisit		:lfmdv,
+Dateofvisit		:demo1v,
+Arrivaltime		:demo2v,
+Timeofdeparture		:demo3v,
+Personnelnature		:ryxzv,
+Numberofvisitors	:lfrsv,
+Licenseplate		:fwclv,
+Numberofvehicles		:clsv,
+Name		:fkxmv,
+Workunit	:gzdwv,
+Contactnumber	:lxdhv,
+Remarks		:bz,
+
+
+								}}
+				 }, function(ret) {
+
+	//alert(JSON.stringify(ret))
+	 toast.hide()
+				 if(ret){
+				 if(ret.code==200){
+					 api.toast({
+					 msg: '提交成功!',
+					 duration: 2000,
+					 location: 'middle'
+					 });
+					toast.hide()
+jy=0
+		 }else {
+			 toast.hide()
+			 api.toast({
+			 msg: ret.info,
+			 duration: 2000,
+			 location: 'middle'
+	 });
+		 }
+
+				 }else {
+
+						toast.hide()
+					 api.toast({
+					 msg: '网络错误',
+					 duration: 2000,
+					 location: 'middle'
+			 });
+				 }
+
+				 })
+	}
+}
+</script>

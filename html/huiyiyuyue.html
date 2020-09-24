@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="format-detection" content="telephone=no"><!-- 禁止IPHONE识别手机号码 -->
+<meta name="viewport" content="width=device-width,user-scalable=no, initial-scale=1">
+<title>会议室</title>
+<!-- css -->
+<link rel="stylesheet" type="text/css" href="css/index.css">
+<link rel="stylesheet" type="text/css" href="css/mui.min.css" />
+<link rel="stylesheet" href="css/calendar.css">
+<link rel="stylesheet" type="text/css" href="../css/aui.css">
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/aui-toast.js"></script>
+<script type="text/javascript" src="../script/H.js"></script>
+<script type="text/javascript" src="../script/jquery.js"></script>
+<script type="text/javascript" src="../script/yuming.js"></script>
+<style>
+.module-content{padding-top: 44px;margin-bottom: 50px;}
+.yylist{padding: 10px;}
+.yylist li{background: #fff;border-radius: 10px;padding: 5px 10px;margin-bottom: 10px;}
+.yylist li .yytext{display: flex;justify-content: space-between;align-items: center;line-height: 22px;}
+.yylist li .yyl{width: 60%;color: #000;font-size: 14px;}
+.yylist li .yyl span{color: #25CB83;padding-top: 8px;}
+.yylist li .yyr{color: #000;font-size: 14px;}
+.yylist li .yyr span{color: #999;font-size: 14px;}
+.hybz{display: flex;align-items: center; border-top: 1px solid #f1f1f1;line-height: 30px;font-size: 12px;color: #999;margin-top: 10px;}
+.hybz img{margin-right: 10px;width: 16px;height: 16px;}
+</style>
+</head>
+<body style="background: #f7f7f7;">
+	<header id="headj">
+		<a >
+			<img src="images/back_jt.png" onclick="api.closeWin()" />
+			<span onclick="api.closeWin()">我的预约</span>
+		</a>
+	</header>
+<div class="module-content" id="ge">
+	<ul class="yylist" >
+		<li>
+			<div class="yytext">
+				<p class="yyl">
+					<b>10栋18楼1号会议室</b><br />
+					<span>预约成功</span>
+				</p>
+				<p class="yyr">
+					12月12日<br />
+					<span>下午 14:00-16:00</span>
+				</p>
+			</div>
+			<div class="hybz">
+				<img src="images/bz.png" />
+				<span>2019年信息化项目总结会</span>
+			</div>
+		</li>
+		<li>
+			<div class="yytext">
+				<p class="yyl">
+					<b>10栋18楼1号会议室</b><br />
+					<span>预约成功</span>
+				</p>
+				<p class="yyr">
+					12月12日<br />
+					<span>下午 14:00-16:00</span>
+				</p>
+			</div>
+			<div class="hybz">
+				<img src="images/bz.png" />
+				<span>2019年信息化项目总结会</span>
+			</div>
+		</li>
+		<li>
+			<div class="yytext">
+				<p class="yyl">
+					<b>10栋18楼1号会议室</b><br />
+					<span>预约成功</span>
+				</p>
+				<p class="yyr">
+					12月12日<br />
+					<span>下午 14:00-16:00</span>
+				</p>
+			</div>
+			<div class="hybz">
+				<img src="images/bz.png" />
+				<span>2019年信息化项目总结会</span>
+			</div>
+		</li>
+		<li>
+			<div class="yytext">
+				<p class="yyl">
+					<b>10栋18楼1号会议室</b><br />
+					<span>预约成功</span>
+				</p>
+				<p class="yyr">
+					12月12日<br />
+					<span>下午 14:00-16:00</span>
+				</p>
+			</div>
+			<div class="hybz">
+				<img src="images/bz.png" />
+				<span>2019年信息化项目总结会</span>
+			</div>
+		</li>
+		<li>
+			<div class="yytext">
+				<p class="yyl">
+					<b>10栋18楼1号会议室</b><br />
+					<span>预约成功</span>
+				</p>
+				<p class="yyr">
+					12月12日<br />
+					<span>下午 14:00-16:00</span>
+				</p>
+			</div>
+			<div class="hybz">
+				<img src="images/bz.png" />
+				<span>2019年信息化项目总结会</span>
+			</div>
+		</li>
+		<li>
+			<div class="yytext">
+				<p class="yyl">
+					<b>10栋18楼1号会议室</b><br />
+					<span>预约成功</span>
+				</p>
+				<p class="yyr">
+					12月12日<br />
+					<span>下午 14:00-16:00</span>
+				</p>
+			</div>
+			<div class="hybz">
+				<img src="images/bz.png" />
+				<span>2019年信息化项目总结会</span>
+			</div>
+		</li>
+	</ul>
+</div>
+<div class="foot_menu" style="display:none">
+	<ul>
+		<li>
+			<a href="index.html">
+				<i><img src="images/menu_icon01.png"></i>
+				<span>首 页</span>
+			</a>
+		</li>
+		<li class="cur">
+			<a href="shequ.html">
+				<i><img src="images/menu_icon02_r.png"></i>
+				<span>社 区</span>
+			</a>
+		</li>
+		<li>
+			<a href="news.html">
+				<i><img src="images/menu_icon03.png"></i>
+				<span>消 息</span>
+			</a>
+		</li>
+		<li>
+			<a href="user.html">
+				<i><img src="images/menu_icon04.png"></i>
+				<span>我 的</span>
+			</a>
+		</li>
+	</ul>
+</div>
+</body>
+<script src="js/jquery.min.js"></script>
+<script src="js/calendar.js"></script>
+
+<!--方法调用-->
+<script>
+$('.room').datePicker({
+	okFunc: function (date) {
+		console.log(date);
+	}
+});
+</script>
+</html>
+<script type="text/javascript">
+apiready = function () {
+$api.fixStatusBar(document.getElementById('headj'));
+document.getElementById('headj').style.height=(50+api.safeArea.top)+'px'
+document.getElementById('ge').style.marginTop=(5+api.safeArea.top)+'px'
+
+
+}
+</script>

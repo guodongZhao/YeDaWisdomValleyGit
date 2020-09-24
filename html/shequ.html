@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="format-detection" content="telephone=no"><!-- 禁止IPHONE识别手机号码 -->
+<meta name="viewport" content="width=device-width,user-scalable=no, initial-scale=1">
+<title>社区</title>
+<!-- css -->
+<link rel="stylesheet" type="text/css" href="css/index.css">
+<link rel="stylesheet" type="text/css" href="css/mui.min.css" />
+<link href="http://at.alicdn.com/t/font_1542633_vjfoldr9imp.css" />
+<script src="http://at.alicdn.com/t/font_1542633_vjfoldr9imp.js"></script>
+<link rel="stylesheet" type="text/css" href="../css/aui.css">
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/aui-toast.js"></script>
+<script type="text/javascript" src="../script/H.js"></script>
+<script type="text/javascript" src="../script/jquery.js"></script>
+<script type="text/javascript" src="../script/yuming.js"></script>
+<style>
+.module-content{padding: 10px;margin-bottom: 50px;}
+.mainp{margin: 10px 0 20px; font-size: 18px;color: #333;font-weight: bold; display: flex;align-items: center;}
+.mainp span{display: inline-block; background: linear-gradient(to bottom, #2dc5ff , #1a54ff);height: 16px; width: 2px;margin-right: 5px;}
+
+.dsf{margin-bottom: 25px;}
+.dsf ul{display: flex;align-items: center;}
+.dsf li{text-align: center;width: 25%;}
+.dsf li img{width: 40px;}
+.dsf li p{color: #333;font-size: 14px;margin-top: 10px;}
+.taolun{margin: 15px 0;}
+.box1 {width:100%;overflow:hidden;margin-bottom: 25px;}
+.box1 .wrap {width:100%;overflow-x:scroll;}
+.box1 .wrap ul {width:260%;}
+.box1 .wrap ul li {text-align: center;margin-right: 2%;box-sizing:border-box;position: relative;float: left;width: 200px}
+.box1 .wrap ul li img{width:100%;height: 100px; border-radius: 5px;}
+.box1 .wrap ul li p{font-size: 14px;color: #fff;font-weight: bold; padding:10px;position: absolute;bottom: 0px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;}
+.box1 .wrap::-webkit-scrollbar, .box1 .wrap ul::-webkit-scrollbar { display: none;}
+.remen{margin-bottom: 25px;}
+.remen li{width: 100%;border-radius: 10px;margin-bottom: 15px;background: #fff;padding: 10px;box-shadow: 0 0 8px 0 #d9d9d9;}
+.remen li img{width: 100%; border-radius: 10px;}
+.remen li p{color: #333;font-size: 14px;white-space: nowrap;overflow: hidden;  text-overflow: ellipsis;padding: 10px 0;}
+.remen li span{color: #666;font-size: 14px;display: flex;align-items: center;}
+.remen li span img{width: 20px;margin-right: 8px;height: 20px;}
+.xinwen ul{margin-top: 15px;margin-bottom: 25px;}
+.xinwen ul li{padding: 10px;border-top: 1px solid #f1f1f1; background: #fff; }
+.xinwen ul li a{display: flex;align-items: center;}
+.xinwen ul li img{width: 120px;height: 60px;border-radius: 5px;margin-left: 10px;}
+.xinwen ul li div{width: 70%;}
+.xinwen ul li p{color: #333;font-size: 15px;line-height: 22px;margin-bottom: 6px; display: -webkit-box !important;overflow: hidden; text-overflow: ellipsis; word-break: break-all;-webkit-box-orient: vertical; -webkit-line-clamp: 2;}
+.xinwen ul li span{color: #999;font-size: 12px;}
+</style>
+</head>
+<body style="background: #fff;">
+<div class="module-content"  id="headj">
+	<p class="mainp"><span></span>社区交流</p>
+	<div class="box1">
+	    <div class="wrap">
+	        <ul id="shequ">
+			<!--	<li>
+					<a onclick="opw('shequjl',1)">
+						<img src="images/shequ.png" />
+						<p>园区互动</p>
+					</a>
+				</li>
+				<li>
+					<a href="">
+						<img src="images/shequ1.png" />
+						<p>跳蚤市场</p>
+					</a>
+				</li>
+				<li>
+					<a href="">
+						<img src="images/shequ2.png" />
+						<p>企业合作</p>
+					</a>
+				</li>
+				<li>
+					<a href="">
+						<img src="images/shequ3.png" />
+						<p>我要拼车</p>
+					</a>
+				</li>-->
+	        </ul>
+	    </div>
+	</div>
+
+	<p class="mainp"><span></span>活动报名</p>
+	<ul class="remen" id="huodong">
+
+	</ul>
+	<div class="xinwen">
+    	<p class="mainp"><span></span>园区资讯</p>
+    	<ul id="zixun">
+    	<!--	<li><a href="#">
+    			<div>
+    				<p>烟台开发区管委副主任陈军来业达智汇谷调研</p>
+    				<span>2019-08-14</span>
+    			</div>
+    			<img src="images/xinwen.png" />
+    		</a></li>
+    		<li><a href="#">
+    			<div>
+    				<p>山东首个商业航天产业创新聚集区将落户业达智汇谷 </p>
+    				<span>2019-07-18</span>
+    			</div>
+    			<img src="images/xinwen1.png" />
+    		</a></li>-->
+    	</ul>
+    </div>
+
+	<p class="mainp"><span></span>第三方服务</p>
+	<div class="dsf">
+		<ul>
+			<li>
+				<a href="">
+					<img src="images/tianmao.jpg" />
+					<p>天猫</p>
+				</a>
+			</li>
+			<li>
+				<a href="">
+					<img src="images/elm.jpg" />
+					<p>饿了么</p>
+				</a>
+			</li>
+			<li>
+				<a href="">
+					<img src="images/meituan.jpg" />
+					<p>美团</p>
+				</a>
+			</li>
+			<li>
+				<a href="">
+					<img src="images/hcp.jpg" />
+					<p>火车票</p>
+				</a>
+			</li>
+			<li>
+				<a href="">
+					<img src="images/tpp.jpg" />
+					<p>淘票票</p>
+				</a>
+			</li>
+        </ul>
+	</div>
+</div>
+<div class="foot_menu">
+	<ul>
+		<li onclick="opw('index')">
+			<a >
+				<i><img src="images/menu_icon01.png"></i>
+				<span>首 页</span>
+			</a>
+		</li>
+		<li class="cur"  onclick="opw('shequ')">
+			<a>
+				<i><img src="images/menu_icon02_r.png"></i>
+				<span>社 区</span>
+			</a>
+		</li>
+		<li  onclick="opw('news')">
+			<a >
+				<i><img src="images/menu_icon03.png"></i>
+				<span>消 息</span>
+			</a>
+		</li>
+		<li onclick="opw('user')">
+			<a >
+				<i><img src="images/menu_icon04.png"></i>
+				<span>我 的</span>
+			</a>
+		</li>
+	</ul>
+</div>
+</body>
+<script src="js/jquery.js" type="text/javascript"></script>
+<link rel="stylesheet" href="css/swiper.min.css">
+<script src="js/swiper.jquery.min.js"></script>
+</html>
+<script type="text/javascript">
+apiready = function () {
+$api.fixStatusBar(document.getElementById('headj'));
+api.setStatusBarStyle({
+style: 'dark'
+});
+jjj=0
+api.addEventListener({
+name: 'keyback'
+}, function(ret, err) {
+
+
+if(jjj==1){
+	api.toLauncher()
+	/*api.sendEvent({
+			name: 'gyy',
+			extra: {
+					key1: 'value1',
+					key2: 'value2'
+			}
+	});*/
+}
+
+if( jjj==0){
+
+api.toast({
+   msg: '再按一次将退出应用',
+   duration: 2000,
+   location: 'bottom'
+});
+jjj=1;
+setTimeout(function(){
+ jjj=0;
+},2000)
+
+
+}
+
+
+})
+function huodong(){
+  api.ajax({
+    url: yuming2+'/api/park/index/parkActivities',
+        method: 'post',
+        data:{values: {
+
+
+ "loginMark": api.deviceId,
+ "token": $api.getStorage('token'),
+type:1
+              }}
+       }, function(ret) {
+ //alert(JSON.stringify(ret))
+ api.refreshHeaderLoadDone()
+ toast.hide()
+         for (var i = 0; i < document.getElementsByClassName('zhuan').length; i++) {
+          document.getElementsByClassName('zhuan')[i].style.display='none'
+        }
+        if(ret){
+        if(1){
+
+ //alert(ret.data.list.length)
+ if(ret.data&&ret.data.length>0){
+ var htmlh='';
+ for (var i = 0; i <ret.data.length; i++) {
+	if(i==0){  htmlh+= '<li onclick="huodong('+ret.data[i].id+')">'
+	htmlh+=	'	<img src="'+yuming2+'/upload/'+ret.data[i].thumbnail+'" />'
+		htmlh+=	'<p>'+ret.data[i].post_title+'</p>'
+	htmlh+=	'	<span><img src="images/canjia.png" />'+ret.data[i].count+'人已报名</span>'
+	htmlh+='	</li>'
+}
+
+ }
+// html+='<div class="xiala"></div>'
+
+ document.getElementById('huodong').innerHTML=htmlh;
+
+ }else {
+  //document.getElementById('ccc').innerHTML='<img src="../image/zanwu.png"style="width:100px;height:100px;display:block;margin:0 auto;margin-top:160px;margin-bottom:100px;">'
+ }
+
+        }else {
+
+      toast.hide()
+        }
+
+
+      }else {
+
+       /* api.toast({
+        msg: '网络错误',
+        duration: 2000,
+        location: 'middle'
+    });*/
+      }
+ toast.hide()
+
+       })
+}
+huodong()
+function zixun(){
+  api.ajax({
+    url: yuming2+'/api/park/index/parkInformation',
+        method: 'post',
+        data:{values: {
+
+
+ "loginMark": api.deviceId,
+ "token": $api.getStorage('token'),
+type:1
+              }}
+       }, function(ret) {
+ //alert(JSON.stringify(ret))
+ api.refreshHeaderLoadDone()
+ toast.hide()
+         for (var i = 0; i < document.getElementsByClassName('zhuan').length; i++) {
+          document.getElementsByClassName('zhuan')[i].style.display='none'
+        }
+        if(ret){
+        if(1){
+
+ //alert(ret.data.list.length)
+ if(ret.data&&ret.data.length>0){
+ var htmlz='';
+ for (var i = 0; i <ret.data.length; i++) {
+   htmlz+='<li><a onclick="zxxq('+ret.data[i].id+')">'
+    htmlz+= '<div>'
+      htmlz+= '<p>'+ret.data[i].post_title+'</p>'
+      htmlz+= '<span>'+ret.data[i].date+'</span>'
+  htmlz+= '  </div>'
+    htmlz+=' <img src="'+yuming2+'/upload/'+ret.data[i].thumbnail+'" />'
+   htmlz+='</a></li>'
+ }
+// html+='<div class="xiala"></div>'
+ //document.getElementById('huodong').style.width=(parseInt(ret.data.length)*280)+'px'
+ document.getElementById('zixun').innerHTML=htmlz;
+
+ }else {
+  //document.getElementById('ccc').innerHTML='<img src="../image/zanwu.png"style="width:100px;height:100px;display:block;margin:0 auto;margin-top:160px;margin-bottom:100px;">'
+ }
+
+        }else {
+
+      toast.hide()
+        }
+
+
+      }else {
+
+       /* api.toast({
+        msg: '网络错误',
+        duration: 2000,
+        location: 'middle'
+    });*/
+      }
+ toast.hide()
+
+       })
+}
+zixun()
+function shequ(){
+  api.ajax({
+    url: yuming2+'/api/Forum/forum/index',
+        method: 'post',
+        data:{values: {
+
+
+ "loginMark": api.deviceId,
+ "token": $api.getStorage('token'),
+type:1
+              }}
+       }, function(ret) {
+ //alert(JSON.stringify(ret))
+ api.refreshHeaderLoadDone()
+ toast.hide()
+         for (var i = 0; i < document.getElementsByClassName('zhuan').length; i++) {
+          document.getElementsByClassName('zhuan')[i].style.display='none'
+        }
+        if(ret){
+        if(1){
+
+ //alert(ret.data.list.length)
+ if(ret.data&&ret.data.length>0){
+ var htmlz='';
+  document.getElementById('shequ').style.width=220*parseInt(ret.data.length)+'px'
+ for (var i = 0; i <ret.data.length; i++) {
+   htmlz+='<li>'
+		htmlz+=' <a onclick="shequ('+ret.data[i].id+',this)" data-name="'+ret.data[i].name+'">'
+		htmlz+=	 '<img src="'+yuming2+'/upload/'+ret.data[i].icon+'" />'
+		htmlz+=	' <p>'+ret.data[i].name+'</p>'
+	htmlz+=	' </a>'
+	htmlz+= '</li>'
+ }
+// html+='<div class="xiala"></div>'
+ //document.getElementById('huodong').style.width=(parseInt(ret.data.length)*280)+'px'
+ document.getElementById('shequ').innerHTML=htmlz;
+
+ }else {
+  //document.getElementById('ccc').innerHTML='<img src="../image/zanwu.png"style="width:100px;height:100px;display:block;margin:0 auto;margin-top:160px;margin-bottom:100px;">'
+ }
+
+        }else {
+
+      toast.hide()
+        }
+
+
+      }else {
+
+       /* api.toast({
+        msg: '网络错误',
+        duration: 2000,
+        location: 'middle'
+    });*/
+      }
+ toast.hide()
+
+       })
+}
+shequ()
+}
+function huodong(data){
+	api.openWin({
+			name: 'houdong',
+			url: './houdong.html',
+			pageParam: {
+					id: data
+			}
+	});
+
+}
+function shequ(data,n){
+	api.openWin({
+			name: 'shequjl',
+			url: './shequjl.html',
+			pageParam: {
+					id: data,
+					name:n.getAttribute('data-name')
+			}
+	});
+
+}
+function zxxq(data,n){
+	api.openWin({
+			name: 'zxxq',
+			url: './zxxq.html',
+			pageParam: {
+					id: data,
+
+			}
+	});
+
+}
+</script>

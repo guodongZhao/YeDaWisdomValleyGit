@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="format-detection" content="telephone=no"><!-- 禁止IPHONE识别手机号码 -->
+<meta name="viewport" content="width=device-width,user-scalable=no, initial-scale=1">
+<title>会议室</title>
+<!-- css -->
+<link rel="stylesheet" type="text/css" href="css/index.css">
+<link rel="stylesheet" type="text/css" href="css/mui.min.css" />
+<link rel="stylesheet" href="css/calendar.css">
+<style>
+.module-content{padding-top: 44px;margin-bottom: 50px;}
+.hysj{background: #367ff8;display: flex;justify-content: space-between;padding: 10px;align-items: center;}
+
+.hysj p{color: #000;font-size: 12px;width: 50px}
+.hylist{padding: 20px 10px;}
+.hylist li{background: #fff;border-radius: 10px;padding: 15px 0px 0;overflow: hidden;margin-bottom: 15px;}
+.hylist li h2{font-size: 16px;padding: 5px 15px;color: #000;}
+.hylist li > p{color: #000;font-size: 14px;padding: 5px 15px;}
+.hysb{display: flex;padding: 10px 0;}
+.hysb p{width: 25%;text-align: center;}
+.hysb p img{width: 36%;}
+.hysb p span{display: block; font-size: 12px;margin: 10px 0;}
+.yyue{display: block;text-align: center;color: #367ff8;font-size: 14px; line-height: 36px;background: linear-gradient(to right, #ebf3ff , #c3d7f9);}
+</style>
+</head>
+<body style="background: #f7f7f7;">
+	<header>
+		<a href="javascript:history.back(-1)">
+			<img src="images/back_jt.png" />
+			<span onclick="api.closeWin()">会议室预约</span>
+		</a>
+	</header>
+<div class="module-content">
+	<ul class="hylist">
+		<li>
+			<h2>10栋18楼1号会议室</h2>
+			<p>可容纳200人</p>
+			<div class="hysb">
+				<p>
+					<img src="images/touying.png" />
+					<span>投影仪</span>
+				</p>
+				<p>
+					<img src="images/baiban.png" />
+					<span>白板</span>
+				</p>
+				<p>
+					<img src="images/yinxiang.png" />
+					<span>音箱</span>
+				</p>
+			</div>
+			<a href="huiyishi.html" class="yyue">立即预约</a>
+		</li>
+		<li>
+			<h2>5栋8楼4号会议室</h2>
+			<p>可容纳50人</p>
+			<div class="hysb">
+				<p>
+					<img src="images/touying.png" />
+					<span>投影仪</span>
+				</p>
+				<p>
+					<img src="images/baiban.png" />
+					<span>白板</span>
+				</p>
+				<p>
+					<img src="images/yinxiang.png" />
+					<span>音箱</span>
+				</p>
+				<p>
+					<img src="images/huatong.png" />
+					<span>话筒</span>
+				</p>
+			</div>
+			<a href="huiyishi.html" class="yyue">立即预约</a>
+		</li>
+		<li>
+			<h2>16栋12楼4号会议室</h2>
+			<p>可容纳500人</p>
+			<div class="hysb">
+				<p>
+					<img src="images/touying.png" />
+					<span>投影仪</span>
+				</p>
+				<p>
+					<img src="images/baiban.png" />
+					<span>白板</span>
+				</p>
+				<p>
+					<img src="images/yinxiang.png" />
+					<span>音箱</span>
+				</p>
+				<p>
+					<img src="images/huatong.png" />
+					<span>话筒</span>
+				</p>
+			</div>
+			<a href="huiyishi.html" class="yyue">立即预约</a>
+		</li>
+	</ul>
+</div>
+<div class="foot_menu">
+	<ul>
+		<li>
+			<a href="index.html">
+				<i><img src="images/menu_icon01.png"></i>
+				<span>首 页</span>
+			</a>
+		</li>
+		<li class="cur">
+			<a href="wuye.html">
+				<i><img src="images/menu_icon02.png"></i>
+				<span>智 能</span>
+			</a>
+		</li>
+		<li>
+			<a href="news.html">
+				<i><img src="images/menu_icon03.png"></i>
+				<span>消 息</span>
+			</a>
+		</li>
+		<li>
+			<a href="user.html">
+				<i><img src="images/menu_icon04.png"></i>
+				<span>我 的</span>
+			</a>
+		</li>
+	</ul>
+</div>
+</body>
+<script src="js/jquery.min.js"></script>
+<script src="js/calendar.js"></script>
+
+<!--方法调用-->
+<script>
+$('.room').datePicker({
+	okFunc: function (date) {
+		console.log(date);
+	}
+});
+</script>
+</html>

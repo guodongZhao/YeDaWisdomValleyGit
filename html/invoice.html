@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="format-detection" content="telephone=no"><!-- 禁止IPHONE识别手机号码 -->
+<meta name="viewport" content="width=device-width,user-scalable=no, initial-scale=1">
+<title>我的发票</title>
+<!-- css -->
+<link rel="stylesheet" type="text/css" href="css/index.css">
+<link rel="stylesheet" type="text/css" href="css/mui.min.css" />
+<link rel="stylesheet" href="css/calendar.css">
+<style>
+.module-content{padding-top: 44px;margin-bottom: 50px;}
+.invoice{padding: 10px;}
+.invoice li{background: #fff;border-radius: 10px;padding: 5px 10px;margin-bottom: 10px;height: 80px; position: relative;}
+.invoice li span{position: absolute;width: 16px;height: 16px;border-radius: 10px;background: #f7f7f7;left: 90px;}
+.invoice li span.top{top: -8px;}
+.invoice li span.bottom{bottom: -8px;}
+.invoicein{align-items: center;height: 70px;}
+.invoicein .fpq{width: 90px; border-right: 1px solid #f1f1f1;position: absolute;top: 20px;left: 10px;}
+.invoicein .fpq b{color: #F04124;font-size: 16px;}
+.invoicein .fpq p{font-size: 14px;margin-top: 10px;}
+.invoicein .fptext{position: absolute;left: 110px;right: 10px;}
+.invoicein h3{font-size: 14px;color: #000;line-height: 24px;margin: 0; overflow: hidden;text-overflow:ellipsis;white-space: nowrap;}
+.invoicein h4{font-size: 14px;color: #333;line-height: 22px;margin: 0;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;}
+.invoicein h5{font-size: 14px;color: #666;line-height: 22px;margin: 0;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;}
+</style>
+</head>
+<body style="background: #f7f7f7;">
+	<header>
+		<a href="javascript:history.back(-1)">
+			<img src="images/back_jt.png" />
+			<span onclick="api.closeWin()">我的发票</span>
+		</a>
+	</header>
+<div class="module-content">
+	<ul class="invoice">
+		<li><a href="invoicexq.html">
+			<span class="top"></span>
+			<span class="bottom"></span>
+			<div class="invoicein">
+				<div class="fpq">
+					<b>￥1000.00</b>
+					<p>单位</p>
+				</div>
+				<div class="fptext">
+					<h3>名称：业达物业集团</h3>
+					<h4>地址：山东省烟台市芝罘区通世街道峰山路1号</h4>
+					<h5>电话：18585985968</h5>
+				</div>
+			</div>
+		</a></li>
+		<li><a href="invoicexq.html">
+			<span class="top"></span>
+			<span class="bottom"></span>
+			<div class="invoicein">
+				<div class="fpq">
+					<b>￥1000.00</b>
+					<p>个人</p>
+				</div>
+				<div class="fptext">
+					<h3>名称：王晓华</h3>
+					<h4>地址：山东省烟台市芝罘区通世街道峰山路1号</h4>
+					<h5>电话：18585985968</h5>
+				</div>
+			</div>
+		</a></li>
+	</ul>
+</div>
+<div class="foot_menu">
+	<ul>
+		<li>
+			<a href="index.html">
+				<i><img src="images/menu_icon01.png"></i>
+				<span>首 页</span>
+			</a>
+		</li>
+		<li class="cur">
+			<a href="wuye.html">
+				<i><img src="images/menu_icon02.png"></i>
+				<span>智 能</span>
+			</a>
+		</li>
+		<li>
+			<a href="news.html">
+				<i><img src="images/menu_icon03.png"></i>
+				<span>消 息</span>
+			</a>
+		</li>
+		<li>
+			<a href="user.html">
+				<i><img src="images/menu_icon04.png"></i>
+				<span>我 的</span>
+			</a>
+		</li>
+	</ul>
+</div>
+</body>
+<script src="js/jquery.min.js"></script>
+<script src="js/calendar.js"></script>
+
+<!--方法调用-->
+<script>
+$('.room').datePicker({
+	okFunc: function (date) {
+		console.log(date);
+	}
+});
+</script>
+</html>

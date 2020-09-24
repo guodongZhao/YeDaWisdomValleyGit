@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="format-detection" content="telephone=no"><!-- 禁止IPHONE识别手机号码 -->
+<meta name="viewport" content="width=device-width,user-scalable=no, initial-scale=1">
+<title>公寓管理</title>
+<!-- css -->
+<link rel="stylesheet" type="text/css" href="css/index.css">
+<link rel="stylesheet" type="text/css" href="css/mui.min.css" />
+
+<style>
+.module-content{padding-top: 44px;padding-bottom: 50px;}
+.sdmenu h2{font-size: 16px;padding: 10px;border-bottom: 1px solid #f1f1f1;margin: 0; display: flex;justify-content: space-between;align-items: center;}
+.sdmenu h2 span{display: block;width: 12px;height: 12px; background: url(images/fold.png)no-repeat right top;background-size:12px 24px;}
+.sdmenu h2.on span{background-position-y: bottom;}
+.sdmenu h3{display: flex;padding:10px 20px;align-items: center;background: #f9f9f9;border-bottom: 1px solid #fff; font-size: 14px; color: #000;margin: 0;}
+.sdmenu h3 img{width: 16px;height: 16px;margin-right: 10px;}
+.gongyu{display: flex;align-items: center;flex-wrap: wrap;margin: 0 10px;}
+.gongyu li{width: 30%;margin: 10px 1.5%;padding: 15px 10px;border-radius: 10px;line-height: 24px;}
+.gongyu li p{font-size: 16px;font-weight: bold;}
+.gongyu li span{font-size: 14px;}
+.gongyu li.grey{background: #f4f4f4;border: 1px solid #e2e2e2;}
+.gongyu li.grey p,.gongyu li.grey span{color: #aeaeae;}
+
+.gongyu li.blue{background: #eaf4fe;border: 1px solid #daebfb;}
+.gongyu li.blue p,.gongyu li.blue span{color: #0c83f9;}
+
+.gongyu li.green{background: #e6f9f3;border: 1px solid #d4fff1;}
+.gongyu li.green p,.gongyu li.green span{color: #00b168;}
+
+.gongyu li.yellow{background: #fef4eb;border: 1px solid #ffead7;}
+.gongyu li.yellow p,.gongyu li.yellow span{color: #fd7808;}
+
+.gongyu li.red{background: #ffedf1;border: 1px solid #fbdae2;}
+.gongyu li.red p,.gongyu li.red span{color: #ff3a5f;}
+.tianjia{position: fixed;right: 10px;width: 36px;height: 36px;bottom: 65px;}
+.tianjia img{width: 100%;}
+</style>
+</head>
+<body style="background: #fff;">
+<header>
+	<a href="javascript:history.back(-1)">
+		<img src="images/back_jt.png" />
+		<span onclick="api.closeWin()">公寓管理</span>
+	</a>
+</header>
+<div class="module-content">
+	<div class="sdmenu">
+		<h2 class="on">B去9号楼<span></span></h2>
+		<div class="collapsed">
+			<h3 class="on"><img src="images/lou.png"/>1层</h3>
+			<ul class="gongyu">
+				<li class="blue"><a href="gongyuxq.html">
+					<p>A101</p>
+					<span>王晓华</span>
+				</a></li>
+				<li class="blue"><a href="gongyuxq.html">
+					<p>A102</p>
+					<span>王晓华</span>
+				</a></li>
+				<li class="yellow"><a href="gongyuxq.html">
+					<p>A103</p>
+					<span>预约退房</span>
+				</a></li>
+				<li class="green"><a href="gongyuxq.html">
+					<p>A104</p>
+					<span>已预订</span>
+				</a></li>
+				<li class="red"><a href="gongyuxq.html">
+					<p>A105</p>
+					<span>空置</span>
+				</a></li>
+				<li class="grey"><a href="gongyuxq.html">
+					<p>A106</p>
+					<span>装修中</span>
+				</a></li>
+			</ul>
+			<h3><img src="images/lou.png" />2层</h3>
+			<ul class="gongyu">
+				<li class="blue"><a href="gongyuxq.html">
+					<p>A101</p>
+					<span>王晓华</span>
+				</a></li>
+				<li class="blue"><a href="gongyuxq.html">
+					<p>A102</p>
+					<span>王晓华</span>
+				</a></li>
+				<li class="yellow"><a href="gongyuxq.html">
+					<p>A103</p>
+					<span>预约退房</span>
+				</a></li>
+				<li class="green"><a href="gongyuxq.html">
+					<p>A104</p>
+					<span>已预订</span>
+				</a></li>
+				<li class="red"><a href="gongyuxq.html">
+					<p>A105</p>
+					<span>空置</span>
+				</a></li>
+				<li class="grey"><a href="gongyuxq.html">
+					<p>A106</p>
+					<span>装修中</span>
+				</a></li>
+			</ul>
+			<h3><img src="images/lou.png" />3层</h3>
+			<ul class="gongyu">
+				<li class="blue"><a href="gongyuxq.html">
+					<p>A101</p>
+					<span>王晓华</span>
+				</a></li>
+				<li class="blue"><a href="gongyuxq.html">
+					<p>A102</p>
+					<span>王晓华</span>
+				</a></li>
+				<li class="yellow"><a href="gongyuxq.html">
+					<p>A103</p>
+					<span>预约退房</span>
+				</a></li>
+				<li class="green"><a href="gongyuxq.html">
+					<p>A104</p>
+					<span>已预订</span>
+				</a></li>
+				<li class="red"><a href="gongyuxq.html">
+					<p>A105</p>
+					<span>空置</span>
+				</a></li>
+				<li class="grey"><a href="gongyuxq.html">
+					<p>A106</p>
+					<span>装修中</span>
+				</a></li>
+			</ul>
+		</div>
+		<h2>B去10号楼<span></span></h2>
+		<div class="collapsed">
+			<h3><img src="images/lou.png" />1层</h3>
+			<ul class="gongyu">
+				<li class="blue"><a href="gongyuxq.html">
+					<p>A101</p>
+					<span>王晓华</span>
+				</a></li>
+				<li class="blue"><a href="gongyuxq.html">
+					<p>A102</p>
+					<span>王晓华</span>
+				</a></li>
+				<li class="yellow"><a href="gongyuxq.html">
+					<p>A103</p>
+					<span>预约退房</span>
+				</a></li>
+				<li class="green"><a href="gongyuxq.html">
+					<p>A104</p>
+					<span>已预订</span>
+				</a></li>
+				<li class="red"><a href="gongyuxq.html">
+					<p>A105</p>
+					<span>空置</span>
+				</a></li>
+				<li class="grey"><a href="gongyuxq.html">
+					<p>A106</p>
+					<span>装修中</span>
+				</a></li>
+			</ul>
+			<h3><img src="images/lou.png" />2层</h3>
+			<ul class="gongyu">
+				<li class="blue"><a href="gongyuxq.html">
+					<p>A101</p>
+					<span>王晓华</span>
+				</a></li>
+				<li class="blue"><a href="gongyuxq.html">
+					<p>A102</p>
+					<span>王晓华</span>
+				</a></li>
+				<li class="yellow"><a href="gongyuxq.html">
+					<p>A103</p>
+					<span>预约退房</span>
+				</a></li>
+				<li class="green"><a href="gongyuxq.html">
+					<p>A104</p>
+					<span>已预订</span>
+				</a></li>
+				<li class="red"><a href="gongyuxq.html">
+					<p>A105</p>
+					<span>空置</span>
+				</a></li>
+				<li class="grey"><a href="gongyuxq.html">
+					<p>A106</p>
+					<span>装修中</span>
+				</a></li>
+			</ul>
+			<h3><img src="images/lou.png" />3层</h3>
+			<ul class="gongyu">
+				<li class="blue"><a href="gongyuxq.html">
+					<p>A101</p>
+					<span>王晓华</span>
+				</a></li>
+				<li class="blue"><a href="gongyuxq.html">
+					<p>A102</p>
+					<span>王晓华</span>
+				</a></li>
+				<li class="yellow"><a href="gongyuxq.html">
+					<p>A103</p>
+					<span>预约退房</span>
+				</a></li>
+				<li class="green"><a href="gongyuxq.html">
+					<p>A104</p>
+					<span>已预订</span>
+				</a></li>
+				<li class="red"><a href="gongyuxq.html">
+					<p>A105</p>
+					<span>空置</span>
+				</a></li>
+				<li class="grey"><a href="gongyuxq.html">
+					<p>A106</p>
+					<span>装修中</span>
+				</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+<a class="tianjia" href="gongyuadd.html"><img src="images/ad.png" /></a>
+<div class="foot_menu">
+	<ul>
+		<li>
+			<a href="index.html">
+				<i><img src="images/menu_icon01.png"></i>
+				<span>首 页</span>
+			</a>
+		</li>
+		<li class="cur">
+			<a href="wuye.html">
+				<i><img src="images/menu_icon02.png"></i>
+				<span>智 能</span>
+			</a>
+		</li>
+		<li>
+			<a href="news.html">
+				<i><img src="images/menu_icon03.png"></i>
+				<span>消 息</span>
+			</a>
+		</li>
+		<li>
+			<a href="user.html">
+				<i><img src="images/menu_icon04.png"></i>
+				<span>我 的</span>
+			</a>
+		</li>
+	</ul>
+</div>
+</body>
+<script src="js/jquery.js"></script>
+<script type="text/javascript" src="js/jquery.SuperSlide.2.1.1.js" ></script>
+<script>
+	$(".sdmenu").slide({
+		titCell: "h2",
+		targetCell: ".collapsed",
+		defaultIndex: 1,
+		effect: "slideDown",
+		delayTime: 300,
+		trigger: "click",
+		returnDefault: true
+	});
+	$(".sdmenu").slide({
+		titCell: "h3",
+		targetCell: ".gongyu",
+		defaultIndex: 1,
+		effect: "slideDown",
+		delayTime: 300,
+		trigger: "click",
+		returnDefault: true
+	});
+</script>
+</html>

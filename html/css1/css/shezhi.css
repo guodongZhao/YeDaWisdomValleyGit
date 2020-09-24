@@ -1,0 +1,26 @@
+body{
+  background: white;
+}
+#head{
+	width: 100%;
+	height: 50px;;
+	color: white;;
+	line-height: 50px;;
+	position: relative;
+	margin: 0 auto;font-size: 18px;
+	text-align: center;
+/*	position: fixed;*/
+	left: 0;
+	top: 0;
+	z-index: 30;
+	background: #F9F9F9;
+	color: #303030;
+	font-weight: bold;
+}
+
+#head #zuo{
+	height: 26px;;
+	left: 5%;
+	bottom: 12px;
+	position: absolute;
+}

@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="format-detection" content="telephone=no"><!-- 禁止IPHONE识别手机号码 -->
+<meta name="viewport" content="width=device-width,user-scalable=no, initial-scale=1">
+<title>自助缴费</title>
+<!-- css -->
+<link rel="stylesheet" type="text/css" href="css/index.css">
+<link rel="stylesheet" type="text/css" href="css/mui.min.css" />
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/aui-toast.js"></script>
+<script type="text/javascript" src="../script/H.js"></script>
+<script type="text/javascript" src="../script/jquery.js"></script>
+<script type="text/javascript" src="../script/yuming.js"></script>
+<script src="js/jquery.js"></script>
+<style>
+.module-content{padding-top: 44px;margin-bottom: 50px;}
+.hybt{color: #000;font-size: 16px;line-height: 40px;}
+.hyxz{background: #f4f4f4;border-top-left-radius: 10px;border-top-right-radius: 10px;padding: 10px 15px;}
+.yyr{border-radius: 10px;overflow: hidden;padding: 10px;background: #fff;}
+.yyr li{display: flex;align-items: center;padding: 5px 0; border-bottom: 1px solid #f1f1f1;}
+.yyr li:last-child{border-bottom: 0;}
+.yyr li span{font-size: 14px;color: #333;width: 80px;}
+.yyr li select{font-size: 14px;}
+.yyr li input{border: 0;font-size: 14px;color: #000;}
+.yyr p{line-height: 44px;color: #000;font-size: 14px;}
+.payment{margin: 15px 0;background: #fff;border-radius: 10px;}
+.payment li{display: flex;padding: 10px;align-items: center;font-size: 14px; border-bottom: 1px solid #f1f1f1;}
+.payment li img{width: 30px;height: 30px;margin: 0 10px;}
+.tjsq{display: block;text-align: center; line-height: 40px;margin-top: 10px; color:#fff;font-size: 14px; border-radius: 10px;background: linear-gradient(to right, #367ff8 , #556dff);}
+
+</style>
+</head>
+<body style="background: #f7f7f7;">
+	<header id="headj">
+		<a >
+			<img src="images/back_jt.png" onclick="api.closeWin()" />
+
+			<span onclick="api.closeWin()">自助缴费</span>
+		</a>
+	</header>
+<div class="module-content " id="ge">
+	<div class="hyxz">
+		<ul class="yyr">
+
+			<li><span>公司名称</span><input type="text" placeholder="请填写公司名称" readonly="readonly" id="gongsi"/></li>
+
+			<!--<li><span>备注</span><input type="text" placeholder="请填写备注" /></li>-->
+		</ul>
+		<p class="hybt">请选择支付方式</p>
+		<ul class="payment">
+			<li><input type="radio" name="pay" checked="checked" id="zf1" /><img src="images/zhifubao.png" /><span>支付宝</span></li>
+			<li><input type="radio" name="pay" id="zf2"/><img src="images/weixin.png" /><span>微信</span></li>
+		</ul>
+		<a class="tjsq" onclick="tijiao()">支付</a>
+	</div>
+</div>
+<div class="foot_menu" style="display:none">
+	<ul>
+		<li>
+			<a href="index.html">
+				<i><img src="images/menu_icon01.png"></i>
+				<span>首 页</span>
+			</a>
+		</li>
+		<li class="cur">
+			<a href="wuye.html">
+				<i><img src="images/menu_icon02.png"></i>
+				<span>智 能</span>
+			</a>
+		</li>
+		<li>
+			<a href="news.html">
+				<i><img src="images/menu_icon03.png"></i>
+				<span>消 息</span>
+			</a>
+		</li>
+		<li>
+			<a href="user.html">
+				<i><img src="images/menu_icon04.png"></i>
+				<span>我 的</span>
+			</a>
+		</li>
+	</ul>
+</div>
+</body>
+<script type="text/javascript" src="js/jquery.js" ></script>
+<script type="text/javascript" src="js/jquery.SuperSlide.2.1.1.js" ></script>
+<script>
+	$(".slideTxtBox").slide({trigger:"click"});
+</script>
+</html>
+<script type="text/javascript">
+apiready = function () {
+$api.fixStatusBar(document.getElementById('headj'));
+document.getElementById('headj').style.height=(50+api.safeArea.top)+'px'
+document.getElementById('ge').style.marginTop=(5+api.safeArea.top)+'px'
+//alert(JSON.stringify(api.pageParam.arr))
+//alert(JSON.stringify(api.pageParam.ren))
+//document.getElementById('leixing').value=api.pageParam.arr.bname
+document.getElementById('gongsi').value=api.pageParam.arr.billownername
+//document.getElementById('jine').value=api.pageParam.arr.account
+}
+jy=0
+function tijiao(){
+	zftp=1
+  if(document.getElementById('zf1').checked){
+			zftp=1
+	}else {
+			zftp=2
+	}
+var ttt=api.pageParam.arr
+ttt["payType"]=zftp
+if(jy==0){
+		jy=1
+		showDefault()
+		/*近在咫尺:
+http://zhg.tianzhuowangluo.com/api/bill/bill/addBill
+
+近在咫尺:
+payType
+
+		*/
+		//alert(JSON.stringify(ttt))
+		api.ajax({
+						 url: yuming2+'/api/bill/bill/addBill',
+						 method: 'post',
+						 data:{values: ttt}
+				 }, function(rets) {
+jy=0
+	//alert(JSON.stringify(rets))
+	 toast.hide()
+				 if(rets){
+				 if(rets.code==1){
+				if(zftp==2){
+					var wxPay = api.require('wxPay');
+	        wxPay.payOrder(
+
+	            {   apiKey: rets.data.appid,
+	                 orderId: rets.data.prepayid,
+	                 mchId:  rets.data.partnerid,
+	                 nonceStr: rets.data.noncestr,
+	                 timeStamp: rets.data.timestamp,
+	                 package: rets.data.package,
+	                 sign: rets.data.sign,
+	            } , function(ret, err) {
+
+	                 if (ret.status) {
+	                   jy=0;
+	                  toast.hide()
+	                   //
+	                   //$api.setStorage('tiaoshu',0)
+	                   api.toast({
+	                 msg:'支付成功!',
+	                 duration: 1000,
+	                 location: 'middle'
+	                 });
+
+	       jy=0
+	       setTimeout(function(){
+	       api.sendEvent({
+	       name: 'sx'
+
+	       });
+
+	       api.closeWin();
+
+	       },1000)
+
+	                 } else {
+	                   api.toast({
+	                 msg:'支付失败',
+	                 duration: 1000,
+	                 location: 'middle'
+	                 });
+
+	                 jy=0;
+	        toast.hide()
+	                 }
+
+
+	             })
+				}else {
+					var aliPay = api.require('aliPay');
+					aliPay.payOrder({
+										orderInfo: rets.data
+								}, function(ret, err) {
+//alert(JSON.stringify(err))
+									 if(ret.code=='9000')
+									 {
+
+										 //
+										 //$api.setStorage('tiaoshu',0)
+										 api.toast({
+									 msg:'支付成功!',
+									 duration: 1000,
+									 location: 'middle'
+									 });
+
+ jy=0
+ setTimeout(function(){
+ api.sendEvent({
+ name: 'sx'
+
+ });
+
+ api.closeWin();
+
+ },1000)
+
+									 }
+									 else
+									 {
+										 api.toast({
+									 msg:'付款失败',
+									 duration: 1000,
+									 location: 'middle'
+									 });
+
+										 jy=0;
+										 toast.hide()
+
+									 }
+								});
+				}
+			/*		toast.hide()
+jy=0*/
+		 }else {
+       jy=0
+			 toast.hide()
+			 api.toast({
+			 msg: ret.msg,
+			 duration: 2000,
+			 location: 'middle'
+	 });
+		 }
+
+				 }else {
+
+						toast.hide()
+					 api.toast({
+					 msg: '网络错误',
+					 duration: 2000,
+					 location: 'middle'
+			 });
+				 }
+
+				 })
+	}
+
+}
+</script>

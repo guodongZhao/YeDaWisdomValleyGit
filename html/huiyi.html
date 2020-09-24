@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="format-detection" content="telephone=no"><!-- 禁止IPHONE识别手机号码 -->
+<meta name="viewport" content="width=device-width,user-scalable=no, initial-scale=1">
+<title>会议室</title>
+<!-- css -->
+<link rel="stylesheet" type="text/css" href="css/index.css">
+<link rel="stylesheet" type="text/css" href="css/mui.min.css" />
+<link rel="stylesheet" href="css/calendar.css">
+<link rel="stylesheet" type="text/css" href="../css/aui.css">
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/aui-toast.js"></script>
+<script type="text/javascript" src="../script/H.js"></script>
+<script type="text/javascript" src="../script/jquery.js"></script>
+<script type="text/javascript" src="../script/yuming.js"></script>
+<style>
+.module-content{padding-top: 44px;margin-bottom: 50px;}
+.hysj{background: #367ff8;display: flex;justify-content: space-between;padding: 10px;align-items: center;}
+
+.hysj p{color: #000;font-size: 12px;width: 50px}
+.hylist{padding: 20px 10px;}
+.hylist li{background: #fff;border-radius: 10px;padding: 15px 0px 0;overflow: hidden;margin-bottom: 15px;}
+.hylist li h2{font-size: 16px;padding: 5px 15px;color: #000;font-weight: bold;}
+.hylist li > p{color: #000;font-size: 14px;padding: 5px 15px;}
+.hysb{
+	/*display: flex;*/
+	padding: 0px 0 10px 0;}
+.hysb p{width: 100%;text-align: left;padding: 0px 18px;box-sizing: border-box;color: grey;line-height: 20px;}
+.hysb p img{width: 36%;}
+.hysb p span{display: block; font-size: 12px;margin: 0px 0;}
+.yyue{display: block;text-align: center;color: white;font-size: 14px; line-height: 36px;background:#556DFF;}
+.zhuan{
+	display: none;
+	margin: 0 auto;
+}
+</style>
+</head>
+<body style="background: #F1F1F1;">
+	<header id="headj">
+		<a >
+			<img src="images/back_jt.png"  onclick="api.closeWin()"/>
+			<span onclick="api.closeWin()">会议室预约</span>
+		</a>
+	</header>
+<div class="module-content" id="ge">
+	<div class="hysj" style="display:none">
+		<p>前一天</p>
+		<div class="row">
+			<input type="text" class="room" value="10/12/2019" id="endTime">
+		</div>
+		<p style="text-align: right;">后一天</p>
+	</div>
+	<ul class="hylist" id="jmenjin">
+<!--	<li>
+			<h2>10栋18楼1号会议室</h2>
+			<p>可容纳200人</p>
+			<div class="hysb">
+				<p>
+					<img src="images/touying.png" />
+					<span>投影仪</span>
+				</p>
+				<p>
+					<img src="images/baiban.png" />
+					<span>白板</span>
+				</p>
+				<p>
+					<img src="images/yinxiang.png" />
+					<span>音箱</span>
+				</p>
+			</div>
+			<a  onclick="opw('huiyishi',1)" class="yyue">立即预约</a>
+		</li>
+		<li>
+			<h2>5栋8楼4号会议室</h2>
+			<p>可容纳50人</p>
+			<div class="hysb">
+				<p>
+					<img src="images/touying.png" />
+					<span>投影仪</span>
+				</p>
+				<p>
+					<img src="images/baiban.png" />
+					<span>白板</span>
+				</p>
+				<p>
+					<img src="images/yinxiang.png" />
+					<span>音箱</span>
+				</p>
+				<p>
+					<img src="images/huatong.png" />
+					<span>话筒</span>
+				</p>
+			</div>
+			<a href="huiyishi.html" class="yyue">立即预约</a>
+		</li>
+		<li>
+			<h2>16栋12楼4号会议室</h2>
+			<p>可容纳500人</p>
+			<div class="hysb">
+				<p>
+					<img src="images/touying.png" />
+					<span>投影仪</span>
+				</p>
+				<p>
+					<img src="images/baiban.png" />
+					<span>白板</span>
+				</p>
+				<p>
+					<img src="images/yinxiang.png" />
+					<span>音箱</span>
+				</p>
+				<p>
+					<img src="images/huatong.png" />
+					<span>话筒</span>
+				</p>
+			</div>
+			<a href="huiyishi.html" class="yyue">立即预约</a>
+		</li>
+	</ul>
+</div>
+<div class="foot_menu" style="display:none">
+	<ul>
+		<li>
+			<a href="index.html">
+				<i><img src="images/menu_icon01.png"></i>
+				<span>首 页</span>
+			</a>
+		</li>
+		<li class="cur">
+			<a href="shequ.html">
+				<i><img src="images/menu_icon02_r.png"></i>
+				<span>社 区</span>
+			</a>
+		</li>
+		<li>
+			<a href="news.html">
+				<i><img src="images/menu_icon03.png"></i>
+				<span>消 息</span>
+			</a>
+		</li>
+		<li>
+			<a href="user.html">
+				<i><img src="images/menu_icon04.png"></i>
+				<span>我 的</span>
+			</a>
+		</li>-->
+	</ul>
+	<img src="../image/zhuan.gif" id="zhuan" style="height:20px;width:auto;margin-top:10px;margin-bottom:10px;" class="zhuan">
+	<div id="ddd">
+
+	</div>
+</div>
+</body>
+<script src="js/jquery.min.js"></script>
+<script src="js/calendar.js"></script>
+
+<!--方法调用-->
+<script>
+/*$('.room').datePicker({
+	okFunc: function (date) {
+		console.log(date);
+	}
+});*/
+</script>
+</html>
+<script type="text/javascript">
+page=0
+arrindex=0
+arr=[]
+apiready = function () {
+$api.fixStatusBar(document.getElementById('headj'));
+document.getElementById('headj').style.height=(50+api.safeArea.top)+'px'
+document.getElementById('ge').style.marginTop=(5+api.safeArea.top)+'px'
+/*
+：/learun/adms/conference/getconferencelist
+类型：Get
+请求参数：
+参数名称	类型	备注	必须
+loginMark	String	设备标识，必须具有唯一性	是
+token	String	验证码，从登录后返回信息中获取	是
+pageno	String	当前页码	是
+pagesize	String	每页记录数	是
+ConferenceName	String	会议室名称，不填写名称查询全部
+返回参数：
+参数名称	类型	备注
+code	String	结果响应码
+info	String	结果响应信息
+data	String	返回值
+Data主要属性
+参数名称	类型	备注
+pageno	String	当前页码
+pagesize	String	每页记录数
+total	String	总记录数
+list	List<Map>	列表
+*/
+api.addEventListener({
+    name: 'sx'
+}, function(ret, err){
+  showDefault()
+	page=0;
+  zb()
+});
+$api.setStorage('j',0)
+showDefault()
+function zb(){
+
+page++
+if(page==1){
+//alert(riqi)
+//alert()
+ api.ajax({
+	 url: yuming+'/learun/adms/conference/getconferencelist',
+			 method: 'get',
+			 data:{values: {
+
+
+"loginMark": api.deviceId,
+"token": $api.getStorage('token'),
+pageno:page,
+pagesize:10,
+
+ConferenceName:''
+						 }}
+			}, function(ret) {
+//alert(JSON.stringify(ret))
+api.refreshHeaderLoadDone()
+				for (var i = 0; i < document.getElementsByClassName('zhuan').length; i++) {
+				 document.getElementsByClassName('zhuan')[i].style.display='none'
+			 }
+			 if(ret){
+			 if(1){
+
+
+if(ret.data.list.length>0){
+var html='';
+for (var i = 0; i <ret.data.list.length; i++) {
+	arrindex++
+	arr.push(ret.data.list[i])
+	html+=	'<li>'
+		html+=	'	<h2>'+ret.data.list[i].ConferenceName+'（'+ret.data.list[i].Position+'）'+'</h2>'
+		html+=	'	<p>容纳人数:'+ret.data.list[i].ConNumber+'人</p>'
+
+		html+=		'	<p>'
+		//	html+=			'<img src="images/touying.png" />'
+			html+=		'	设备设施:'+ret.data.list[i].Facilities+''
+			html+=	'	</p>'
+
+
+			html+=	'	<div style="width:100%;height:200px;overflow:hidden">'
+			if(1){	html+='<img src="../image/hy'+(i+1)+'.jpg" style="width:100%;">'}
+				html+=	'	</div>'
+		html+=	'	<a onclick="ljyy('+arrindex+')" data-id="'+ret.data.list[i].ID+'"  data-position="'+ret.data.list[i].Position+'"   data-name="'+ret.data.list[i].ConferenceName+'" data-num="'+ret.data.list[i].ConNumber+'"  data-img="'+ret.data.list[i].status+'"  class="yyue">立即预约</a>'
+
+	html+=	'	</li>'
+}
+html+='<div class="xiala"></div>'
+document.getElementById('jmenjin').innerHTML=html;
+
+}else {
+ document.getElementById('jmenjin').innerHTML='<img src="../image/zanwu.png"style="width:100px;height:100px;display:block;margin:0 auto;margin-top:160px;margin-bottom:100px;">'
+}
+
+			 }else {
+
+		 toast.hide()
+			 }
+
+
+		 }else {
+
+			/* api.toast({
+			 msg: '网络错误',
+			 duration: 2000,
+			 location: 'middle'
+	 });*/
+		 }
+toast.hide()
+			})
+}else {
+ api.ajax({
+	 url: yuming+'/learun/adms/acs/getacs',
+ 			method: 'get',
+ 			data:{values: {
+
+
+ "loginMark": api.deviceId,
+ "token": $api.getStorage('token'),
+ pageno:page,
+ pagesize:10,
+ buildingid:api.pageParam.id
+					}}
+}, function(ret) {
+				for (var i = 0; i < document.getElementsByClassName('zhuan').length; i++) {
+				 document.getElementsByClassName('zhuan')[i].style.display='none'
+			 }
+			 if(ret){
+			 if(1){
+
+
+				 if(ret.data.list&&ret.data.list.length>0){
+				 var html='';
+				 for (var i = 0; i <ret.data.list.length; i++) {
+					 arrindex++
+					 arr.push(ret.data.list[i])
+	 				html+=	'<li>'
+	 					html+=	'	<h2>'+ret.data.list[i].Position+'  '+ret.data.list[i].ConferenceName+'</h2>'
+	 					html+=	'	<p>容纳人数:'+ret.data.list[i].ConNumber+'人</p>'
+	 					html+=	'	<div class="hysb">'
+	 					html+=		'	<p>'
+	 					//	html+=			'<img src="images/touying.png" />'
+	 						html+=		'	<span>设备设施:'+ret.data.list[i].Facilities+'</span>'
+	 						html+=	'	</p>'
+
+	 					html+=	'	</div>'
+						html+=	'	<div style="width:100%;height:200px;overflow:hidden">'
+						if(1){	html+='<img src="../image/hy'+(i+1)+'.jpg" style="width:100%;">'}
+							html+=	'	</div>'
+		html+=	'	<a onclick="ljyy('+arrindex+')" data-id="'+ret.data.list[i].ID+'"  data-position="'+ret.data.list[i].Position+'"   data-name="'+ret.data.list[i].ConferenceName+'" data-num="'+ret.data.list[i].ConNumber+'"  data-img="'+ret.data.list[i].status+'"  class="yyue">立即预约</a>'
+	 				html+=	'	</li>'
+	 			}
+
+html+='<div class="xiala"></div>'
+document.getElementsByClassName('xiala')[page-2].innerHTML=html
+	$api.setStorage('j',0)
+
+}else {
+ //document.getElementById('content').innerHTML='<img src="../image/zanwu.png"style="width:100px;height:100px;display:block;margin:0 auto;margin-top:100px;">'
+}
+
+			 }
+
+
+		 }else {
+
+			/* api.toast({
+			 msg: '网络错误',
+			 duration: 2000,
+			 location: 'middle'
+	 });*/
+		 }
+toast.hide()
+			})
+
+
+}
+
+}
+zb()
+api.addEventListener({
+name:'scrolltobottom',
+extra:{
+		threshold:0           //设置距离底部多少距离时触发，默认值为0，数字类型
+}
+}, function(ret, err){
+
+if($api.getStorage('j')==0){
+$api.setStorage('j',1)
+//alert(1)
+ var zhuan=document.getElementById('zhuan').cloneNode(true);
+ zhuan.style.display='block'
+ document.getElementById('ddd').appendChild(zhuan)
+
+zb()
+}
+});
+}
+function ljyy(data){
+	api.openWin({
+	    name: 'huiyishi',
+	    url: './huiyishi.html',
+	    pageParam: {
+	        arr:arr[data-1],
+					tu:data
+	    }
+	});
+
+}
+</script>

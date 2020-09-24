@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="format-detection" content="telephone=no"><!-- 禁止IPHONE识别手机号码 -->
+<meta name="viewport" content="width=device-width,user-scalable=no, initial-scale=1">
+<title>报修</title>
+<!-- css -->
+<link rel="stylesheet" type="text/css" href="css/index.css">
+<link rel="stylesheet" type="text/css" href="css/mui.min.css" />
+<link href="css/foundation-datepicker.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="../css/aui.css">
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/aui-toast.js"></script>
+<script type="text/javascript" src="../script/H.js"></script>
+<script type="text/javascript" src="../script/jquery.js"></script>
+<script type="text/javascript" src="../script/yuming.js"></script>
+<style>
+.module-content{padding-top: 44px;padding-bottom: 50px;}
+.hybt{color: #000;font-size: 16px;line-height: 40px;}
+.hyxz{background: #f4f4f4;border-top-left-radius: 10px;border-top-right-radius: 10px;padding: 10px 15px;}
+
+.yyr{border-radius: 10px;overflow: hidden;}
+.yyr li{display: flex;background: #fff;align-items: center;padding:5px 10px;border-bottom: 1px solid #EDEDED;}
+.yyr li span{font-size: 14px;color: #333;width: 80px;font-weight: bold;}
+.yyr li select{font-size: 14px;}
+.yyr li input{border: 0;font-size: 14px;color: #000;text-align: right;}
+.yyr p{line-height: 44px;color: #000;font-size: 14px;}
+.hyxz textarea{border-radius: 10px;border: 0;color: #000;font-size: 14px;}
+.hyxz textarea::-webkit-input-placeholder{color: #333;}
+.tjsq{display: block;text-align: center; line-height: 40px;margin-top: 10px; color:#fff;font-size: 14px; border-radius: 10px;background: linear-gradient(to right, #367ff8 , #556dff);}
+</style>
+</head>
+<body style="background: #f7f7f7;">
+	<header  id="headj">
+		<a >
+			<img src="images/back_jt.png" onclick="api.closeWin()" />
+			<span onclick="api.closeWin()">详情</span>
+		</a>
+	</header>
+<div class="module-content" id="ge">
+	<div class="hyxz" >
+<div id="ct">
+
+</div>
+
+	<!--<a class="tjsq" onclick="tijiao()">提交</a>-->
+	</div>
+</div>
+
+<div class="foot_menu" style="display:none">
+	<ul>
+		<li>
+			<a href="index.html">
+				<i><img src="images/menu_icon01.png"></i>
+				<span>首 页</span>
+			</a>
+		</li>
+		<li class="cur">
+			<a href="shequ.html">
+				<i><img src="images/menu_icon02_r.png"></i>
+				<span>社 区</span>
+			</a>
+		</li>
+		<li>
+			<a href="news.html">
+				<i><img src="images/menu_icon03.png"></i>
+				<span>消 息</span>
+			</a>
+		</li>
+		<li>
+			<a href="user.html">
+				<i><img src="images/menu_icon04.png"></i>
+				<span>我 的</span>
+			</a>
+		</li>
+	</ul>
+</div>
+</body>
+<script src="js/jquery-1.11.3.min.js"></script>
+<script src="js/foundation-datepicker.js"></script>
+<script src="js/locales/foundation-datepicker.zh-CN.js"></script>
+<script>
+$('#demo-1').fdatepicker();
+$('#demo-2').fdatepicker();
+</script>
+</html>
+<script type="text/javascript">
+apiready = function () {
+$api.fixStatusBar(document.getElementById('headj'));
+document.getElementById('headj').style.height=(50+api.safeArea.top)+'px'
+document.getElementById('ge').style.marginTop=(5+api.safeArea.top)+'px'
+//alert(JSON.stringify(api.pageParam.arr))
+/*F_FullName	string	公司名称
+2.企业详细信息
+请求地址：/learun/adms/company/getcompanydetailed
+类型：Get
+请求参数：
+参数名称	类型	备注	必须
+loginMark	String	设备标识，必须具有唯一性	是
+token	String	验证码，从登录后返回信息中获取	是
+num	String	参数：1（公司详细信息）	是
+CompanyId	String	num为1时填写企业列表接口（getcompany）的ID。	是
+返回参数：
+参数名称	类型	备注
+code	String	结果响应码
+info	String	结果响应信息
+data	String	返回值
+Data主要属性
+ID	string	主键
+Name	String	企业名称
+TYSHXYDM	String	统一社会信用代码
+Regist_date	String	注册时间
+RYSJ	String	入住时间
+ZCDZ	String	注册时间
+ZCZB	String	注册资本
+ZCZBBZMY	String	注册资本币种1人民币2美元3欧元4日元，单位都为（万元）
+F_Nature	String	公司性质
+JYFW	String	经营范围
+LXR	String	联系人
+LXDH	String 	联系电话
+FRXM	String	法人名称
+FRLXDH	String	法人联系电话
+ZJL	String 	负责人姓名
+ZJLLXDH	String	负责人联系电话
+BGRYRS	String 	办公人员数量
+NWZ	String	拟申请用房面积
+TZFJCZBL	String	设备称重情况
+QYBGDH	String	危化品种类和数量
+*/
+function zb(){
+  api.ajax({
+           url: yuming+'/learun/adms/company/getcompanydetailed',
+           method: 'get',
+           data:{values: {
+             "loginMark": api.deviceId,
+             "token": $api.getStorage('token'),
+						 num:1,
+            CompanyId	:api.pageParam.arr.ID,
+
+
+
+
+              }}
+       }, function(ret) {
+
+//alert(JSON.stringify(ret))
+ toast.hide()
+       if(ret){
+       if(ret.code==200){
+				 html=''
+				 html+=	'	<ul class="yyr">'
+				 	html+=		'	<li><span>公司名称</span><input type="text" value="'+ret.data.F_FullName+'" placeholder="" readonly="readonly" id="name" value="'+api.pageParam.arr.name+'" /></li>'
+					html+=		'	<li><span>注册时间</span><input type="text" value="'+ret.data.Regist_date+'" placeholder="" readonly="readonly" id="name" value="'+api.pageParam.arr.name+'" /></li>'
+					html+=		'	<li><span>入住时间</span><input type="text" value="'+ret.data.RYSJ+'" placeholder="" readonly="readonly" id="name" value="'+api.pageParam.arr.name+'" /></li>'
+danwei=''
+//1人民币2美元3欧元4日元，单位都为（万元）
+if(ret.data.ZCZBBZMY==1){
+	danwei='万人民币'
+}
+if(ret.data.ZCZBBZMY==2){
+	danwei='万美元'
+}
+if(ret.data.ZCZBBZMY==3){
+	danwei='万欧元'
+}
+if(ret.data.ZCZBBZMY==4){
+	danwei='万日元'
+}
+				html+=		'	<li><span>注册资本</span><input type="text" value="'+ret.data.ZCZB+danwei+'" placeholder="" readonly="readonly" id="name" value="'+api.pageParam.arr.name+'" /></li>'
+				html+=		'	<li><span>公司性质</span><input type="text" value="'+ret.data.F_Nature+'" placeholder="" readonly="readonly" id="name" value="'+api.pageParam.arr.name+'" /></li>'
+			html+=		'	<li><span>联系人</span><input type="text" value="'+ret.data.LXR+'" placeholder="" readonly="readonly" id="name" value="'+api.pageParam.arr.name+'" /></li>'
+			html+=		'	<li><span>联系电话</span><input type="text" value="'+ret.data.LXDH+'" placeholder="" readonly="readonly" id="name" value="'+api.pageParam.arr.name+'" /></li>'
+		 html+=		'	<li><span>法人</span><input type="text" value="'+ret.data.FRXM+'" placeholder="" readonly="readonly" id="name" value="'+api.pageParam.arr.name+'" /></li>'
+		 html+=		'	<li><span>法人电话</span><input type="text" value="'+ret.data.FRLXDH+'" placeholder="" readonly="readonly" id="name" value="'+api.pageParam.arr.name+'" /></li>'
+		 html+=		'	<li><span>负责人</span><input type="text" value="'+ret.data.ZJL+'" placeholder="" readonly="readonly" id="name" value="'+api.pageParam.arr.name+'" /></li>'
+		 html+=		'	<li><span>负责人电话</span><input type="text" value="'+ret.data.ZJLLXDH+'" placeholder="" readonly="readonly" id="name" value="'+api.pageParam.arr.name+'" /></li>'
+		 html+=		'	<li><span>办公人员数量</span><input type="text" value="'+ret.data.BGRYRS+'" placeholder="" readonly="readonly" id="name" value="'+api.pageParam.arr.name+'" /></li>'
+		 html+=		'	<li><span>用房面积</span><input type="text" value="'+ret.data.NWZ+'" placeholder="" readonly="readonly" id="name" value="'+api.pageParam.arr.name+'" /></li>'
+		 html+=		'	<li><span>设备称重情况</span><input type="text" value="'+ret.data.TZFJCZBL+'" placeholder="" readonly="readonly" id="name" value="'+api.pageParam.arr.name+'" /></li>'
+		 html+=		'	<li><span>危化品种类和数量</span><input type="text" value="'+ret.data.TZFJCZBL+'" placeholder="" readonly="readonly" id="name" value="'+api.pageParam.arr.name+'" /></li>'
+
+
+				 	html+=	'	</ul>'
+				 	html+=	'<p class="hybt">经营范围</p>'
+				 	html+=	'<textarea readonly="readonly" id="bz" style="height:200px;">'+ret.data.JYFW+'</textarea>'
+
+				 document.getElementById('ct').innerHTML=html
+
+   }else {
+     jy=0
+     toast.hide()
+     api.toast({
+     msg: ret.info,
+     duration: 2000,
+     location: 'middle'
+ });
+   }
+
+       }else {
+
+          toast.hide()
+         api.toast({
+         msg: '网络错误',
+         duration: 2000,
+         location: 'middle'
+     });
+       }
+
+       })
+
+}
+zb()
+}
+jy=0
+function tijiao(){
+  //alert(document.getElementById('nyr').value)
+/*14.4修改房间租赁信息
+：/learun/adms/Parkinglease/postparkingleaseaddorupdate
+loginMark	String
+token	String
+id	String
+parkingid	int
+tenantryid	String
+starttime	String
+endtime	String
+remark	String
+*/
+
+	if(jy==0){
+		jy=1
+		showDefault()
+		api.ajax({
+						 url: yuming+'/learun/adms/Parkinglease/postparkingleaseaddorupdate',
+						 method: 'post',
+						 data:{values: {
+               "loginMark": api.deviceId,
+               "token": $api.getStorage('token'),
+							 id	:api.pageParam.arr.id,
+	 						parkingid		:api.pageParam.arr.parkingid	,
+	 						tenantryid:api.pageParam.arr.tenantryid,
+	 						starttime	:document.getElementById('starttime').value,
+	 						endtime	:document.getElementById('endtime').value,
+
+	 						remark:document.getElementById('bz').value,
+
+
+
+								}}
+				 }, function(ret) {
+
+	//alert(JSON.stringify(ret))
+	 toast.hide()
+				 if(ret){
+				 if(ret.code==200){
+					 api.sendEvent({
+					     name: 'sx',
+					     extra: {
+					         key1: 'value1',
+					         key2: 'value2'
+					     }
+					 });
+
+					 api.toast({
+					 msg: '提交成功!',
+					 duration: 2000,
+					 location: 'middle'
+					 });
+					toast.hide()
+jy=0
+		 }else {
+       jy=0
+			 toast.hide()
+			 api.toast({
+			 msg: ret.info,
+			 duration: 2000,
+			 location: 'middle'
+	 });
+		 }
+
+				 }else {
+
+						toast.hide()
+					 api.toast({
+					 msg: '网络错误',
+					 duration: 2000,
+					 location: 'middle'
+			 });
+				 }
+
+				 })
+	}
+}
+</script>

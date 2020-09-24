@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="format-detection" content="telephone=no"><!-- 禁止IPHONE识别手机号码 -->
+<meta name="viewport" content="width=device-width,user-scalable=no, initial-scale=1">
+<title>账单</title>
+<!-- css -->
+<link rel="stylesheet" type="text/css" href="css/index.css">
+<link rel="stylesheet" type="text/css" href="css/mui.min.css" />
+<link rel="stylesheet" type="text/css" href="../css/aui.css">
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/aui-toast.js"></script>
+<script type="text/javascript" src="../script/H.js"></script>
+<script type="text/javascript" src="../script/jquery.js"></script>
+<script type="text/javascript" src="../script/yuming.js"></script>
+<style>
+.module-content{padding-top: 44px;margin-bottom: 50px;}
+.zhangdan{margin-top: 10px;}
+.zhangdan li{position: relative;line-height: 24px; display: flex;justify-content: space-between;padding: 10px;background: #fff;margin-bottom: 10px;}
+.zhangdan li img{width: 26px;height: 26px;margin-right: 10px;}
+.zhangdan li span{color: #000;font-size: 18px;}
+.zhangdan li div{width: 80%;}
+.zhangdan li div h3{font-size: 14px;color: #000;}
+.zhangdan li div h4{font-size: 12px;color: #33;}
+.zhangdan li div p{color: #999;font-size: 12px;}
+.zhifu{
+  position: absolute;
+  height: 24px;
+  line-height: 24px;
+  text-align: right;
+  width: 60px;
+color: white;
+color: #2D6BFA;
+border-radius: 4px;
+right: 10px;
+bottom: 10px;
+}
+.zhuan{
+	display: none;
+	margin: 0 auto;
+}
+.tjsq{display: block;text-align: center; line-height: 40px;margin-top: 10px; color:#fff;font-size: 14px; border-radius: 10px;background: linear-gradient(to right, #367ff8 , #556dff);width: 90%;margin:0 auto;margin-top: 50px;}
+
+</style>
+</head>
+<body style="background: #f7f7f7;">
+	<header id="headj">
+		<a >
+			<img src="images/back_jt.png" onclick="api.closeWin()" />
+			<span onclick="api.closeWin()">账单</span>
+		</a>
+	</header>
+<div class="module-content " id="ge">
+
+	<ul class="zhangdan" id="jmenjin">
+<!--		<li>
+			<img src="images/shuif.png" />
+			<div>
+				<h3>水费-10栋18楼1805室</h3>
+				<h4>日常缴费</h4>
+				<p>12-12 08:36</p>
+			</div>
+			<span>-100.00</span>
+		</li>
+		<li>
+			<img src="images/fangf.png" />
+			<div>
+				<h3>会议室-10栋18楼1号会议室</h3>
+				<h4>日常缴费</h4>
+				<p>12-12 09:52</p>
+			</div>
+			<span>-100.00</span>
+		</li>
+		<li>
+			<img src="images/dianf.png" />
+			<div>
+				<h3>电费-10栋18楼1805室</h3>
+				<h4>日常缴费</h4>
+				<p>12-12 07:22</p>
+			</div>
+			<span>-100.00</span>
+		</li>-->
+	</ul>
+
+	<img src="../image/zhuan.gif" id="zhuan" style="height:20px;width:auto;margin-top:10px;margin-bottom:10px;" class="zhuan">
+	<div id="ddd">
+
+	</div>
+</div>
+<div class="foot_menu" style="display:none">
+	<ul>
+		<li>
+			<a href="index.html">
+				<i><img src="images/menu_icon01.png"></i>
+				<span>首 页</span>
+			</a>
+		</li>
+		<li class="cur">
+			<a href="shequ.html">
+				<i><img src="images/menu_icon02_r.png"></i>
+				<span>社 区</span>
+			</a>
+		</li>
+		<li>
+			<a href="news.html">
+				<i><img src="images/menu_icon03.png"></i>
+				<span>消 息</span>
+			</a>
+		</li>
+		<li>
+			<a href="user.html">
+				<i><img src="images/menu_icon04.png"></i>
+				<span>我 的</span>
+			</a>
+		</li>
+	</ul>
+</div>
+</body>
+<script type="text/javascript" src="js/jquery.js" ></script>
+<script type="text/javascript" src="js/jquery.SuperSlide.2.1.1.js" ></script>
+<script>
+	$(".slideTxtBox").slide({trigger:"click"});
+</script>
+</html>
+<script type="text/javascript">
+arr=[]
+page=0
+arrindex=0
+apiready = function () {
+$api.fixStatusBar(document.getElementById('headj'));
+document.getElementById('headj').style.height=(50+api.safeArea.top)+'px'
+document.getElementById('ge').style.marginTop=(5+api.safeArea.top)+'px'
+$api.setStorage('j',0)
+showDefault()
+api.addEventListener({
+    name: 'sx'
+}, function(ret, err){
+	page=0;
+  showDefault()
+  zb()
+});
+/*
+/learun/adms/bill/billshow类型：GET
+请求参数：
+参数名称	类型	备注	必须
+loginMark	String	设备标识，必须具有唯一性	是
+token	String	验证码，从登录后返回信息中获取	是
+page	Int	页码	是
+rows	Int	每页显示数量	是
+billdate	String	账单日期 年月(格式要求YYYY-MM如:2019-01 月份要为两位数)	否
+billownername	String	公司名称	否
+返回参数：
+参数名称	类型	备注
+code	String	结果响应码
+info	String	结果响应信息
+data	List<Map>	返回值
+data主要属性：
+参数名称	类型	备注
+id	int	序号
+billcode	String	帐单代码
+billownerid	String	帐单ID
+createtime	datetime	创建时间
+companyid	String	数据区分序号
+createrid	String	创建ID
+billdate	String	账单日期 (年月显示方式 YYYY-MM)
+remark	String	备注
+receipts	String	收据
+change	String	改变
+payer	String	付款人
+paydatetime	String	付款日期时间
+billownername	String	账单持有人姓名*/
+function zb(){
+
+page++
+if(1){
+//alert(riqi)
+
+ api.ajax({
+   url: yuming+'/learun/adms/bill/billitems',
+   method: 'get',
+   data:{values: {
+     "loginMark": api.deviceId,
+     "token": $api.getStorage('token'),
+    billcode	:api.pageParam.id,
+
+						 }}
+			}, function(ret) {
+//alert(JSON.stringify(ret))
+api.refreshHeaderLoadDone()
+				for (var i = 0; i < document.getElementsByClassName('zhuan').length; i++) {
+				 document.getElementsByClassName('zhuan')[i].style.display='none'
+			 }
+			 if(ret){
+			 if(1){
+
+
+if(ret.data.list.length>0){
+var html='';
+for (var i = 0; i <ret.data.list.length; i++) {
+	arr.push(ret.data.list[i])
+	arrindex++
+if(ret.data.list[i].cname=='未支付'){html+='	<li onclick="zdxq('+arrindex+')">'}else {
+  //document.getElementById('iszf').style.display='none'
+  html+='	<li >'
+}
+if(ret.data.list[i].bname=='房租'){html+=	'	<img src="images/fangf.png" style="width: 26px;height: 26px;"/>'}
+if(ret.data.list[i].bname=='水费'){html+=	'	<img src="images/shuif.png"  style="width: 26px;height: 26px;"/>'}
+if(ret.data.list[i].bname=='电费'){html+=	'	<img src="images/dianf.png"  style="width: 26px;height: 26px;"/>'}
+if(ret.data.list[i].bname=='物业费'){html+=	'	<img src="images/wuye.png"  style="width: 26px;height: 26px;"/>'}
+html+=	'	<div style="width:50%">'
+	html+=	'	<h3 style="text-indent:0;text-align:left">'+ret.data.list[i].bname+'</h3>'
+//if(ret.data.list[i].remark){	html+=	'	<h4>'ret.data.list[i].remark+'</h4>'}
+	html+=	'	<p>'+ret.data.list[i].cname+'</p>'
+	html+=	'</div>'
+html+='	<span style="margin-right:10px;width:140px;text-align:right;">'+ret.data.list[i].account+'</span>'
+//if(ret.data.list[i].cname=='未支付'){	html+=	'	<div class="zhifu" style="width:46px;font-size:12px">去支付</div>'}
+html+=	'</li>'
+}
+html+='<div class="xiala"></div>'
+document.getElementById('jmenjin').innerHTML=html;
+$('.vv').click(function(e){
+
+　　e.stopPropagation();
+
+})
+}else {
+ document.getElementById('jmenjin').innerHTML='<img src="../image/zanwu.png"style="width:100px;height:100px;display:block;margin:0 auto;margin-top:160px;margin-bottom:100px;">'
+}
+
+			 }else {
+
+		 toast.hide()
+			 }
+
+
+		 }else {
+
+			/* api.toast({
+			 msg: '网络错误',
+			 duration: 2000,
+			 location: 'middle'
+	 });*/
+		 }
+toast.hide()
+			})
+}else {
+ api.ajax({
+	 url: yuming+'/learun/adms/bill/billshow',
+			 method: 'get',
+			 data:{values: {
+
+
+"loginMark": api.deviceId,
+"token": $api.getStorage('token'),
+page:page,
+rows:10,
+					}}
+}, function(ret) {
+				for (var i = 0; i < document.getElementsByClassName('zhuan').length; i++) {
+				 document.getElementsByClassName('zhuan')[i].style.display='none'
+			 }
+			 if(ret){
+			 if(1){
+
+
+         if(ret.data&&ret.data.length>0){
+         var html='';
+         for (var i = 0; i <ret.data.length; i++) {
+					 arr.push(ret.data[i])
+					 arrindex++
+				 html+='	<li onclick="zdxq('+arrindex+')">'
+				 html+=	'	<img src="images/fangf.png" />'
+				 html+=	'	<div>'
+					 html+=	'	<h3>'+ret.data[i].billownername+'</h3>'
+		if(ret.data[i].remark){	html+=	'	<h4>'+ret.data[i].remark+'</h4>'}
+					 html+=	'	<p>'+ret.data[i].billdate+'</p>'
+					 html+=	'</div>'
+				 html+='	<span></span>'
+				 html+=	'</li>'
+         }
+
+html+='<div class="xiala"></div>'
+document.getElementsByClassName('xiala')[page-2].innerHTML=html
+	$api.setStorage('j',0)
+  $('.vv').click(function(e){
+
+  　　e.stopPropagation();
+
+  })
+}else {
+ //document.getElementById('content').innerHTML='<img src="../image/zanwu.png"style="width:100px;height:100px;display:block;margin:0 auto;margin-top:100px;">'
+}
+
+			 }
+
+
+		 }else {
+
+			/* api.toast({
+			 msg: '网络错误',
+			 duration: 2000,
+			 location: 'middle'
+	 });*/
+		 }
+toast.hide()
+			})
+
+
+}
+
+}
+zb()
+api.addEventListener({
+name:'scrolltobottom',
+extra:{
+		threshold:0           //设置距离底部多少距离时触发，默认值为0，数字类型
+}
+}, function(ret, err){
+
+if($api.getStorage('j')==0){
+$api.setStorage('j',1)
+//alert(1)
+ /*var zhuan=document.getElementById('zhuan').cloneNode(true);
+ zhuan.style.display='block'
+ document.getElementById('ddd').appendChild(zhuan)
+
+zb()*/
+}
+});
+}
+function zdxq(data){
+	api.openWin({
+	    name: 'pay',
+	    url: './pay.html',
+	    pageParam: {
+	        arr: arr[data-1],
+          ren:api.pageParam.ren
+	    }
+	});
+
+}
+</script>

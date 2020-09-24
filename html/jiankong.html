@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="format-detection" content="telephone=no"><!-- 禁止IPHONE识别手机号码 -->
+<meta name="viewport" content="width=device-width,user-scalable=no, initial-scale=1">
+<title>监控</title>
+<!-- css -->
+<link rel="stylesheet" type="text/css" href="css/index.css">
+<link rel="stylesheet" type="text/css" href="css/mui.min.css" />
+<link rel="stylesheet" type="text/css" href="../css/aui.css">
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/aui-toast.js"></script>
+<script type="text/javascript" src="../script/H.js"></script>
+<script type="text/javascript" src="../script/jquery.js"></script>
+<script type="text/javascript" src="../script/yuming.js"></script>
+<style>
+.module-content{padding-top: 44px;margin-bottom: 50px;}
+.slideTxtBox .hd{width: 100%;overflow: auto;}
+.slideTxtBox .hd ul{width: 200%;overflow: hidden; margin: 10px auto;display: flex;}
+.slideTxtBox .hd ul li{flex-wrap: nowrap; margin: 0 10px;font-size: 14px;padding:4px 6px;border-radius: 20px; background: #fff;color: #666;}
+.slideTxtBox .hd ul li.on{background: #007AFF;color: #fff;}
+
+.jiankong{padding: 10px;}
+.jiankong li{background:#fff;border-radius: 10px;margin-bottom: 10px; padding: 10px 10px 10px 0;}
+.jiankong li a{display: flex; justify-content: space-between; align-items: center;}
+.jiankong li .jktext{display: flex; align-items: center;}
+.jiankong li .jktext .xian{background: #007AFF;width: 3px;border-radius: 2px; height: 16px;margin-right: 10px;}
+.jiankong li .jktext h3{color: #000;font-size: 14px;line-height: 22px; }
+.jiankong li .jktext b{background: #cab4f5;color: #fff;border-radius: 15px;padding: 2px 4px;margin-left: 10px; font-weight: normal;font-size: 8px;}
+.jiankong li p{font-size: 12px;color: #666;padding-left: 10px;line-height: 22px; }
+.jiankong li h4{width: ;text-align: center;width: 40px;}
+.jiankong li h4 img{width: 20px;margin-bottom: 10px;}
+.jiankong li h4 .chakan{background: #008CBA;color: #fff;border-radius: 15px;padding: 4px 8px; font-weight: normal;font-size: 12px;}
+.jiankong li h4 .chakan2{background: #666;color: #fff;border-radius: 15px;padding: 4px 8px; font-weight: normal;font-size: 12px;}
+</style>
+</head>
+<body style="background: #f7f7f7;">
+	<header>
+		<a href="javascript:history.back(-1)">
+			<img src="images/back_jt.png" />
+			<span onclick="api.closeWin()">监控</span>
+		</a>
+	</header>
+<div class="module-content slideTxtBox">
+	<div class="hd">
+		<ul>
+			<li class="on">全部</li>
+			<li>CBD楼</li>
+			<li>CBD楼</li>
+			<li>CBD楼</li>
+			<li>CBD楼</li>
+			<li>CBD楼</li>
+			<li>CBD楼</li>
+		</ul>
+	</div>
+	<div class="bd">
+		<ul class="jiankong">
+			<li><a href="#">
+				<div>
+					<div class="jktext">
+						<span class="xian"></span>
+						<h3>360°广角监控</h3>
+						<b>CBD楼</b>
+					</div>
+					<p>设备编号：15425545214</p>
+					<p>产看范围：10楼1单元电梯</p>
+				</div>
+				<h4>
+					<img src="images/jiankong2.png" /><br />
+					<span class="chakan2">查看</span>
+				</h4>
+			</a></li>
+			<li><a href="#">
+				<div>
+					<div class="jktext">
+						<span class="xian"></span>
+						<h3>360°广角监控</h3>
+						<b>CBD楼</b>
+					</div>
+					<p>设备编号：15425545214</p>
+					<p>产看范围：10楼1单元走廊东</p>
+				</div>
+				<h4>
+					<img src="images/jiankong.png" /><br />
+					<span class="chakan">查看</span>
+				</h4>
+			</a></li>
+
+			<li><a href="#">
+				<div>
+					<div class="jktext">
+						<span class="xian"></span>
+						<h3>360°广角监控</h3>
+						<b>CBD楼</b>
+					</div>
+					<p>设备编号：15425545214</p>
+					<p>产看范围：10楼1单元走廊东</p>
+				</div>
+				<h4>
+					<img src="images/jiankong.png" /><br />
+					<span class="chakan">查看</span>
+				</h4>
+			</a></li>
+
+			<li><a href="#">
+				<div>
+					<div class="jktext">
+						<span class="xian"></span>
+						<h3>360°广角监控</h3>
+						<b>CBD楼</b>
+					</div>
+					<p>设备编号：15425545214</p>
+					<p>产看范围：10楼1单元走廊东</p>
+				</div>
+				<h4>
+					<img src="images/jiankong.png" /><br />
+					<span class="chakan">查看</span>
+				</h4>
+			</a></li>
+			<li><a href="#">
+				<div>
+					<div class="jktext">
+						<span class="xian"></span>
+						<h3>360°广角监控</h3>
+						<b>CBD楼</b>
+					</div>
+					<p>设备编号：15425545214</p>
+					<p>产看范围：10楼1单元走廊东</p>
+				</div>
+				<h4>
+					<img src="images/jiankong.png" /><br />
+					<span class="chakan">查看</span>
+				</h4>
+			</a></li>
+		</ul>
+		<ul class="jiankong">
+			<li><a href="#">
+				<div>
+					<div class="jktext">
+						<span class="xian"></span>
+						<h3>360°广角监控</h3>
+						<b>CBD楼</b>
+					</div>
+					<p>设备编号：15425545214</p>
+					<p>产看范围：10楼1单元电梯</p>
+				</div>
+				<h4>
+					<img src="images/jiankong.png" /><br />
+					<span class="chakan">查看</span>
+				</h4>
+			</a></li>
+			<li><a href="#">
+				<div>
+					<div class="jktext">
+						<span class="xian"></span>
+						<h3>360°广角监控</h3>
+						<b>CBD楼</b>
+					</div>
+					<p>设备编号：15425545214</p>
+					<p>产看范围：10楼1单元走廊东</p>
+				</div>
+				<h4>
+					<img src="images/jiankong.png" /><br />
+					<span class="chakan">查看</span>
+				</h4>
+			</a></li>
+		</ul>
+		<ul class="jiankong">
+			<li><a href="#">
+				<div>
+					<div class="jktext">
+						<span class="xian"></span>
+						<h3>360°广角监控</h3>
+						<b>CBD楼</b>
+					</div>
+					<p>设备编号：15425545214</p>
+					<p>产看范围：10楼1单元电梯</p>
+				</div>
+				<h4>
+					<img src="images/jiankong.png" /><br />
+					<span class="chakan">查看</span>
+				</h4>
+			</a></li>
+			<li><a href="#">
+				<div>
+					<div class="jktext">
+						<span class="xian"></span>
+						<h3>360°广角监控</h3>
+						<b>CBD楼</b>
+					</div>
+					<p>设备编号：15425545214</p>
+					<p>产看范围：10楼1单元走廊东</p>
+				</div>
+				<h4>
+					<img src="images/jiankong.png" /><br />
+					<span class="chakan">查看</span>
+				</h4>
+			</a></li>
+		</ul>
+
+	</div>
+</div>
+<div class="foot_menu">
+	<ul>
+		<li>
+			<a href="index.html">
+				<i><img src="images/menu_icon01.png"></i>
+				<span>首 页</span>
+			</a>
+		</li>
+		<li class="cur">
+			<a href="shequ.html">
+				<i><img src="images/menu_icon02_r.png"></i>
+				<span>社 区</span>
+			</a>
+		</li>
+		<li>
+			<a href="news.html">
+				<i><img src="images/menu_icon03.png"></i>
+				<span>消 息</span>
+			</a>
+		</li>
+		<li>
+			<a href="user.html">
+				<i><img src="images/menu_icon04.png"></i>
+				<span>我 的</span>
+			</a>
+		</li>
+	</ul>
+</div>
+</body>
+<script type="text/javascript" src="js/jquery.js" ></script>
+<script type="text/javascript" src="js/jquery.SuperSlide.2.1.1.js" ></script>
+<script>
+	$(".slideTxtBox").slide({trigger:"click"});
+</script>
+</html>

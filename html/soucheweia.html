@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="format-detection" content="telephone=no"><!-- 禁止IPHONE识别手机号码 -->
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+<title>一停车场</title>
+<!-- css -->
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+<link rel="stylesheet" type="text/css" href="css/index.css">
+<link rel="stylesheet" type="text/css" href="css/mui.min.css" />
+<link rel="stylesheet" type="text/css" href="../css/aui.css">
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/aui-toast.js"></script>
+<script type="text/javascript" src="../script/H.js"></script>
+<script type="text/javascript" src="../script/jquery.js"></script>
+<script type="text/javascript" src="../script/yuming.js"></script>
+<style>
+.module-content{padding-top: 44px;margin-bottom: 50px;}
+.slideTxtBox .hd ul{width: 50%;margin: 10px auto;display: flex;justify-content: space-around;}
+.slideTxtBox .hd ul li{text-align: center;font-size: 14px;}
+.slideTxtBox .hd ul li p{width: 20px;height: 2px;margin: auto;margin-top: 6px;}
+.slideTxtBox .hd ul li.on{color: #007AFF;}
+.slideTxtBox .hd ul li.on p{background: #007AFF;}
+
+.slideTxtBox .bd{border-top: 10px solid #f9f9f9;}
+.tcw{padding: 10px;}
+.tcw li{border-bottom: 1px solid #f1f1f1;padding: 10px;}
+.tcw li div{display: flex;justify-content: space-between;line-height: 22px; font-size: 14px;}
+.tcw li p{font-size: 12px;}
+.zhuan{
+  display: none;
+  margin: 0 auto;
+}
+#sou{
+  position: absolute;
+  height: 20px;
+  width: 20px;
+  right: 10px;
+  bottom: 16px;
+}
+#db{
+  width: 100%;
+  margin: 0 auto;
+  height: 50px;
+  line-height: 50px;
+  position: relative;
+  background: white;
+}
+.db1{
+  position: absolute;
+  left: 5%;
+  width: 20%;
+  height: 50px;
+  top: 0;
+  line-height: 50px;
+  font-size: 14px;
+  color: #464646;
+display: none;
+}
+#louceng{
+  position: absolute;
+  height: 20px;
+  line-height: 20px;
+  font-size: 14px;
+  border: none;
+  outline: none;
+  left: 34px;
+  bottom: 15px;
+  overflow: scroll;
+  background: none;
+width: 50px;
+
+  color: #4182F5!important;
+
+  text-indent: 0;
+  padding: 0;
+}
+.db2{
+  position: absolute;
+  left: 5%;
+  width: 30%;
+  height: 50px;
+  top: 0;
+  line-height: 50px;
+  font-size: 14px;
+  color: #464646;
+}
+.db2 input{
+  position: absolute;
+  height: 20px;
+  line-height: 20px;
+  font-size: 14px;
+  border: none;
+  outline: none;
+  left:33px;
+  bottom: 15px;background: none;
+  overflow: scroll;  color: #4182F5;
+}
+#db3{
+  height: 50px;
+  width: 50px;
+  text-align: center;
+  font-size: 14px;
+  color: #4182F5;
+  line-height: 50px;
+  position: absolute;
+  right: 5%;
+  top:0;
+}
+</style>
+</head>
+<body>
+	<header id="headj">
+		<a >
+			<img src="images/back_jt.png" onclick="api.closeWin()" />
+			<span onclick="api.closeWin()" id="tname"></span> <img src="../image/sousuo.png" id="sou" >
+		</a>
+	</header>
+<div class="module-content slideTxtBox" id="ge">
+  <div id="db">
+    <div class="db1">
+    楼层
+    <select class="ss" name="ss" id="louceng" readonly="readonly">
+      <option value="">全部</option>
+    </select>
+    </div>
+    <div class="db2">
+  车位号 <input type="number" name="a" id="cheweihao" placeholder="请输入车位号">
+    </div>
+    <div id="db3">
+      搜索
+    </div>
+  </div>
+
+	<div class="bd">
+		<ul class="tcw" id="jzuo">
+	<!--		<li>
+				<div><span>楼层：b1</span><span>车位号：258</span></div>
+				<div>业达智慧园区一停车场</div>
+			</li>
+-->
+		</ul>
+		<ul class="tcw" id="jyou" style="display:none">
+<!--			<li>
+				<div><span>楼层：b1</span><span>车位号：258</span></div>
+				<div>业达智慧园区一停车场</div>
+				<p>车牌号：鲁Y 525v5</p>
+			</li>
+-->
+
+		</ul>
+	</div>
+</div>
+<img src="../image/zhuan.gif" id="zhuan" style="height:20px;width:auto;margin-top:10px;margin-bottom:10px;" class="zhuan">
+<div id="ddd">
+
+</div>
+<div class="foot_menu" style="display:none">
+	<ul>
+		<li>
+			<a href="index.html">
+				<i><img src="images/menu_icon01.png"></i>
+				<span>首 页</span>
+			</a>
+		</li>
+		<li class="cur">
+			<a href="shequ.html">
+				<i><img src="images/menu_icon02_r.png"></i>
+				<span>社 区</span>
+			</a>
+		</li>
+		<li>
+			<a href="news.html">
+				<i><img src="images/menu_icon03.png"></i>
+				<span>消 息</span>
+			</a>
+		</li>
+		<li>
+			<a href="user.html">
+				<i><img src="images/menu_icon04.png"></i>
+				<span>我 的</span>
+			</a>
+		</li>
+	</ul>
+</div>
+</body>
+<script type="text/javascript" src="js/jquery.js" ></script>
+<script type="text/javascript" src="js/jquery.SuperSlide.2.1.1.js" ></script>
+<script>
+	$(".slideTxtBox").slide({trigger:"click"});
+</script>
+</html>
+<script type="text/javascript">
+page=0;
+lou=''
+hao=''
+apiready = function () {
+$api.fixStatusBar(document.getElementById('headj'));
+document.getElementById('headj').style.height=(50+api.safeArea.top)+'px'
+document.getElementById('ge').style.marginTop=(5+api.safeArea.top)+'px'
+document.getElementById('tname').innerHTML=api.pageParam.name
+document.getElementById('sou').onclick=function(){
+  api.openWin({
+      name: 'souchewei',
+      url: './souchewei.html',
+      pageParam: {
+          id: api.pageParam.id
+      }
+  });
+
+}
+showDefault()
+function zblou(){
+  /*
+  参数名称	类型	备注	必须
+  loginMark	String	设备标识，必须具有唯一性	是
+  token	String	验证码，从登录后返回信息中获取	是
+  parkuuid	String	停车场区域的uuid	是
+
+  返回参数：
+  参数名称	类型	备注
+  code	String	结果响应码
+  info	String	结果响应信息
+  data	List<Map>	返回值
+  data主要属性：
+  参数名称	类型	备注
+  areaUuid	String	区域uuid
+  areaName	String	区域名称
+  返回参数举例：
+  {
+  	"code": 200,
+  	"info": "响应成功",
+  	"data": [{
+  		"areaUuid": "2f220c69bc724884871b0f90e091cef4",
+  		"areaName": "b1"
+  	}, {
+  		"areaUuid": "6d28e5f86db6477ba5eb5c1e474341f2",
+  		"areaName": "b2"
+  	}]
+  */
+  api.ajax({
+    url: yuming+'/learun/adms/parking/getparkingfloorlist',
+        method: 'get',
+        data:{values: {
+          "loginMark": api.deviceId,
+          "token": $api.getStorage('token'),
+          parkUuid	:api.pageParam.id,
+
+              }}
+       }, function(ret) {
+ //alert(JSON.stringify(ret))
+ toast.hide()
+ api.refreshHeaderLoadDone()
+         for (var i = 0; i < document.getElementsByClassName('zhuan').length; i++) {
+          document.getElementsByClassName('zhuan')[i].style.display='none'
+        }
+        if(ret){
+        if(ret.code==200){
+
+
+ if(ret.data.length>0){
+ var htmlt='  <option value="">全部</option>';
+ for (var i = 0; i <ret.data.length; i++) {
+ htmlt+='  <option value="'+ret.data[i].areaUuid+'">'+ret.data[i].areaName+'</option>'
+
+ }
+
+ //html+='<div class="xiala"></div>'
+ document.getElementById('louceng').innerHTML=htmlt;
+
+ }else {
+ // document.getElementById('content1').innerHTML='<img src="../../image/zanwu.png"style="width:100px;height:100px;display:block;margin:0 auto;margin-top:160px;margin-bottom:100px;">'
+ }
+
+        }else {
+          api.toast({
+           msg:ret.info,
+           duration: 2000,
+           location: 'middle'
+          });
+      toast.hide()
+        }
+
+
+      }else {
+
+       /* api.toast({
+        msg: '网络错误',
+        duration: 2000,
+        location: 'middle'
+    });*/
+      }
+ toast.hide()
+       })
+}
+zblou()
+document.getElementById('louceng').oninput=function(){
+  lou=document.getElementById('louceng').value
+  //alert(1)
+}
+document.getElementById('cheweihao').oninput=function(){
+  hao=document.getElementById('cheweihao').value
+}
+document.getElementById('db3').onclick=function(){
+  page=0
+  showDefault()
+  zb()
+}
+$api.setStorage('j',0)
+
+function zb(){
+/*
+：/learun/adms/parking/getplotstatus
+类型：GET
+请求参数：
+参数名称	类型	备注	必须
+loginMark	String	设备标识，必须具有唯一性	是
+token	String	验证码，从登录后返回信息中获取	是
+parkUuid	String	停车场uuid	是
+floorUuid	String	楼层uuid	否
+plotNo	String	车位号	否
+pageno	String	当前页码	是
+pagesize	String	每页记录数	是
+*/
+page++
+if(page==1){
+//alert(riqi)
+//alert(lou)
+ api.ajax({
+   url: yuming+'/learun/adms/parking/getplotstatus',
+       method: 'get',
+       data:{values: {
+         "loginMark": api.deviceId,
+         "token": $api.getStorage('token'),
+         parkUuid	:api.pageParam.id,
+         pageno	:page,
+         pagesize	:40,
+         floorUuid:lou,
+         plotNo:hao
+             }}
+      }, function(ret) {
+//alert(JSON.stringify(ret))
+api.refreshHeaderLoadDone()
+        for (var i = 0; i < document.getElementsByClassName('zhuan').length; i++) {
+         document.getElementsByClassName('zhuan')[i].style.display='none'
+       }
+       document.getElementById('jzuo').innerHTML=''
+       if(ret){
+       if(ret.code==200){
+
+
+if(ret.data.list.length>0){
+var html='';
+
+if(page==1){
+  arr=[]
+  arrindex=0
+  document.getElementById('jzuo').innerHTML=''
+}
+for (var i = 0; i <ret.data.list.length; i++) {
+  arr.push(ret.data.list[i])
+  arrindex++
+//  ' <div class="d" onclick="sjxq(1)">'+
+  if(ret.data.list[i].status==0){
+      html= '	<li onclick="cwxq('+arrindex+')">'+
+				'<div><span>楼层：'+ret.data.list[i].floorName+'</span><span>车位号：'+ret.data.list[i].plotNo+'</span></div>'+
+			'	<div>'+ret.data.list[i].parkName+'</div>'+
+			'</li>'
+      $('#jzuo').append(html)
+    }else {
+       html= '	<li onclick="cwxq('+arrindex+')">'+
+      '<div><span>楼层：'+ret.data.list[i].floorName+'</span><span>车位号：'+ret.data.list[i].plotNo+'</span></div>'+
+    '	<div>'+ret.data.list[i].parkName+'</div>'+
+    	'<p>车牌号：'+ret.data.list[i].plateNo+'</p>'+
+ 			'</li>'
+          $('#jzuo').append(html)
+    }
+
+        $api.setStorage('j',0)
+
+}
+
+//html+='<div class="xiala"></div>'
+//document.getElementById('content1').innerHTML=html;
+
+}else {
+// document.getElementById('content1').innerHTML='<img src="../../image/zanwu.png"style="width:100px;height:100px;display:block;margin:0 auto;margin-top:160px;margin-bottom:100px;">'
+}
+
+       }else {
+         api.toast({
+          msg:ret.info,
+          duration: 2000,
+          location: 'middle'
+         });
+     toast.hide()
+       }
+
+
+     }else {
+
+      /* api.toast({
+       msg: '网络错误',
+       duration: 2000,
+       location: 'middle'
+   });*/
+     }
+toast.hide()
+      })
+}else {
+  api.ajax({
+    url: yuming+'/learun/adms/parking/getplotstatus',
+        method: 'get',
+        data:{values: {
+          "loginMark": api.deviceId,
+          "token": $api.getStorage('token'),
+          parkUuid	:api.pageParam.id,
+          pageno	:page,
+          pagesize	:40,
+          floorUuid:lou,
+          plotNo:hao
+              }}
+       }, function(ret) {
+ //alert(JSON.stringify(ret))
+ api.refreshHeaderLoadDone()
+         for (var i = 0; i < document.getElementsByClassName('zhuan').length; i++) {
+          document.getElementsByClassName('zhuan')[i].style.display='none'
+        }
+        if(ret){
+        if(ret.code==200){
+
+
+ if(ret.data.list.length>0){
+ var html='';
+ for (var i = 0; i <ret.data.list.length; i++) {
+   arr.push(ret.data.list[i])
+   arrindex++
+ //  ' <div class="d" onclick="sjxq(1)">'+
+   if(ret.data.list[i].status==0){
+      html= '	<li>'+
+ 				'<div><span>楼层：'+ret.data.list[i].floorName+'</span><span>车位号：'+ret.data.list[i].plotNo+'</span></div>'+
+ 			'	<div>'+ret.data.list[i].parkName+'</div>'+
+ 			'</li>'
+       $('#jzuo').append(html)
+     }else {
+       html= '	<li>'+
+       '<div><span>楼层：'+ret.data.list[i].floorName+'</span><span>车位号：'+ret.data.list[i].plotNo+'</span></div>'+
+     '	<div>'+ret.data.list[i].parkName+'</div>'+
+     	'<p>车牌号：'+ret.data.list[i].plateNo+'</p>'+
+  			'</li>'
+           $('#jzuo').append(html)
+     }
+
+         $api.setStorage('j',0)
+
+ }
+
+ //html+='<div class="xiala"></div>'
+ //document.getElementById('content1').innerHTML=html;
+
+ }else {
+ // document.getElementById('content1').innerHTML='<img src="../../image/zanwu.png"style="width:100px;height:100px;display:block;margin:0 auto;margin-top:160px;margin-bottom:100px;">'
+ }
+
+        }else {
+          api.toast({
+           msg:ret.info,
+           duration: 2000,
+           location: 'middle'
+          });
+      toast.hide()
+        }
+
+
+      }else {
+
+       /* api.toast({
+        msg: '网络错误',
+        duration: 2000,
+        location: 'middle'
+    });*/
+      }
+ toast.hide()
+       })
+
+}
+
+}
+//zb()
+api.addEventListener({
+name:'scrolltobottom',
+extra:{
+    threshold:0           //设置距离底部多少距离时触发，默认值为0，数字类型
+}
+}, function(ret, err){
+
+if($api.getStorage('j')==0){
+$api.setStorage('j',1)
+//alert(1)
+ var zhuan=document.getElementById('zhuan').cloneNode(true);
+ zhuan.style.display='block'
+ document.getElementById('ddd').appendChild(zhuan)
+
+zb()
+}
+});
+}
+function cwxq(data){
+  api.openWin({
+      name: 'cwxqa',
+      url: './cwxqa.html',
+      pageParam: {
+          arr: arr[data-1]
+      }
+  });
+
+}
+</script>

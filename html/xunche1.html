@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="format-detection" content="telephone=no"><!-- 禁止IPHONE识别手机号码 -->
+<meta name="viewport" content="width=device-width,user-scalable=no, initial-scale=1">
+<title>智能寻车</title>
+<!-- css -->
+<link rel="stylesheet" type="text/css" href="css/index.css">
+<link rel="stylesheet" type="text/css" href="css/mui.min.css" />
+<link rel="stylesheet" type="text/css" href="../css/aui.css">
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/aui-toast.js"></script>
+<script type="text/javascript" src="../script/H.js"></script>
+<script type="text/javascript" src="../script/jquery.js"></script>
+<script type="text/javascript" src="../script/yuming.js"></script>
+<style>
+.module-content{padding-top: 44px;margin-bottom: 50px;}
+.tcc{padding: 10px;}
+.tcc li{background: #fff;border-radius: 10px;padding: 10px;margin-bottom: 10px;}
+.tcc h3{padding-left: 15px;border-bottom: 1px solid #f1f1f1;padding-bottom: 10px;margin-bottom: 10px; display: flex;justify-content: space-between;align-items: center;}
+.tcc h3 span{color: #000;font-size: 14px;}
+.tcc h3 img{width: 8px;height: 8px;}
+.tcc h4{font-size: 14px;color: #333;display: flex;padding-left: 15px;}
+.tcc p{color: #333;font-size: 12px;display: flex;padding-left: 15px;}
+.tcc h4 span,.tcc p span{width: 50px;}
+.mainp{margin: 10px 0 20px; font-size: 18px;color: #333;display: flex;align-items: center;display: flex;align-items: center;justify-content: space-between;}
+.mainp span{display: inline-block; background: linear-gradient(to bottom, #2dc5ff , #1a54ff);height: 16px; width: 2px;margin-right: 5px;}
+.mainp b{width: 88%;}
+.mainp a{font-size: 12px;color: #666;}
+.main ul{display: flex;justify-content: space-around;flex-wrap: wrap;margin-top: 15px;}
+.main ul li{width: 30%;padding: 15px 0;border-radius: 3px;/*box-shadow: 0 0 5px 0 #cee5ff;*/background: #fff; margin-bottom: 15px;}
+.main ul li a{display: flex;align-items: center;justify-content: center; line-height:20px;}
+.main ul li img{width: 20px;height: 20px;margin-right: 6px;}
+.main ul li span{color: #000c33;font-size: 14px;}
+</style>
+</head>
+<body style="background: #f7f7f7;">
+	<header  id="headj">
+		<a onclick="api.closeWin()" >
+			<img src="images/back_jt.png" onclick="api.closeWin()"/>
+			<span onclick="api.closeWin()">智能寻车</span>
+		</a>
+	</header>
+<div class="module-content" id="ge">
+  <div class="main" style="margin-top:30px">
+
+    <ul>
+
+
+      <li onclick="opw('xunche2',1)"><a >
+        <img src="images/xunche.png" />
+        <span>智能寻车</span>
+      </a></li>
+      <li onclick="opw('xunche',1)"><a >
+        <img src="images/xunche.png" />
+        <span>查看车位</span>
+      </a></li>
+    </ul>
+  </div>
+</div>
+<div class="foot_menu" style="display:none">
+	<ul>
+		<li>
+			<a href="index.html">
+				<i><img src="images/menu_icon01.png"></i>
+				<span>首 页</span>
+			</a>
+		</li>
+		<li class="cur">
+			<a href="shequ.html">
+				<i><img src="images/menu_icon02_r.png"></i>
+				<span>社 区</span>
+			</a>
+		</li>
+		<li>
+			<a href="news.html">
+				<i><img src="images/menu_icon03.png"></i>
+				<span>消 息</span>
+			</a>
+		</li>
+		<li>
+			<a href="user.html">
+				<i><img src="images/menu_icon04.png"></i>
+				<span>我 的</span>
+			</a>
+		</li>
+	</ul>
+</div>
+</body>
+</html>
+<script type="text/javascript">
+apiready = function () {
+$api.fixStatusBar(document.getElementById('headj'));
+document.getElementById('headj').style.height=(50+api.safeArea.top)+'px'
+document.getElementById('ge').style.marginTop=(5+api.safeArea.top)+'px'
+//showDefault()
+function zb(){
+	api.ajax({
+					 url: yuming+'/learun/adms/parking/getparkinglist',
+					 method: 'get',
+					 data:{values: {
+
+
+	"loginMark": api.deviceId,
+	"token": $api.getStorage('token')
+
+
+							}}
+			 }, function(ret) {
+
+//alert(JSON.stringify(ret))
+
+			 if(ret){
+			 if(ret.code==200){
+
+				toast.hide()
+var html=''
+for (var i = 0; i < ret.data.length; i++) {
+if(1){
+	html+='<li>'+
+	'	<a  onclick="tingchechang(this)"  data-id="'+ret.data[i].areaUuid+'"  data-name="'+ret.data[i].areaName+'停车场">'+
+		'	<h3><span>'+ret.data[i].areaName+'停车场</span><img src="images/gray_arr.png" /></h3>'+
+		'	<h4><span>位置</span>'+ret.data[i].areaName+'</h4>'+
+		//'	<p><span>车位</span>500</p>'+
+		'</a>'+
+	'</li>'
+
+
+}
+
+}
+document.getElementById('jtcc').innerHTML=html
+	 }else {
+		 toast.hide()
+		 api.toast({
+		 msg: ret.info,
+		 duration: 2000,
+		 location: 'middle'
+ });
+	 }
+
+			 }else {
+
+					toast.hide()
+				 api.toast({
+				 msg: '网络错误',
+				 duration: 2000,
+				 location: 'middle'
+		 });
+			 }
+
+			 })
+}
+//zb()
+
+}
+function tingchechang(data){
+	api.openWin({
+	    name: 'tingchechang',
+	    url: './tingchechang.html',
+	    pageParam: {
+	        id: data.getAttribute('data-id'),
+					name:data.getAttribute('data-name')
+	    }
+	});
+
+}
+</script>

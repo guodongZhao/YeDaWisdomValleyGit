@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="format-detection" content="telephone=no"><!-- 禁止IPHONE识别手机号码 -->
+<meta name="viewport" content="width=device-width,user-scalable=no, initial-scale=1">
+<title>租赁车位添加</title>
+<!-- css -->
+<link rel="stylesheet" type="text/css" href="css/index.css">
+<link rel="stylesheet" type="text/css" href="css/mui.min.css" />
+<link href="css/foundation-datepicker.css" rel="stylesheet" type="text/css">
+<style>
+.module-content{padding-top: 44px;padding-bottom: 50px;}
+.hybt{color: #000;font-size: 16px;line-height: 40px;}
+.hyxz{background: #f4f4f4;border-top-left-radius: 10px;border-top-right-radius: 10px;padding: 10px 15px;}
+
+.yyr{border-radius: 10px;overflow: hidden;}
+.yyr li{display: flex;background: #fff;align-items: center;padding:5px 10px;border-bottom: 1px solid #f1f1f1;}
+.yyr li:last-child{border-bottom: 0;}
+.yyr li span{font-size: 14px;color: #333;width: 80px;}
+.yyr li select{font-size: 14px;}
+.yyr li input{border: 0;font-size: 14px;color: #000;}
+.yyr p{line-height: 44px;color: #000;font-size: 14px;}
+.hyxz textarea{border-radius: 10px;border: 0;color: #000;font-size: 14px;}
+.hyxz textarea::-webkit-input-placeholder{color: #333;}
+.tjsq{display: block;text-align: center; line-height: 40px;margin-top: 10px; color:#fff;font-size: 14px; border-radius: 10px;background: linear-gradient(to right, #367ff8 , #556dff);}
+</style>
+</head>
+<body style="background: #f7f7f7;">
+	<header>
+		<a href="javascript:history.back(-1)">
+			<img src="images/back_jt.png" />
+			<span onclick="api.closeWin()">租赁车位添加</span>
+		</a>
+	</header>
+<div class="module-content">
+	<div class="hyxz">
+		<ul class="yyr">
+			<li><span>停车场</span><select><option>业达智慧园区一停车场</option><option>业达智慧园区二停车场</option></select></li>
+			<li><span>楼层</span><select><option>1层</option><option>2层</option></select></li>
+			<li><span>停车位</span><input type="text" placeholder="请填写停车位" /></li>
+			<li><span>租赁人</span><input type="text" placeholder="请填写租赁人" /></li>
+			<li><span>车牌号</span><input type="text" placeholder="请填写车牌号" /></li>
+			<li><span>电话号</span><input type="text" placeholder="请填写租赁人电话" /></li>
+			<li><span>录入人</span><input type="text" placeholder="请填写录入人" /></li>
+			<li><span>开始时间</span><input type="text" placeholder="请选择开始时间" value="12/12/2019" id="demo-1" /></li>
+			<li><span>结束时间</span><input type="text" placeholder="请选择结束时间" value="12/12/2019" id="demo-2"></li>
+		</ul>
+
+	<a class="tjsq" >提交添加</a>
+
+	</div>
+</div>
+
+<div class="foot_menu">
+	<ul>
+		<li>
+			<a href="index.html">
+				<i><img src="images/menu_icon01.png"></i>
+				<span>首 页</span>
+			</a>
+		</li>
+		<li class="cur">
+			<a href="wuye.html">
+				<i><img src="images/menu_icon02.png"></i>
+				<span>智 能</span>
+			</a>
+		</li>
+		<li>
+			<a href="news.html">
+				<i><img src="images/menu_icon03.png"></i>
+				<span>消 息</span>
+			</a>
+		</li>
+		<li>
+			<a href="user.html">
+				<i><img src="images/menu_icon04.png"></i>
+				<span>我 的</span>
+			</a>
+		</li>
+	</ul>
+</div>
+</body>
+<script src="js/jquery-1.11.3.min.js"></script>
+<script src="js/foundation-datepicker.js"></script>
+<script src="js/locales/foundation-datepicker.zh-CN.js"></script>
+<script>
+$('#demo-1').fdatepicker();
+$('#demo-2').fdatepicker();
+</script>
+</html>

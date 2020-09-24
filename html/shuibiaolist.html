@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="format-detection" content="telephone=no"><!-- 禁止IPHONE识别手机号码 -->
+<meta name="viewport" content="width=device-width,user-scalable=no, initial-scale=1">
+<title>水表抄表</title>
+<!-- css -->
+<link rel="stylesheet" type="text/css" href="css/index.css">
+<link rel="stylesheet" type="text/css" href="css/mui.min.css" />
+<link href="css/foundation-datepicker.css" rel="stylesheet" type="text/css">
+<style>
+.module-content{padding-top: 44px;padding-bottom: 50px;}
+.fklist{margin: 10px;}
+.fklist li{background: #fff;border-radius:5px;padding: 10px;margin-bottom: 10px;line-height: 22px;}
+.fklist li a{}
+.fklist li h3{display: block; font-size: 14px;color: #000;margin-bottom: 10px;width: 100%;}
+.fklist li div{width: 100%; display: flex;justify-content: space-between;align-items: center; color: #666;font-size: 12px;}
+.fklist li p{display: flex;justify-content: space-between; color: #999;font-size: 12px;border-top: 1px solid #f1f1f1;margin-top: 10px;padding-top: 10px;}
+.fklist li p img{width: 16px;height: 16px;}
+.tianjia{position: fixed;right: 10px;width: 36px;height: 36px;bottom: 65px;}
+.tianjia img{width: 100%;}
+.yincang{display: none;position: fixed;background: rgba(0,0,0,0.5);top: 0;bottom: 0;left: 0;right: 0;z-index: 9999;}
+.tanchuang{display: none;position: fixed;background: #fff; top: 35%;width: 80%;left: 10%;padding:15px 10px;border-radius: 10px; z-index: 10000;}
+.tanchuang h3{color: #fe2400;font-size: 16px;text-align: center;}
+.tcbtn{margin: 20px auto 10px;display: flex;justify-content: space-between;width: 60%;}
+.tcbtn span{font-size: 14px;text-align: center;width: 45%;border-radius: 5px;color: #fff;padding: 10px 0;}
+</style>
+</head>
+<body style="background: #f7f7f7;">
+	<header>
+		<div class="head">
+			<a href="javascript:history.back(-1)">
+				<img src="images/back_jt.png" />
+			</a>
+			<div>
+				<input placeholder="查询" />
+				<img src="images/search.png" />
+			</div>
+		</div>
+	</header>
+<div class="module-content">
+	<ul class="fklist">
+		<li>
+			<a href="shuibiao.html">
+				<h3>水表编号：256896586211</h3>
+				<div>
+					<span>业主编号：256</span>
+					<span>表数：55</span>
+				</div>
+			</a>
+			<p>
+				<span>2019-12-12</span>
+				<img src="images/del.png" class="del" />
+			</p>
+		</li>
+		<li><a href="shuibiao.html">
+				<h3>水表编号：256896586211</h3>
+				<div>
+					<span>业主编号：256</span>
+					<span>表数：55</span>
+				</div>
+			</a>
+			<p>
+				<span>2019-12-12</span>
+				<img src="images/del.png" class="del" />
+			</p>
+		</li>
+		<li><a href="shuibiao.html">
+				<h3>水表编号：256896586211</h3>
+				<div>
+					<span>业主编号：256</span>
+					<span>表数：55</span>
+				</div>
+			</a>
+			<p>
+				<span>2019-12-12</span>
+				<img src="images/del.png" class="del" />
+			</p>
+		</li>
+	</ul>
+</div>
+<a class="tianjia" href="shuibiaoadd.html"><img src="images/ad.png" /></a>
+<div class="foot_menu">
+	<ul>
+		<li>
+			<a href="index.html">
+				<i><img src="images/menu_icon01.png"></i>
+				<span>首 页</span>
+			</a>
+		</li>
+		<li class="cur">
+			<a href="wuye.html">
+				<i><img src="images/menu_icon02.png"></i>
+				<span>智 能</span>
+			</a>
+		</li>
+		<li>
+			<a href="news.html">
+				<i><img src="images/menu_icon03.png"></i>
+				<span>消 息</span>
+			</a>
+		</li>
+		<li>
+			<a href="user.html">
+				<i><img src="images/menu_icon04.png"></i>
+				<span>我 的</span>
+			</a>
+		</li>
+	</ul>
+</div>
+
+<div class="yincang"></div>
+<div class="tanchuang">
+	<h3>确定删除这条记录?</h3>
+	<div class="tcbtn">
+		<span style="background: #F08A24;">确定</span>
+		<span style="background: #0C83F9;">取消</span>
+	</div>
+</div>
+</body>
+<script src="js/jquery.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $(".del").click(function(){
+            $(".yincang").show();
+            $(".tanchuang").show();
+        });
+        $(".yincang").click(function(){
+            $(".yincang").hide();
+            $(".tanchuang").hide();
+        });
+        $(".tcbtn span").click(function(){
+            $(".yincang").hide();
+            $(".tanchuang").hide();
+        });
+    });
+</script>
+</html>

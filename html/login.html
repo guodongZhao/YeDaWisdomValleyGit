@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="format-detection" content="telephone=no"><!-- 禁止IPHONE识别手机号码 -->
+<meta name="viewport" content="width=device-width,user-scalable=no, initial-scale=1">
+<title>登录</title>
+<!-- css -->
+<link rel="stylesheet" type="text/css" href="css/index.css">
+<link rel="stylesheet" type="text/css" href="../css/aui.css">
+<style>
+	.login-h2{
+		font-size: 26px;
+		color: #000;
+		font-weight: bold;
+		margin:1rem 20px;
+	}
+	.login-ul{
+		margin: 20px;
+	}
+	.login-ul li{
+		display: flex;
+		justify-content: ;
+		align-items: center;
+		font-size: 16px;
+		border-bottom: 1px solid #ddd;
+		line-height: 50px;
+		height: 50px;
+		margin-top: 10px;
+	}
+	.login-ul li input{border: none;color: 333;}
+	.login-ul li input::-webkit-input-placeholder{color: #999;}
+	.dlbtn{
+		display: block;
+		color: #fff;
+		border-radius: 25px;
+		margin:0.5rem 10px 0.5rem;
+		background: #007AFF;
+		text-align: center;
+		line-height: 40px;
+		font-size: 14px;
+	}
+	.login-reg{margin:0 20px;text-align: right;line-height: 14px;}
+	.login-reg a{color: #007AFF;font-size: 14px;}
+	.zhuce{margin: 0.4rem;color: #999;font-size: 12px;text-align: center;}
+	.zhuce a{color: #007AFF;}
+</style>
+</head>
+<body style="background: #fff;">
+	<header id="headj">
+		<a href="javascript:history.go(-1)" style="display:none"><img src="images/back_jt.png" /></a>
+	</header>
+	<div class="module-content" id="ge">
+		<h2 class="login-h2">Hi! 欢迎登录</h2>
+		<ul class="login-ul">
+			<li>
+				<input type="text" placeholder="请输入账号" id="zh" style="width:100%"/>
+			</li>
+			<li>
+				<input type="password" placeholder="请输入密码" id="mm" style="width:100%"/>
+			</li>
+		</ul>
+		<div class="login-reg" ><a  onclick="wangji()">忘记密码</a></div>
+		<a class="dlbtn" id="denglu">登录</a>
+		<p class="zhuce">还没有账号，<a onclick="zhuce()">立即注册</a></p>
+	</div>
+</body>
+</html>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/aui-toast.js"></script>
+<script type="text/javascript" src="../script/H.js"></script>
+<script type="text/javascript" src="../script/jquery.js"></script>
+<script type="text/javascript" src="../script/yuming.js"></script>
+<script type="text/javascript" src="../script/md5.js"></script>
+<script>
+
+    apiready = function () {
+$api.fixStatusBar(document.getElementById('headj'));
+document.getElementById('ge').style.marginTop=(60+parseInt(api.safeArea.top))+'px'
+api.setStatusBarStyle({
+style: 'dark'
+});
+//退出
+jjj=0
+api.addEventListener({
+name: 'gyy'
+}, function(ret, err) {
+
+
+
+	         api.closeWidget({
+	       id: 'A6021923307939',
+	       retData: {
+	           name: 'closeWidget'
+	       },
+	       silent:true,
+	       animation: {
+	           type: 'flip',
+	           subType: 'from_bottom',
+	           duration: 500
+	       }
+	   });
+
+
+
+
+})
+
+api.addEventListener({
+name: 'keyback'
+}, function(ret, err) {
+
+if(jjj==1){
+
+         api.closeWidget({
+       id: 'A6021923307939',
+       retData: {
+           name: 'closeWidget'
+       },
+       silent:true,
+       animation: {
+           type: 'flip',
+           subType: 'from_bottom',
+           duration: 500
+       }
+   });
+
+}
+
+if( jjj==0){
+
+api.toast({
+   msg: '再按一次将退出应用',
+   duration: 2000,
+   location: 'bottom'
+});
+jjj=1;
+setTimeout(function(){
+ jjj=0;
+},2000)
+
+
+}
+
+
+})
+if($api.getStorage('token')){
+	api.openWin({
+ 			name: 'index',
+ 			url: './index.html',
+ 			reload:true,
+ 			pageParam: {
+ 					name: 'test'
+ 			}
+ 	});
+}
+jy=0
+document.getElementById('denglu').onclick=function(){
+	var i1=document.getElementById('zh').value;
+	var i2=document.getElementById('mm').value;
+	/*
+'mudan','password':'202CB962AC59075B964B07152D234B70'
+	*/
+	if(i1==''){
+		api.toast({
+				msg: '请输入账号',
+				duration: 2000,
+				location: 'bottom'
+		});
+		return;
+	}
+	if(i2==''){
+		api.toast({
+				msg: '请输入密码',
+				duration: 2000,
+				location: 'bottom'
+		});
+		return;
+	}
+	//hex_md5("aaa");
+	//alert(hex_md5(i2))
+	if(i1!=''&&i2!=''&&jy==0){
+		jy=1
+	showDefault()
+
+	api.ajax({
+					 url: yuming+'/learun/adms/user/login',
+					 method: 'post',
+					 data:{values: {
+
+
+	"loginMark": api.deviceId,
+	"data": JSON.stringify({	'username':i1,'password':hex_md5(i2)/*'202CB962AC59075B964B07152D234B70'*//*hex_md5(i2)*/})
+
+							}}
+			 }, function(ret) {
+
+//alert(JSON.stringify(ret))
+
+
+		//	alert(JSON.stringify(ret))
+			 if(ret){
+			 if(ret.code==200){
+				 jy=0;
+				toast.hide()
+				$api.setStorage('info', ret.data.baseinfo);
+			$api.setStorage('mm', hex_md5(i2));
+					$api.setStorage('token', ret.data.baseinfo.token);
+
+
+ api.openWin({
+			name: 'index',
+			url: './index.html',
+			reload:true,
+			pageParam: {
+					name: 'test'
+			}
+	});
+
+//api.closeWin();
+
+				 toast.hide()
+			/*   api.toast({
+				 msg: '账号或密码错误',
+				 duration: 2000,
+				 location: 'middle'
+		 });*/
+	 }else {   jy=0;
+		 toast.hide()
+		 api.toast({
+		 msg: ret.info,
+		 duration: 2000,
+		 location: 'middle'
+ });
+	 }
+
+			 }else {
+				 jy=0
+					toast.hide()
+				 api.toast({
+				 msg: '网络错误',
+				 duration: 2000,
+				 location: 'middle'
+		 });
+			 }
+
+			 })
+
+	}
+}
+    }
+		function zhuce(){
+			api.openWin({
+			    name: 'register',
+			    url: './register.html',
+			    pageParam: {
+			        name: 'test'
+			    }
+			});
+
+		}
+		function wangji(){
+			api.openWin({
+			    name: 'forget',
+			    url: './forget.html',
+			    pageParam: {
+			        name: 'test'
+			    }
+			});
+
+		}
+</script>

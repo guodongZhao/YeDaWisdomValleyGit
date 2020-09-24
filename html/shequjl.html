@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="format-detection" content="telephone=no"><!-- 禁止IPHONE识别手机号码 -->
+<meta name="viewport" content="width=device-width,user-scalable=no, initial-scale=1">
+<title>社区交流</title>
+<!-- css -->
+
+<link rel="stylesheet" type="text/css" href="css/index.css">
+<link rel="stylesheet" type="text/css" href="css/mui.min.css" />
+<link href="css/foundation-datepicker.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="../css/aui.css">
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/aui-toast.js"></script>
+<script type="text/javascript" src="../script/H.js"></script>
+<script type="text/javascript" src="../script/jquery.js"></script>
+<script type="text/javascript" src="../script/yuming.js"></script>
+<style>
+.module-content{padding-top: 44px;padding-bottom: 50px;}
+.shequ{margin: 10px;}
+.shequ li{background: #fff;margin-bottom: 10px;padding: 10px;border-radius: 10px;}
+.shequ li .sqhead{display: flex;align-items: center;margin-bottom: 10px;}
+.shequ li .sqhead img{width: 36px;height: 36px;border-radius: 20px;margin-right: 10px;}
+.shequ li .sqhead h4{color: #000;font-size: 14px;}
+.shequ li .sqhead span{color: #666;font-size: 12px;}
+.shequ li h3{color: #000;font-size: 14px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;}
+.shequ li .sqimg{display: flex;}
+.shequ li .sqimg img{width: 30%;margin: 10px 1.5%;height: 60px;}
+.shequ li .dpinglun{padding: 10px 0 0;border-top: 1px solid #f1f1f1;display: flex;justify-content: space-between;align-items: center;}
+.shequ li .dpinglun p{display: flex;align-items: center;}
+.shequ li .dpinglun img{width: 16px;height: 16px;margin-right: 10px;}
+.shequ li .dpinglun span{font-size: 12px;}
+.tianjia{position: fixed;right: 10px;width: 36px;height: 36px;bottom: 65px;}
+.tianjia img{width: 100%;}
+.zhuan{
+  display: none;
+  margin: 0 auto;
+}
+</style>
+</head>
+<body style="background: #f7f7f7;">
+  <a class="tianjia" onclick="opw('fabu',1)"><img src="images/ad.png" /></a>
+	<header  id="headj">
+
+			<img src="images/back_jt.png" onclick="api.closeWin()" style="height:16px;position:relative;top:2px;"/>
+			<span id="name" onclick="api.closeWin()"></span>
+
+	</header>
+<div class="module-content" id="ge">
+<ul class="shequ" id="shequ">
+	<!--<li>
+		<div class="sqhead">
+			<img src="images/icon1.png" />
+			<div>
+				<h4>小阿贵</h4>
+				<span>2019-12-27</span>
+			</div>
+		</div>
+		<a href="shequxq.html">
+			<h3>社区交流标题一社区交流标题一</h3>
+			<div class="sqimg">
+				<img src="images/gongyu.jpg" />
+				<img src="images/gongyu.jpg" />
+				<img src="images/gongyu.jpg" />
+			</div>
+		</a>
+		<div class="dpinglun">
+			<p>
+				<img src="images/eye.png" />
+				<span>52</span>
+			</p>
+			<p>
+				<img src="images/pinglun.png" />
+				<span>52</span>
+			</p>
+		</div>
+	</li>
+	<li>
+		<div class="sqhead">
+			<img src="images/icon1.png" />
+			<div>
+				<h4>小阿贵</h4>
+				<span>2019-12-27</span>
+			</div>
+		</div>
+		<a href="shequxq.html">
+			<h3>社区交流标题一社区交流标题一</h3>
+			<div class="sqimg">
+				<img src="images/gongyu.jpg" />
+				<img src="images/gongyu.jpg" />
+				<img src="images/gongyu.jpg" />
+			</div>
+		</a>
+		<div class="dpinglun">
+			<p>
+				<img src="images/eye.png" />
+				<span>52</span>
+			</p>
+			<p>
+				<img src="images/pinglun.png" />
+				<span>52</span>
+			</p>
+		</div>
+	</li>-->
+</ul>
+<img src="../image/zhuan.gif" id="zhuan" style="height:20px;width:auto;margin-top:10px;margin-bottom:10px;" class="zhuan">
+<div id="ddd">
+
+</div>
+</div>
+
+<div class="foot_menu" style="display:none">
+	<ul>
+		<li class="cur">
+			<a href="index.html">
+				<i><img src="images/menu_icon01_r.png"></i>
+				<span>首 页</span>
+			</a>
+		</li>
+		<li>
+			<a href="wuye.html">
+				<i><img src="images/menu_icon02.png"></i>
+				<span>智 能</span>
+			</a>
+		</li>
+		<li>
+			<a href="news.html">
+				<i><img src="images/menu_icon03.png"></i>
+				<span>消 息</span>
+			</a>
+		</li>
+		<li>
+			<a href="user.html">
+				<i><img src="images/menu_icon04.png"></i>
+				<span>我 的</span>
+			</a>
+		</li>
+	</ul>
+</div>
+</body>
+
+</html>
+<script type="text/javascript">
+	page=0
+	apiready = function () {
+	$api.fixStatusBar(document.getElementById('headj'));
+	document.getElementById('headj').style.height=(50+api.safeArea.top)+'px'
+	document.getElementById('ge').style.marginTop=(5+api.safeArea.top)+'px'
+	api.addEventListener({
+	    name: 'sx'
+	}, function(ret, err){
+		showDefault()
+		page=0
+		zb()
+	});
+document.getElementById('name').innerHTML=api.pageParam.name
+	$api.setStorage('j',0)
+	showDefault()
+	function zb(){
+
+	page++
+	//alert(str)
+	if(page==1){
+	//alert(riqi)
+/*/api/Forum/forum/getList
+ class_id ,page
+*/
+	 api.ajax({
+	   url: yuming2+'/api/Forum/forum/getList',
+	       method: 'get',
+	       data:{values: {
+	         "loginMark": api.deviceId,
+	         "token": $api.getStorage('token'),
+class_id:api.pageParam.id,
+	         page	:page,
+	         pagesize	:10,
+	        type:2
+	             }}
+	      }, function(ret) {
+//	alert(JSON.stringify(ret))
+	api.refreshHeaderLoadDone()
+
+	        for (var i = 0; i < document.getElementsByClassName('zhuan').length; i++) {
+	         document.getElementsByClassName('zhuan')[i].style.display='none'
+	       }
+	       if(ret){
+	       if(1){
+	         arr=[]
+	         arrindex=0
+	document.getElementById('shequ').innerHTML=''
+	if(ret.data.length>0){
+
+	for (var i = 0; i <ret.data.length; i++) {
+    //alert(i)
+	//  ' <div class="d" onclick="sjxq(1)">'+
+
+
+	  if(1){
+      var html='';
+	     html+='<li onclick="shequxq('+ret.data[i].id+')">'
+		 	html+=	'<div class="sqhead">'
+		 		html+=	'<img src="images/icon1.png" />'
+		 		html+='	<div>'
+		 		html+=	'	<h4>'+ret.data[i].name+'</h4>'
+		 		html+=		'<span>'+new Date(ret.data[i].add_time*1000).toLocaleString()+" "+ new Date(ret.data[i].add_time*1000).toLocaleString1()+'</span>'
+		 		html+=	'</div>'
+		 		html+='</div>'
+		 	html+=	'<a >'
+		 	html+=	'	<h3>'+ret.data[i].content+'</h3>'
+		 	html+=	'	<div class="sqimg">'
+for (var j = 0; j < ret.data[i].img_str.length; j++) {
+html+=	'	<img src="'+yuming2+'/upload/'+ret.data[i].img_str[j]+'" />'
+}
+
+		 	html+=	'	</div>'
+		 html+=	'	</a>'
+		 	html+=	'<div class="dpinglun">'
+		 	html+=	'	<p>'
+		 	html+=		'	<img src="images/eye.png" />'
+		 		html+=		'<span>'+ret.data[i].see_num+'</span>'
+		 		html+=	'</p>'
+		 		html+='	<p>'
+		 			html+=	'<img src="images/pinglun.png" />'
+		 			html+=	'<span>'+ret.data[i].num+'</span>'
+		 		html+=	'</p>'
+		 	html+='	</div>'
+		 html+=	'</li>'
+	      $('#shequ').append(html)
+	    }else {
+
+	    }
+
+	        $api.setStorage('j',0)
+
+	}
+
+	//html+='<div class="xiala"></div>'
+	//document.getElementById('content1').innerHTML=html;
+
+	}else {
+ document.getElementById('shequ').innerHTML='<img src="../image/zanwu.png"style="width:100px;height:100px;display:block;margin:0 auto;margin-top:160px;margin-bottom:100px;">'
+	}
+
+	       }else {
+	         api.toast({
+	          msg:ret.info,
+	          duration: 2000,
+	          location: 'middle'
+	         });
+	     toast.hide()
+	       }
+
+
+	     }else {
+
+	      /* api.toast({
+	       msg: '网络错误',
+	       duration: 2000,
+	       location: 'middle'
+	   });*/
+	     }
+	toast.hide()
+	      })
+	}else {
+		api.ajax({
+			url: yuming2+'/api/Forum/forum/getList',
+ 	       method: 'get',
+ 	       data:{values: {
+ 	         "loginMark": api.deviceId,
+ 	         "token": $api.getStorage('token'),
+ class_id:api.pageParam.id,
+ 	         page	:page,
+ 	         pagesize	:10,
+ 	        type:2
+	              }}
+	       }, function(ret) {
+	 //alert(JSON.stringify(ret))
+	 api.refreshHeaderLoadDone()
+	         for (var i = 0; i < document.getElementsByClassName('zhuan').length; i++) {
+	          document.getElementsByClassName('zhuan')[i].style.display='none'
+	        }
+	        if(ret){
+	        if(1){
+	          arr=[]
+	          arrindex=0
+
+	   if(ret.data.length>0){
+	   var html='';
+	   for (var i = 0; i <ret.data.length; i++) {
+	   //  ' <div class="d" onclick="sjxq(1)">'+
+
+
+	 	  if(1){
+	 	     html+='<li onclick="shequxq('+ret.data[i].id+')">'
+	 		 	html+=	'<div class="sqhead">'
+	 		 		html+=	'<img src="images/icon1.png" />'
+	 		 		html+='	<div>'
+	 		 		html+=	'	<h4>'+ret.data[i].name+'</h4>'
+	 		 		html+=		'<span>'+new Date(ret.data[i].add_time*1000).toLocaleString()+" "+ new Date(ret.data[i].add_time*1000).toLocaleString1()+'</span>'
+	 		 		html+=	'</div>'
+	 		 		html+='</div>'
+	 		 	html+=	'<a >'
+	 		 	html+=	'	<h3>'+ret.data[i].content+'</h3>'
+	 		 	html+=	'	<div class="sqimg">'
+	 for (var j = 0; j < ret.data[i].img_str.length; j++) {
+	 html+=	'	<img src="'+yuming2+'/upload/'+ret.data[i].img_str[j]+'" />'
+	 }
+
+	 		 	html+=	'	</div>'
+	 		 html+=	'	</a>'
+	 		 	html+=	'<div class="dpinglun">'
+	 		 	html+=	'	<p>'
+	 		 	html+=		'	<img src="images/eye.png" />'
+	 		 		html+=		'<span>'+ret.data[i].see_num+'</span>'
+	 		 		html+=	'</p>'
+	 		 		html+='	<p>'
+	 		 			html+=	'<img src="images/pinglun.png" />'
+	 		 			html+=	'<span>'+ret.data[i].num+'</span>'
+	 		 		html+=	'</p>'
+	 		 	html+='	</div>'
+	 		 html+=	'</li>'
+	 	      $('#shequ').append(html)
+	 	    }else {
+
+	 	    }
+
+	 	        $api.setStorage('j',0)
+	   }
+
+	 //html+='<div class="xiala"></div>'
+	 //document.getElementById('content1').innerHTML=html;
+
+	 }else {
+	 // document.getElementById('content1').innerHTML='<img src="../../image/zanwu.png"style="width:100px;height:100px;display:block;margin:0 auto;margin-top:160px;margin-bottom:100px;">'
+	 }
+
+	        }else {
+	          api.toast({
+	           msg:ret.info,
+	           duration: 2000,
+	           location: 'middle'
+	          });
+	      toast.hide()
+	        }
+
+
+	      }else {
+
+	       /* api.toast({
+	        msg: '网络错误',
+	        duration: 2000,
+	        location: 'middle'
+	    });*/
+	      }
+	 toast.hide()
+	       })
+
+
+	}
+
+	}
+	zb()
+
+	api.addEventListener({
+	name:'scrolltobottom',
+	extra:{
+	    threshold:0           //设置距离底部多少距离时触发，默认值为0，数字类型
+	}
+	}, function(ret, err){
+
+	if($api.getStorage('j')==0){
+	$api.setStorage('j',1)
+	//alert(1)
+	 var zhuan=document.getElementById('zhuan').cloneNode(true);
+	 zhuan.style.display='block'
+	 document.getElementById('ddd').appendChild(zhuan)
+
+	zb()
+	}
+	});
+
+
+}
+function shequxq(data){
+	api.openWin({
+	    name: 'shequxq',
+	    url: './shequxq.html',
+	    pageParam: {
+	        id: data
+	    }
+	});
+
+}
+</script>

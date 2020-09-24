@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="format-detection" content="telephone=no"><!-- 禁止IPHONE识别手机号码 -->
+<meta name="viewport" content="width=device-width,user-scalable=no, initial-scale=1">
+<title>修改设备</title>
+<!-- css -->
+<link rel="stylesheet" type="text/css" href="css/index.css">
+<link rel="stylesheet" type="text/css" href="css/mui.min.css" />
+<link href="css/foundation-datepicker.css" rel="stylesheet" type="text/css">
+link rel="stylesheet" type="text/css" href="../css/aui.css">
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/aui-toast.js"></script>
+<script type="text/javascript" src="../script/H.js"></script>
+<script type="text/javascript" src="../script/jquery.js"></script>
+<script type="text/javascript" src="../script/yuming.js"></script>
+<style>
+.module-content{padding-top: 44px;padding-bottom: 50px;}
+.hybt{color: #000;font-size: 16px;line-height: 40px;}
+.hyxz{background: #f4f4f4;border-top-left-radius: 10px;border-top-right-radius: 10px;padding: 10px 15px;}
+
+.yyr{border-radius: 10px;overflow: hidden;padding: 10px;background: #fff;}
+.yyr li{display: flex;align-items: center;padding: 5px 0; border-bottom: 1px solid #f1f1f1;}
+.yyr li:last-child{border-bottom: 0;}
+.yyr li span{font-size: 14px;color: #333;width: 80px;}
+.yyr li select{font-size: 14px;}
+.yyr li input{border: 0;font-size: 14px;color: #000;}
+.yyr p{line-height: 44px;color: #000;font-size: 14px;}
+.hyxz textarea{border-radius: 10px;border: 0;color: #000;font-size: 14px;}
+.hyxz textarea::-webkit-input-placeholder{color: #333;}
+.tjsq{display: block;text-align: center; line-height: 40px;margin-top: 10px; color:#fff;font-size: 14px; border-radius: 10px;background: linear-gradient(to right, #367ff8 , #556dff);}
+</style>
+</head>
+<body style="background: #f7f7f7;">
+	<header  id="headj">
+		<a >
+			<img src="images/back_jt.png" onclick="api.closeWin()" />
+
+			<span onclick="api.closeWin()">植被信息</span>
+		</a>
+	</header>
+<div class="module-content" id="ge">
+	<div class="hyxz" >
+		<!--<p class="hybt">访问申请</p>-->
+		<div id="ct">
+
+		</div>
+
+	<a class="tjsq" onclick="tijiao()">提交</a>
+	</div>
+</div>
+
+<div class="foot_menu" style="display:none">
+	<ul>
+		<li>
+			<a href="index.html">
+				<i><img src="images/menu_icon01.png"></i>
+				<span>首 页</span>
+			</a>
+		</li>
+		<li class="cur">
+			<a href="wuye.html">
+				<i><img src="images/menu_icon02.png"></i>
+				<span>智 能</span>
+			</a>
+		</li>
+		<li>
+			<a href="news.html">
+				<i><img src="images/menu_icon03.png"></i>
+				<span>消 息</span>
+			</a>
+		</li>
+		<li>
+			<a href="user.html">
+				<i><img src="images/menu_icon04.png"></i>
+				<span>我 的</span>
+			</a>
+		</li>
+	</ul>
+</div>
+</body>
+<script src="js/jquery-1.11.3.min.js"></script>
+<script src="js/foundation-datepicker.js"></script>
+<script src="js/locales/foundation-datepicker.zh-CN.js"></script>
+<script>
+$('#demo-1').fdatepicker();
+$('#demo-2').fdatepicker();
+$('#demo-3').fdatepicker();
+</script>
+</html>
+
+<script type="text/javascript">
+apiready = function () {
+$api.fixStatusBar(document.getElementById('headj'));
+document.getElementById('headj').style.height=(50+api.safeArea.top)+'px'
+document.getElementById('ge').style.marginTop=(5+api.safeArea.top)+'px'
+//alert(JSON.stringify(api.pageParam.arr))
+function zb(){
+	htmlx=''
+	htmlx+=	'	<ul class="yyr">'
+	htmlx+='	<li><span>植被名称</span><input type="text" placeholder="请输入植被名称" id="name" /></li>'
+	 htmlx+=	'	</ul>'
+	  htmlx+=	'<p class="hybt">备注</p>'
+	  htmlx+=	'<textarea placeholder="请输入备注" id="remark"></textarea>'
+
+	document.getElementById('ct').innerHTML=htmlx
+
+
+
+}
+zb()
+}
+jy=0
+function tijiao(){
+  //alert(document.getElementById('nyr').value)
+/*14.4修改房间租赁信息
+请求地址：/learun/adms/plant/postplantadd
+类型：Post
+请求参数：
+参数名称	类型	备注	必须
+loginMark	String	设备标识，必须具有唯一性	是
+token	String	验证码，从登录后返回信息中获取	是
+id	String	填写id为编辑，不填写为新增
+Name	String	植被序号	是
+remark	String	备注
+*/
+
+	if(jy==0){
+		jy=1
+		showDefault()
+		api.ajax({
+						 url: yuming+'/learun/adms/plant/postplantadd',
+						 method: 'post',
+						 data:{values: {
+               "loginMark": api.deviceId,
+               "token": $api.getStorage('token'),
+						//	 id	:api.pageParam.arr.id,
+	 				    Name:document.getElementById('name').value,
+	 						remark:document.getElementById('remark').value
+
+
+
+								}}
+				 }, function(ret) {
+
+	//alert(JSON.stringify(ret))
+	 toast.hide()
+				 if(ret){
+				 if(ret.code==200){
+					 api.sendEvent({
+					     name: 'sx',
+					     extra: {
+					         key1: 'value1',
+					         key2: 'value2'
+					     }
+					 });
+
+					 api.toast({
+					 msg: '提交成功!',
+					 duration: 2000,
+					 location: 'middle'
+					 });
+					toast.hide()
+jy=0
+		 }else {
+       jy=0
+			 toast.hide()
+			 api.toast({
+			 msg: ret.info,
+			 duration: 2000,
+			 location: 'middle'
+	 });
+		 }
+
+				 }else {
+
+						toast.hide()
+					 api.toast({
+					 msg: '网络错误',
+					 duration: 2000,
+					 location: 'middle'
+			 });
+				 }
+
+				 })
+	}
+}
+</script>

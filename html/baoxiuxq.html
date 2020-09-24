@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="format-detection" content="telephone=no"><!-- 禁止IPHONE识别手机号码 -->
+<meta name="viewport" content="width=device-width,user-scalable=no, initial-scale=1">
+<title>报修</title>
+<!-- css -->
+<link rel="stylesheet" type="text/css" href="css/index.css">
+<link rel="stylesheet" type="text/css" href="css/mui.min.css" />
+<link href="css/foundation-datepicker.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="../css/aui.css">
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/aui-toast.js"></script>
+<script type="text/javascript" src="../script/H.js"></script>
+<script type="text/javascript" src="../script/jquery.js"></script>
+<script type="text/javascript" src="../script/yuming.js"></script>
+<style>
+.module-content{padding-top: 44px;padding-bottom: 50px;}
+.hybt{color: #000;font-size: 16px;line-height: 40px;}
+.hyxz{background: #f4f4f4;border-top-left-radius: 10px;border-top-right-radius: 10px;padding: 10px 15px;}
+
+.yyr{border-radius: 10px;overflow: hidden;}
+.yyr li{display: flex;background: #fff;align-items: center;padding:5px 10px;}
+.yyr li span{font-size: 14px;color: #333;width: 80px;}
+.yyr li select{font-size: 14px;}
+.yyr li input{border: 0;font-size: 14px;color: #000;}
+.yyr p{line-height: 44px;color: #000;font-size: 14px;}
+.hyxz textarea{border-radius: 10px;border: 0;color: #000;font-size: 14px;}
+.hyxz textarea::-webkit-input-placeholder{color: #333;}
+.iimg{
+	width: 100%;
+	height: auto;
+	margin-bottom: 10px;
+}
+.tjsq{display: block;text-align: center; line-height: 40px;margin-top: 10px; color:#fff;font-size: 14px; border-radius: 10px;background: linear-gradient(to right, #367ff8 , #556dff);}
+</style>
+</head>
+<body style="background: #f7f7f7;">
+	<header  id="headj">
+		<a >
+			<img src="images/back_jt.png" onclick="api.closeWin()" />
+			<span onclick="api.closeWin()">报修详情</span>
+		</a>
+	</header>
+<div class="module-content" id="ge">
+	<div class="hyxz" id="ct">
+
+
+
+	</div>
+</div>
+
+<div class="foot_menu" style="display:none">
+	<ul>
+		<li>
+			<a href="index.html">
+				<i><img src="images/menu_icon01.png"></i>
+				<span>首 页</span>
+			</a>
+		</li>
+		<li class="cur">
+			<a href="shequ.html">
+				<i><img src="images/menu_icon02_r.png"></i>
+				<span>社 区</span>
+			</a>
+		</li>
+		<li>
+			<a href="news.html">
+				<i><img src="images/menu_icon03.png"></i>
+				<span>消 息</span>
+			</a>
+		</li>
+		<li>
+			<a href="user.html">
+				<i><img src="images/menu_icon04.png"></i>
+				<span>我 的</span>
+			</a>
+		</li>
+	</ul>
+</div>
+</body>
+<script src="js/jquery-1.11.3.min.js"></script>
+<script src="js/foundation-datepicker.js"></script>
+<script src="js/locales/foundation-datepicker.zh-CN.js"></script>
+<script>
+$('#demo-1').fdatepicker();
+$('#demo-2').fdatepicker();
+</script>
+</html>
+<script type="text/javascript">
+apiready = function () {
+$api.fixStatusBar(document.getElementById('headj'));
+document.getElementById('headj').style.height=(50+api.safeArea.top)+'px'
+document.getElementById('ge').style.marginTop=(5+api.safeArea.top)+'px'
+//alert(JSON.stringify(api.pageParam.arr))
+function zb(){
+	html=''
+	html+=	'	<ul class="yyr">'
+		html+=		'	<li><span>设备类型</span><input type="text" placeholder="请填写设备类型" readonly="readonly" value="'+api.pageParam.arr.deviceType+'" /></li>'
+			html+=	'	<li><span>设备名称</span><input type="text" placeholder="请填写设备名称" readonly="readonly" value="'+api.pageParam.arr.deviceName+'" /></li>'
+			html+=	'	<li><span>设备地点</span><input type="text" placeholder="请填写设备地点" readonly="readonly"  value="'+api.pageParam.arr.devicePlace+'" /></li>'
+
+			html+=	'	<li><span>报修人</span><input type="text" placeholder="请填写报修人" readonly="readonly"  value="'+api.pageParam.arr.reporter+'" /></li>'
+			html+=	'	<li><span>联系电话</span><input type="text" placeholder="请填写报修人电话" readonly="readonly" value="'+api.pageParam.arr.repairerTelephone+'" /></li>'
+			html+=	'	<li><span>报修时间</span><input type="text" placeholder="请选择报修时间" value="'+api.pageParam.arr.repairTime+'"  readonly="readonly" /></li>'
+			html+=	'	<li><span>录入人</span><input type="text" placeholder="请填写录入人" readonly="readonly"  value="'+api.pageParam.arr.inputPerson+'"/></li>'
+			html+=	'	<li><span>录入时间</span><input type="text" placeholder="请选择录入时间" value="'+api.pageParam.arr.inputTime+'" readonly="readonly" ></li>'
+		if(api.pageParam.arr.operationResult==1){	html+=	'	<li><span>处理状态</span><input type="text" readonly="readonly"  value="已修理"/></li>'}else {
+			html+=	'	<li><span>处理状态</span><input type="text" readonly="readonly"  value="待修理"/></li>'
+		}
+
+			html+=	'	<li><span>处理人</span><input type="text" readonly="readonly"  value="'+api.pageParam.arr.operationer+'"/></li>'
+			html+=	'	<li><span>处理时间</span><input type="text"  value="'+api.pageParam.arr.operationTime+'" readonly="readonly" ></li>'
+
+		html+=	'	</ul>'
+		html+=	'<p class="hybt">故障描述</p>'
+		html+=	'<textarea placeholder="" readonly="readonly">'+api.pageParam.arr.faultDescription+'</textarea>'
+			html+=	'<p class="hybt">处理描述</p>'
+			html+=	'<textarea placeholder="" readonly="readonly">'+api.pageParam.arr.operationDesc+'</textarea>'
+				html+=	'<p class="hybt">图片详情</p>'
+				array=[]
+			if(api.pageParam.arr.picture){	array=api.pageParam.arr.picture.split(',')}
+				for (var i = 0; i < array.length; i++) {
+					html+= ' <img src="'+array[i]+'"  class="iimg"/>'
+				}
+	document.getElementById('ct').innerHTML=html
+}
+zb()
+}
+</script>

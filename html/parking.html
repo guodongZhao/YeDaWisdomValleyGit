@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="format-detection" content="telephone=no"><!-- 禁止IPHONE识别手机号码 -->
+<meta name="viewport" content="width=device-width,user-scalable=no, initial-scale=1">
+<title>车位查询</title>
+<!-- css -->
+<link rel="stylesheet" type="text/css" href="css/index.css">
+<link rel="stylesheet" type="text/css" href="css/mui.min.css" />
+<style>
+.module-content{padding-top: 44px;margin-bottom: 50px;}
+.hyxz{background: #f4f4f4;border-top-left-radius: 10px;border-top-right-radius: 10px;padding: 10px 15px;}
+.yyr{border-radius: 10px;overflow: hidden;margin-bottom: 20px;}
+.yyr li{display: flex;background: #fff;align-items: center;padding:5px 10px;border-bottom: 1px solid #f1f1f1;}
+.yyr li:last-child{border-bottom: 0;}
+.yyr li span{font-size: 14px;color: #333;width: 80px;}
+.yyr li select{font-size: 14px;}
+.yyr li input{border: 0;font-size: 14px;color: #000;}
+.tjsq{display: block;text-align: center; line-height: 40px;margin:10px; color:#fff;font-size: 14px; border-radius: 10px;background: linear-gradient(to right, #367ff8 , #556dff);}
+</style>
+</head>
+<body style="background: #f7f7f7;">
+	<header>
+		<a href="javascript:history.back(-1)">
+			<img src="images/back_jt.png" onclick="api.closeWin()"/>
+			<span onclick="api.closeWin()">车位查询</span>
+		</a>
+	</header>
+	<div class="module-content">
+		<div class="hyxz">
+			<ul class="yyr">
+				<li><span>停车场</span><select><option>一停车场</option><option>二停车场</option></select></li>
+				<li><span>楼层</span><select><option>1层</option><option>2层</option></select></li>
+				<li><span>车位号</span><input type="text" placeholder="请填写车位号" /></li>
+			</ul>
+			<a class="tjsq" >查找</a>
+		</div>
+	</div>
+<div class="foot_menu">
+	<ul>
+		<li>
+			<a href="index.html">
+				<i><img src="images/menu_icon01.png"></i>
+				<span>首 页</span>
+			</a>
+		</li>
+		<li class="cur">
+			<a href="wuye.html">
+				<i><img src="images/menu_icon02.png"></i>
+				<span>智 能</span>
+			</a>
+		</li>
+		<li>
+			<a href="news.html">
+				<i><img src="images/menu_icon03.png"></i>
+				<span>消 息</span>
+			</a>
+		</li>
+		<li>
+			<a href="user.html">
+				<i><img src="images/menu_icon04.png"></i>
+				<span>我 的</span>
+			</a>
+		</li>
+	</ul>
+</div>
+</body>
+<script type="text/javascript" src="js/jquery.js" ></script>
+<script type="text/javascript" src="js/jquery.SuperSlide.2.1.1.js" ></script>
+<script>
+	$(".slideTxtBox").slide({trigger:"click"});
+</script>
+</html>

@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="format-detection" content="telephone=no"><!-- 禁止IPHONE识别手机号码 -->
+<meta name="viewport" content="width=device-width,user-scalable=no, initial-scale=1">
+<title>报修</title>
+<!-- css -->
+<link rel="stylesheet" type="text/css" href="css/index.css">
+<link rel="stylesheet" type="text/css" href="css/mui.min.css" />
+<link href="css/foundation-datepicker.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="../css/aui.css">
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/aui-toast.js"></script>
+<script type="text/javascript" src="../script/H.js"></script>
+<script type="text/javascript" src="../script/jquery.js"></script>
+<script type="text/javascript" src="../script/yuming.js"></script>
+<style>
+.module-content{padding-top: 44px;padding-bottom: 50px;}
+.hybt{color: #000;font-size: 16px;line-height: 40px;}
+.hyxz{background: #f4f4f4;border-top-left-radius: 10px;border-top-right-radius: 10px;padding: 10px 15px;}
+
+.yyr{border-radius: 10px;overflow: hidden;}
+.yyr li{display: flex;background: #fff;align-items: center;padding:5px 10px;}
+.yyr li span{font-size: 14px;color: #333;width: 80px;}
+.yyr li select{font-size: 14px;}
+.yyr li input{border: 0;font-size: 14px;color: #000;}
+.yyr p{line-height: 44px;color: #000;font-size: 14px;}
+.hyxz textarea{border-radius: 10px;border: 0;color: #000;font-size: 14px;}
+.hyxz textarea::-webkit-input-placeholder{color: #333;}
+.tjsq{display: block;text-align: center; line-height: 40px;margin-top: 10px; color:#fff;font-size: 14px; border-radius: 10px;background: linear-gradient(to right, #367ff8 , #556dff);}
+</style>
+</head>
+<body style="background: #f7f7f7;">
+	<header  id="headj">
+		<a >
+			<img src="images/back_jt.png" onclick="api.closeWin()" />
+			<span onclick="api.closeWin()">车位详情</span>
+		</a>
+	</header>
+<div class="module-content" id="ge">
+	<div class="hyxz" >
+<div id="ct">
+
+</div>
+
+	<a class="tjsq" onclick="tijiao()">提交</a>
+	</div>
+</div>
+
+<div class="foot_menu" style="display:none">
+	<ul>
+		<li>
+			<a href="index.html">
+				<i><img src="images/menu_icon01.png"></i>
+				<span>首 页</span>
+			</a>
+		</li>
+		<li class="cur">
+			<a href="shequ.html">
+				<i><img src="images/menu_icon02_r.png"></i>
+				<span>社 区</span>
+			</a>
+		</li>
+		<li>
+			<a href="news.html">
+				<i><img src="images/menu_icon03.png"></i>
+				<span>消 息</span>
+			</a>
+		</li>
+		<li>
+			<a href="user.html">
+				<i><img src="images/menu_icon04.png"></i>
+				<span>我 的</span>
+			</a>
+		</li>
+	</ul>
+</div>
+</body>
+<script src="js/jquery-1.11.3.min.js"></script>
+<script src="js/foundation-datepicker.js"></script>
+<script src="js/locales/foundation-datepicker.zh-CN.js"></script>
+<script>
+$('#demo-1').fdatepicker();
+$('#demo-2').fdatepicker();
+</script>
+</html>
+<script type="text/javascript">
+apiready = function () {
+$api.fixStatusBar(document.getElementById('headj'));
+document.getElementById('headj').style.height=(50+api.safeArea.top)+'px'
+document.getElementById('ge').style.marginTop=(5+api.safeArea.top)+'px'
+//alert(JSON.stringify(api.pageParam.arr))
+function zb(){
+	api.ajax({
+					 url: yuming+'/learun/adms/newuser/getcompany',
+					 method: 'get',
+					 data:{values: {
+
+
+	"loginMark": api.deviceId,
+	"token": $api.getStorage('token')
+
+
+							}}
+			 }, function(ret) {
+
+//alert(JSON.stringify(ret))
+
+			 if(ret){
+			 if(ret.code==200){
+
+				toast.hide()
+var html=''
+for (var i = 0; i < ret.data.length; i++) {
+if(1){
+html+='<option value="'+ret.data[i].areaId+'">'+ret.data[i].areaName+'</option>'
+}
+
+}
+htmlx=''
+htmlx+=	'	<ul class="yyr">'
+	htmlx+=		'	<li><span>车位名称</span><input type="text" placeholder="请填写车位名称" readonly="readonly"  id="name" value="'+api.pageParam.arr.name+'" /></li>'
+  htmlx+=	'	<li ><span>承租方</span><input type="text"  readonly="readonly"  readonly="readonly" value="'+api.pageParam.arr.F_FullName+'" /></li>'
+			if(api.pageParam.arr.starttime){htmlx+=	'	<li><span>开始时间</span><input type="date" id="starttime" value="'+api.pageParam.arr.starttime.split(' ')[0]+'"  ></li>'}else {
+			htmlx+=	'	<li><span>开始时间</span><input type="date" id="starttime"   ></li>'
+			}
+if(api.pageParam.arr.endtime){      htmlx+=	'	<li><span>结束时间</span><input type="date" id="endtime" value="'+api.pageParam.arr.endtime.split(' ')[0]+'" ></li>'}else {
+	htmlx+=	'	<li><span>结束时间</span><input type="date" id="endtime"  ></li>'
+}
+
+	htmlx+=	'	</ul>'
+	htmlx+=	'<p class="hybt">备注</p>'
+	htmlx+=	'<textarea placeholder="" id="bz">'+api.pageParam.arr.remark+'</textarea>'
+//alert(1)
+
+
+document.getElementById('ct').innerHTML=htmlx
+//document.getElementById('czf').value=api.pageParam.arr.companyid
+	 }else {
+		 toast.hide()
+		 api.toast({
+		 msg: ret.info,
+		 duration: 2000,
+		 location: 'middle'
+ });
+	 }
+
+			 }else {
+
+					toast.hide()
+				 api.toast({
+				 msg: '网络错误',
+				 duration: 2000,
+				 location: 'middle'
+		 });
+			 }
+
+			 })
+
+}
+zb()
+}
+jy=0
+function tijiao(){
+  //alert(document.getElementById('nyr').value)
+/*14.4修改房间租赁信息
+：/learun/adms/Parkinglease/postparkingleaseaddorupdate
+loginMark	String
+token	String
+id	String
+parkingid	int
+tenantryid	String
+starttime	String
+endtime	String
+remark	String
+*/
+
+	if(jy==0){
+		jy=1
+		showDefault()
+		api.ajax({
+						 url: yuming+'/learun/adms/Parkinglease/postparkingleaseaddorupdate',
+						 method: 'post',
+						 data:{values: {
+               "loginMark": api.deviceId,
+               "token": $api.getStorage('token'),
+							 id	:api.pageParam.arr.id,
+	 						parkingid		:api.pageParam.arr.parkingid	,
+	 						tenantryid:api.pageParam.arr.tenantryid,
+	 						starttime	:document.getElementById('starttime').value,
+	 						endtime	:document.getElementById('endtime').value,
+
+	 						remark:document.getElementById('bz').value,
+
+
+
+								}}
+				 }, function(ret) {
+
+	//alert(JSON.stringify(ret))
+	 toast.hide()
+				 if(ret){
+				 if(ret.code==200){
+					 api.sendEvent({
+					     name: 'sx',
+					     extra: {
+					         key1: 'value1',
+					         key2: 'value2'
+					     }
+					 });
+
+					 api.toast({
+					 msg: '提交成功!',
+					 duration: 2000,
+					 location: 'middle'
+					 });
+					toast.hide()
+jy=0
+		 }else {
+       jy=0
+			 toast.hide()
+			 api.toast({
+			 msg: ret.info,
+			 duration: 2000,
+			 location: 'middle'
+	 });
+		 }
+
+				 }else {
+
+						toast.hide()
+					 api.toast({
+					 msg: '网络错误',
+					 duration: 2000,
+					 location: 'middle'
+			 });
+				 }
+
+				 })
+	}
+}
+</script>

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="format-detection" content="telephone=no"><!-- 禁止IPHONE识别手机号码 -->
+<meta name="viewport" content="width=device-width,user-scalable=no, initial-scale=1">
+<title>活动</title>
+<!-- css -->
+<link rel="stylesheet" type="text/css" href="css/index.css">
+<link rel="stylesheet" type="text/css" href="css/mui.min.css" />
+<link rel="stylesheet" type="text/css" href="../css/aui.css">
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/aui-toast.js"></script>
+<script type="text/javascript" src="../script/H.js"></script>
+<script type="text/javascript" src="../script/jquery.js"></script>
+<script type="text/javascript" src="../script/yuming.js"></script>
+<style>
+.module-content{padding-top: 44px;padding-bottom: 50px;}
+.title{padding:10px 10px 0;font-weight: bold;font-size: 16px;line-height: 24px;color: #000;}
+.time{font-size: 12px;line-height: 24px;text-align: center;color: #999;padding-top: 10px; margin-top: 10px;border-top: 1px dashed #f1f1f1;}
+.detali{padding: 10px;line-height: 24px;margin-top:-30px;}
+.detali img{width: 100%;margin: 10px 0;}
+.tjsq{display: block;text-align: center; line-height: 40px;margin:10px; color:#fff;font-size: 14px; border-radius: 10px;background: linear-gradient(to right, #367ff8 , #556dff);}
+</style>
+</head>
+<body style="background: #fff;">
+	<header id="headj">
+		<a >
+			<img src="images/back_jt.png"  onclick="api.closeWin()"/>
+			<span onclick="api.closeWin()">帮助中心</span>
+		</a>
+	</header>
+	<div class="module-content " id="ge">
+
+		<div class="detali" id="neirong">
+
+		</div>
+
+	</div>
+<div class="foot_menu" style="display:none">
+	<ul>
+		<li>
+			<a href="index.html">
+				<i><img src="images/menu_icon01.png"></i>
+				<span>首 页</span>
+			</a>
+		</li>
+		<li class="cur">
+			<a href="wuye.html">
+				<i><img src="images/menu_icon02.png"></i>
+				<span>智 能</span>
+			</a>
+		</li>
+		<li>
+			<a href="news.html">
+				<i><img src="images/menu_icon03.png"></i>
+				<span>消 息</span>
+			</a>
+		</li>
+		<li>
+			<a href="user.html">
+				<i><img src="images/menu_icon04.png"></i>
+				<span>我 的</span>
+			</a>
+		</li>
+	</ul>
+</div>
+</body>
+<script type="text/javascript" src="js/jquery.js" ></script>
+<script type="text/javascript" src="js/jquery.SuperSlide.2.1.1.js" ></script>
+<script>
+	$(".slideTxtBox").slide({trigger:"click"});
+</script>
+</html>
+<script type="text/javascript">
+title=''
+jy=0
+apiready = function () {
+$api.fixStatusBar(document.getElementById('headj'));
+document.getElementById('headj').style.height=(50+api.safeArea.top)+'px'
+document.getElementById('ge').style.marginTop=(5+api.safeArea.top)+'px'
+//alert(JSON.stringify($api.getStorage('info')))
+api.addEventListener({
+    name: 'sx'
+}, function(ret, err){
+  zb()
+});
+
+showDefault()
+function zb(){
+	api.ajax({
+					 url: yuming2+'/api/park/chen/gethelp',
+					 method: 'get',
+					 data:{values: {
+	"loginMark": api.deviceId,
+	"token": $api.getStorage('token'),
+	"id":api.pageParam.id,
+	user_id:$api.getStorage('info').userId
+
+							}}
+			 }, function(ret) {
+toast.hide()
+//alert(JSON.stringify(ret))
+
+			 if(ret){
+			 if(1){
+//document.getElementById('biaoti').innerHTML=ret.data.post_title
+//document.getElementById('shijian').innerHTML=ret.data.date
+document.getElementById('neirong').innerHTML=article(ret.data)
+
+
+	 }else {
+	//	 toast.hide()
+		 api.toast({
+		 msg: ret.info,
+		 duration: 2000,
+		 location: 'middle'
+	});
+	 }
+
+			 }else {
+
+					toast.hide()
+				 api.toast({
+				 msg: '网络错误',
+				 duration: 2000,
+				 location: 'middle'
+		 });
+			 }
+
+			 })
+}
+zb()
+}
+
+function tijiao(){
+
+	if(jy==0){
+		jy=1
+		showDefault()
+		/*
+		请求地址: /api/park/index/signUp
+		类型：post
+		请求参数：
+		参数名称	类型	备注	必须
+		names	String	姓名	是
+		phone	String	手机号	是
+		content	String	报名类型	是
+		*/
+	/*	alert(JSON.stringify({
+			uid:api.pageParam.id,
+			names	:$api.getStorage('info').realName,
+			phone	:$api.getStorage('info').telephone,
+			content	:title
+		}))*/
+		api.ajax({
+						 url: yuming2+'/api/park/index/signUp',
+						 method: 'post',
+						 data:{values: {
+
+
+		"loginMark": api.deviceId,
+		"token": $api.getStorage('token'),
+	uid:api.pageParam.id,
+	names	:$api.getStorage('info').realName,
+	phone	:$api.getStorage('info').telephone,
+	content	:title,
+	user_id:$api.getStorage('info').userId
+
+								}}
+				 }, function(ret) {
+
+	//alert(JSON.stringify(ret))
+	 toast.hide()
+				 if(ret){
+				 if(ret.code==1){
+					 api.toast({
+					 msg: '报名成功!',
+					 duration: 2000,
+					 location: 'middle'
+					 });
+					 api.sendEvent({
+					     name: 'sx',
+					     extra: {
+					         key1: 'value1',
+					         key2: 'value2'
+					     }
+					 });
+
+					toast.hide()
+jy=0
+		 }else {
+			 toast.hide()
+			 api.toast({
+			 msg: ret.msg,
+			 duration: 2000,
+			 location: 'middle'
+	 });
+		 }
+
+				 }else {
+
+						toast.hide()
+					 api.toast({
+					 msg: '网络错误',
+					 duration: 2000,
+					 location: 'middle'
+			 });
+				 }
+
+				 })
+	}
+}
+</script>

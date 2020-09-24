@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="format-detection" content="telephone=no"><!-- 禁止IPHONE识别手机号码 -->
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+<title>一停车场</title>
+<!-- css -->
+<link rel="stylesheet" type="text/css" href="../css/frozenui.css">
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+<link rel="stylesheet" type="text/css" href="css/index.css">
+<link rel="stylesheet" type="text/css" href="css/mui.min.css" />
+<link rel="stylesheet" type="text/css" href="../css/aui.css">
+  <link href="../css/Hui.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/aui-toast.js"></script>
+<script type="text/javascript" src="../script/H.js"></script>
+<script type="text/javascript" src="../script/jquery.js"></script>
+<script type="text/javascript" src="../script/yuming.js"></script>
+<style>
+
+.module-content{padding-top: 44px;padding-bottom: 50px;}
+.fklist{margin: 10px;}
+.fklist li{background: #fff;border-radius:5px;padding: 10px;margin-bottom: 10px;line-height: 22px;}
+.fklist li a{}
+.fklist li h3{display: block; font-size: 14px;color: #000;margin-bottom: 10px;width: 100%;font-size: 16px;font-weight: bold;}
+.fklist li div{width: 100%;color: #333;font-size: 14px;}
+.fklist li h4{color: #666;font-size: 13px;line-height: 22px;}
+.fklist li p{display: flex;justify-content: space-between; color: #999;font-size: 12px;border-top: 0px solid #f1f1f1;margin-top: 0px;padding-top: 0px;}
+.fklist li p img{width: 16px;height: 16px;}
+.tianjia{position: fixed;right: 10px;width: 36px;height: 36px;bottom: 65px;}
+.tianjia img{width: 100%;}
+.yincang{display: none;position: fixed;background: rgba(0,0,0,0.5);top: 0;bottom: 0;left: 0;right: 0;z-index: 9999;}
+.tanchuang{display: none;position: fixed;background: #fff; top: 35%;width: 80%;left: 10%;padding:15px 10px;border-radius: 10px; z-index: 10000;}
+.tanchuang h3{color: #fe2400;font-size: 16px;text-align: center;}
+.tcbtn{margin: 20px auto 10px;display: flex;justify-content: space-between;width: 60%;}
+.tcbtn span{font-size: 14px;text-align: center;width: 45%;border-radius: 5px;color: #fff;padding: 10px 0;}
+.zhuan{
+  display: none;
+  margin: 0 auto;
+}
+
+#sou{
+	height: 30px;
+	line-height: 30px;
+	position: absolute;
+	width: 80%;
+	right: 10%;
+	bottom: 14px;
+	font-size: 14px;
+	border-radius: 15px;
+  text-indent: 10px;
+  font-size: 14px;
+  background: #EEF2FB;
+  border: none;
+}
+#sout{
+	height: 20px;
+width: 20px;;
+	position: absolute;
+
+	right: 4%;
+	bottom: 18px;
+}
+.qd{
+  height: 40px;
+  width: 100%;
+  position: relative;
+  line-height: 40px;
+  font-size: 14px;
+  text-align: center;
+  color: #464646;
+  border-top: 0.5px solid #EDEDED;
+}
+.qd1{
+  width: 50%;
+  height: 40px;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+    border-right: 0.5px solid #EDEDED;
+}
+.qd2{
+  width: 50%;
+  height: 40px;
+  position: absolute;
+  right: 0;
+  bottom: 0
+}
+html,body{
+	background: #F7F7F7
+}
+.t1{
+  border-radius: 12px;
+  position: relative;
+  margin: 0 auto;
+  width: 90%;
+  background: #102654;
+  font-size: 16px;
+  color: white;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-top: 10px;
+}
+
+.t11{
+  width: 100%;
+  position: relative;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  display: flex;
+
+}
+.t111{
+flex: 1;
+height: 50px;
+color: #5EC9DB;
+}
+.white{
+  color: white;
+}
+.bt{
+  color: #5EC9DB;
+  width: 100%;
+  text-align: left;
+  font-size: 16px;
+  line-height: 50px;
+  text-indent: 10px;
+}
+.dw{
+  color: white;
+  font-size: 16px;
+  width: 100px;
+  text-align: right;
+  height: 30px;
+  line-height: 30px;
+  position: absolute;
+  right: 10px;;
+  top: 60px;
+}
+</style>
+</head>
+<body>
+	<div class="ui-dialog" id="dialog">
+					<div class="ui-dialog-cnt">
+							<div class="ui-dialog-bd">
+									<p>确定要删除吗？</p>
+							</div>
+
+							<div class="qd">
+								<div class="qd1" onclick="quxiao()">
+取消
+								</div>
+								<div class="qd2"  onclick="queding()">
+确定
+								</div>
+							</div>
+					</div>
+			</div>
+	<header id="headj">
+		<a >
+			<img src="images/back_jt.png" onclick="api.closeWin()" />
+			<span  id="tname" onclick="api.closeWin()">企业广场</span>
+		</a>
+    <div style="display:none">
+      <input type="text" placeholder="请输入名称" id="sou" />
+      <img src="images/search.png" id="sout"/>
+    </div>
+    		<img src="./images/search.png" id="jgsou" style="height:20px;width:20px;position:absolute;right:5%;bottom:15px;">
+	</header>
+<div class="module-content slideTxtBox" id="ge">
+ <div class="t1" id="ding1">
+   <div class="t11">
+        <div class="t111">
+  园区企业数
+      </div>
+      <div class="t111 white" id="t1">
+0家
+    </div>
+   </div>
+   <div class="t11">
+        <div class="t111" id="t2">
+0家
+      </div>
+      <div class="t111" id="t3">
+  0家
+    </div>
+   </div>
+   <div class="t11">
+        <div class="t111 white">
+  新能源
+      </div>
+      <div class="t111 white">
+生物医药
+    </div>
+   </div>
+   <div class="t11">
+        <div class="t111" id="t4">
+  0家
+      </div>
+      <div class="t111" id="t5">
+0家
+    </div>
+   </div>
+   <div class="t11">
+        <div class="t111 white">
+  电子信息
+      </div>
+      <div class="t111 white">
+电子商务
+    </div>
+   </div>
+   <div class="t11">
+        <div class="t111" id="t6">
+  0家
+      </div>
+      <div class="t111" id="t7">
+  0家
+    </div>
+   </div>
+   <div class="t11">
+        <div class="t111 white">
+  智能制造
+      </div>
+      <div class="t111 white">
+其他
+    </div>
+   </div>
+ </div>
+  <div class="t1">
+ <div class="bt">
+   园区企业分析
+ </div>
+ <div class="dw">
+   百万
+ </div>
+  <div id="main" class="H-width-100-percent H-box-sizing-border-box" style="height:280px;"></div>
+
+	</div>
+  <div class="t1">
+ <div class="bt">
+  园区空间
+ </div>
+
+  <div id="main2" class="H-width-100-percent H-box-sizing-border-box" style="height:280px;"></div>
+
+  </div>
+  <div class="t1">
+ <div class="bt">
+  企业人员统计
+ </div>
+
+  <div id="main3" class="H-width-100-percent H-box-sizing-border-box" style="height:280px;"></div>
+
+  </div>
+</div>
+<img src="../image/zhuan.gif" id="zhuan" style="height:20px;width:auto;margin-top:10px;margin-bottom:10px;" class="zhuan">
+<div id="ddd">
+
+</div>
+<div class="" style="display: block;text-align: center; line-height: 40px; color:#fff;font-size: 14px; border-radius: 10px;background: linear-gradient(to right, #367ff8 , #556dff);width:90%;position:fixed;bottom:10px;left:5%" onclick="opw('qiye',1)">
+  查看详情
+</div>
+<div class="" style="height:60px;width:100%">
+
+</div>
+<div class="foot_menu" style="display:none">
+	<ul>
+		<li>
+			<a href="index.html">
+				<i><img src="images/menu_icon01.png"></i>
+				<span>首 页</span>
+			</a>
+		</li>
+		<li class="cur">
+			<a href="shequ.html">
+				<i><img src="images/menu_icon02_r.png"></i>
+				<span>社 区</span>
+			</a>
+		</li>
+		<li>
+			<a href="news.html">
+				<i><img src="images/menu_icon03.png"></i>
+				<span>消 息</span>
+			</a>
+		</li>
+		<li>
+			<a href="user.html">
+				<i><img src="images/menu_icon04.png"></i>
+				<span>我 的</span>
+			</a>
+		</li>
+	</ul>
+</div>
+
+</body>
+<script src="../script/echarts.simple.min.js"></script>
+<script src="../script/H.js" type="text/javascript"></script>
+<script type="text/javascript" src="js/jquery.js" ></script>
+<script type="text/javascript" src="js/jquery.SuperSlide.2.1.1.js" ></script>
+<script>
+	$(".slideTxtBox").slide({trigger:"click"});
+</script>
+</html>
+<script type="text/javascript">
+//alert(1)
+page=0;
+str=''
+arr=[]
+arrindex=0
+apiready = function () {
+$api.fixStatusBar(document.getElementById('headj'));
+document.getElementById('headj').style.height=(50+api.safeArea.top)+'px'
+document.getElementById('ge').style.marginTop=(5+api.safeArea.top)+'px'
+
+document.getElementById('sou').oninput=function(){//alert(str)
+str=document.getElementById('sou').value
+
+}
+document.getElementById('jgsou').onclick=function(){
+	api.openWin({
+	    name: 'souqiye',
+	    url: './souqiye.html',
+	    pageParam: {
+	        tp: 1
+	    }
+	});
+
+}
+api.addEventListener({
+    name: 'sx'
+}, function(ret, err){
+	showDefault()
+	page=0
+	zb()
+});
+
+document.getElementById('sout').onclick=function(){
+showDefault()
+page=0
+zb()
+}
+$api.setStorage('j',0)
+showDefault()
+
+function zb(){
+
+//alert(  F_FullName)
+/*
+parkinfo	getreport1	园区企业数	T1:企业总数，T2:新能源，T3:生物医药，T4:电子信息,T5：电子商务，T6:智能制造
+	getreport2	园区企业分析（注册金额统计）	首页效果图，依稀排序
+	getreport3	园区空间数量统计	　
+	getreport4	企业人员统计	LXRY：留学人员，GCC：高层次，Employee：普通人才
+	getreport5	　	　
+*/
+
+
+ api.ajax({
+   url: 'http://223.78.120.36:8803/MyProject/IndexAPI/GetIndexApiData',
+       method: 'post',
+       data:{values: {
+         "loginMark": api.deviceId,
+         "token": $api.getStorage('token'),
+
+             }}
+      }, function(ret) {
+fenxiarr=[]
+
+api.refreshHeaderLoadDone()
+
+       if(ret){
+       if(1){
+         var info=JSON.parse(ret.info)
+        var sss= JSON.parse(info.parkinfo)
+        var ssinfo=JSON.parse(sss.parkinfo)
+ //alert(JSON.stringify(ssinfo))
+ for (var i = 1; i < 7; i++) {
+   var bb='T'+i
+  // alert(bb)
+   document.getElementById('t'+i+'').innerHTML=ssinfo.Info.getreport1[0][bb]+'家'
+ }
+ document.getElementById('t7').innerHTML=ssinfo.Info.getreport1[0].T1-ssinfo.Info.getreport1[0].T2-ssinfo.Info.getreport1[0].T3-ssinfo.Info.getreport1[0].T4-ssinfo.Info.getreport1[0].T5-ssinfo.Info.getreport1[0].T6
+ for (var i = 1; i < 7; i++) {
+   var bb='T'+i
+  // alert(bb)
+   fenxiarr.push(ssinfo.Info.getreport2[0][bb])
+ }
+ // 基于准备好的dom，初始化echarts实例
+ var myChart = echarts.init(document.getElementById('main'));
+ var option = {
+     title: {
+         text: '某地区蒸发量和降水量',
+         subtext: '纯属虚构'
+     },
+     tooltip: {
+         trigger: 'axis'
+     },
+     legend: {
+         data: ['蒸发量', '降水量']
+     },
+     toolbox: {
+         show: true,
+         feature: {
+             dataView: { show: true, readOnly: false },
+             magicType: { show: true, type: ['line', 'bar'] },
+             restore: { show: true },
+             saveAsImage: { show: true }
+         }
+     },
+     calculable: true,
+     xAxis: [
+         {
+             type: 'category',
+             data: [1, 5, 10, 20, 30,50],
+                color: "#fff",
+                axisLabel : {
+
+                              textStyle: { //改变刻度字体样式
+                                  color: '#fff'
+                              }
+                          }
+
+
+         }
+     ],
+     yAxis: [
+         {
+             type: 'value',
+                color: "#fff",
+                axisLabel : {
+
+                              textStyle: { //改变刻度字体样式
+                                  color: '#fff'
+                              }
+                          }
+
+
+         }
+     ],
+     series: [
+         {
+             name: '蒸发量',
+             type: 'bar',
+             data: fenxiarr,
+             itemStyle: {
+          normal: {
+　　　　　　　　//这里是重点
+              color: function(params) {
+                //注意，如果颜色太少的话，后面颜色不会自动循环，最好多定义几个颜色
+                  var colorList = ['#5EC9DB','#5EC9DB','#5EC9DB','#5EC9DB','#5EC9DB','#5EC9DB'];
+                  return colorList[params.dataIndex]
+              }
+          }
+      },
+
+             markPoint: {
+                 data: [
+                     { type: 'max', name: '最大值' },
+                     { type: 'min', name: '最小值' }
+                 ]
+             },
+             markLine: {
+                 data: [
+                     { type: 'average', name: '平均值' }
+                 ]
+             }
+         }
+     ]
+ };
+
+ // 使用刚指定的配置项和数据显示图表。
+ myChart.setOption(option);
+ // 基于准备好的dom，初始化echarts实例
+ var myChart2 = echarts.init(document.getElementById('main2'));
+ var option2 = {
+     title: {
+         text: '某地区蒸发量和降水量',
+         subtext: '纯属虚构'
+     },
+     tooltip: {
+         trigger: 'axis'
+     },
+     legend: {
+         data: ['蒸发量', '降水量']
+     },
+     toolbox: {
+         show: true,
+         feature: {
+             dataView: { show: true, readOnly: false },
+             magicType: { show: true, type: ['line', 'bar'] },
+             restore: { show: true },
+             saveAsImage: { show: true }
+         }
+     },
+     calculable: true,
+     xAxis: [
+         {
+             type: 'category',
+             data: ['CBD',"ZJGY","RoomA","RoomB","RoomC","Fact1","Fact2","Fact3"],
+                color: "#fff",
+
+                axisLabel : {  interval:0,
+                  rotate:40,
+
+                              textStyle: { //改变刻度字体样式
+                                  color: '#fff'
+                              }
+                          }
+
+
+         }
+     ],
+     yAxis: [
+         {
+             type: 'value',
+                color: "#fff",
+                axisLabel : {
+
+                              textStyle: { //改变刻度字体样式
+                                  color: '#fff'
+                              }
+                          }
+
+
+         }
+     ],
+     series: [
+         {
+             name: '蒸发量',
+             type: 'bar',
+             data: [ssinfo.Info.getreport3[0]["CBD"],ssinfo.Info.getreport3[0]["ZJGY"],ssinfo.Info.getreport3[0]["RoomA"],ssinfo.Info.getreport3[0]["RoomB"],ssinfo.Info.getreport3[0]["RoomC"],ssinfo.Info.getreport3[0]["Fact1"],ssinfo.Info.getreport3[0]["Fact2"],ssinfo.Info.getreport3[0]["Fact3"]],
+             itemStyle: {
+          normal: {
+　　　　　　　　//这里是重点
+              color: function(params) {
+                //注意，如果颜色太少的话，后面颜色不会自动循环，最好多定义几个颜色
+                  var colorList = ['#5EC9DB','#5EC9DB','#5EC9DB','#5EC9DB','#5EC9DB','#5EC9DB','#5EC9DB','#5EC9DB'];
+                  return colorList[params.dataIndex]
+              }
+          }
+      },
+
+             markPoint: {
+                 data: [
+                     { type: 'max', name: '最大值' },
+                     { type: 'min', name: '最小值' }
+                 ]
+             },
+             markLine: {
+                 data: [
+                     { type: 'average', name: '平均值' }
+                 ]
+             }
+         }
+     ]
+ };
+ he=ssinfo.Info.getreport4[0]["LXRY"]+ssinfo.Info.getreport4[0]["GCC"]+ ssinfo.Info.getreport4[0]["Employee"]
+ he1=((ssinfo.Info.getreport4[0]["LXRY"]/he)*100).toFixed(2)
+ he2=((ssinfo.Info.getreport4[0]["GCC"]/he)*100).toFixed(2)
+ he3=((ssinfo.Info.getreport4[0]["Employee"]/he)*100).toFixed(2)
+ //alert(he1)
+ // 使用刚指定的配置项和数据显示图表。
+ myChart2.setOption(option2);
+ var myChart3 = echarts.init(document.getElementById('main3'));
+ var option3 = {
+     title: {
+         text: '某站点用户访问来源',
+         subtext: '纯属虚构',
+         x: 'center'
+     },
+     tooltip: {
+         trigger: 'item',
+         formatter: "{a} <br/>{b} : {c} ({d}%)"
+     },
+     legend: {
+         orient: 'vertical',
+         left: 'left',
+         data: ['留学人员'+he1+'%', '高层次人才'+he2+'%', '普通人才'+he3+'%']
+     },
+     series: [
+         {
+             name: '访问来源',
+             type: 'pie',
+             radius: '55%',
+             center: ['50%', '60%'],
+             data: [
+                 { value: ssinfo.Info.getreport4[0]["LXRY"], name: '留学人员'+he1+'%' },
+                 { value: ssinfo.Info.getreport4[0]["GCC"], name: '高层次人才'+he2+'%' },
+                 { value: ssinfo.Info.getreport4[0]["Employee"], name: '普通人才'+he3+'%' },
+
+             ],
+             itemStyle: {
+                 emphasis: {
+                     shadowBlur: 10,
+                     shadowOffsetX: 0,
+                     shadowColor: 'rgba(0, 0, 0, 0.5)'
+                 }
+             }
+         }
+     ]
+ };
+
+ myChart3.setOption(option3);
+       }else {
+         api.toast({
+          msg:ret.info,
+          duration: 2000,
+          location: 'middle'
+         });
+     toast.hide()
+       }
+
+
+     }else {
+
+      /* api.toast({
+       msg: '网络错误',
+       duration: 2000,
+       location: 'middle'
+   });*/
+     }
+toast.hide()
+      })
+}
+zb()
+
+
+}
+function shanchu(data){
+
+  id=data
+    $("#dialog").addClass("show");
+}
+function quxiao(data){
+
+  //id=data
+    $("#dialog").removeClass("show");
+}
+function queding(data){
+/*
+/learun/adms/Roomlease/deleleroomlease
+*/
+showDefault()
+//alert(id)
+      $("#dialog").removeClass("show");
+		if(1){	api.ajax({
+		    url: yuming+'/learun/adms/plant/postplantcheckdelete',
+		        method: 'post',
+		        data:{values: {
+		          "loginMark": api.deviceId,
+		          "token": $api.getStorage('token'),
+		        id	:id,
+
+		              }}
+		       }, function(ret) {
+		 //alert(JSON.stringify(ret))
+toast.hide()
+		         for (var i = 0; i < document.getElementsByClassName('zhuan').length; i++) {
+		          document.getElementsByClassName('zhuan')[i].style.display='none'
+		        }
+		        if(ret){
+		        if(ret.code==200){
+							api.toast({
+							 msg:'删除成功!',
+							 duration: 2000,
+							 location: 'middle'
+							});
+api.sendEvent({
+    name: 'sx',
+    extra: {
+        key1: 'value1',
+        key2: 'value2'
+    }
+});
+
+
+
+		        }else {
+		          api.toast({
+		           msg:ret.info,
+		           duration: 2000,
+		           location: 'middle'
+		          });
+		      toast.hide()
+		        }
+
+
+		      }else {
+
+		       /* api.toast({
+		        msg: '网络错误',
+		        duration: 2000,
+		        location: 'middle'
+		    });*/
+		      }
+		 toast.hide()
+	 })}else {
+		 api.ajax({
+ 		    url: yuming+'/learun/adms/Roomdistribution/deleleroomdistribution',
+ 		        method: 'post',
+ 		        data:{values: {
+ 		          "loginMark": api.deviceId,
+ 		          "token": $api.getStorage('token'),
+ 		        id	:id,
+
+ 		              }}
+ 		       }, function(ret) {
+ 		 //alert(JSON.stringify(ret))
+ toast.hide()
+ 		         for (var i = 0; i < document.getElementsByClassName('zhuan').length; i++) {
+ 		          document.getElementsByClassName('zhuan')[i].style.display='none'
+ 		        }
+ 		        if(ret){
+ 		        if(ret.code==200){
+ 							api.toast({
+ 							 msg:'删除成功!',
+ 							 duration: 2000,
+ 							 location: 'middle'
+ 							});
+ api.sendEvent({
+     name: 'sx',
+     extra: {
+         key1: 'value1',
+         key2: 'value2'
+     }
+ });
+
+
+
+ 		        }else {
+ 		          api.toast({
+ 		           msg:ret.info,
+ 		           duration: 2000,
+ 		           location: 'middle'
+ 		          });
+ 		      toast.hide()
+ 		        }
+
+
+ 		      }else {
+
+ 		       /* api.toast({
+ 		        msg: '网络错误',
+ 		        duration: 2000,
+ 		        location: 'middle'
+ 		    });*/
+ 		      }
+ 		 toast.hide()
+ 	 })
+	 }
+}
+function bianji(data){
+	api.openWin({
+	    name: 'editfangwu',
+	    url: './editfangwu.html',
+	    pageParam: {
+	        arr:arr[data-1]
+	    }
+	});
+
+}
+function cwxq(data){
+  api.openWin({
+      name: 'qiyexq',
+      url: './qiyexq.html',
+      pageParam: {
+          arr:arr[data-1]
+      }
+  });
+
+}
+</script>

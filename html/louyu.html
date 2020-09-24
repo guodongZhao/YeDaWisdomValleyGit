@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="format-detection" content="telephone=no"><!-- 禁止IPHONE识别手机号码 -->
+<meta name="viewport" content="width=device-width,user-scalable=no, initial-scale=1">
+<title>园区</title>
+<!-- css -->
+<link rel="stylesheet" type="text/css" href="css/index.css">
+<link rel="stylesheet" type="text/css" href="css/mui.min.css" />
+<link href="css/foundation-datepicker.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="../css/aui.css">
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/aui-toast.js"></script>
+<script type="text/javascript" src="../script/H.js"></script>
+<script type="text/javascript" src="../script/jquery.js"></script>
+<script type="text/javascript" src="../script/yuming.js"></script>
+<style>
+#jsnr{padding: 10px;line-height: 24px;background: white;	margin-top: -50px;
+	display: block;}
+#jsnr img{width: 100%;margin: 10px 0;}
+.module-content{padding-top: 44px;padding-bottom: 50px;}
+.louceng{}
+.lcl{width: 100%;color: #333; font-size: 14px;position: fixed;left: 0;top: 68px;bottom: 0px; background: #f7f7f7;overflow: scroll;height: 44px;background: white;}
+.kuai{
+	height: 2px;
+	border-radius: 1px;
+	width:30px;
+	left: 50%;
+	margin-left: -15px;
+	bottom: 4px;
+	display: none;
+	background:  #367ff8;
+	position: absolute;
+}
+.lcl ul{height: 100%;overflow-x: auto;}
+.lcl li{padding: 10px;line-height: 22px;width: auto;float: left;position: relative;}
+.lcl li.cur{background: #fff; color: #367ff8;font-weight: bold;}
+.cur .kuai{
+	display: block;
+}
+.lcr{margin-left: 0px;}
+.lcr ul{padding: 10px;}
+.lcr li{text-align: center;background: #fff;margin-bottom: 10px;padding: 10px;}
+.lcr li img{border-radius: 5px;width: 100%;}
+.lcr li p{font-size: 14px;color: #333;margin-top: 8px;}
+#js{
+	position: absolute;
+	width: 100px;
+	text-align: right;
+	bottom: 16px;
+	line-height: 20px;
+	height: 20px;
+	font-size: 14px;
+	color: #556DFF;
+	right: 5%;
+
+}
+#youin{
+	display: none;
+}
+h3{
+	text-indent: 0!important;
+}
+#jsnr{
+	width: 100%;
+	overflow: hidden;
+}
+#jsnr img{
+	width: 100%!important;
+	margin: 0 auto!important;
+	margin-left: 0!important;
+}
+</style>
+</head>
+<body style="background: #f7f7f7;">
+	<header id="headj">
+		<a >
+			<img src="images/back_jt.png" onclick="api.closeWin()" />
+			<span onclick="api.closeWin()">园区</span>
+		</a>
+		<div id="js" onclick="jieshao()" style="display:none">
+			园区介绍
+		</div>
+	</header>
+<div class="module-content" id="ge">
+	<div class="louceng">
+		<div class="lcl" id="zuo">
+			<ul id="zuoin">
+		<!--		<li class="cur zzz" onclick="lou(this,1)">业达智谷</li>
+				<li class="zzz" onclick="lou(this,1)">烟台留学人员创业园区</li>
+-->
+			</ul>
+		</div>
+		<div class="lcr">
+			<ul id="youin">
+			<!--	<li><a  onclick="opw('gongyu',1)">
+					<img src="images/zhihui.jpg" />
+					<p>CBD 楼</p>
+				</a></li>
+				<li><a href="gongyu.html">
+					<img src="images/zhihui2.jpg" />
+					<p>专家公寓</p>
+				</a></li>
+				<li><a href="gongyu.html">
+					<img src="images/zhihui.jpg" />
+					<p>孵化器A</p>
+				</a></li>
+				<li><a href="gongyu.html">
+					<img src="images/zhihui2.jpg" />
+					<p>孵化器B</p>
+				</a></li>
+				<li><a href="gongyu.html">
+					<img src="images/zhihui.jpg" />
+					<p>孵化器C</p>
+				</a></li>-->
+			</ul>
+		</div>
+	</div>
+</div>
+<div id="jsnr">
+<!--	<h3 class="title" style="width:100%;text-align:center">潮平岸阔 逐梦业达</h3>
+
+
+	CHINA （SHANDONG）PILOT FREE TRADE ZONE YANTAI AREA
+	中韩（烟台）产业园
+	SINO—SOUTH KOREAN INDUSTRIAL PARK（YANTAI）
+	烟台经济技术开发区
+	Yantai Economic and Technological Development Area
+
+<h3 class="title" style="width:100%;text-align:center">烟台片区简介</h3>
+	P1-2（跨页），烟台片区简介</br>
+	配图：开发区滨海一线航拍俯角全景大图</br>
+	配文，如下：</br>
+	中国（山东）自由贸易试验区烟台片区</br>
+	山东自由贸易试验区三大片区之一，位于烟台经济技术开发区范围内，实施面积29.99平方公里，其中包括中韩（烟台）产业园、烟台保税港西区两个国家级园区，是烟台改革突破、创新发展的又一国家级重大开放平台和创新高地。（建议添加规划图）
+	烟台片区将按照功能集聚、联动发展的原则，总体谋划、重点突破，力争通过3—5年左右的改革试验，基本建立与国际最高标准和通行规则相衔接的制度体系，形成法治化、国际化、便利化营商环境，建成投资贸易便利、高端产业集聚、创新要素活跃、资源高效配置、金融服务完善、监管安全规范、辐射带动作用突出的自贸试验区，倾力打造国际贸易中心、国际金融合作中心、八角湾国际会展交流中心、海洋经济创新发展中心、国际人才集聚发展中心、国际商事综合服务中心、国际智能制造中心、国际医养健康产业中心等“八大中心”。
+	烟台片区将立足区位和产业优势，主动服务和融入国家发展战略，围绕高水平对外开放、新旧动能转换、机制流程再造，努力建设成为中日韩合作先行区、海洋智能制造创新区、科技成果转化样板区、海洋经济示范区、现代服务业集聚区，推动经济高质量发展。
+
+	P3，烟台经济技术开发区概况</br>
+	配图： 福莱山景观塔及周边楼群全景（P4-5跨页）</br>
+	配文，如下：</br>
+	烟台经济技术开发区</br>
+	烟台经济技术开发区成立于1984年10月，是全国首批14个国家级开发区之一，管辖面积360平方公里，总人口50万，在商务部发布的国家级开发区综合发展水平考核评价中排名第七，县域经济位列山东省第二，是烟台对外开放的龙头。
+	坚持“产业立区”，构建现代化产业体系。共有5万多家市场主体，工业企业近3千家，产值过百亿企业6家，过十亿企业29家，形成机械制造、电子信息两大主导产业持续升级，生物医药、化工新材料两大优势产业强势崛起，大数据、节能环保、智能制造等潜力产业增容扩规的产业格局。坚持“开放兴区”，崛起对外开放新高地。引进外资项目1700多个，其中世界500强项目82个。建成中俄托木斯克、中匈宝思德2个国家级境外合作园区，占全省50%，成为烟台抢滩“一带一路”的桥头堡。坚持“创新强区”，构建“政产学研资介”协同创新生态。聚集各类金融机构124家，设立各类基金174支、总规模1300多亿元。拥有各类科技创新平台215个，引进省级以上高层次人才140余人。启动八角湾中央创新区、八角湾海洋经济创新区，打造国际化人才集聚洼地、海洋科技创新基地。（“政产学研金服用”）
+	P4，烟台经济技术开发区名片</br>
+	配图：全景P4-5跨页</br>
+	配文，如下：</br>
+	烟台经济技术开发区名片</br>
+	中国工业园区环境管理示范区       国家生态工业示范园区</br>
+	国家首批循环经济试点单位         国家新型工业化产业示范基地</br>
+	国家知识产权示范园区             全国应急产业示范基地</br>
+	ISO14001、ISO9001“双认证区域”  联合国绿色工业园区</br>
+	全国模范劳动关系和谐工业园区     全国首批“书香城市”</br>
+
+	P5，烟台留学人员创业园区概况</br>
+	配图，综合中心门头广角特写</br>
+	配文，如下：</br>
+	烟台留学人员创业园区</br>
+	成立于1995年12月，是国内最早设立的留学人员创业园之一，国家留学人员创业园，国家高新技术创业服务中心，全国为侨公共服务示范单位，山东省留学人员创新创业示范园，烟台高层次人才创业园（开发区）。
+	园区孵化面积24万平方米，配套设施齐全，创业环境优良，扶持政策优惠，服务体系完善。坚持“科学家至上、企业家第一”理念，为海内外人才搭建起优良的创新创业平台，477名海外留学人员来区创业，其中国家“千人计划”专家44名，“泰山学者”等省级人才37名，烟台市“双百计划”专家42名，成功研制出世界首例血管内皮抑制素抗肿瘤新药“恩度”、世界首创可降解人工神经修复材料等一大批“高、精、尖”技术成果，累计创办企业778家，拥有1个国家工程实验室、1个国家级企业技术中心和6个省级工程技术中心，上市及挂牌企业14家，被上市公司并购企业3家，形成了以生物医药、新材料、电子信息、智能制造为主导的产业格局，充分发挥了“集聚高端人才、引进先进技术、培育高新企业、促进产业升级”的创新创业载体作用，被社会各界誉为“金种子工程”。
+
+	P6，业达智谷概况及配套环境（原P7-8跨页，删减压缩为一页）</br>
+	配图，原有7张图，再做精选  配文，如下：</br>
+	业达智谷</br>
+	“业达智谷”工程于2015年12月启动实施，以烟台留学人员创业园区为主体建设，是烟台经济技术开发区重点打造的综合性创新创业平台，山东省首批省级经济开发区创新创业示范平台。
+	“业达智谷”建筑面积20万平方米，一期工程12万平方米于2018年9月投入使用，包括1座综合办公楼、3座孵化器和1座人才公寓，同步建设了高水平创新创业成果展厅、会议中心等公共服务设施，引进了北京科技大学科技园等4家专业机构共建创新创业平台,进驻了新动能（烟台）产业技术研究院等6家公共服务平台。二期工程8万平方米，规划建设2万平方米孵化器和6万平方米加速器。
+	 “业达智谷”工程以高层次人才（团队）、高科技项目引进和高水平孵化器建设为重点，搭建“创业苗圃（众创空间）—孵化器—加速器—产业园”的创新创业生态体系，开展“国际化”合作、实行“专业化” 服务、探索“市场化”运营、实现“智能化”管理，提升智慧（人才）、智能（技术）、智造（产业）集聚业达的智汇效应，努力打造高新科技企业孵化基地，国际高科技成果展示体验基地，国际创新创业高峰论坛和创新创业文化培养基地。
+
+	P7-8，配套优惠政策节选</br>
+	配图，2楼展厅墙习大大题词“聚天下英才而用之”+“潮平岸阔 俊采星驰”</br>
+	配文，如下：</br>
+	烟台市高层次人才优惠政策</br>
+	1.全职创新人才入选烟台市“双百计划”第一、二、三层次的，分别给予600万元、200万元和100万元税后资助；兼职创新人才入选的，给予50万元税后资助；创业人才入选第一、二、三层次的，分别给予300万元、200万元和100万元税后资助。</br>
+	2.蓝色产业领军人才团队入选烟台市“双百计划”的，给予300—600万元税后资助。</br>
+	3.对带重大项目来烟创新创业的顶尖人才（团队），采取“一事一议”的方式引进，给予最高1亿元资助或1.5亿元直投股权投资支持。</br>
+	4.创业人才入驻烟台高创园的，根据项目层次给予10-50万元启动资金，股权投资支持项目，给予最高300万元资助，提供最高60万元贷款贴息，并享受房租“三年免两年减半”优惠，每年再从高创园创业项目中择优确定20名人才给予每人30万元扶持资金。</br>
+	5.参加每年度中国·烟台海内外精英创业大赛的，提供2000-5000元交通补贴，项目注册落地后，对获得特等奖、一等奖、二等奖、三等奖、优胜奖的分别给予20万元、5万元、3万元、2万元、1万元奖励，二等奖以上项目经评估认定可直接入选烟台市“双百计划”，给予100-300万元创业资助。创业项目入驻高创园后，享受第4条有关政策待遇。</br>
+	6.积极推荐来烟创新创业人才申报国家“千人计划”、山东省泰山人才工程，入选后可获得50-600万元补助和经费资助，并享受其他配套服务。</br>
+
+	烟台经济技术开发区《关于进一步加快创新型开发区建设的意见》</br>
+	1.创新创业领军团队扶持：具备世界一流水平、对开发区产业发展有重大影响、能带来重大经济效益和社会效益的创新创业团队，经评审给予1000万元至3000万元项目经费资助；国内顶尖水平、国际先进水平的创新创业团队，给予500万元至1000万元项目经费资助；国内先进水平的创新创业团队，给予300万元至500万元项目经费资助。</br>
+	2.创业领军人才扶持：创业项目经评审确定为A类、B类和C类的创业领军人才，分别给予500万元、300万元、100万元创业资金支持。</br>
+	3.创新领军人才扶持：区内企业引进、创新项目经评审确定为A类、B类和C类的创新领军人才，分别给予200万元、150万元、100万元项目经费资助。</br>
+	4.科技企业创新创业扶持：列入国家重点研发计划项目、国家重大专项、重大国防科技专项，给予 100%资金配套；列入山东省重点研发计划（重大项目）给予80%资金配套；列入烟台市重点研发计划（重大项目）给予 50%资金配套。</br>
+	5.科技成果产业化扶持：对获得国家技术发明或科技进步一等奖、二等奖且在开发区产业化的创新成果, 投产后分别给予500万元、200万元奖励；对获得山东省技术发明或科技进步一等奖、二等奖且在开发区产业化的创新成果,投产后分别给予150万元、100万元奖励。</br>
+	6.高端创新资源扶持：国家级科研院所、国家重点大学以及国际知名高校和科研院所等高端科技资源，在开发区设立或共建分支机构或研究院，给予最高5000万元的支持；国家实验室、国家技术创新中心等国家级重大创新载体在开发区设分支机构或研发机构，予以最高3000万元支持。</br>
+	《烟台留学人员创业园区有关政策规定》</br>
+	1.对海外人才创业项目进行评审，分A类、B类和C类给予创业启动资金，资金额度分别为90万元、60万元和30万元。</br>
+	2.海外人才企业自注册之日5年内，获得市级以上部门无偿项目资助，按实际到位资金，可获得1:1配套资金支持，每家企业年度配套资金累计不超过100万元。</br>
+	3.海内外人才企业入园孵化，原则上可租用不高于500平方米的生产经营用房，并享受5年房租补贴。300平方米以内的，前3年补贴全额房租，后2年补贴50%；超过300平方米部分，前3年补贴房租的50%，后2年收取全价房租。</br>
+	4.海外人才企业孵化毕业，经评审可入驻创业园区企业加速器，原则上可租用1500平方米以内的加速器厂房，并享受2年全额房租补贴。</br>
+	5.海内外人才企业孵化毕业，进入产业化阶段并需自建厂房的，可优先安排项目用地，并纳入规划建设“绿色通道”。</br>
+	6.海内外人才在创业园区创办企业，在烟台城区无自有住房，并且每年连续或者累计半年以上在烟居住，可租住“业达智谷”等区内人才公寓，并给予相应的房租补贴，期限为3年，年最高补贴金额不超过15000元。</br>
+	P9， 业达智谷餐厅</br>
+	配图，3W实景照片等餐饮效果图，不能出现3W标识。</br>
+	配文，如下：</br>
+	P10， “业达智谷”人才公寓</br>
+	配图，人才公寓不同房间的实景照片</br>
+	配文，如下：
+	　(建议省略文字,以图片展示配套设施及智能化建设,包含但不限于餐厅和公寓)</br>
+
+	P11-12，新动能（烟台）产业技术研究院</br>
+	配片组图：展厅横幅广角+LOGO墙+水吧+会议室+办公区等</br>
+	配文，如下：</br>
+	新动能（烟台）产业技术研究院</br>
+	2018年9月成立，位于业达智谷综合办公楼19层。秉承“做科技服务产业的领航者”发展理念，定位“产才融合发展示范平台”和“高层次人才引进与培育基地”，积极引进拥有自主知识产权、面向市场的科技成果；加速科技成果转化，培育高科技创业企业；支持本土企业创新发展；引进和培养高层次人才，力争通过3年时间，探索出“科技创新孵化器”经营发展模式，形成科技金融深度融合发展的驱动方式，逐步构建辐射海内外的科技创新孵化体系及产业投资平台，培育推动区域经济发展、具有行业领先地位、具备可持续发展的战略性新兴产业。
+	P13-14，腾讯烟台新工科研究院</br>
+	配片组图：楼体外墙标识+一楼展厅+创客中心+办公局部等</br>
+	配文，如下：</br>
+	腾讯烟台新工科研究院</br>
+	2018年12月成立，是腾讯公司、烟台开发区管委、山东诚海电子科技有限公司三方共同建设的事业单位法人性质科研机构，是腾讯公司在国内建设的首个新工科研究院。
+	研究院及其科技园区面积16000万平米，位于业达智谷B栋孵化器，共投资建设大数据、云计算、人工智能等12个新工科实验室，与国内知名高校、科研机构和国内外一流科技企业开展合作，依托腾讯公司科技优势开展新工科技术研究以及相关项目产品的研发实施；培养新工科高端师资人才和高素质复合型新工科人才，培育孵化新工科类科技创新企业，打造相关领域产业集群。
+
+	P15，烟台资本市场服务基地＆业达基金谷</br>
+	配片组图：形象前台+展厅内外+会议室 +办公局部等</br>
+	配文，如下：</br>
+	烟台资本市场服务基地＆业达基金谷</br>
+	为更好地服务企业开展资本运作，烟台市依托开发区先后与上海证券交易所、深圳证券交易所开展战略合作，分别于2018年10月、2019年8月设立上交所烟台资本市场服务基地和深交所烟台资本市场服务基地。2019年8月，烟台市政府在基地同时挂牌“烟台资本市场服务基地”，基地成为全市资本市场的综合服务枢纽。基地坐落在业达智谷综合办公楼7层，突出挂牌上市培育、直接融资服务、融合科技金融、培植新兴产业、集聚金融服务机构五大核心，构建地方政府、境内外证券交易所、金融服务机构、行业和社会组织、企业共同参与、共享发展的资本市场综合服务平台。
+	2016年，山东省政府批准烟台市建设全省区域性基金管理中心，2018年，国务院批准《山东新旧动能转换综合试验区建设总体方案》，“支持烟台开展基金管理服务专项改革创新”。开发区作为全省区域性基金管理中心“双核”之一，以产融一体化为目标，聚焦服务实体经济，充分发挥产业基础优势、政策集成优势，大力引进培育各类基金业态，打造业达基金谷。2018年末，全区设立各类基金及管理机构198家，基金规模1262亿元，投资总额456亿元。财政参股设立5支子基金，规模9.4亿元，已投向40个科技创新早期项目。
+	P16， 上交大-烟台先进材料联合创新研发中心</br>
+	配片组图：展厅横幅广角+LOGO墙+水吧+会议室+办公区等</br>
+	配文，如下：</br>
+	上海交大-烟台先进材料联合创新研发中心</br>
+	位于业达智谷综合办公楼6F，面积1800平方米，包括TED演讲报告厅、新科技展厅、科技图书馆、科技咖啡馆、众创空间孵化区等场所，烟台绿丞新材料科技服务有限公司为其管理运营单位。</br>
+	研发中心拥有专业科技服务团队、优质科学家、科技项目及基金等资源优势，举办多种形式科技交流和科技培训，为制造型企业提供专家咨询、测试分析等技术升级转型服务；为政府提供设立并运营科技创新平台载体等科技创新综合服务；为人才科技成果转化提供融资、小试、中试等服务；为高校提供校地、校企合作共建研究院、新型研发机构等科创载体运营服务。
+
+	P17， 3W COFFICE烟台业达空间</br>
+	配片组图：一楼咖啡厅广角+迎宾LOGO墙+办公局部等</br>
+	配文，如下：</br>
+	3W COFFICE烟台业达空间</br>
+	3W COFFICE 烟台业达空间隶属3W集团，位于业达智谷B栋孵化器，面积 6000平方米， 建有百个开放工位、独立办公室、远程视频会议室、睡眠仓、咖啡水吧/书吧/餐厅等场所和配套设施。</br>
+	3W COFFICE是中国领先的一站式企业服务平台，致力于打造受年轻人喜爱的办公空间及企业服务。烟台业达空间结合当地产业特点和3W集团优势，重点招募互联网科技、软件、新材料、人工智能、生物制药、新媒体等领域项目及企业入驻，在科技服务、项目研发、市场拓展等方面提供全方位帮助，不定期举办产品、技术、私董会等商业社群沙龙和论坛，助力创业者扬帆起航。</br>
+
+	P18， 北京科技大学烟台科技园</br>
+	配片组图：顶楼LOGO +楼体外墙悬挂牌匾等</br>
+	配文，如下：</br>
+	北京科技大学烟台科技园</br>
+	2018年5月，北京科大科技园有限公司与烟台开发区管委签署协议，共同建设北科（烟台）新材料孵化器。烟台北科大科技园发展有限公司是北京科技大学首个、目前唯一一个学校全资异地科技园区运营实体，是北京科技大学烟台科技园、北科（烟台）新材料孵化器的具体建设单位。
+	科技园下辖孵化服务中心、技术转移中心、工业设计中心、分析检验中心等六个机构，与烟台共同打造“科技创新、企业孵化、成果转化、实验检测、人才培养、国际交流”六位一体校地企产学研协同创新平台及新材料产业专业孵化平台；建设区域“创新人才与技术高地”，助力烟台传统行业转型升级及战略性新兴产业提升，推动烟台加快创新驱动发展。</br>
+	P19， 烟台节能环保产业孵化园</br>
+	配片组图：资料照片素材等</br>
+	配文，如下：</br>
+	烟台节能环保产业孵化园</br>
+	孵化园于2014年5月由内蒙古商会会员企业和中国航天513所合作成立，同时成立山东鲁蒙低碳技术研究院，先后被认定为国家级众创空间、国家级科技企业孵化器、山东省环保高技术孵化中心和山东省青年创业孵化示范基地等,是山东省节能环保行业唯一的一家国家级科技孵化器。为更好的服务于开发区的节能环保企业，于2019年7月迁至开发区业达智谷孵化器B栋。
+	孵化园致力于培育节能环保技术、产品转化基地和低碳经济示范园区，招募与园区主营业务即智慧能源整体解决方案和智慧环保整体解决方案相关、具有自主知识产权的企业入孵，建设了政策服务、技术服务、市场推广、人才服务、投融资服务、第三方服务等业务平台，为入孵企业提供全方位服务，促进孵化企业成长。
+
+	P20, 中韩科创孵化服务基地</br>
+	配片组图：办公空间+匾额+揭牌</br>
+	配文，如下：</br>
+	中韩科创孵化合作基地</br>
+	中韩科创孵化合作基地由中韩（烟台）产业园管理服务中心与韩国技术风投财团、韩国科学技术研究院合作共建，2019年7月揭牌，是烟台市引进的首个中韩合作国家级科技共建项目，也是开发区首个海外孵化器项目。
+	基地将结合中韩产业园发展规划，致力打造韩资企业创新孵化基地和区域经济升级发展加速器，进一步深化中韩产业、技术、产品对接，助力中韩经济和高端产业合作。韩国技术风投财团同期在业达智谷设立代表处，将举办商务、论坛活动及中韩（烟台）产业园投资政策说明会，组织符合中韩（烟台）产业园鼓励发展产业的韩资企业入驻基地。
+
+	P21，哈尔滨工程大学烟台研究（生）院</br>
+	配片组图：资料照片素材+楼层LOGO</br>
+	配文，如下：</br>
+	哈尔滨工程大学烟台研究（生）院</br>
+	由烟台市政府和哈尔滨工程大学联合共建，聚焦“大海工”定位，通过科研先行、项目牵引、优势互补、平台共享、实验室联合共建等，促进校企深度合作、产教深度融合，形成技术协同攻关、成果高效转化、产业创新升级、人才共同培养的全链条、全要素良性互动，为企业注入发展新动能，为学校探索人才培养新模式。
+	烟台研究（生）院规划用地不少于1000亩，一期规划用地232亩，建筑面积14万平方米，2018年10月开工建设，预计2020年8月交付使用。规划3-5年内教师与工作人员达到300人，各类研究生1500人，形成30个技术创新团队；10年内教师与工作人员达到600人，各类研究生3000人，形成60个技术创新团队。
+
+	P22， 中国（烟台）海创园孵化基地</br>
+	配片组图：楼层LOGO等  配文，如下：</br>
+	中国（烟台）海创园孵化基地</br>
+	由中国技术创业协会留学人员创业园联盟与烟台开发区管委合作共建，重点支持节能环保、新材料、3D打印、新一代信息技术、先进装备制造、生物医药等领域项目，由专业团队为海内外高端人才创新创业提供工商注册、项目申报、投融资、创业辅导、全国市场渠道资源对接等基础服务、深度服务和核心服务，不定期举办投融资商务洽谈等活动，加快企业孵化和发展。通过政府引导和市场运作相结合，借助企业平台、人才平台、国际合作平台、投融资平台等资源，打造政策体系完善、高端人才聚集、产业相对聚焦的全国人才产业示范园区。</br>
+	P23，中科院烟台育成中心</br>
+	配片组图：提供素材  配文，如下：</br>
+	中国科学院烟台产业技术创新与育成中心</br>
+	2019年1月，经中国科学院批准由中国科学院烟台海岸带研究所、烟台市政府和烟台开发区管委签约共建。</br>
+	中心是中国科学院与山东省人民政府、中国科学院海洋大科学研究中心与烟台市人民政府战略合作的重点推进工作之一，集聚中国科学院科技创新资源和高端人才资源，对接烟台现代主导产业体系，打造高层次与关键人才培养、技术协同创新、技术转移转化、创业孵化、中试产业化、公共技术服务、军民融合等为一体的专业性综合型创新创业基地，推动中科院系统人才、技术、成果在烟台落地和转化，促进烟台新旧动能转换，服务山东海洋强省建设。</br>
+	P24，烟台兰天使创新创业孵化器</br>
+	配片组图：提供素材   配文，如下：</br>
+	业达·兰天使众创空间</br>
+	2015年8月成立，烟台留学人员创业园区与北京安芙兰旗下新型孵化器“兰天使”合作共建，是烟台开发区第一家国家级众创空间，由烟台兰天使创新创业孵化器有限公司运营管理，位于创业园区珠江路园区，面积约900平方米，分为商务洽谈区、集中办公区、项目路演区三个模块。</br>
+	众创空间聚集创新思想、产品、技术、资本等创业要素和行业资源，以中介服务、金融资本、信息数据构成的大数据资源管理利用为基础，以科技咨询、人才培育服务手段为核心，搭建起投资人、创业导师和创业者三方互动的创业交流平台，成为开发区创业核心地域。</br>
+
+	烟台职业教育三创公共实训基地</br>
+
+	烟台职业教育三创公共实训基地全称“烟台市职业教育创新创业创客中心基地”，由烟台市教育局、烟台船舶工业学校和腾讯烟台新工科研究院合作共建的公共性教育服务项目，面积1000平方米，位于开发区业达智谷B座。实训基地设有网络空间安全实训室、计算机检测维修与数据恢复实训室、网络布线实训室、分布式光伏系统的装调与运维实训室、虚拟现实（VR）制作与应用实训室、创客教育培训实训室等6个实训室，前期投资500万元。公共实训基地依托腾讯新工科研究院资源优势，开展创新、创业、创客教育师资培训、技能大赛训练、“1+X”证书培训和产教融合， 服务开发区新旧动能转换和自贸试验区建设。
+-->
+</div>
+<div class="foot_menu" style="display:none">
+	<ul>
+		<li>
+			<a href="index.html">
+				<i><img src="images/menu_icon01.png"></i>
+				<span>首 页</span>
+			</a>
+		</li>
+		<li class="cur">
+			<a href="shequ.html">
+				<i><img src="images/menu_icon02_r.png"></i>
+				<span>社 区</span>
+			</a>
+		</li>
+		<li>
+			<a href="news.html">
+				<i><img src="images/menu_icon03.png"></i>
+				<span>消 息</span>
+			</a>
+		</li>
+		<li>
+			<a href="user.html">
+				<i><img src="images/menu_icon04.png"></i>
+				<span>我 的</span>
+			</a>
+		</li>
+	</ul>
+</div>
+</body>
+<script src="js/jquery-1.11.3.min.js"></script>
+<script src="js/foundation-datepicker.js"></script>
+<script src="js/locales/foundation-datepicker.zh-CN.js"></script>
+<script>
+$('#demo-1').fdatepicker();
+$('#demo-2').fdatepicker();
+$('#demo-3').fdatepicker();
+</script>
+</html>
+<script type="text/javascript">
+zuoid=''
+apiready = function () {
+$api.fixStatusBar(document.getElementById('headj'));
+document.getElementById('headj').style.height=(50+api.safeArea.top)+'px'
+document.getElementById('ge').style.marginTop=(49+api.safeArea.top)+'px'
+document.getElementById('zuo').style.top=(50+api.safeArea.top)+'px'
+api.addEventListener({
+    name: 'zbly'
+}, function(ret, err) {
+	showDefault()
+    you()
+});
+showDefault()
+function jjj(){
+	api.ajax({
+					 url: yuming2+'/api/park/chen/getintr',
+					 method: 'get',
+					 data:{values: {
+	"loginMark": api.deviceId,
+	"token": $api.getStorage('token'),
+	"id":api.pageParam.id,
+	user_id:$api.getStorage('info').userId
+
+							}}
+			 }, function(ret) {
+toast.hide()
+//alert(JSON.stringify(ret))
+
+			 if(ret){
+			 if(1){
+//document.getElementById('biaoti').innerHTML=ret.data.post_title
+//document.getElementById('shijian').innerHTML=ret.data.date
+document.getElementById('jsnr').innerHTML=article(ret.data)
+
+
+	 }else {
+	//	 toast.hide()
+
+	 }
+
+			 }else {
+
+					toast.hide()
+				 api.toast({
+				 msg: '网络错误',
+				 duration: 2000,
+				 location: 'middle'
+		 });
+			 }
+
+			 })
+}
+jjj()
+function zuozb(){
+	api.ajax({
+					 url: yuming+'/learun/adms/acs/getpropark',
+					 method: 'get',
+					 data:{values: {
+
+
+	"loginMark": api.deviceId,
+	"token": $api.getStorage('token')
+
+
+							}}
+			 }, function(ret) {
+
+//alert(JSON.stringify(ret))
+
+			 if(ret){
+			 if(ret.code==200){
+
+				toast.hide()
+var html=''
+html+=	'	<li class="zzz cur" onclick="jieshao(this)">园区介绍 '
+html+='<div class="kuai"></div>'+
+'</li>'
+for (var i = 0; i < ret.data.length; i++) {
+if(i==0){
+	html+=	'	<li class="zzz" onclick="lou(this,'+ret.data[i].areaId+')">'+ret.data[i].areaName
+html+='<div class="kuai"></div>'+
+	'</li>'
+	zuoid=ret.data[0].areaId
+//you()
+}else {
+		html+=	'	<li class="zzz" onclick="lou(this,'+ret.data[i].areaId+')">'+ret.data[i].areaName
+html+='<div class="kuai"></div>'+
+		'</li>'
+}
+
+
+}
+
+document.getElementById('zuoin').innerHTML=html
+	 }else {
+		 toast.hide()
+		 api.toast({
+		 msg: ret.info,
+		 duration: 2000,
+		 location: 'middle'
+ });
+	 }
+
+			 }else {
+
+					toast.hide()
+				 api.toast({
+				 msg: '网络错误',
+				 duration: 2000,
+				 location: 'middle'
+		 });
+			 }
+
+			 })
+}
+zuozb()
+function you(){
+	document.getElementById('jsnr').style.display='none'
+		document.getElementById('youin').style.display='block'
+	api.ajax({
+					 url: yuming+'/learun/adms/acs/getprobuilding',
+					 method: 'get',
+					 data:{values: {
+
+
+	"loginMark": api.deviceId,
+	"token": $api.getStorage('token'),
+parkid:zuoid
+
+							}}
+			 }, function(ret) {
+
+//alert(JSON.stringify(ret))
+toast.hide()
+			 if(ret){
+			 if(ret.code==200){
+
+				toast.hide()
+var htmly=''
+if(1){for (var i = 0; i < ret.data.length; i++) {
+if(1){
+	//gongyu='gongyu'
+	htmly+='	<li><a  onclick="gongyu('+ret.data[i].areaId+',this)" data-name="'+ret.data[i].areaName+'">'+
+		'	<img src="images/zhihui.jpg" />'+
+			'<p>'+ret.data[i].areaName+'</p>'+
+	'	</a></li>'
+
+}
+
+}
+document.getElementById('youin').innerHTML=htmly
+}else {
+
+}
+
+	 }else {
+		 toast.hide()
+		 api.toast({
+		 msg: ret.info,
+		 duration: 2000,
+		 location: 'middle'
+ });
+	 }
+
+			 }else {
+
+					toast.hide()
+				 api.toast({
+				 msg: '网络错误',
+				 duration: 2000,
+				 location: 'middle'
+		 });
+			 }
+
+			 })
+}
+
+
+}
+function lou(data1,data2){
+	var zzz=document.getElementsByClassName('zzz');
+	for (var i = 0; i < zzz.length; i++) {
+		zzz[i].classList.remove('cur')
+	}
+	zuoid=data2
+	data1.classList.add('cur')
+	api.sendEvent({
+	    name: 'zbly',
+	    extra: {
+	        key1: 'value1',
+	        key2: 'value2'
+	    }
+	});
+
+}
+function gongyu(data,data2){
+	api.openWin({
+	    name: 'gongyu',
+	    url: './gongyu.html',
+	    pageParam: {
+	        id: data,
+					name:data2.getAttribute('data-name')
+	    }
+	});
+
+}
+function jieshao(data,data2){
+	/*api.openWin({
+	    name: 'jieshao',
+	    url: './jieshao.html',
+
+	});*/
+	var zzz=document.getElementsByClassName('zzz');
+	for (var i = 0; i < zzz.length; i++) {
+		zzz[i].classList.remove('cur')
+	}
+
+	data.classList.add('cur')
+	document.getElementById('jsnr').style.display='block'
+		document.getElementById('youin').style.display='none'
+
+}
+</script>

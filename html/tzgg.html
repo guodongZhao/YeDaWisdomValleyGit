@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="format-detection" content="telephone=no"><!-- 禁止IPHONE识别手机号码 -->
+<meta name="viewport" content="width=device-width,user-scalable=no, initial-scale=1">
+<title>消息</title>
+<!-- css -->
+<link rel="stylesheet" type="text/css" href="css/index.css">
+<link rel="stylesheet" type="text/css" href="css/mui.min.css" />
+<link href="http://at.alicdn.com/t/font_1542633_vjfoldr9imp.css" />
+<script src="http://at.alicdn.com/t/font_1542633_vjfoldr9imp.js"></script>
+<link rel="stylesheet" type="text/css" href="../css/aui.css">
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/aui-toast.js"></script>
+<script type="text/javascript" src="../script/H.js"></script>
+<script type="text/javascript" src="../script/jquery.js"></script>
+<script type="text/javascript" src="../script/yuming.js"></script>
+<style>
+.module-content{padding: 10px;margin-bottom: 50px;}
+.xwfl{background: #fff; border-radius: 5px;box-shadow: 0 0 5px 0 #dedede;margin-bottom: 15px; padding: 10px;display: flex;align-items: center;justify-content: space-around;}
+.xwfl li{text-align: center;}
+.xwfl li img{width: 26px;}
+.xwfl li p{font-size: 14px;margin-top: 8px;}
+.news{}
+.news li{background: #fff;border-radius: 10px; padding: 10px;margin-bottom: 15px;}
+.news .span{display: block;background: #999;color: #fff;font-size: 10px;height: 20px;width: 100px;border-radius: 20px;margin: 15px auto;text-align: center;}
+.news a{color: #333;font-size: 14px;}
+.news a img{width: 100%;margin-top: 10px;}
+.news a p{color: #999;font-size: 12px;display: -webkit-box !important;overflow: hidden;text-overflow: ellipsis; word-break: break-all;-webkit-box-orient: vertical;-webkit-line-clamp: 2;}
+.news a div{color: #333;font-size: 14px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;margin-bottom: 10px;}
+.syxx{padding: 10px 0;font-size: 18px;color: #333;font-weight: bold;height: 40px;}
+.zhuan{
+	display: none;
+	margin: 0 auto;
+}
+.cur{
+	color: #556DFF
+}
+.lcl{width: 100%;color: #333; font-size: 14px;position: fixed;left: 0;top: 68px;bottom: 0px; background: #f7f7f7;overflow: scroll;height: 44px;background: white;}
+.kuai{
+	height: 2px;
+	border-radius: 1px;
+	width:30px;
+	left: 50%;
+	margin-left: -15px;
+	bottom: 4px;
+	display: none;
+	background:  #367ff8;
+	position: absolute;
+}
+.lcl ul{height: 100%;overflow-x: auto;}
+.lcl li{padding: 10px;line-height: 22px;width: auto;float: left;position: relative;}
+.lcl li.cur{background: #fff; color: #367ff8;font-weight: bold;}
+.cur .kuai{
+	display: block;
+}
+
+.zuow{
+  overflow: hidden;
+  height: 44px;
+  width: 600px;
+}
+
+</style>
+</head>
+<body style="background: #f4f4f4;">
+  <header id="headj">
+    <a >
+      <img src="images/back_jt.png" onclick="api.closeWin()" />
+      <span onclick="api.closeWin()">通知公告</span>
+    </a>
+    <div id="js" onclick="jieshao()" style="display:none">
+      园区介绍
+    </div>
+  </header>
+<div class="module-content" id="ge">
+
+  <div class="lcl" id="zuo">
+    <div id="zuoin">
+      <div class="zuow">
+
+
+    	<li class="zzz cur" onclick="jieshao(this)" data-name="会议通知">会议通知
+    <div class="kuai"></div>
+      </li>
+      <li class="zzz" onclick="jieshao(this)"  data-name="活动公告">活动公告
+    <div class="kuai"></div>
+      </li>
+      <li class="zzz" onclick="jieshao(this)"  data-name="社会公告">社会公告
+    <div class="kuai"></div>
+      </li>
+      <li class="zzz" onclick="jieshao(this)"  data-name="内部公告">内部公告
+    <div class="kuai"></div>
+      </li>
+      <li class="zzz" onclick="jieshao(this)"  data-name="其他公告">其他公告
+    <div class="kuai"></div>
+      </li>
+      <li class="zzz" onclick="jieshao(this)"  data-name="园区企业">园区企业
+    <div class="kuai"></div>
+      </li>
+      <li class="zzz" onclick="jieshao(this)"  data-name="园区管理层">园区管理层
+    <div class="kuai"></div>
+      </li>
+      <li class="zzz" onclick="jieshao(this)"  data-name="全部">全部
+    <div class="kuai"></div>
+      </li>
+        </div>
+    </div>
+  </div>
+	<ul class="news" id="ccc" >
+	<!--	<span>2019-08-13</span>
+		<li><a href="#">
+			<div>山东首个商业航天产业创新聚集区将落户业达智汇谷</div>
+			<p>8月13日上午，烟台开发区管委副主任陈军在区经发科技局副局长邹天峰陪同下来业达智汇谷调研。</p>
+			<img src="images/xiaoxi1.jpeg"/>
+		</a></li>
+		<span>2019-07-15</span>
+		<li><a href="#">
+			<div>烟台开发区管委副主任陈军来业达智汇谷调研</div>
+			<p>7月15日下午，中国航天科工集团第三研究院科技委副主任高文坤一行到业达智汇谷参观考察</p>
+		</a></li>
+		<span>2019-07-12</span>
+		<li><a href="#">
+			<div>山东首个商业航天产业创新聚集区将落户业达智汇谷</div>
+			<p>业达智汇谷调研。</p>
+			<img src="images/xiaoxi2.jpeg"/>
+		</a></li>-->
+	</ul>
+	<img src="../image/zhuan.gif" id="zhuan" style="height:20px;width:auto;margin-top:10px;margin-bottom:10px;" class="zhuan">
+	<div id="ddd">
+
+	</div>
+</div>
+<div class="foot_menu" style="display:none">
+	<ul>
+		<li onclick="opw('index')">
+			<a >
+				<i><img src="images/menu_icon01.png"></i>
+				<span>首 页</span>
+			</a>
+		</li>
+		<li onclick="opw('shequ')">
+      <a>
+        <i><img src="images/menu_icon02.png"></i>
+        <span>社区</span>
+      </a>
+    </li>
+		<li class="cur"  onclick="opw('news')">
+			<a >
+				<i><img src="images/menu_icon03_r.png"></i>
+				<span>消 息</span>
+			</a>
+		</li>
+		<li onclick="opw('user')">
+			<a >
+				<i><img src="images/menu_icon04.png"></i>
+				<span>我 的</span>
+			</a>
+		</li>
+	</ul>
+</div>
+
+</body>
+</html>
+<script type="text/javascript">
+page=0;
+type='会议通知'
+status=1
+apiready = function () {
+$api.fixStatusBar(document.getElementById('headj'));
+document.getElementById('headj').style.height=(50+api.safeArea.top)+'px'
+document.getElementById('ge').style.marginTop=(80+api.safeArea.top)+'px'
+document.getElementById('zuo').style.top=(50+api.safeArea.top)+'px'
+api.setStatusBarStyle({
+style: 'dark'
+});
+api.addEventListener({
+    name: 'zbnew'
+}, function(ret, err) {
+	showDefault()
+page=0;
+    zb()
+});
+$api.setStorage('j',0)
+showDefault()
+function zb(){
+
+page++
+if(page==1){
+//alert(riqi)
+//alert()
+/*
+F_CategoryId	String	公告类型：会议通知，活动公告，社会公告
+内部公告，其他公告，园区企业
+园区管理层，全部。
+四项必须填一项	否
+StartTime	DateTime	时间段查询开始时间，四项必须填一项	否
+EndTime	DateTime	时间段查询结束时间，四项必须填一项	否
+F_TypeId	Int	1发布政策填2通知公告，四项必须填一项	是
+*/
+ api.ajax({
+	 url: yuming+'/learun/adms/newoa/getoalist',
+			 method: 'get',
+			 data:{values: {
+
+
+"loginMark": api.deviceId,
+"token": $api.getStorage('token'),
+pageno:page,
+pagesize:10,
+F_CategoryId:type,
+F_TypeId:2
+						 }}
+			}, function(ret) {
+//alert(JSON.stringify(ret))
+api.refreshHeaderLoadDone()
+toast.hide()
+				for (var i = 0; i < document.getElementsByClassName('zhuan').length; i++) {
+				 document.getElementsByClassName('zhuan')[i].style.display='none'
+			 }
+			 if(ret){
+			 if(1){
+
+//alert(ret.data.list.length)
+if(ret.data&&ret.data.list.length>0){
+var html='';
+for (var i = 0; i <ret.data.list.length; i++) {
+
+	html+='<span class="span" style="line-height: 20px;">'+ret.data.list[i].F_ReleaseTime.split(':')[0]+':'+ret.data.list[i].F_ReleaseTime.split(':')[1]+'</span>'
+		html+='<li data-id="'+ret.data.list[i].F_NewsId+'" onclick="xiaoxixx(this)">'
+		html+=	'<div style="line-height: 20px;margin-top:8px;">'+ret.data.list[i].F_FullHead+'</div>'
+	//html+=	'<div style="line-height: 30px;">'+article(ret.data.list[i].F_NewsContent)+'</div>'
+if(ret.data.list[i].F_PV>0){html+=	'<div style="width:100%;text-align:right;font-size:14px;color:green;line-height:30px;">'+
+		 '已读'+
+	'</div>'}else {
+		html+=	'<div style="width:100%;text-align:right;font-size:14px;color:red;line-height:30px;">'+
+				 '未读'+
+			'</div>'
+	}
+	html+=	'</li>'
+}
+html+='<div class="xiala"></div>'
+document.getElementById('ccc').innerHTML=html;
+
+}else {
+ document.getElementById('ccc').innerHTML='<img src="../image/zanwu.png"style="width:100px;height:100px;display:block;margin:0 auto;margin-top:160px;margin-bottom:100px;">'
+}
+
+			 }else {
+
+		 toast.hide()
+			 }
+
+
+		 }else {
+
+			/* api.toast({
+			 msg: '网络错误',
+			 duration: 2000,
+			 location: 'middle'
+	 });*/
+		 }
+toast.hide()
+			})
+}else {
+ api.ajax({
+	 url: yuming+'/learun/adms/newoa/getoalist',
+			 method: 'get',
+			 data:{values: {
+
+
+"loginMark": api.deviceId,
+"token": $api.getStorage('token'),
+pageno:page,
+pagesize:10,
+F_CategoryId:type,
+F_TypeId:status
+					}}
+}, function(ret) {
+				for (var i = 0; i < document.getElementsByClassName('zhuan').length; i++) {
+				 document.getElementsByClassName('zhuan')[i].style.display='none'
+			 }
+			 if(ret){
+			 if(1){
+
+
+				 if(ret.data&&ret.data.list.length>0){
+				 var html='';
+				 for (var i = 0; i <ret.data.list.length; i++) {
+				 	html+='<span class="span">'+ret.data.list[i].F_ReleaseTime.split(':')[0]+':'+ret.data.list[i].F_ReleaseTime.split(':')[1]+'</span>'
+				 		html+='<li data-id="'+ret.data.list[i].F_NewsId+'" onclick="xiaoxixx(this)">'
+				 		html+=	'<div style="line-height: 20px;margin-top:8px;">'+ret.data.list[i].F_FullHead+'</div>'
+				 //	html+=	'<div style="line-height: 30px;">'+article(ret.data.list[i].F_NewsContent)+'</div>'
+				 if(ret.data.list[i].F_PV>0){html+=	'<div style="width:100%;text-align:right;font-size:14px;color:green;line-height:30px;">'+
+				 		 '已读'+
+				 	'</div>'}else {
+				 		html+=	'<div style="width:100%;text-align:right;font-size:14px;color:red;line-height:30px;">'+
+				 				 '未读'+
+				 			'</div>'
+				 	}
+				 	html+=	'</li>'
+				 }
+
+html+='<div class="xiala"></div>'
+document.getElementsByClassName('xiala')[page-2].innerHTML=html
+	$api.setStorage('j',0)
+
+}else {
+ //document.getElementById('content').innerHTML='<img src="../image/zanwu.png"style="width:100px;height:100px;display:block;margin:0 auto;margin-top:100px;">'
+}
+
+			 }
+
+
+		 }else {
+
+			/* api.toast({
+			 msg: '网络错误',
+			 duration: 2000,
+			 location: 'middle'
+	 });*/
+		 }
+toast.hide()
+			})
+
+
+}
+
+}
+zb()
+
+api.addEventListener({
+name:'scrolltobottom',
+extra:{
+		threshold:0           //设置距离底部多少距离时触发，默认值为0，数字类型
+}
+}, function(ret, err){
+
+if($api.getStorage('j')==0){
+$api.setStorage('j',1)
+//alert(1)
+ var zhuan=document.getElementById('zhuan').cloneNode(true);
+ zhuan.style.display='block'
+ document.getElementById('ddd').appendChild(zhuan)
+
+zb()
+}
+});
+
+}
+function txuan(data,data2){
+	var tt=document.getElementsByClassName('tt');
+	for (var i = 0; i < tt.length; i++) {
+		tt[i].classList.remove('cur')
+	}
+	data2.getElementsByClassName('tt')[0].classList.add('cur')
+	if(data==1){
+		status=1
+			type='';
+	}else{
+	status=2
+	if(data==2){
+		type='会议通知';
+	}
+	if(data==3){
+		type='全部';
+	}
+	}
+
+	page=0;
+	api.sendEvent({
+	    name: 'zbnew',
+	    extra: {
+	        key1: 'value1',
+	        key2: 'value2'
+	    }
+	});
+
+}
+function xiaoxixx(data){
+	api.openWin({
+	    name: 'xiaoxixx',
+	    url: './xiaoxixx.html',
+	    pageParam: {
+	        id: data.getAttribute('data-id')
+	    }
+	});
+
+}
+function jieshao(data){
+	/*api.openWin({
+	    name: 'jieshao',
+	    url: './jieshao.html',
+
+	});*/
+	var zzz=document.getElementsByClassName('zzz');
+	for (var i = 0; i < zzz.length; i++) {
+		zzz[i].classList.remove('cur')
+	}
+
+	data.classList.add('cur')
+	type=data.getAttribute('data-name')
+api.sendEvent({
+    name: 'zbnew',
+    extra: {
+        key1: 'value1',
+        key2: 'value2'
+    }
+});
+
+}
+</script>

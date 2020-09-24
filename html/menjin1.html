@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="format-detection" content="telephone=no"><!-- 禁止IPHONE识别手机号码 -->
+<meta name="viewport" content="width=device-width,user-scalable=no, initial-scale=1">
+<title>园区</title>
+<!-- css -->
+<link rel="stylesheet" type="text/css" href="css/index.css">
+<link rel="stylesheet" type="text/css" href="css/mui.min.css" />
+<link href="css/foundation-datepicker.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="../css/aui.css">
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/aui-toast.js"></script>
+<script type="text/javascript" src="../script/H.js"></script>
+<script type="text/javascript" src="../script/jquery.js"></script>
+<script type="text/javascript" src="../script/yuming.js"></script>
+<style>
+.module-content{padding-top: 44px;padding-bottom: 50px;}
+.louceng{}
+.lcl{width: 100%;color: #333; font-size: 14px;position: fixed;left: 0;top: 68px;bottom: 0px; background: #f7f7f7;overflow: scroll;height: 44px;background: white;}
+.kuai{
+	height: 2px;
+	border-radius: 1px;
+	width:30px;
+	left: 50%;
+	margin-left: -15px;
+	bottom: 4px;
+	display: none;
+	background:  #367ff8;
+	position: absolute;
+}
+.lcl ul{height: 100%;overflow-x: auto;}
+.lcl li{padding: 10px;line-height: 22px;width: auto;float: left;position: relative;}
+.lcl li.cur{background: #fff; color: #367ff8;font-weight: bold;}
+.cur .kuai{
+	display: block;
+}
+.lcr{margin-left: 0px;}
+.lcr ul{padding: 10px;}
+.lcr li{text-align: center;background: #fff;margin-bottom: 10px;padding: 10px;}
+.lcr li img{border-radius: 5px;width: 100%;}
+.lcr li p{font-size: 14px;color: #333;margin-top: 8px;}
+</style>
+</head>
+<body style="background: #f7f7f7;">
+	<header id="headj">
+		<a >
+			<img src="images/back_jt.png" onclick="api.closeWin()" />
+			<span onclick="api.closeWin()">智能门禁</span>
+		</a>
+	</header>
+<div class="module-content" id="ge">
+	<div class="louceng">
+		<div class="lcl" id="zuo">
+			<ul id="zuoin">
+		<!--		<li class="cur zzz" onclick="lou(this,1)">业达智谷</li>
+				<li class="zzz" onclick="lou(this,1)">烟台留学人员创业园区</li>
+-->
+			</ul>
+		</div>
+		<div class="lcr">
+			<ul id="youin">
+			<!--	<li><a  onclick="opw('gongyu',1)">
+					<img src="images/zhihui.jpg" />
+					<p>CBD 楼</p>
+				</a></li>
+				<li><a href="gongyu.html">
+					<img src="images/zhihui2.jpg" />
+					<p>专家公寓</p>
+				</a></li>
+				<li><a href="gongyu.html">
+					<img src="images/zhihui.jpg" />
+					<p>孵化器A</p>
+				</a></li>
+				<li><a href="gongyu.html">
+					<img src="images/zhihui2.jpg" />
+					<p>孵化器B</p>
+				</a></li>
+				<li><a href="gongyu.html">
+					<img src="images/zhihui.jpg" />
+					<p>孵化器C</p>
+				</a></li>-->
+			</ul>
+		</div>
+	</div>
+</div>
+
+<div class="foot_menu" style="display:none">
+	<ul>
+		<li>
+			<a href="index.html">
+				<i><img src="images/menu_icon01.png"></i>
+				<span>首 页</span>
+			</a>
+		</li>
+		<li class="cur">
+			<a href="shequ.html">
+				<i><img src="images/menu_icon02_r.png"></i>
+				<span>社 区</span>
+			</a>
+		</li>
+		<li>
+			<a href="news.html">
+				<i><img src="images/menu_icon03.png"></i>
+				<span>消 息</span>
+			</a>
+		</li>
+		<li>
+			<a href="user.html">
+				<i><img src="images/menu_icon04.png"></i>
+				<span>我 的</span>
+			</a>
+		</li>
+	</ul>
+</div>
+</body>
+<script src="js/jquery-1.11.3.min.js"></script>
+<script src="js/foundation-datepicker.js"></script>
+<script src="js/locales/foundation-datepicker.zh-CN.js"></script>
+<script>
+$('#demo-1').fdatepicker();
+$('#demo-2').fdatepicker();
+$('#demo-3').fdatepicker();
+</script>
+</html>
+<script type="text/javascript">
+zuoid=''
+apiready = function () {
+$api.fixStatusBar(document.getElementById('headj'));
+document.getElementById('headj').style.height=(50+api.safeArea.top)+'px'
+document.getElementById('ge').style.marginTop=(49+api.safeArea.top)+'px'
+document.getElementById('zuo').style.top=(50+api.safeArea.top)+'px'
+api.addEventListener({
+    name: 'zbly'
+}, function(ret, err) {
+	showDefault()
+    you()
+});
+showDefault()
+function zuozb(){
+	api.ajax({
+					 url: yuming+'/learun/adms/acs/getpropark',
+					 method: 'get',
+					 data:{values: {
+
+
+	"loginMark": api.deviceId,
+	"token": $api.getStorage('token')
+
+
+							}}
+			 }, function(ret) {
+
+//alert(JSON.stringify(ret))
+
+			 if(ret){
+			 if(ret.code==200){
+
+				toast.hide()
+var html=''
+for (var i = 0; i < ret.data.length; i++) {
+	if(i==0){
+		html+=	'	<li class="cur zzz" onclick="lou(this,'+ret.data[i].areaId+')">'+ret.data[i].areaName
+	html+='<div class="kuai"></div>'+
+		'</li>'
+		zuoid=ret.data[0].areaId
+	you()
+	}else {
+			html+=	'	<li class="zzz" onclick="lou(this,'+ret.data[i].areaId+')">'+ret.data[i].areaName
+	html+='<div class="kuai"></div>'+
+			'</li>'
+	}
+
+}
+document.getElementById('zuoin').innerHTML=html
+	 }else {
+		 toast.hide()
+		 api.toast({
+		 msg: ret.info,
+		 duration: 2000,
+		 location: 'middle'
+ });
+	 }
+
+			 }else {
+
+					toast.hide()
+				 api.toast({
+				 msg: '网络错误',
+				 duration: 2000,
+				 location: 'middle'
+		 });
+			 }
+
+			 })
+}
+zuozb()
+function you(){
+	api.ajax({
+					 url: yuming+'/learun/adms/acs/getprobuilding',
+					 method: 'get',
+					 data:{values: {
+
+
+	"loginMark": api.deviceId,
+	"token": $api.getStorage('token'),
+parkid:zuoid
+
+							}}
+			 }, function(ret) {
+
+//alert(JSON.stringify(ret))
+toast.hide()
+			 if(ret){
+			 if(ret.code==200){
+
+				toast.hide()
+var htmly=''
+for (var i = 0; i < ret.data.length; i++) {
+if(1){
+	//gongyu='gongyu'
+	htmly+='	<li><a  onclick="gongyu('+ret.data[i].areaId+',this)" data-name="'+ret.data[i].areaName+'">'+
+		'	<img src="images/zhihui.jpg" />'+
+			'<p>'+ret.data[i].areaName+'</p>'+
+	'	</a></li>'
+
+}
+
+}
+document.getElementById('youin').innerHTML=htmly
+	 }else {
+		 toast.hide()
+		 api.toast({
+		 msg: ret.info,
+		 duration: 2000,
+		 location: 'middle'
+ });
+	 }
+
+			 }else {
+
+					toast.hide()
+				 api.toast({
+				 msg: '网络错误',
+				 duration: 2000,
+				 location: 'middle'
+		 });
+			 }
+
+			 })
+}
+
+
+}
+function lou(data1,data2){
+	var zzz=document.getElementsByClassName('zzz');
+	for (var i = 0; i < zzz.length; i++) {
+		zzz[i].classList.remove('cur')
+	}
+	zuoid=data2
+	data1.classList.add('cur')
+	api.sendEvent({
+	    name: 'zbly',
+	    extra: {
+	        key1: 'value1',
+	        key2: 'value2'
+	    }
+	});
+
+}
+function gongyu(data,data2){
+	api.openWin({
+	    name: 'menjin2',
+	    url: './menjin2.html',
+	    pageParam: {
+	        id: data,
+					name:data2.getAttribute('data-name')
+	    }
+	});
+
+}
+</script>

@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="format-detection" content="telephone=no"><!-- 禁止IPHONE识别手机号码 -->
+<meta name="viewport" content="width=device-width,user-scalable=no, initial-scale=1">
+<title>公寓</title>
+<!-- css -->
+<link rel="stylesheet" type="text/css" href="css/index.css">
+<link rel="stylesheet" type="text/css" href="css/mui.min.css" />
+<link rel="stylesheet" type="text/css" href="../css/aui.css">
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/aui-toast.js"></script>
+<script type="text/javascript" src="../script/H.js"></script>
+<script type="text/javascript" src="../script/jquery.js"></script>
+<script type="text/javascript" src="../script/yuming.js"></script>
+<script src="js/jquery.js"></script>
+<script type="text/javascript" src="js/sdmenu.js"></script>
+<script type="text/javascript">
+
+</script>
+<style>
+.module-content{padding-top: 44px;padding-bottom: 50px;}
+
+.sdmenu h3{display: flex;padding:10px;align-items: center;font-size: 16px;color: #000; border-bottom: 1px solid #f1f1f1;}
+.sdmenu h3 img{width: 16px;height: 16px;margin-right: 10px;}
+/*.sdmenu{margin:0 auto;font-family:Arial, sans-serif;font-size:12px;padding-bottom:10px;background:url(../images/bottom.gif) no-repeat  right bottom;color:#fff;}
+.sdmenu div{background:url(../images/title.gif) repeat-x;overflow:hidden;}
+.sdmenu div.collapsed{height:40px;}*/
+.gongyu{display: flex;align-items: center;flex-wrap: wrap;margin: 0 10px;}
+.gongyu li{width: 30%;margin: 10px 1.5%;padding: 15px 10px;border-radius: 10px;line-height: 24px;background: white}
+.gongyu li p{font-size: 14px;font-weight: 400;text-align: center;}
+.gongyu li span{font-size: 14px;}
+.gongyu li.grey{background: #f4f4f4;border: 1px solid #e2e2e2;}
+.gongyu li.grey p,.gongyu li.grey span{color: #aeaeae;}
+
+.gongyu li.blue{background: #eaf4fe;border: 1px solid #daebfb;}
+.gongyu li.blue p,.gongyu li.blue span{color: #0c83f9;}
+
+.gongyu li.green{background: #e6f9f3;border: 1px solid #d4fff1;}
+.gongyu li.green p,.gongyu li.green span{color: #00b168;}
+
+.gongyu li.yellow{background: #fef4eb;border: 1px solid #ffead7;}
+.gongyu li.yellow p,.gongyu li.yellow span{color: #fd7808;}
+
+.gongyu li.red{background: #ffedf1;border: 1px solid #fbdae2;}
+.gongyu li.red p,.gongyu li.red span{color: #ff3a5f;}
+</style>
+</head>
+<body style="background: #F7F7F7;">
+	<header id="headj">
+		<a >
+			<img src="images/back_jt.png" onclick="api.closeWin()" />
+		<span onclick="api.closeWin()" id="tname"></span>
+	</a>
+</header>
+<div class="module-content" id="ge">
+	<div id="my_menu" class="sdmenu">
+	<!--	<div class="collapsed">
+			<h3><img src="images/lou.png" />1层</h3>
+			<ul class="gongyu">
+				<li class="blue" onclick="opw('gongyuxq',1)"><a>
+					<p>A101</p>
+					<span>王晓华</span>
+				</a></li>
+				<li class="blue"  onclick="opw('gongyuxq',1)"><a >
+					<p>A102</p>
+					<span>王晓华</span>
+				</a></li>
+				<li class="yellow"  onclick="opw('gongyuxq',1)"><a >
+					<p>A103</p>
+					<span>预约退房</span>
+				</a></li>
+				<li class="green"  onclick="opw('gongyuxq',1)"><a >
+					<p>A104</p>
+					<span>已预订</span>
+				</a></li>
+				<li class="red"  onclick="opw('gongyuxq',1)"><a >
+					<p>A105</p>
+					<span>空置</span>
+				</a></li>
+				<li class="grey"  onclick="opw('gongyuxq',1)"><a >
+					<p>A106</p>
+					<span>装修中</span>
+				</a></li>
+			</ul>
+		</div>-->
+	<!--	<div class="collapsed">
+			<h3><img src="images/lou.png" />2层</h3>
+			<ul class="gongyu">
+				<li class="blue"><a href="gongyuxq.html">
+					<p>A101</p>
+					<span>王晓华</span>
+				</a></li>
+				<li class="blue"><a href="gongyuxq.html">
+					<p>A102</p>
+					<span>王晓华</span>
+				</a></li>
+				<li class="yellow"><a href="gongyuxq.html">
+					<p>A103</p>
+					<span>预约退房</span>
+				</a></li>
+				<li class="green"><a href="gongyuxq.html">
+					<p>A104</p>
+					<span>已预订</span>
+				</a></li>
+				<li class="red"><a href="gongyuxq.html">
+					<p>A105</p>
+					<span>空置</span>
+				</a></li>
+				<li class="grey"><a href="gongyuxq.html">
+					<p>A106</p>
+					<span>装修中</span>
+				</a></li>
+			</ul>
+		</div>-->
+	</div>
+
+</div>
+
+<div class="foot_menu" style="display:none">
+	<ul>
+		<li>
+			<a href="index.html">
+				<i><img src="images/menu_icon01.png"></i>
+				<span>首 页</span>
+			</a>
+		</li>
+		<li class="cur">
+			<a href="shequ.html">
+				<i><img src="images/menu_icon02_r.png"></i>
+				<span>社 区</span>
+			</a>
+		</li>
+		<li>
+			<a href="news.html">
+				<i><img src="images/menu_icon03.png"></i>
+				<span>消 息</span>
+			</a>
+		</li>
+		<li>
+			<a href="user.html">
+				<i><img src="images/menu_icon04.png"></i>
+				<span>我 的</span>
+			</a>
+		</li>
+	</ul>
+</div>
+</body>
+
+</html>
+<script type="text/javascript">
+louarr=[]
+apiready = function () {
+$api.fixStatusBar(document.getElementById('headj'));
+document.getElementById('headj').style.height=(50+api.safeArea.top)+'px'
+document.getElementById('ge').style.marginTop=(5+api.safeArea.top)+'px'
+document.getElementById('tname').innerHTML=api.pageParam.name
+showDefault()
+function lou(){
+/*	alert(JSON.stringify({
+"loginMark": api.deviceId,
+"token": $api.getStorage('token'),
+"parkid":api.pageParam.id
+
+		 }))*/
+	api.ajax({
+					 url: yuming+'/learun/adms/acs/getprofloor',
+					 method: 'get',
+					 data:{values: {
+	"loginMark": api.deviceId,
+	"token": $api.getStorage('token'),
+"buildingid":api.pageParam.id
+
+							}}
+			 }, function(ret) {
+
+//alert(JSON.stringify(ret))
+toast.hide()
+			 if(ret){
+			 if(ret.code==200){
+louarr=ret.data
+fang()
+	 }else {
+	//	 toast.hide()
+		 api.toast({
+		 msg: ret.info,
+		 duration: 2000,
+		 location: 'middle'
+ });
+	 }
+
+			 }else {
+
+					toast.hide()
+				 api.toast({
+				 msg: '网络错误',
+				 duration: 2000,
+				 location: 'middle'
+		 });
+			 }
+
+			 })
+}
+lou()
+function fang(){
+	html=''
+	for (var i = 0; i <louarr.length; i++) {
+		html+='	<div class="collapsed">'+
+			'	<h3  onclick="menjin2('+louarr[i].areaId+',this,'+i+')" data-name="'+api.pageParam.name+louarr[i].areaName+'"><img src="images/lou.png" />'+louarr[i].areaName+'</h3>'+
+				//onclick="opw('gongyuxq',1)"
+			'	<ul class="gongyu">'
+
+
+html+=	'</ul>'
+'</div>'
+
+
+
+
+
+
+
+	}
+			fang2()
+
+}
+function fang2(){
+	document.getElementById('my_menu').innerHTML=html
+	var myMenu;
+	window.onload = function() {
+		myMenu = new SDMenu("my_menu");
+		myMenu.init();
+	};
+}
+}
+function menjin(data,data2,data3){
+	api.openWin({
+	    name: 'jiankongwo',
+	    url: './jiankongwo.html',
+	    pageParam: {
+	        id: data,
+					name:data2.getAttribute('data-name')
+	    }
+	});
+
+}
+function menjin2(data,data2,data3){
+	/*api.openWin({
+	    name: 'jiankonglou',
+	    url: './jiankonglou.html',
+	    pageParam: {
+	        id: data,
+					name:data2.getAttribute('data-name')
+	    }
+	});*/
+	/*api.openWin({
+	    name: 'menjinlou',
+	    url: './menjinlou.html',
+	    pageParam: {
+	        id: data,
+					name:data2.getAttribute('data-name')
+	    }
+	});*/
+	var gongyu=document.getElementsByClassName('gongyu');
+	if(gongyu[data3].style.display=='flex'){
+	  gongyu[data3].style.display='none'
+	}else {
+	    gongyu[data3].style.display='flex'
+	}
+	api.ajax({
+					 url: yuming+'/learun/adms/acs/getproroom',
+					 method: 'get',
+					 data:{values: {
+	"loginMark": api.deviceId,
+	"token": $api.getStorage('token'),
+"floorid":data
+
+							}}
+			 }, function(ret) {
+//alert(i)
+//alert(JSON.stringify(ret))
+toast.hide()
+			 if(ret){
+			 if(ret.code==200){
+				 html=''
+				 for (var j = 0; j < ret.data.length; j++) {
+			 		html+=	'	<li  style="overflow:scroll" onclick="menjin('+ret.data[j].areaId+',this)" data-name="'+ret.data[j].areaName+'"><a>'+
+			 				'	<p>'+ret.data[j].areaName+'</p>'+
+
+			 			'	</a></li>'
+			 	}
+
+		gongyu[data3].innerHTML=html
+	 }else {
+		 toast.hide()
+		/* api.toast({
+		 msg: ret.info,
+		 duration: 2000,
+		 location: 'middle'
+ });*/
+	 }
+
+			 }else {
+
+					toast.hide()
+			/*	 api.toast({
+				 msg: '网络错误',
+				 duration: 2000,
+				 location: 'middle'
+		 });*/
+			 }
+
+		 })
+}
+</script>

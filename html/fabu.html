@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8;IE=Edge,chrome=1"/>
+   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<title>物品详情</title>
+
+  <link rel="stylesheet" type="text/css" href="../css/aui.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/re.css"/>
+        <link rel="stylesheet" type="text/css" href="../css/frozenui.css"/>
+        <link rel="stylesheet" type="text/css" href="../css/mpicker.css"/>
+    <script type="text/javascript" src="../script/jquery.js"></script>
+
+      <script src="../script/api.js" type="text/javascript" ></script>
+
+              <script src="../script/api.js" type="text/javascript" ></script>
+          <script src="../script/yuming.js" type="text/javascript" ></script>
+        <script src="../script/aui-toast.js" type="text/javascript" ></script>
+        <style media="screen">
+        html,body{
+          background: white;
+        }
+          #ge{
+            height: 50px;
+            position: relative;
+            text-align: center;
+            color: black;
+            font-size: 16px;
+            line-height: 50px;
+            background: white;
+          }
+          #zuo{
+            height: 20px;
+            position: absolute;
+            left: 4%;
+            bottom: 15px;
+            width: 20px;
+          }
+          #fb{
+            height: 24px;
+            line-height: 24px;
+            font-size: 14px;
+            color: white;
+            width: 50px;
+            position: absolute;
+            right: 3%;
+            border-radius: 4px;
+            background: #2D6BFA;
+            bottom: 13px;
+            text-align: center;
+          }
+          textarea::-webkit-input-placeholder{
+          	color:4082F5;
+          }
+          #xinde{
+            width: 94%;
+            display: block;
+            margin: 0 auto;
+            margin-top: 10px;
+            outline: none;
+          /*  border-radius: 4px;*/
+            color: #464646;
+            font-size: 14px;
+            line-height: 20px;
+            height: 120px;
+            overflow: scroll;
+            border: none;
+          }
+          #pzt{
+          display: block;
+          margin: 0 auto;
+          width: 94%;
+          margin: 0 auto;
+          height: auto;
+          margin-top: 20px;
+          margin-bottom: 20px;
+         }
+
+         #pzt .pzw{
+          float: left;
+           height: 80px;
+           width: 80px;
+           margin-right: 20px;
+           margin-bottom: 10px;
+           position: relative;
+         }
+         #pzt .pzwo{
+          float: left;
+           height: 80px;
+           width: 80px;
+           margin-right: 20px;
+           margin-bottom: 10px;
+           position: relative;
+         }
+      #pzt .pzc{
+      position: absolute;
+      z-index: 1;
+      width: 30px;
+      height: 30px;
+      left: -10px;
+      top: -10px;
+      }
+      #pzt img{
+      width: 100%;
+      height: 100%;
+      border-radius: 10px;
+      }
+      #lizi{
+        display: none;
+      }
+      .a{
+        height: 50px;
+        line-height: 50px;
+        font-size: 14px;
+        color: #464646;
+        position: relative;
+        width: 94%;
+        overflow: hidden;
+        margin:0 auto;
+      }
+      .a input{
+        position: absolute;
+        width: 80%;
+        left: 60px;
+        top: 15px;
+        height: 20px;
+        line-height: 20px;
+        overflow: scroll;
+      }
+        </style>
+</head>
+
+
+<body style="background: white;">
+
+
+	<div id="ge"><img src="../image/tcha.png" onclick="api.closeWin()" id="zuo"/>
+新动态
+<div id="fb">
+  发布
+</div>
+<div class="abbxixian">
+
+</div>
+  </div>
+  <div class="a select-value" >
+  分类
+  <input type="text" name="s" value="" placeholder="请选择分类" id="fenlei" readonly="readonly">
+  <div class="abbxixian">
+
+  </div>
+  </div>
+<textarea id="xinde" placeholder="分享你的心情吧"></textarea>
+<div id="content1" style="margin-top:10px;">
+  <div id="pzt" style="clear:both">
+    <div class="pzw" id="lizi">
+          <img src="../image/tianjiatu.png"  class="pz"/>
+          <img src="../image/cha.png"  class="pzc"/>
+      </div>
+    <div class="pzwo" id="pz">
+  <img src="../image/tianjiatu.png"  class="pz" style="border-radius:0;"/>
+  </div>
+
+  </div>
+</div>
+<div class="ui-dialog" id="dialog2">
+        <div class="ui-dialog-cnt">
+            <div class="ui-dialog-bd">
+                <p>确定要删除图片？</p>
+            </div>
+            <div class="ui-dialog-ft">
+                <button type="button" data-role="button" onclick="quxiao()">取消</button>
+                <button type="button" data-role="button" onclick="qdsc()">确定</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/yuming.js"></script>
+  <script type="text/javascript" src="../script/mPicker.min.js"></script>
+<script type="text/javascript">
+tubase64=''
+base=''
+arrtu=[]
+strtu=''
+n=0
+pd=[]
+mtn1=0
+mtn2=0
+tuid=''
+tuidarr=[]
+  arrlx=[]
+  flid=''
+  apiready = function(){
+    $api.fixStatusBar( $api.dom('#ge') );
+   api.setStatusBarStyle({
+   style: 'dark'
+   });
+/*   api.openPicker({
+       type: 'date_time',
+       date: '2014-05-01 12:30',
+       title: '选择时间'
+   }, function(ret, err) {
+       if (ret) {
+           alert(JSON.stringify(ret));
+       } else {
+           alert(JSON.stringify(err));
+       }
+   });*/
+
+//document.getElementById('xinde').style.marginTop=(65+parseInt(api.safeArea.top))+'px'
+function zb(){
+  api.ajax({
+           url: yuming2+'/api/Forum/forum/index',
+           method: 'post',
+           data:{values: {
+
+              }}
+       }, function(ret) {
+        // alert(JSON.stringify(ret))
+   if(ret){
+       arrlx=[]
+       for (var i = 0; i < ret.data.length; i++) {
+         arrlx.push({ "name":ret.data[i].name, "value":ret.data[i].id })
+       }
+       if(ret.data.length>0){
+         flid=ret.data[0].id
+          document.getElementById('fenlei').value=ret.data[0].name
+       }
+
+     $('.select-value').mPicker({
+                 level:1,
+                 dataJson:arrlx,
+                 Linkage:true,
+                 rows:3,
+                 idDefault:true,
+                 splitStr:' ',
+                 header:'<div class="mPicker-header">选择分类</div>',
+                 confirm:function(json){
+                     console.info('当前选中json：',json);
+                     console.info('【json里有不带value时】');
+                     console.info('选中的id序号为：', json.ids);
+                     console.info('选中的value为：', json.values);
+                     // var id1= $('.select-value').data('id1');
+                     // var id2 = $('.select-value').data('id2');
+                     // var id3 = $('.select-value').data('id3');
+                     // console.info('第一列json：',city3[id1]);
+                     // console.info('第二列json：', city3[id1].child[id2]);
+                     // console.info('第三列json：', city3[id1].child[id2].child[id3]);
+                 //	alert(JSON.stringify(json))
+                     var strs= new Array(); //定义一数组
+     //alert(JSON.stringify(json))
+     document.getElementById('fenlei').value=json.name
+     flid=json.values
+                 },
+                 cancel:function(json){
+                     console.info('当前选中json：',json);
+                 }
+             })
+
+   }else {
+     api.toast({
+       msg: '网络错误',
+       duration: 2000,
+       location: 'middle'
+   });
+   }
+
+       })
+}
+zb()
+/*
+陈爱峰:
+/api/Forum/forum/upImg
+
+陈爱峰:
+/api/Forum/forum/addPost
+uid,token,content,class_id,img_str =>数组
+
+陈爱峰:
+name
+
+*/
+pdtid=0
+document.getElementById('pz').onclick=function(){
+  if(api.systemType=='android') {
+    if(confirmPer('storage')){
+
+    }else {
+      return
+    }
+  }
+  var UIAlbumBrowser = api.require('UIAlbumBrowser');
+UIAlbumBrowser.open({
+max: 9,
+type:'image',
+styles: {
+bg: '#fff',
+mark: {
+icon: '',
+position: 'bottom_left',
+size: 20
+},
+nav: {
+bg: 'rgba(0,0,0,0.6)',
+titleColor: '#fff',
+titleSize: 18,
+cancelColor: '#fff',
+cancelSize: 16,
+finishColor: '#fff',
+finishSize: 16
+}
+},
+rotation: true
+}, function(ret) {
+/*
+android        //Android系统
+win            //Windows系统
+wp             //Windows Phone系统
+示例代码
+var systemType = api.systemType
+*/
+if (ret) {
+//    alert(JSON.stringify(ret));
+if(ret.eventType=='confirm'){
+if(api.systemType=='android'){
+for (var i = 0; i < ret.list.length; i++) {
+  tttt=ret.list[i].path
+
+
+showDefault()
+pdtid=1
+//  alert(tubase64)
+api.ajax({
+  url: yuming2 + '/upImg/upimg/upImg',
+  method: 'post',
+  headers: {
+      'XX-Token': $api.getStorage('token'),
+      'XX-Device-Type': 'android'
+  },
+  data: {
+      values: {
+        //  uid: $api.getStorage('id')
+      },
+      files:{
+        file:tttt
+      }
+  }
+     }, function(ret) {
+
+pdtid=0
+toast.hide()
+if(ret){
+if(ret.code==1){
+pd.push(1)
+/*  api.toast({
+msg: '上传成功'
+});*/
+tuidarr.push(ret.msg.filepath)
+n++
+kl=	document.getElementById('lizi').cloneNode(true);
+kl.setAttribute('id','l'+n)
+kl.getElementsByClassName('pz')[0].setAttribute('src',yuming2+'/upload/'+ret.msg.filepath)
+console.log(yuming2+'/upload/'+ret.msg.filepath)
+if(1){
+//   alert(JSON.stringify(ret))
+document.getElementById('pzt').insertBefore(kl,document.getElementById('pz'))
+}else {
+document.getElementById('pzt').insertBefore(kl,document.getElementById('pz'))
+document.getElementById('pz').style.display='none'
+
+
+}
+var pzc=document.getElementsByClassName('pzc');
+for (var i = 0; i < pzc.length; i++) {
+  !function(i){
+      pzc[i].onclick=function(){
+        mtn1=i-1
+        mtn2=i
+        $("#dialog2").addClass("show");
+      }
+  }(i)
+
+}
+}else {
+api.toast({
+msg: ret.msg
+});
+}
+
+}else {
+api.toast({
+msg: '网络错误'
+});
+}
+     })
+
+
+}
+}else {
+for (var i = 0; i < ret.list.length; i++) {
+  var UIAlbumBrowser = api.require('UIAlbumBrowser');
+UIAlbumBrowser.transPath({
+path: ret.list[i].path
+}, function(ret, err) {
+if (ret) {
+//alert(JSON.stringify(ret));
+tttt=ret.path
+
+
+showDefault()
+pdtid=1
+//  alert(tubase64)
+api.ajax({
+  url: yuming2 + '/upImg/upimg/upImg',
+method: 'post',
+headers: {
+  'XX-Token': $api.getStorage('token'),
+  'XX-Device-Type': 'android'
+},
+data: {
+  values: {
+    //  uid: $api.getStorage('id')
+  },
+  files:{
+    file:tttt
+  }
+}
+ }, function(ret) {
+//  alert(JSON.stringify(ret))
+pdtid=0
+toast.hide()
+if(ret){
+if(ret.code==1){
+pd.push(1)
+/*  api.toast({
+msg: '上传成功'
+});*/
+n++
+kl=	document.getElementById('lizi').cloneNode(true);
+kl.setAttribute('id','l'+n)
+kl.getElementsByClassName('pz')[0].setAttribute('src',yuming2+'/upload/'+ret.msg.filepath)
+
+tuidarr.push(ret.msg.filepath)
+
+
+
+if(1){
+
+document.getElementById('pzt').insertBefore(kl,document.getElementById('pz'))
+}else {
+document.getElementById('pzt').insertBefore(kl,document.getElementById('pz'))
+document.getElementById('pz').style.display='none'
+
+
+}
+var pzc=document.getElementsByClassName('pzc');
+for (var i = 0; i < pzc.length; i++) {
+!function(i){
+  pzc[i].onclick=function(){
+    mtn1=i-1
+    mtn2=i
+    $("#dialog2").addClass("show");
+  }
+}(i)
+
+}
+}else {
+api.toast({
+msg: ret.msg
+});
+}
+
+}else {
+api.toast({
+msg: '网络错误'
+});
+}
+ })
+} else {
+//alert(JSON.stringify(err));
+}
+});
+
+}
+/*
+var UIAlbumBrowser = api.require('UIAlbumBrowser');
+UIAlbumBrowser.transPath({
+path: ''
+}, function(ret, err) {
+if (ret) {
+alert(JSON.stringify(ret));
+} else {
+alert(JSON.stringify(err));
+}
+});
+*/
+}
+}
+}
+});
+
+}
+var pzc=document.getElementsByClassName('pzc');
+ for (var i = 0; i < pzc.length; i++) {
+   !function(i){
+       pzc[i].onclick=function(){
+         mtn1=i-1
+         mtn2=i
+         $("#dialog2").addClass("show");
+       }
+   }(i)
+
+ }
+/////////////////
+jy=0
+document.getElementById('fb').onclick=function(){
+var jianyi=document.getElementById('xinde').value;
+//alert(JSON.stringify(tuidarr))
+if(!flid){
+  api.toast({
+  msg: '请选择分类!',
+  duration: 2000,
+  location: 'middle'
+ });
+  return
+}
+if(!jianyi){
+  api.toast({
+  msg: '请填写内容!',
+  duration: 2000,
+  location: 'middle'
+ });
+  return
+}
+pics=''
+for (var i = 0; i < tuidarr.length; i++) {
+  pics+=tuidarr[i]+','
+}
+if(jy==0&&jianyi){
+jy=1
+showDefault()
+/*http://car.tianzhuowangluo.com/car/community/release
+/api/Forum/forum/addPost
+uid,token,content,class_id,img_str =>数组
+
+陈爱峰:
+name
+示例：2 //分类id*/
+api.ajax({
+       url: yuming2+'/api/Forum/forum/addPost',
+        headers:  {'XX-Token': $api.getStorage('token'),'XX-Device-Type': 'android'} ,
+       method: 'post',
+       data:{values: {uid:$api.getStorage('info').userId,token: $api.getStorage('token'),
+content:jianyi,img_str:pics,class_id:flid,name:$api.getStorage('info').realName
+          }}
+   }, function(ret) {
+//  alert(JSON.stringify(ret))
+jy=0
+if(ret){
+if(ret.code==1){
+api.toast({
+msg: '发布成功!',
+duration: 2000,
+location: 'middle'
+});
+api.sendEvent({
+    name: 'sx',
+    extra: {
+        key1: 'value1',
+        key2: 'value2'
+    }
+});
+
+setTimeout(function(){
+api.closeWin();
+
+},1000)
+}else {
+api.toast({
+msg: ret.msg,
+duration: 2000,
+location: 'middle'
+});
+}
+
+}else {
+api.toast({
+msg: '网络错误',
+duration: 2000,
+location: 'middle'
+});
+}
+ toast.hide()
+
+   })
+}
+}
+
+
+}
+function quxiao(){
+
+    $("#dialog2").removeClass("show");
+
+}
+function qdsc(){
+pd.pop()
+arrtu.splice(mtn1,1)
+tuidarr.splice(mtn1,1)
+var pzw=document.getElementsByClassName('pzw')
+var parent=document.getElementById("pzt");
+//alert(mtn2)
+parent.removeChild(pzw[mtn2]);
+//pzw[mtn2].style.display='none'
+//alert(mtn2)
+if(pd.length<3){
+document.getElementById('pz').style.display='block'
+}
+$("#dialog2").removeClass("show");
+var pzc=document.getElementsByClassName('pzc');
+  for (var i = 0; i < pzc.length; i++) {
+    !function(i){
+        pzc[i].onclick=function(){
+          mtn1=i-1
+          mtn2=i
+          $("#dialog2").addClass("show");
+        }
+    }(i)
+
+  }
+}
+
+</script>

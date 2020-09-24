@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="format-detection" content="telephone=no"><!-- 禁止IPHONE识别手机号码 -->
+<meta name="viewport" content="width=device-width,user-scalable=no, initial-scale=1">
+<title>社区详情</title>
+<!-- css -->
+<link rel="stylesheet" type="text/css" href="css/index.css">
+<link rel="stylesheet" type="text/css" href="css/mui.min.css" />
+<link href="css/foundation-datepicker.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="../css/aui.css">
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/aui-toast.js"></script>
+<script type="text/javascript" src="../script/H.js"></script>
+<script type="text/javascript" src="../script/jquery.js"></script>
+<script type="text/javascript" src="../script/yuming.js"></script>
+<style>
+.module-content{padding-top: 44px;padding-bottom: 50px;}
+.sqxq{background: #fff;margin-bottom: 10px;padding: 10px;}
+.sqhead{display: flex;align-items: center;margin-bottom: 10px;}
+.sqhead img{width: 36px;height: 36px;border-radius: 20px;margin-right: 10px;}
+.sqhead h4{color: #000;font-size: 14px;}
+.sqhead span{color: #666;font-size: 12px;}
+.sqxq h3{color: #000;font-size: 14px;margin-bottom: 10px; font-weight: bold;}
+.sqtext{color: #333;font-size: 14px;margin-bottom: 10px;line-height: 22px; }
+.sqxqimg{width: 100%;}
+.dpinglun{padding: 10px 0 0;border-top: 1px solid #f1f1f1;margin-top: 10px; display: flex;justify-content: space-between;align-items: center;}
+.dpinglun p, .dpinglun a{display: flex;align-items: center;}
+.dpinglun img{width: 16px;height: 16px;margin-right: 10px;}
+.dpinglun span{font-size: 12px;}
+
+.pinglun{background: #fff;margin-bottom: 10px;}
+.pinglun li{border-bottom: 1px solid #f1f1f1;padding: 10px;}
+.pinglun li:last-child{border-bottom: 0;}
+#tu img{
+	width: 100%;
+}
+#jfoot{
+	width: 100%;
+	position: fixed;
+	left: 0;
+	z-index: 666;
+	bottom: 0;
+	background: white;
+	border-top:0.5px solid #464646;
+	text-indent: 20px;
+	font-size: 14px;
+	color: #464646;
+	line-height: 50px;
+}
+#jfoot1{
+	width: 80%;
+	height: 30px;
+	border-radius: 15px;
+	position: absolute;
+	left: 15%;
+	bottom: 10px;
+	background: #EEF2FB;
+	line-height: 30px;
+	color: grey;
+}
+.zhuan{
+  display: none;
+  margin: 0 auto;
+}
+</style>
+</head>
+<body style="background: #f7f7f7;">
+	<header id="headj">
+		<a >
+			<img src="images/back_jt.png" onclick="api.closeWin()"/>
+			<span onclick="api.closeWin()">社区详情</span>
+		</a>
+	</header>
+<div class="module-content" id="ge">
+	<div class="sqxq">
+		<div class="sqhead">
+			<img src="images/icon1.png" />
+			<div>
+				<h4 id="name"></h4>
+				<span id="shijian"></span>
+			</div>
+		</div>
+		<h3 id="biaoti" style="display:none"></h3>
+		<div class="sqtext" id="neirong"></div>
+		<div id="tu">
+
+		</div>
+	<!--	<img src="images/gongyu.jpg" class="sqxqimg"/>-->
+
+		<div class="dpinglun">
+			<p>
+				<img src="images/eye.png" />
+				<span id="yds">0</span>
+			</p>
+			<p>
+				<img src="images/pinglun.png" />
+				<span id="pls">0</span>
+			</p>
+		</div>
+	</div>
+	<ul class="pinglun" id="pinglun">
+	<!--	<li>
+			<div class="sqhead">
+				<img src="images/icon1.png" />
+				<div>
+					<h4>小阿贵</h4>
+					<span>2019-12-27</span>
+				</div>
+			</div>
+			<div class="sqtext">社区详情社区详情社区详情社区详情社区详情社区详情社区详情社区详情社区详情社区详情社区详情社区详情社情</div>
+		</li>-->
+
+	</ul>
+	<img src="../image/zhuan.gif" id="zhuan" style="height:20px;width:auto;margin-top:10px;margin-bottom:10px;" class="zhuan">
+	<div id="ddd">
+
+	</div>
+</div>
+<div id="jfoot">
+	评论 <div id="jfoot1">
+说点什么吧
+	</div>
+</div>
+<div class="foot_menu" style="display:none">
+	<ul>
+		<li class="cur">
+			<a href="index.html">
+				<i><img src="images/menu_icon01_r.png"></i>
+				<span>首 页</span>
+			</a>
+		</li>
+		<li>
+			<a href="wuye.html">
+				<i><img src="images/menu_icon02.png"></i>
+				<span>智 能</span>
+			</a>
+		</li>
+		<li>
+			<a href="news.html">
+				<i><img src="images/menu_icon03.png"></i>
+				<span>消 息</span>
+			</a>
+		</li>
+		<li>
+			<a href="user.html">
+				<i><img src="images/menu_icon04.png"></i>
+				<span>我 的</span>
+			</a>
+		</li>
+	</ul>
+</div>
+</body>
+
+</html>
+<script type="text/javascript">
+	//api/Forum/forum/getinfo
+	page=0
+	apiready = function () {
+	$api.fixStatusBar(document.getElementById('headj'));
+	document.getElementById('headj').style.height=(50+api.safeArea.top)+'px'
+	document.getElementById('ge').style.marginTop=(5+api.safeArea.top)+'px'
+	api.addEventListener({
+	    name: 'sx'
+	}, function(ret, err){
+		showDefault()
+		page=0
+		zb0()
+	});
+	api.addEventListener({
+	    name: 'pinglun'
+	}, function(ret, err){
+		showDefault()
+		page=0
+		pinglun()
+	});
+	document.getElementById('jfoot').onclick=function(){
+		chatBox = api.require('UIChatBox');
+
+
+		chatBox.open({
+				placeholder:'说点什么吧',
+				maxRows:4,
+			//  emotionPath:'widget://image/emotion',
+				texts: {
+						recordBtn: {
+								normalTitle: '按住 说话',
+								activeTitle: '松开 结束'
+						}
+				},
+				styles: {
+						inputBar: {
+								borderColor: '#fff',
+								bgColor: '#fff'
+						},
+						inputBox: {
+								borderColor: '#2D6BFA',
+								bgColor: '#ffffff'
+						},
+					/*  emotionBtn: {
+								normalImg: 'widget://image/biaoqing1.png'
+						},*/
+
+						keyboardBtn: {
+								normalImg: 'widget://image/jianpan1.png'
+						},
+
+						recordBtn: {
+								normalBg: '#2D6BFA',
+								activeBg: '#ffffff',
+								color: '#767d88',
+								size: 14
+						},
+						indicator: {
+								target: 'both',
+								color: '#767d88',
+								activeColor: '#f3f3f3'
+						},
+						sendBtn: {
+								titleColor: '#fff',
+								bg: '#2D6BFA' ,
+								activeBg: 'rgba(208,0,35,0.6)',
+								titleSize: 14
+						}
+				},
+				extras: {
+						titleSize: 14,
+						titleColor: '#767d88',
+						btns: [
+						]
+				},
+				isClose:true
+		}, function(ret){
+				//点击附加功能面板
+				if(ret.eventType == 'clickExtras'){
+						if(ret.index == 0){
+								//关闭面板
+								chatBox.closeBoard();
+
+						}
+						if(ret.index == 1){
+								//关闭面板
+								chatBox.closeBoard();
+
+						}
+						if(ret.index == 2){
+								//关闭面板
+								chatBox.closeBoard();
+
+						}
+				}
+				//点击发送按钮
+
+					if(ret.eventType == 'send'){
+						if(ret.msg==''){
+							//  toast('不能发送空消息！');
+								api.toast({
+							 msg: '评论内容不能为空！',
+							 duration: 1000,
+							 location: 'middle'
+					 });
+								return false;
+						}else {
+							showDefault()
+/*
+陈爱峰:
+/api/Forum/forum/addPostDiscuss
+
+陈爱峰:
+forum_id ,uid,token,nr,d_name
+
+*/
+							api.ajax({
+											 url: yuming2+'/api/Forum/forum/addPostDiscuss',
+											 method: 'post',
+											 data:{values: {
+						forum_id:api.pageParam.id,nr:ret.msg,uid:$api.getStorage('info').userId,token:$api.getStorage('token'),d_name:$api.getStorage('info').realName
+													}}
+									 }, function(ret) {
+							//	 alert(JSON.stringify(ret))
+										 toast.hide()
+							if(ret){
+							if(ret.code==1){
+								$api.setStorage('j',0)
+								jz=0
+							api.toast({
+							msg: '评论成功!',
+							duration: 2000,
+							location: 'middle'
+							});
+							page=0
+							api.sendEvent({
+							name: 'pinglun',
+							extra: {
+							key1: 'value1',
+							key2: 'value2'
+							}
+							});
+
+							api.sendEvent({
+									name: 'sx',
+									extra: {
+											key1: 'value1',
+											key2: 'value2'
+									}
+							});
+
+
+							}else {
+							api.toast({
+							msg: ret.msg,
+							duration: 2000,
+							location: 'middle'
+							});
+							}
+							}else {
+							api.toast({
+							msg: '网络错误',
+							duration: 2000,
+							location: 'middle'
+							});
+							}
+									 })
+						}
+
+				//  alert(ret.msg)
+				var UIChatBox = api.require('UIChatBox');
+				UIChatBox.closeKeyboard()
+	UIChatBox.close();
+
+				}
+
+
+chatBox.popupKeyboard();
+		});
+
+
+	}
+	function zb0(){
+		api.ajax({
+			url: yuming2+'/api/Forum/forum/getinfo',
+					method: 'get',
+					data:{values: {
+						"loginMark": api.deviceId,
+						"token": $api.getStorage('token'),
+id:api.pageParam.id,
+
+								}}
+				 }, function(ret) {
+//alert(JSON.stringify(ret))
+if(ret){
+	document.getElementById('yds').innerHTML=ret.data.see_num
+		document.getElementById('pls').innerHTML=ret.data.num
+			document.getElementById('name').innerHTML=ret.data.name
+				document.getElementById('neirong').innerHTML=ret.data.content
+					document.getElementById('shijian').innerHTML=new Date(ret.data.add_time*1000).toLocaleString()+" "+ new Date(ret.data.add_time*1000).toLocaleString1()
+httu=''
+for (var i = 0; i < ret.data.img_str.length; i++) {
+	//ret.data.img_str[i]
+	httu+=	'	<img src="'+yuming2+'/upload/'+ret.data.img_str[i]+'" />'
+}
+document.getElementById('tu').innerHTML=httu
+}
+				 })
+	}
+	zb0()
+	$api.setStorage('j',0)
+function pinglun(){
+  page++
+  //alert(1)
+  //
+  nian='';
+yue='';
+ri='';
+shi='';
+fen='';
+miao='';
+Date.prototype.toLocaleString = function() {
+if(this.getFullYear()>9){
+nian=this.getFullYear()
+}else {
+nian='0'+this.getFullYear()
+}
+
+if(parseInt(this.getMonth())+1>9){
+yue=parseInt(this.getMonth())+parseInt(1)
+}else {
+yue='0'+(parseInt(this.getMonth())+parseInt(1))
+}
+
+
+if(this.getDate()>9){
+ri=this.getDate()
+}else {
+ri='0'+this.getDate()
+}
+return nian+'.'+yue+'.'+ri
+}
+Date.prototype.toLocaleString1 = function() {
+if(this.getHours()>9){
+shi=this.getHours()
+}else {
+shi='0'+this.getHours()
+}
+if(this.getMinutes()>9){
+fen=this.getMinutes()
+}else {
+fen='0'+this.getMinutes()
+}
+if(this.getSeconds()>9){
+miao=this.getSeconds()
+}else {
+miao='0'+this.getSeconds()
+}
+return shi+':'+fen
+}
+
+//输出：new Date(时间戳*1000).toLocaleString()+"&nbsp"+ new Date(时间戳*1000).toLocaleString1()
+
+  //
+  /*
+  http://car.tianzhuowangluo.com/car/community/leaveList
+  请求参数
+  参数名
+  参数类型
+  描述
+  release_id
+  number
+  示例：1 //社区列表id
+  page
+  number
+  示例：1 //页数
+  */
+if(1){
+
+  	api.ajax({
+			url: yuming2+'/api/Forum/forum/getinfo',
+					method: 'get',
+					data:{values: {
+						"loginMark": api.deviceId,
+						"token": $api.getStorage('token'),
+id:api.pageParam.id,
+              }}
+       }, function(ret) {
+         jz=1
+ //alert(JSON.stringify(ret))
+/*  if(ret.data.length>0){document.getElementById('shum').innerHTML=' · '+ret.data.length}else {
+    document.getElementById('shum').style.display='none'
+  }*/
+  toast.hide()
+      for (var i = 0; i < document.getElementsByClassName('zhuan').length; i++) {
+        document.getElementsByClassName('zhuan')[i].style.display='none'
+      }
+       if(ret){
+       if(ret.code==1){
+         /*if(ret.data.length==0){
+
+          document.getElementById('pt').innerHTML='<span style="color:#464646;font-size:14px;margin-top:10px;">暂无评论~<span>'
+      }else {
+          document.getElementById('pt').innerHTML=''
+      }*/
+
+      if(ret.data.pl.length){
+       html=''
+       for (var i = 0; i < ret.data.pl.length; i++) {
+        html+='	<li>'
+					  html+=	'<div class="sqhead">'
+					  html+=	'	<img src="images/icon1.png" />'
+					  html+=	'	<div>'
+						  html+=	'	<h4>'+ret.data.pl[i].d_name+'</h4>'
+						  html+=	'	<span>'+new Date(ret.data.pl[i].add_time*1000).toLocaleString()+" "+ new Date(ret.data.pl[i].add_time*1000).toLocaleString1()+'</span>'
+					  html+=	'	</div>'
+				  html+=	'	</div>'
+				  html+=	'	<div class="sqtext">'+ret.data.pl[i].nr+'</div>'
+			  html+=	'	</li>'
+       }
+         html+='<div class="xiala"></div>'
+       document.getElementById('pinglun').innerHTML=html
+      }
+
+
+
+       }
+       }else {
+        // jy=0
+         api.toast({
+         msg: '网络错误',
+         duration: 2000,
+         location: 'middle'
+     });
+       }
+toast.hide()
+})}else {
+api.ajax({
+  url: yuming+'/car/community/leaveList',
+method: 'post',
+data:{values: {
+   'release_id':api.pageParam.id,
+   page:page
+ }}
+     }, function(ret) {
+    // alert(JSON.stringify(ret))
+    for (var i = 0; i < document.getElementsByClassName('zhuan').length; i++) {
+      document.getElementsByClassName('zhuan')[i].style.display='none'
+    }
+     if(ret){
+       if(1){
+
+         if(ret.data.length){
+          html=''
+          for (var i = 0; i < ret.data.length; i++) {
+           html+=	'<div class="pl">'+
+             '	<img src="'+ret.data[i].avatar+'" class="pl1" onclick="tdzl('+ret.data[i].userId+',this)" data-name="'+ret.data[i].user_nickname+'" data-ava="'+ret.data[i].avatar+'"/>'+
+             '	<div class="pl2">'+
+                 ret.data[i].user_nickname+
+             '	</div>'+
+               '<div class="pl3">'+
+           //  new Date(	ret.data[i].add_time*1000).toLocaleString()+" "+ new Date(ret.data[i].add_time*1000).toLocaleString1()+
+   ret.data[i].create_time.split(':')[0]+":"+ret.data[i].create_time.split(':')[1]+
+             '	</div>'
+
+           html+=		'<div class="pl5" onclick="huifu(this,'+ret.data[i].id+')" data-name="'+ret.data[i].user_nickname+'">'+
+           ret.data[i].leave+
+             '	</div>'+
+             '	<div class="pl6">'+
+
+           '	</div>'
+           if(ret.data[i].repay.length>0){
+             for (var j = 0; j < ret.data[i].repay.length; j++) {
+
+
+             html+='<div class="hf">'
+             html+=	'<div class="pl">'+
+               '	<img src="'+ret.data[i].repay[j].user_avatar+'" class="pl1" onclick="tdzl('+ret.data[i].repay[j].user_id+',this)"  data-name="'+ret.data[i].repay[j].user_nickname+'" data-ava="'+ret.data[i].repay[j].user_avatar+'"/>'+
+               '	<div class="pl2">'+
+                 ret.data[i].repay[j].user_nickname+
+               '	</div>'+
+                 '<div class="plsj">'+
+         ret.data[i].repay[j].create_time.split(':')[0]+":"+  ret.data[i].repay[j].create_time.split(':')[1]+
+
+               '	</div>'
+
+             if(zhurenid==ret.data[i].repay[j].user_id){
+               html+=		'<div class="pl5" onclick="huifu(this,'+ret.data[i].repay[j].id+')" data-name="'+ret.data[i].repay[j].user_nickname+'">主人<span style="color:#2D6BFA">回复</span>'+ret.data[i].repay[j].name+':'
+             }else {
+                html+=		'<div class="pl5" onclick="huifu(this,'+ret.data[i].repay[j].id+')" data-name="'+ret.data[i].repay[j].user_nickname+'">'+ret.data[i].repay[j].user_nickname+'<span style="color:#2D6BFA">回复</span>'+ret.data[i].repay[j].name+':'
+             }
+                 html+=	  ret.data[i].repay[j].leave+
+               '	</div>'+
+               '	<div class="pl6">'+
+
+             '	</div>'
+               html+='</div>'
+               html+=   '<div class="xixian" >'+
+
+
+         '  </div>'
+                 html+='</div>'
+                   }
+           }
+               html+=   '<div class="xixian" style="float: left;">'+
+
+
+         '  </div>'+
+           '	</div>'
+          }
+     html+='<div class="xiala"></div>'
+
+     document.getElementsByClassName('xiala')[page-2].innerHTML=html
+       $api.setStorage('j',0)
+    }
+
+
+
+     }
+     }else {
+      // jy=0
+       api.toast({
+       msg: '网络错误',
+       duration: 2000,
+       location: 'middle'
+   });
+     }
+toast.hide()
+     })
+}
+
+}
+pinglun()
+//上啦加载
+
+api.addEventListener({
+    name:'scrolltobottom',
+    extra:{
+        threshold:0           //设置距离底部多少距离时触发，默认值为0，数字类型
+    }
+}, function(ret, err){
+
+  if($api.getStorage('j')==0&&jz==1){
+  /*  $api.setStorage('j',1)
+
+    //alert(1)
+     var zhuan=document.getElementById('zhuan').cloneNode(true);
+     zhuan.style.display='block'
+     document.getElementById('ddd').appendChild(zhuan)
+
+ pinglun()*/
+}
+});
+}
+</script>

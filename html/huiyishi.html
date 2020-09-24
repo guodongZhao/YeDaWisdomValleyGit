@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="format-detection" content="telephone=no"><!-- 禁止IPHONE识别手机号码 -->
+<meta name="viewport" content="width=device-width,user-scalable=no, initial-scale=1">
+<title>会议室预约</title>
+<!-- css -->
+<link rel="stylesheet" type="text/css" href="css/index.css">
+<link rel="stylesheet" type="text/css" href="css/mui.min.css" />
+<link href="http://at.alicdn.com/t/font_1542633_vjfoldr9imp.css" />
+<script src="http://at.alicdn.com/t/font_1542633_vjfoldr9imp.js"></script>
+<link rel="stylesheet" type="text/css" href="../css/aui.css">
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/aui-toast.js"></script>
+<script type="text/javascript" src="../script/H.js"></script>
+<script type="text/javascript" src="../script/jquery.js"></script>
+<script type="text/javascript" src="../script/yuming.js"></script>
+<style>
+
+.m-slider {
+    overflow-x: hidden;
+    width: 100%;
+    position: relative;
+}
+.slider-wrapper {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    -webkit-transform: translate3d(0px, 0px, 0px);
+    transform: translate3d(0px, 0px, 0px);
+    position: relative;
+    z-index: 1;
+    -webkit-transition-property: -webkit-transform;
+    transition-property: -webkit-transform;
+    transition-property: transform;
+    transition-property: transform, -webkit-transform;
+}
+
+.slider-item {
+    width: 100%;
+    height: 100%;
+    -webkit-flex-shrink: 0;
+    -ms-flex-negative: 0;
+    flex-shrink: 0;
+    background: #f6f6f6;
+}
+
+.slider-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border: none;
+}
+.slider-pagination {
+    text-align: right;
+    position: absolute;
+    width: 100%;
+    z-index: 2;
+    right: 0;
+    bottom: 10px;
+    pointer-events: none;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: end;
+    -webkit-align-items: flex-end;
+    -ms-flex-align: end;
+    align-items: flex-end;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+
+.slider-pagination > .slider-pagination-item { margin: 0 5px; width: 7px; height: 7px; display: inline-block; border-radius: 100%; background-color: rgba(255,255,255,0.4);}
+.slider-pagination > .slider-pagination-item.slider-pagination-item-active { background-color: #fff;width:15px; border-radius: 33px;}
+.module-content{padding-top: 44px;padding-bottom: 50px;}
+.banner{border-radius: 10px;overflow: hidden;}
+.banner img{display: block;margin: 0;padding: 0; width: 100%;}
+.hys{display: flex;align-items: center;justify-content: space-between;padding: 10px;}
+.hys img{width: 20px;margin-right: 8px;}
+.hys h3{color: #333;font-size: 14px;color: #000; display: flex;align-items: center;width: 80%;}
+.hys p{color: #333;font-size: 12px;display: flex;align-items: center;width: 25%;justify-content: flex-end;}
+.hybt{color: #000;font-size: 16px;line-height: 40px;margin-left: 15px;}
+.hyxz{background: #f4f4f4;border-top-left-radius: 10px;border-top-right-radius: 10px;padding: 10px 15px;}
+
+.office .office-time {
+    padding: 15px;
+    background: #fff;
+    margin-top:15px;
+    border-radius: 10px;
+}
+.office .office-time h4 {
+    font-size: 16px;
+    color: #010101;
+    margin-bottom: 10px;
+}
+.office .office-time p {
+    font-size: 14px;
+    color: #7f7f7f;
+    margin-bottom: 15px;
+}
+.office-time-legend{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin:15px 0;
+}
+.office-time-legend .office-time-legend-item{
+    display: flex;
+}
+.office-time-legend .legend-img{
+    width:19px;
+    height:19px;
+    border-radius: 3px;
+    border:1px solid #ddd;
+    margin-right:5px;
+}
+.office-time-legend .legend-img.used{
+    background: #fff;
+}
+.office-time-legend .legend-img.disabled{
+    background: #999999;
+}
+.office-time-legend .legend-img.checked{
+    background: #e4f1ff;border: 1px solid #c4e0ff;
+}
+.office-time-legend .legend-text{
+    font-size:14px;
+    color:#010101;
+}
+.office .office-time-con.office-time-slot {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.office .office-time-con.office-time-slot .office-time-item {
+    font-size: 14px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+.office .office-time-con .office-time-item {
+    padding: 0 9px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    text-align: center;
+    line-height: 53px;
+    color: #010101;
+}
+.office .office-time-con.office-time-slot .office-time-item.checked {
+    color: #0062CC;
+    background: #e4f1ff;border: 1px solid #c4e0ff;
+}
+
+.office .office-time-con.office-time-slot .office-time-item.disable{
+    color:#010101;
+    background: #999999;
+
+}
+.weui-btn-area {
+    margin: 0.5em 15px 1.17em;
+}
+.weui-btn {
+    position: relative;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 14px;
+    padding-right: 14px;
+    box-sizing: border-box;
+    font-size: 18px;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    line-height: 2.55555556;
+    border-radius: 5px;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    overflow: hidden;
+}
+.weui-btn_main {
+    background-color: #38acff;
+    margin:20px 0 50px;
+}
+.office .office-time-con.office-time-data{
+    overflow-x: scroll; display: -webkit-box; -webkit-overflow-scrolling: touch;
+}
+
+.office-time-data::-webkit-scrollbar {width:0;height:0;display: none;}
+.office .office-time-con.office-time-data .office-time-item{
+    margin-right:10px;
+    cursor: pointer;
+    padding: 8px;
+}
+.office .office-time-con.office-time-data .office-time-item.checked{
+    border:1px solid #38adfd;
+    color:#38adfd;
+    background: #f2f9ff;
+}
+.office .office-time-con.office-time-data .office-time-item span{
+    font-size: 12px;
+    color: #999;
+    display: inline-block;
+    margin-top: 8px;
+}
+.office .office-time-con.office-time-data .office-time-item.checked span{
+    color:#38adfd;
+}
+/*.office .office-time-con.office-time-slot .office-time-item:nth-child(6n+0) {
+    margin-right: 0;
+}*/
+.office .office-time-con.office-time-data .office-time-item {
+    font-size: 13px;
+    line-height: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/*.sdxz ul{display: flex;flex-wrap: wrap;justify-content: space-between;}
+.sdxz ul li{background: #fff;border-radius: 10px;width: 46%;text-align: center;margin-bottom: 10px;line-height: 36px;}
+.sdxz ul li.cur{color: #0062CC;background: #e4f1ff;border: 1px solid #c4e0ff;}*/
+.sbxz{margin-top: 10px;background: #fff;border-radius: 10px;padding: 10px 0;}
+.sbxz ul{display: flex;align-items: center;}
+.sbxz ul li{width: 20%;text-align: center;background: #fff;margin: 10px 2.5%;padding: 10px 0;border-radius: 10px;}
+.sbxz ul li span{display: block;width: 30px;height: 30px;margin: auto;}
+.sbxz ul li .span1{background: url(images/bb.png) no-repeat ; background-size: 30px 60px;}
+.sbxz ul li .span2{background: url(images/ty.png) no-repeat ; background-size: 30px 60px;}
+.sbxz ul li .span3{background: url(images/yx.png) no-repeat ; background-size: 30px 60px;}
+.sbxz ul li .span4{background: url(images/ht.png) no-repeat ; background-size: 30px 60px;}
+.sbxz ul li.cur{background: #e4f1ff;border: 1px solid #c4e0ff;}
+.sbxz ul li.cur span{background-position-y: bottom;}
+.sbxz ul li.cur p{color: #0062CC;}
+.sbxz ul li p{font-size: 14px;margin-top: 8px;}
+.yyr ul{border-radius: 10px;overflow: hidden;}
+.yyr li{display: flex;background: #fff;align-items: center;padding:5px 10px;}
+.yyr li span{font-size: 14px;color: #333;width: 80px;}
+.yyr li select{font-size: 14px;}
+.yyr li input{border: 0;font-size: 14px;color: #000;}
+.yyr p{line-height: 44px;color: #000;font-size: 14px;}
+.yyr textarea{border-radius: 10px;border: 0;color: #000;font-size: 14px;}
+.yyr textarea::-webkit-input-placeholder{color: #333;}
+.tjsq{display: block;text-align: center; line-height: 40px;margin-top: 10px; color:#fff;font-size: 14px; border-radius: 10px;background: linear-gradient(to right, #367ff8 , #556dff);}
+.ss li{display: flex;align-items: center;padding: 5px 0; border-bottom: 1px solid #f1f1f1;}
+.ss li span{font-size: 14px;color: #333;width: 80px;}
+.ss li select{font-size: 14px;}
+.ss li input{border: 0;font-size: 14px;color: #000;}
+</style>
+</head>
+<body style="background: #fff;">
+<header  id="headj">
+	<a >
+		<img src="images/back_jt.png" onclick="api.closeWin()"/>
+		<span onclick="api.closeWin()">会议室预约</span>
+	</a>
+</header>
+<div class="module-content" id="ge">
+<!--	<section class="aui-scrollView">
+		<div class="m-slider" data-ydui-slider="">
+			<div class="slider-wrapper" >
+				<div class="slider-item">
+					<a>
+						<img src="../image/huiyi1.jpg" id="tu11">
+					</a>
+				</div>
+
+			</div>
+			<div class="slider-pagination">
+			</div>
+		</div>-->
+    	<img src="../image/huiyi1.jpg" id="tu11" style="width:100%">
+	</section>
+	<div class="hys">
+		<h3><img src="images/weizhi.png" /><span id="mingzi"></span></h3>
+		<p><img src="images/renshu.png"/><span id="rongna"></span></p>
+	</div>
+	<div class="hyxz office">
+		<!--预约时间-->
+    <div class="weui-panel">
+        <div class="office-time ss">
+            <h4>请选择预约日期</h4>
+            <li><span>预约日期</span><input type="date"   id="td" /></li>
+            <!--<p>只可提前预约最近5天</p>-->
+            <div class="office-time-con office-time-data" style="display:none">
+                <div class="checked office-time-item date_" val="2019-11-25">今天<span>11月25日</span></div>
+                <div class="office-time-item date_" val="2019-11-26">明天<span>11月26日</span></div>
+                <div class="office-time-item date_" val="2019-11-27">后天<span>11月27日</span></div>
+                <div class="office-time-item date_" val="2019-11-28">星期四<span>11月28日</span></div>
+                <div class="office-time-item date_" val="2019-11-29">星期五<span>11月29日</span></div>
+                <div class="office-time-item date_" val="2019-11-30">星期六<span>11月30日</span></div>
+                <div class="office-time-item date_" val="2019-12-01">星期天<span>12月01日</span></div>
+                <div class="office-time-item date_" val="2019-12-02">星期一<span>12月02日</span></div>
+                <div class="office-time-item date_" val="2019-12-03">星期二<span>12月03日</span></div>
+                <div class="office-time-item date_" val="2019-12-04">星期三<span>12月04日</span></div>
+                <div class="office-time-item date_" val="2019-12-05">星期四<span>12月05日</span></div>
+                <div class="office-time-item date_" val="2019-12-06">星期五<span>12月06日</span></div>
+                <div class="office-time-item date_" val="2019-12-07">星期六<span>12月07日</span></div>
+                <div class="office-time-item date_" val="2019-12-08">星期天<span>12月08日</span></div>
+                <div class="office-time-item date_" val="2019-12-09">星期一<span>12月09日</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!--预约时段-->
+    <div class="weui-panel">
+        <div class="office-time">
+            <h4>请选择预约时段</h4>
+            <p>每个数字代表一个时段，例如9点表示9:00:00~9:59:59</p>
+            <div class="office-time-legend">
+                <div class="office-time-legend-item">
+                    <div class="legend-img used"></div>
+                    <div class="legend-text">可选</div>
+                </div>
+                <div class="office-time-legend-item" style="display:none">
+                    <div class="legend-img disabled"></div>
+                    <div class="legend-text">已预订</div>
+                </div>
+                <div class="office-time-legend-item">
+                    <div class="legend-img checked"></div>
+                    <div class="legend-text">已选</div>
+                </div>
+            </div>
+            <div class="office-time-con office-time-slot" id="timeSoltCon">
+                <div class="office-time-item slot_" data-time="1574632800">06:00</div>
+                <div class="office-time-item slot_" data-time="1574634600">06:30</div>
+                <div class="office-time-item slot_" data-time="1574636400">07:00</div>
+                <div class="office-time-item slot_" data-time="1574638200">07:30</div>
+                <div class="office-time-item slot_ " data-time="1574640000">08:00</div>
+                <div class="office-time-item slot_ " data-time="1574641800">08:30</div>
+                <div class="office-time-item slot_ " data-time="1574643600">09:00</div>
+                <div class="office-time-item slot_ " data-time="1574645400">09:30</div>
+                <div class="office-time-item slot_" data-time="1574647200">10:00</div>
+                <div class="office-time-item slot_" data-time="1574649000">10:30</div>
+                <div class="office-time-item slot_" data-time="1574650800">11:00</div>
+                <div class="office-time-item slot_" data-time="1574652600">11:30</div>
+                <div class="office-time-item slot_" data-time="1574654400">12:00</div>
+                <div class="office-time-item slot_" data-time="1574656200">12:30</div>
+                <div class="office-time-item slot_" data-time="1574658000">13:00</div>
+                <div class="office-time-item slot_" data-time="1574658000">13:30</div>
+                <div class="office-time-item slot_" data-time="1574658000">14:00</div>
+                <div class="office-time-item slot_" data-time="1574658000">14:30</div>
+                <div class="office-time-item slot_" data-time="1574658000">15:00</div>
+                <div class="office-time-item slot_" data-time="1574658000">15:30</div>
+                <div class="office-time-item slot_" data-time="1574658000">16:00</div>
+                <div class="office-time-item slot_" data-time="1574658000">16:30</div>
+                <div class="office-time-item slot_" data-time="1574658000">17:00</div>
+                <div class="office-time-item slot_" data-time="1574658000">17:30</div>
+                <div class="office-time-item slot_" data-time="1574658000">18:00</div>
+                <div class="office-time-item slot_" data-time="1574658000">18:30</div>
+                <div class="office-time-item slot_" data-time="1574658000">19:00</div>
+                <div class="office-time-item slot_" data-time="1574658000">19:30</div>
+                <div class="office-time-item slot_" data-time="1574658000">20:00</div>
+                <div class="office-time-item slot_" data-time="1574658000">20:30</div>
+                <div class="office-time-item slot_" data-time="1574658000">21:00</div>
+                <div class="office-time-item slot_" data-time="1574658000">21:30</div>
+                <div class="office-time-item slot_" data-time="1574658000">22:00</div>
+                <div class="office-time-item slot_" data-time="1574658000">22:30</div>
+                <div class="office-time-item slot_" data-time="1574658000">23:00</div>
+            </div>
+
+        </div>
+    </div>
+
+		<div class="sbxz" style="display:none">
+			<p class="hybt">请选择设备(多选)</p>
+			<ul>
+				<li class="cur">
+					<span class="span1"></span>
+					<p>白板</p>
+				</li>
+				<li>
+					<span class="span2"></span>
+					<p>投影仪</p>
+				</li>
+				<li>
+					<span class="span3"></span>
+					<p>音箱</p>
+				</li>
+				<li>
+					<span class="span4"></span>
+					<p>话筒</p>
+				</li>
+			</ul>
+		</div>
+		<div class="yyr">
+			<p class="hybt">请填写信息</p>
+			<ul>
+
+				<li><span>申请公司</span><select id="gs"><option>业达物业公司</option></select></li>
+				<li><span>联&nbsp;&nbsp;系&nbsp;人</span><input type="text" placeholder="请填写联系人" id="ren" /></li>
+				<li><span>联系电话</span><input type="text" placeholder="请填写联系人电话" id="dianhua" /></li>
+			</ul>
+			<p>用途：</p>
+			<textarea placeholder="请填写会议室使用用途" id="yongtu"></textarea>
+		</div>
+
+	<a class="tjsq" onclick="tijiao()">提交申请</a>
+	</div>
+</div>
+<div class="foot_menu" style="display:none">
+	<ul>
+		<li class="cur">
+			<a href="index.html">
+				<i><img src="images/menu_icon01_r.png"></i>
+				<span>首 页</span>
+			</a>
+		</li>
+		<li>
+			<a href="shequ.html">
+				<i><img src="images/menu_icon02.png"></i>
+				<span>社 区</span>
+			</a>
+		</li>
+		<li>
+			<a href="news.html">
+				<i><img src="images/menu_icon03.png"></i>
+				<span>消 息</span>
+			</a>
+		</li>
+		<li>
+			<a href="user.html">
+				<i><img src="images/menu_icon04.png"></i>
+				<span>我 的</span>
+			</a>
+		</li>
+	</ul>
+</div>
+</body>
+<script src="js/jquery.js" type="text/javascript"></script>
+<script type="text/javascript" src="js/slider.js"></script>
+<script>
+startTime ='';
+endTime = '';
+    var box1,box2;
+    $('.date_').click(function() {
+        $('.date_').removeClass('checked');
+        $(this).addClass('checked');
+    });
+
+    $(".slot_").on("click", function () {
+        var $this = $(this);
+        var $boxes = $this.parent().children();
+
+        if ($this.hasClass('disable'))
+            return;
+
+        if (!box1) {
+            // 点击第一个盒子的时候清空所有box的checked状态
+            // 移除之前存储的box2变量
+            // 只给当前盒子增加checked
+            box1 = $this;
+            $boxes.removeClass('checked');
+            $this.addClass('checked');
+            box2 = null;
+        } else if (!box2) {
+            // 点击第二个盒子的时候
+            // 计算从哪个盒子开始到哪个盒子结束需要增加checked状态
+            box2 = $this;
+            var box1Index = box1.index();
+            var box2Index = box2.index();
+
+            // 这里从“第一个盒子”、“第二个盒子”的概念切换到“开始盒子”和“结束盒子”
+            var startBoxIndex = Math.min(box1Index, box2Index);
+            var endBoxIndex = Math.max(box1Index, box2Index);
+
+            // 重复点击第一个盒子时，不计算为第二个盒子
+            if (startBoxIndex === endBoxIndex) {
+                box2 = null;
+            }
+
+            // 开始盒子和结束盒子之间所有的盒子
+            var $startEndBoxRange = $boxes.filter(function () {
+                var index = $(this).index();
+                return index >= startBoxIndex && index <= endBoxIndex;
+            });
+            var $disableBoxes = $startEndBoxRange.filter(function () {
+                return $(this).hasClass('disable');
+            });
+
+            // 用户选择的区间是否包含禁用的盒子
+            if ($disableBoxes.length) {
+                // 包含禁用盒子则提示，并重置第二盒子
+                alert('disabled in range');
+                box2 = null;
+            } else {
+                // 不包含禁用盒子
+                $boxes.removeClass('checked');
+                $startEndBoxRange.addClass('checked');
+
+                // 到这里用户选择完了开始和结束区间
+            }
+        } else {
+            // 当已经选择了第二个盒子后重新点击，意味着刚才选过的一系列盒子作废
+            // 用户期望重新选择盒子区间
+            // 和选择第一个盒子后的逻辑相同
+            box1 = $this;
+            $boxes.removeClass('checked');
+            $this.addClass('checked');
+            box2 = null;
+        }
+
+    })
+
+    $("#submitOrder").on('click',function(){
+        if(box1 && box2){
+             startTime = box1.html();
+           endTime = box2.html();
+          //  alert(startTime)
+              //alert(endTime)
+            if(startTime && endTime){
+                alert("预约成功")
+            }else{
+                alert("请选择预约时间")
+            }
+        }else{
+            alert("请选择两个时间点")
+        }
+
+
+
+    })
+
+</script>
+</html>
+<script type="text/javascript">
+arr=[]
+apiready = function () {
+$api.fixStatusBar(document.getElementById('headj'));
+document.getElementById('headj').style.height=(50+api.safeArea.top)+'px'
+document.getElementById('ge').style.marginTop=(5+api.safeArea.top)+'px'
+//alert(JSON.stringify(api.pageParam.arr))
+document.getElementById('mingzi').innerHTML=api.pageParam.arr.Position+api.pageParam.arr.ConferenceName
+document.getElementById('rongna').innerHTML=api.pageParam.arr.ConNumber+'人'
+document.getElementById('tu11').setAttribute('src','../image/hy'+(parseInt(api.pageParam.tu))+'.jpg')
+/*获取当前时间*/
+   var time = new Date();
+   /*格式化日，如果小于9，则补0*/
+   var day = ("0" + time.getDate()).slice(-2);
+   /*格式化月，如果小于9，则补0*/
+   var month = ("0" + (time.getMonth() + 1)).slice(-2);
+   /*拼接日期*/
+   var today = time.getFullYear() + "-" + (month) + "-" + (day);
+   /*完成赋值操作*/
+   ksdate=today
+   jsdate=today
+   document.getElementById("td").value=today
+   showDefault()
+   function zb(){
+   	api.ajax({
+   					 url: yuming+'/learun/adms/newuser/getcompany',
+   					 method: 'get',
+   					 data:{values: {
+
+
+   	"loginMark": api.deviceId,
+   	"token": $api.getStorage('token')
+
+
+   							}}
+   			 }, function(ret) {
+
+   //alert(JSON.stringify(ret))
+
+   			 if(ret){
+   			 if(ret.code==200){
+   arr=ret.data
+   				toast.hide()
+   var html=''
+   for (var i = 0; i < ret.data.length; i++) {
+   if(1){
+   html+='<option value="'+ret.data[i].areaId+'">'+ret.data[i].areaName+'</option>'
+   }
+
+   }
+   document.getElementById('gs').innerHTML=html
+  // zb1()
+   	 }else {
+   		 toast.hide()
+   		 api.toast({
+   		 msg: ret.info,
+   		 duration: 2000,
+   		 location: 'middle'
+    });
+   	 }
+
+   			 }else {
+
+   					toast.hide()
+   				 api.toast({
+   				 msg: '网络错误',
+   				 duration: 2000,
+   				 location: 'middle'
+   		 });
+   			 }
+
+   			 })
+   }
+   zb()
+}
+/*
+loginMark	String	设备标识，必须具有唯一性
+token	String	验证码，从登录后返回信息中获取
+ID	String	填写id执行更新，不填写id执行新增
+Liaison	String	联系人
+PhoneNumber	String	电话
+CompanyName	String	申请公司
+ConferenceName	String	会议室名称
+Reason	String	申请用途
+Status2	String	会议室地址
+StartTime	DateTime	开始时间
+EndTime	DateTome	结束时间
+ConferenceID	String	会议室id
+CompanyID	String	申请公司id
+Status	String
+Status3	DateTime	/learun/adms/Appointment/postappointment
+*/
+jy=0
+function tijiao(){
+var ren=document.getElementById('ren').value
+var dianhua=document.getElementById('dianhua').value
+var yongtu=document.getElementById('yongtu').value
+gsm=''
+for (var i = 0; i < arr.length; i++) {
+if(  arr[i].areaId==document.getElementById('gs').value){
+gsm=  arr[i].areaName
+}
+}
+if(!ren){
+  api.toast({
+  msg: '请填写联系人!',
+  duration: 2000,
+  location: 'middle'
+  });
+  return
+}
+if(!dianhua){
+  api.toast({
+  msg: '请填写电话!',
+  duration: 2000,
+  location: 'middle'
+  });
+  return
+}
+if(box1 && box2){
+
+}else {
+  api.toast({
+  msg: '请选择时间段!',
+  duration: 2000,
+  location: 'middle'
+  });
+  return
+}
+	if(jy==0){
+		jy=1
+		showDefault()
+		api.ajax({
+						 url: yuming+'/learun/adms/Appointment/postappointment',
+						 method: 'post',
+						 data:{values: {
+
+
+		"loginMark": api.deviceId,
+		"token": $api.getStorage('token'),
+Liaison:ren,
+PhoneNumber:dianhua,
+CompanyName	:gsm,
+ConferenceName:api.pageParam.arr.ConferenceName,
+Reason	:yongtu,
+Status2	:api.pageParam.arr.Position,
+StartTime:document.getElementById('td').value+startTime,
+EndTime	:document.getElementById('td').value+endTime,
+ConferenceID:api.pageParam.arr.ID,
+CompanyID	:document.getElementById('gs').value
+
+								}}
+				 }, function(ret) {
+
+	//alert(JSON.stringify(ret))
+	 toast.hide()
+				 if(ret){
+				 if(ret.code==200){
+           api.sendEvent({
+               name: 'sx',
+               extra: {
+                   key1: 'value1',
+                   key2: 'value2'
+               }
+           });
+
+					 api.toast({
+					 msg: '提交成功!',
+					 duration: 2000,
+					 location: 'middle'
+					 });
+					toast.hide()
+jy=0
+		 }else {
+			 toast.hide()
+			 api.toast({
+			 msg: ret.info,
+			 duration: 2000,
+			 location: 'middle'
+	 });
+		 }
+
+				 }else {
+
+						toast.hide()
+					 api.toast({
+					 msg: '网络错误',
+					 duration: 2000,
+					 location: 'middle'
+			 });
+				 }
+
+				 })
+	}
+}
+</script>

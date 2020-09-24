@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="format-detection" content="telephone=no"><!-- 禁止IPHONE识别手机号码 -->
+<meta name="viewport" content="width=device-width,user-scalable=no, initial-scale=1">
+<title>租赁车位添加</title>
+<!-- css -->
+<link rel="stylesheet" type="text/css" href="css/index.css">
+<link rel="stylesheet" type="text/css" href="css/mui.min.css" />
+<link href="css/foundation-datepicker.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="../css/aui.css">
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/aui-toast.js"></script>
+<script type="text/javascript" src="../script/H.js"></script>
+<script type="text/javascript" src="../script/jquery.js"></script>
+<script type="text/javascript" src="../script/yuming.js"></script>
+<style>
+.module-content{padding-top: 44px;padding-bottom: 50px;}
+.hybt{color: #000;font-size: 16px;line-height: 40px;}
+.hyxz{background: #f4f4f4;border-top-left-radius: 10px;border-top-right-radius: 10px;padding: 10px 15px;}
+
+.yyr{border-radius: 10px;overflow: hidden;}
+.yyr li{display: flex;background: #fff;align-items: center;padding:5px 10px;border-bottom: 1px solid #f1f1f1;}
+.yyr li:last-child{border-bottom: 0;}
+.yyr li span{font-size: 14px;color: #333;width: 80px;}
+.yyr li select{font-size: 14px;}
+.yyr li input{border: 0;font-size: 14px;color: #000;}
+.yyr p{line-height: 44px;color: #000;font-size: 14px;}
+.hyxz textarea{border-radius: 10px;border: 0;color: #000;font-size: 14px;}
+.hyxz textarea::-webkit-input-placeholder{color: #333;}
+.tjsq{display: block;text-align: center; line-height: 40px;margin-top: 10px; color:#fff;font-size: 14px; border-radius: 10px;background: linear-gradient(to right, #367ff8 , #556dff);}
+</style>
+</head>
+<body style="background: #f7f7f7;">
+	<header id="headj">
+		<a >
+			<img src="images/back_jt.png" onclick="api.closeWin()" />
+			<span onclick="api.closeWin()">搜索</span>
+		</a>
+	</header>
+<div class="module-content" id="ge">
+	<div class="hyxz">
+		<ul class="yyr">
+	<li><span>开始时间</span><input type="date" placeholder="请输入设备序号"  id="xuhao" /></li>
+
+      	<li><span>结束时间</span><input type="date" placeholder="请输入年份"  id="nian" /></li>
+
+        <!--	<li><span>巡检结果</span><input type="text" placeholder="请输入巡检结果"  id="inspectionResults" /></li>
+          	<li><span>巡检人</span><input type="text" placeholder="请输入巡检人"  id="inspector" /></li>
+            	<li><span>检查状态</span>
+<select class="ss" id="inspectstatus" >
+  <option value="">全部</option>
+  <option value="0">应检</option>
+    <option value="1">已检</option>
+</select>
+-->
+		</ul>
+
+	<a class="tjsq" id="sou">搜索</a>
+
+	</div>
+</div>
+
+<div class="foot_menu" style="display:none">
+	<ul>
+		<li>
+			<a href="index.html">
+				<i><img src="images/menu_icon01.png"></i>
+				<span>首 页</span>
+			</a>
+		</li>
+		<li class="cur">
+			<a href="wuye.html">
+				<i><img src="images/menu_icon02_r.png"></i>
+				<span>智 能</span>
+			</a>
+		</li>
+		<li>
+			<a href="news.html">
+				<i><img src="images/menu_icon03.png"></i>
+				<span>消 息</span>
+			</a>
+		</li>
+		<li>
+			<a href="user.html">
+				<i><img src="images/menu_icon04.png"></i>
+				<span>我 的</span>
+			</a>
+		</li>
+	</ul>
+</div>
+</body>
+<script src="js/jquery-1.11.3.min.js"></script>
+<script src="js/foundation-datepicker.js"></script>
+<script src="js/locales/foundation-datepicker.zh-CN.js"></script>
+<script>
+
+</script>
+</html>
+<script type="text/javascript">
+apiready = function () {
+$api.fixStatusBar(document.getElementById('headj'));
+document.getElementById('headj').style.height=(50+api.safeArea.top)+'px'
+document.getElementById('ge').style.marginTop=(5+api.safeArea.top)+'px'
+var time = new Date();
+/*格式化日，如果小于9，则补0*/
+var day = ("0" + time.getDate()).slice(-2);
+/*格式化月，如果小于9，则补0*/
+var month = ("0" + (time.getMonth() + 1)).slice(-2);
+/*拼接日期*/
+var today = time.getFullYear() + "-" + (month) + "-" + (day);
+/*完成赋值操作*/
+ksdate=today
+jsdate=today
+//document.getElementById("ks").value=today
+//document.getElementById("js").value=today
+document.getElementById('sou').onclick=function(){
+  if(1){
+    api.openWin({
+        name: 'bangong',
+        url: './bangong.html',
+        pageParam: {
+          ks:document.getElementById("xuhao").value,
+          js:document.getElementById("nian").value,
+
+
+        },
+        reload:true
+    });
+  }else {
+    api.openWin({
+        name: 'dianbiao',
+        url: './dianbiao.html',
+        pageParam: {
+          id:document.getElementById("xuhao").value,
+            nian:document.getElementById("nian").value,
+            yue:document.getElementById("yue").value,
+
+        },
+        reload:true
+    });
+  }
+
+
+}
+
+}
+</script>

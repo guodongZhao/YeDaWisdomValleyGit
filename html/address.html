@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="format-detection" content="telephone=no"><!-- 禁止IPHONE识别手机号码 -->
+<meta name="viewport" content="width=device-width,user-scalable=no, initial-scale=1">
+<title>地址管理</title>
+<!-- css -->
+<link rel="stylesheet" type="text/css" href="css/index.css">
+<link rel="stylesheet" type="text/css" href="css/mui.min.css" />
+<style>
+.module-content{padding-top: 44px;margin-bottom: 50px;}
+.address{background: #fff;}
+.address li{display: flex;justify-content: space-between;align-items: center;border-bottom: 1px solid #f1f1f1;padding: 10px;}
+.address li div{width: 90%;}
+.address li div h3{font-size: 16px;color: #000;}
+.address li div h3 span{color: #999;font-size: 12px;margin-left: 10px;}
+.address li div p{font-size: 14px;color: #333;line-height: 22px;}
+.address li a{font-size: 12px;color: #666;width: 40px;border-left: 1px solid #f1f1f1;text-align: right;}
+</style>
+</head>
+<body style="background: #f7f7f7;">
+	<header>
+		<div class="head">
+			<a href="javascript:history.back(-1)">
+				<img src="images/back_jt.png" />
+			</a>
+			<p>地址管理</p>
+			<a href="addaddress.html">添加新地址</a>
+		</div>
+		
+	</header>
+	<div class="module-content ">
+		<ul class="address">
+			<li>
+				<div>
+					<h3>王晓华<span>18585898965</span></h3>
+					<p>山东省烟台市芝罘区通世街道峰山路1号</p>
+				</div>
+				<a href="editaddress.html">编辑</a>
+			</li>
+			<li>
+				<div>
+					<h3>王晓华<span>18585898965</span></h3>
+					<p>山东省烟台市芝罘区通世街道峰山路1号山东省烟台市芝罘区通世街道峰山路1号</p>
+				</div>
+				<a href="editaddress.html">编辑</a>
+			</li>
+		</ul>
+	</div>
+<div class="foot_menu">
+	<ul>
+		<li>
+			<a href="index.html">
+				<i><img src="images/menu_icon01.png"></i>
+				<span>首 页</span>
+			</a>
+		</li>
+		<li class="cur">
+			<a href="wuye.html">
+				<i><img src="images/menu_icon02.png"></i>
+				<span>智 能</span>
+			</a>
+		</li>
+		<li>
+			<a href="news.html">
+				<i><img src="images/menu_icon03.png"></i>
+				<span>消 息</span>
+			</a>
+		</li>
+		<li>
+			<a href="user.html">
+				<i><img src="images/menu_icon04.png"></i>
+				<span>我 的</span>
+			</a>
+		</li>
+	</ul>
+</div>
+</body>
+<script type="text/javascript" src="js/jquery.js" ></script>
+<script type="text/javascript" src="js/jquery.SuperSlide.2.1.1.js" ></script>
+<script>
+	$(".slideTxtBox").slide({trigger:"click"});
+</script>
+</html>

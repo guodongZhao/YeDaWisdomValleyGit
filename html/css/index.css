@@ -1,0 +1,87 @@
+@charset "utf-8";
+body,h1,h2,h3,h4,h5,dl,dd,dt,p,ul,li,ol{ margin:0; padding:0;}
+input,select,form,textarea,button,video{ border:none; margin:0;outline:none; padding:0; appearance:none;}
+h1,h2,h3,h4,h5{ font-weight:normal;}
+img{ border:none;}
+a{ 
+	text-decoration:none; outline:none;
+	-webkit-tap-highlight-color: transparent;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+}
+select{
+	/*-webkit-appearance:none;*/ /*去除系统默认的样式*/
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);   /* 点击高亮的颜色*/
+}
+body,button,input,select,textarea{ font: normal 12px/100% Helvetica, Arial, sans-serif;}
+li{ list-style-type:none;}
+table{border-collapse:collapse;border-spacing:0;}
+body,html{ width:100%; height: 100%;}
+html{ /*background-color: #f1f1f1; */}
+
+@media screen and (min-width: 320px) {html{font-size:50px;}}
+@media screen and (min-width: 360px) {html{font-size:56.25px;}}
+@media screen and (min-width: 375px) {html{font-size:58.59375px;}}
+@media screen and (min-width: 400px) {html{font-size:62.5px;}}
+@media screen and (min-width: 414px) {html{font-size:64.6875px;}}
+@media screen and (min-width: 440px) {html{font-size:68.75px;}}
+@media screen and (min-width: 480px) {html{font-size:75px;}}
+@media screen and (min-width: 520px) {html{font-size:81.25px;}}
+@media screen and (min-width: 560px) {html{font-size:87.5px;}}
+@media screen and (min-width: 600px) {html{font-size:93.75px;}}
+@media screen and (min-width: 640px) {html{font-size:100px;}}
+@media screen and (min-width: 680px) {html{font-size:100px;}}
+@media screen and (min-width: 720px) {html{font-size:100px;}}
+@media screen and (min-width: 760px) {html{font-size:100px;}}
+@media screen and (min-width: 800px) {html{font-size:100px;}}
+@media screen and (min-width: 960px) {html{font-size:100px;}}
+.icon {
+       width: 1em; height: 1em;
+       vertical-align: -0.15em;
+       fill: currentColor;
+       overflow: hidden;
+    }
+/*头部搜索栏*/
+
+header{height: 44px;line-height: 44px;padding:0 10px; background: #fff;width: 100%;position: fixed;z-index: 99;top: 0;}
+header a{display: flex;align-items: center;}
+header a img{width: 10px;}
+header span{font-size: 14px;color: #333;margin-left: 10px;}
+/*footer_box底部*/
+.footer_box{ margin-top: 3%; background-color: #fff; padding-bottom: 18%; }
+.footer_box .footer h2{ border-bottom: #ddd solid 1px; text-align: center; padding:4% 0; }
+.footer_box .footer h2 a{ font-size: .26rem; color: #999; display: inline-block; padding:0 1%; 
+	border-left: #999 solid 1px; line-height: 100%; padding:0 2%;
+}
+.footer_box .footer h2 a:first-child{border-left: 0;}
+.footer_box .footer h3{ text-align: center; margin:5% 0;}
+.footer_box .footer h3 span{display: inline-block; vertical-align: middle; margin:2%;}
+.footer_box .footer h3 span:after{content: ">"; color: #0dacde; margin-left: .3em; font-size:.24rem;}
+.footer_box .footer h3 span a{font-size:.24rem; color: #999;border-bottom: #999 solid 1px;}
+.footer_box .footer .txt{ text-align: center; color: #999; font-size: .20rem; line-height: 180%;}
+
+/*底部导航菜单*/
+.foot_menu{position: fixed; bottom: 0; left: 0; width: 100%; z-index: 999;}
+.foot_menu ul{ overflow: hidden; background-color: #fff; padding-top:2%; padding-bottom: 1%;
+	display: -webkit-box;
+    display: -moz-box;
+    display: -webkit-flex; /* Safari */ 
+    display: -moz-flex;
+    display: flex;
+    flex-wrap: nowrap;
+	-moz-justify-content: space-around;
+	-webkit-justify-content: space-around;
+	justify-content: space-around;
+	-webkit-box-align: center;
+	-moz-align-items: center;
+	-webkit-align-items: center;
+	align-items: center;
+	border-top: 1px solid #f1f1f1;
+}
+.foot_menu ul li{ text-align: center; }
+.foot_menu ul li i{display: block; margin-bottom: .08rem;}
+.foot_menu ul li img{ display: block; margin:0 auto; width: .4rem;height: .4rem;margin-bottom: 0.05rem; }
+.foot_menu ul li a{ color: #333; font-size: .20rem;display: inline-block;}
+.foot_menu ul li.cur a{color: #367ff8;}
+.foot_menu ul li.gwc a{position: relative;}
+.foot_menu ul li.gwc em{ position: absolute; right: -4%; top: -8%; background-color: #0dacde; border-radius: 50%;font-style:normal; width: .26rem; height: .26rem; text-align: center; line-height: .28rem; border: #fff solid 1px;font-size: .18rem; color: #fff;}

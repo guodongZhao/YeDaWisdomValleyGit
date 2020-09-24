@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="format-detection" content="telephone=no"><!-- 禁止IPHONE识别手机号码 -->
+<meta name="viewport" content="width=device-width,user-scalable=no, initial-scale=1">
+<title>访客</title>
+<!-- css -->
+<link rel="stylesheet" type="text/css" href="../css/frozenui.css">
+<link rel="stylesheet" type="text/css" href="css/index.css">
+<link rel="stylesheet" type="text/css" href="css/mui.min.css" />
+<link href="css/foundation-datepicker.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="../css/aui.css">
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/aui-toast.js"></script>
+<script type="text/javascript" src="../script/H.js"></script>
+<script type="text/javascript" src="../script/jquery.js"></script>
+<script type="text/javascript" src="../script/yuming.js"></script>
+<style>
+.module-content{padding-top: 44px;padding-bottom: 50px;}
+.hybt{color: #000;font-size: 16px;line-height: 40px;}
+.hyxz{background: #f4f4f4;border-top-left-radius: 10px;border-top-right-radius: 10px;padding: 10px 15px;}
+
+.yyr{border-radius: 10px;overflow: hidden;padding: 10px;background: #fff;}
+.yyr li{display: flex;align-items: center;padding: 5px 0; border-bottom: 1px solid #f1f1f1;}
+.yyr li span{font-size: 14px;color: #333;width: 80px;}
+.yyr li select{font-size: 14px;}
+.yyr li input{border: 0;font-size: 14px;color: #000;}
+.yyr p{line-height: 44px;color: #000;font-size: 14px;}
+.hyxz textarea{border-radius: 10px;border: 0;color: #000;font-size: 14px;}
+.hyxz textarea::-webkit-input-placeholder{color: #333;}
+.tjsq{display: block;text-align: center; line-height: 40px;margin-top: 10px; color:#fff;font-size: 14px; border-radius: 10px;background: linear-gradient(to right, #367ff8 , #556dff);}
+#shanchu{
+  height: 24px;
+  line-height: 24px;
+  font-size: 14px;
+  text-align: center;
+  width: 50px;
+  position: absolute;
+  right: 5%;
+  bottom: 16px;
+color: white;
+background: #4083F6;
+border-radius: 4px;
+}
+.qd{
+  height: 40px;
+  width: 100%;
+  position: relative;
+  line-height: 40px;
+  font-size: 14px;
+  text-align: center;
+  color: #464646;
+  border-top: 0.5px solid #EDEDED;
+}
+.qd1{
+  width: 50%;
+  height: 40px;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+    border-right: 0.5px solid #EDEDED;
+}
+.qd2{
+  width: 50%;
+  height: 40px;
+  position: absolute;
+  right: 0;
+  bottom: 0
+}
+</style>
+</head>
+<body style="background: #f7f7f7;">
+  <div class="ui-dialog" id="dialog">
+          <div class="ui-dialog-cnt">
+              <div class="ui-dialog-bd">
+                  <p>确定要删除吗？</p>
+              </div>
+
+              <div class="qd">
+                <div class="qd1" onclick="quxiao()">
+取消
+                </div>
+                <div class="qd2"  onclick="queding()">
+确定
+                </div>
+              </div>
+          </div>
+      </div>
+	<header id="headj">
+		<a>
+			<img src="images/back_jt.png" onclick="api.closeWin()" />
+			<span onclick="api.closeWin()">详情</span>
+		</a>
+    <div id="shanchu" onclick="shanchu()">
+      删除
+    </div>
+	</header>
+<div class="module-content" id="ge">
+	<div class="hyxz">
+		<!--<p class="hybt">访问申请</p>-->
+		<ul class="yyr" id="ct">
+
+		</ul>
+<a class="tjsq" onclick="tijiao()">更新</a>
+	</div>
+</div>
+
+<div class="foot_menu" style="display:none">
+	<ul>
+		<li>
+			<a href="index.html">
+				<i><img src="images/menu_icon01.png"></i>
+				<span>首 页</span>
+			</a>
+		</li>
+		<li class="cur">
+			<a href="shequ.html">
+				<i><img src="images/menu_icon02_r.png"></i>
+				<span>社 区</span>
+			</a>
+		</li>
+		<li>
+			<a href="news.html">
+				<i><img src="images/menu_icon03.png"></i>
+				<span>消 息</span>
+			</a>
+		</li>
+		<li>
+			<a href="user.html">
+				<i><img src="images/menu_icon04.png"></i>
+				<span>我 的</span>
+			</a>
+		</li>
+	</ul>
+</div>
+</body>
+<script src="js/jquery-1.11.3.min.js"></script>
+<script src="js/foundation-datepicker.js"></script>
+<script src="js/locales/foundation-datepicker.zh-CN.js"></script>
+<script>
+$('#demo-1').fdatepicker();
+$('#demo-2').fdatepicker();
+$('#demo-3').fdatepicker();
+</script>
+</html>
+<script type="text/javascript">
+apiready = function () {
+$api.fixStatusBar(document.getElementById('headj'));
+document.getElementById('headj').style.height=(50+api.safeArea.top)+'px'
+document.getElementById('ge').style.marginTop=(5+api.safeArea.top)+'px'
+//alert(JSON.stringify(api.pageParam.arr))
+/*
+F_RealName	String	被访人
+cf	String	被访公司
+df	String	被访部门
+Purposeofthevisit	String	来访目的
+Dateofvisit	DateTime	来访日期
+Arrivaltime	DateTime	到达时间
+Timeofdeparture	DateTime	离开时间
+Personnelnature	String	人员性质
+Numberofvisitors	String	来访人数
+Licenseplate	String	车辆号码
+Numberofvehicles	String	车辆数
+Name	String	姓名
+Workunit	String	工作单位
+Contactnumber	String	联系电话
+Remarks	String	备注
+*/
+function xt(){
+  api.ajax({
+    url: yuming+'/learun/adms/Electricitymeter/electricitymetershow',
+        method: 'get',
+        data:{values: {
+
+
+  "loginMark": api.deviceId,
+  "token": $api.getStorage('token'),
+  page:1,
+  rows:10,
+  id:api.pageParam.id,
+
+              }}
+       }, function(ret) {
+ //alert(JSON.stringify(ret))
+ api.refreshHeaderLoadDone()
+         for (var i = 0; i < document.getElementsByClassName('zhuan').length; i++) {
+          document.getElementsByClassName('zhuan')[i].style.display='none'
+        }
+        if(ret){
+        if(ret.code==200){
+if(ret.data){
+          html=''
+
+          html+=  '<li><span>设备序号</span><input type="text" value="'+ret.data.list[0].deviceid+'" id="deviceid" readonly="readonly"  /></li>'
+          html+=  '<li><span>电表读数</span><input type="text" value="'+ret.data.list[0].dvalue+'"  id="dvalue" /></li>'
+          html+=  '<li><span>日期</span><input type="date"  value="'+ret.data.list[0].year+'-'+ret.data.list[0].month+'-'+ret.data.list[0].day+'"  id="nyr" /></li>'
+  html+='<li style="display:none"><span>数据区分序号</span><input type="text" value="'+isnul(ret.data.list[0].companyid)+'"  id="companyid" /></li>'
+    html+='<li><span>成本项目ID</span><input type="text" value="'+isnul(ret.data.list[0].costitemid)+'"  id="costitemid" /></li>'
+            html+='<li><span>本次表读数</span><input type="text" value="'+isnul(ret.data.list[0].newvalue)+'"  id="newvalue" /></li>'
+            html+='  <li><span>本次读表日期</span><input type="date" value="'+isnul(ret.data.list[0].newdate)+'" id="newdate" /></li>'
+            html+='<li><span>业主编号</span><input type="text" value="'+ret.data.list[0].userno+'"  id="userno" /></li>'
+          html+='<li><span>电表编号</span><input type="text" value="'+ret.data.list[0].commadd+'"  id="commadd" /></li>'
+          html+='  <li><span>电表状态(0异常/1正常)</span><input type="number" value="'+ret.data.list[0].status+'" id="status" /></li>'
+          html+='  <li><span>上次表读数</span><input type="text" value="'+isnul(ret.data.list[0].lastvalue)+'"  id="lastvalue" /></li>'
+          html+='<li><span>上次表读日期</span><input type="date" value="'+isnul(ret.data.list[0].lastdate)+'"  id="lastdate" /></li>'
+           html+='  <li><span>备注</span><input type="text" value="'+isnul(ret.data.list[0].remark)+'"  id="remark" /></li>'
+        /*  html+='  <li><span>联系电话</span><input type="text" value="'+api.pageParam.arr.Contactnumber+'" readonly="readonly" id="lxdh"/></li>'
+          html+='  <li><span>来访目的</span><input type="text" value="'+api.pageParam.arr.Purposeofthevisit+'" readonly="readonly" id="lfmd"/></li>'
+          html+='  <li><span>访问车辆</span><input type="text" value="'+api.pageParam.arr.Licenseplate+'" readonly="readonly" id="fwcl"/></li>'
+          html+='  <li><span>车辆数</span><input type="text" value="'+api.pageParam.arr.Numberofvehicles+'" readonly="readonly" id="cls"/></li>'
+          html+='  <li><span>备注</span><input type="text" value="'+api.pageParam.arr.Remarks+'" readonly="readonly" id="bz"/></li>'*/
+          document.getElementById('ct').innerHTML=html
+}else {
+	api.toast({
+	 msg:'暂无数据',
+	 duration: 2000,
+	 location: 'middle'
+	});
+}
+        }else {
+          api.toast({
+           msg:ret.info,
+           duration: 2000,
+           location: 'middle'
+          });
+      toast.hide()
+        }
+
+
+      }else {
+
+       /* api.toast({
+        msg: '网络错误',
+        duration: 2000,
+        location: 'middle'
+    });*/
+      }
+ toast.hide()
+       })
+
+}
+xt()
+
+//showDefault()
+}
+jy=0
+function tijiao(){
+  //alert(document.getElementById('nyr').value)
+//  return
+  /*求地址：/learun/adms/watermeter/updatewatermeter
+  类型：POST
+  请求参数：
+  参数名称	类型	备注	必须
+  id	int	序号	是
+  dvalue	String	电表读数	是
+  year	String	年	是
+  month	String	月	是
+  day	String	日	是
+  companyid	String	数据区分序号	否
+  costitemid	int	成本项目ID	否
+  remark	String	备注	否
+  newvalue	String	本次表读数	是
+  userno	String	业主编号	否
+  status	String	电表状态(1:正常,0:异常)只有0或1	是
+  commadd	String	电表编号	是
+  lastvalue	String	上次表读数	否
+  lastdate	String	上次表读日期	否
+  newdate	String	本次表读日期	是*/
+	if(jy==0){
+		jy=1
+		showDefault()
+		api.ajax({
+						 url: yuming+'/learun/adms/Electricitymeter/updateelectricitymeter',
+						 method: 'post',
+						 data:{values: {
+               "loginMark": api.deviceId,
+               "token": $api.getStorage('token'),
+               id	:api.pageParam.id,
+               dvalue	:document.getElementById('dvalue').value,
+               year:document.getElementById('nyr').value.split('-')[0],
+               month	:document.getElementById('nyr').value.split('-')[1],
+               day	:document.getElementById('nyr').value.split('-')[2],
+               companyid	:document.getElementById('companyid').value,
+               costitemid	:document.getElementById('costitemid').value,
+               remark	:document.getElementById('remark').value,
+               newvalue	:document.getElementById('newvalue').value,
+               userno	:document.getElementById('userno').value,
+               status	:document.getElementById('status').value,
+               commadd:document.getElementById('commadd').value,
+               lastvalue	:document.getElementById('lastvalue').value,
+               lastdate:document.getElementById('lastdate').value,
+               newdate	:document.getElementById('newdate').value,
+
+
+								}}
+				 }, function(ret) {
+
+	//alert(JSON.stringify(ret))
+	 toast.hide()
+				 if(ret){
+				 if(ret.code==200){
+					 api.toast({
+					 msg: '提交成功!',
+					 duration: 2000,
+					 location: 'middle'
+					 });
+					toast.hide()
+jy=0
+		 }else {
+       jy=0
+			 toast.hide()
+			 api.toast({
+			 msg: ret.info,
+			 duration: 2000,
+			 location: 'middle'
+	 });
+		 }
+
+				 }else {
+
+						toast.hide()
+					 api.toast({
+					 msg: '网络错误',
+					 duration: 2000,
+					 location: 'middle'
+			 });
+				 }
+
+				 })
+	}
+}
+function shanchu(data){
+
+
+    $("#dialog").addClass("show");
+}
+function quxiao(data){
+
+
+    $("#dialog").removeClass("show");
+}
+function queding(){
+  $("#dialog").removeClass("show");
+  //alert(document.getElementById('nyr').value)
+//  return
+  /*求地址：/learun/adms/watermeter/updatewatermeter
+  类型：POST
+  请求参数：
+  参数名称	类型	备注	必须
+  id	int	序号	是
+  dvalue	String	电表读数	是
+  year	String	年	是
+  month	String	月	是
+  day	String	日	是
+  companyid	String	数据区分序号	否
+  costitemid	int	成本项目ID	否
+  remark	String	备注	否
+  newvalue	String	本次表读数	是
+  userno	String	业主编号	否
+  status	String	电表状态(1:正常,0:异常)只有0或1	是
+  commadd	String	电表编号	是
+  lastvalue	String	上次表读数	否
+  lastdate	String	上次表读日期	否
+  newdate	String	本次表读日期	是*/
+	if(jy==0){
+		jy=1
+		showDefault()
+		api.ajax({
+						 url: yuming+'/learun/adms/Electricitymeter/delelectricitymeter',
+						 method: 'post',
+						 data:{values: {
+               "loginMark": api.deviceId,
+               "token": $api.getStorage('token'),
+               id	:api.pageParam.id,
+
+
+								}}
+				 }, function(ret) {
+
+	//alert(JSON.stringify(ret))
+	 toast.hide()
+				 if(ret){
+				 if(ret.code==200){
+					 api.toast({
+					 msg: '删除成功!',
+					 duration: 2000,
+					 location: 'middle'
+					 });
+					toast.hide()
+          api.sendEvent({
+              name: 'sxrw',
+              extra: {
+                  key1: 'value1',
+                  key2: 'value2'
+              }
+          });
+
+          setTimeout(function(){
+            api.closeWin();
+
+          },1000)
+
+jy=0
+		 }else {
+       jy=0
+			 toast.hide()
+			 api.toast({
+			 msg: ret.info,
+			 duration: 2000,
+			 location: 'middle'
+	 });
+		 }
+
+				 }else {
+
+						toast.hide()
+					 api.toast({
+					 msg: '网络错误',
+					 duration: 2000,
+					 location: 'middle'
+			 });
+				 }
+
+				 })
+	}
+}
+</script>

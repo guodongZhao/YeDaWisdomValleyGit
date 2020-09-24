@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="format-detection" content="telephone=no"><!-- 禁止IPHONE识别手机号码 -->
+<meta name="viewport" content="width=device-width,user-scalable=no, initial-scale=1">
+<title>门禁列表</title>
+<!-- css -->
+<link rel="stylesheet" type="text/css" href="css/index.css">
+<link rel="stylesheet" type="text/css" href="css/mui.min.css" />
+<link rel="stylesheet" type="text/css" href="../css/aui.css">
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/aui-toast.js"></script>
+<script type="text/javascript" src="../script/H.js"></script>
+<script type="text/javascript" src="../script/jquery.js"></script>
+<script type="text/javascript" src="../script/yuming.js"></script>
+<style>
+.module-content{padding-top: 44px;margin-bottom: 50px;}
+.menjin{padding: 10px;}
+.menjin li{background: #FFF;border-radius: 10px;margin-bottom: 10px;padding: 10px;display: flex;justify-content: space-between;align-items: center;}
+.menjin li div{line-height: 22px;}
+.menjin li div h3{color: #000;font-size: 14px;}
+.menjin li div p{color: #999;font-size: 12px;}
+.menjin li a{text-align: center;}
+.menjin li img{width: 36px;height: 36px;}
+.menjin li a span{color: #0062CC;font-size: 14px;}
+.zhuan{
+	display: none;
+	margin: 0 auto;
+}
+.jiankong{padding: 10px;}
+.jiankong li{background:#fff;border-radius: 10px;margin-bottom: 10px; padding: 10px 10px 10px 0;}
+.jiankong li a{display: flex; justify-content: space-between; align-items: center;}
+.jiankong li .jktext{display: flex; align-items: center;}
+.jiankong li .jktext .xian{background: #007AFF;width: 3px;border-radius: 2px; height: 16px;margin-right: 10px;}
+.jiankong li .jktext h3{color: #000;font-size: 14px;line-height: 22px; }
+.jiankong li .jktext b{background: #cab4f5;color: #fff;border-radius: 15px;padding: 2px 4px;margin-left: 10px; font-weight: normal;font-size: 8px;}
+.jiankong li p{font-size: 12px;color: #666;padding-left: 10px;line-height: 22px; }
+.jiankong li h4{width: ;text-align: center;width: 40px;}
+.jiankong li h4 img{width: 20px;margin-bottom: 10px;}
+.jiankong li h4 .chakan{background: #008CBA;color: #fff;border-radius: 15px;padding: 4px 8px; font-weight: normal;font-size: 12px;}
+.jiankong li h4 .chakan2{background: #666;color: #fff;border-radius: 15px;padding: 4px 8px; font-weight: normal;font-size: 12px;}
+
+</style>
+</head>
+<body style="background: #f7f7f7;">
+	<header id="headj">
+		<a >
+			<img src="images/back_jt.png" onclick="api.closeWin()" />
+			<span onclick="api.closeWin()" id="tname"></span>
+		</a>
+	</header>
+<div class="module-content" id="ge">
+	<ul class="jiankong" id="jmenjin">
+	<!--	<li>
+			<div>
+				<h3>业达园区东区北门</h3>
+				<p>状态：<span style="color: #25CB83;">有效</span></p>
+			</div>
+			<a>
+				<img src="images/mj2.png"/><br />
+				<span>门禁控制</span>
+			</a>
+		</li>
+		<li>
+			<div>
+				<h3>业达园区东区西门</h3>
+				<p>状态：<span style="color: #25CB83;">有效</span></p>
+			</div>
+			<a>
+				<img src="images/mj2.png"/><br />
+				<span>门禁控制</span>
+			</a>
+		</li>
+		<li>
+			<div>
+				<h3>业达园区东区南门</h3>
+				<p>状态：<span style="color: #25CB83;">有效</span></p>
+			</div>
+			<a>
+				<img src="images/mj2.png"/><br />
+				<span>门禁控制</span>
+			</a>
+		</li>
+		<li>
+			<div>
+				<h3>业达园区西区南门</h3>
+				<p>状态：<span style="color: #CF2D28;">待审核</span></p>
+			</div>
+			<a>
+				<img src="images/mj.png"/><br />
+				<span style="color: #999;">等待审核</span>
+			</a>
+		</li>-->
+	</ul>
+</div>
+<img src="../image/zhuan.gif" id="zhuan" style="height:20px;width:auto;margin-top:10px;margin-bottom:10px;" class="zhuan">
+<div id="ddd">
+
+</div>
+<div class="foot_menu" style="display:none">
+	<ul>
+		<li>
+			<a href="index.html">
+				<i><img src="images/menu_icon01.png"></i>
+				<span>首 页</span>
+			</a>
+		</li>
+		<li class="cur">
+			<a href="shequ.html">
+				<i><img src="images/menu_icon02_r.png"></i>
+				<span>社 区</span>
+			</a>
+		</li>
+		<li>
+			<a href="news.html">
+				<i><img src="images/menu_icon03.png"></i>
+				<span>消 息</span>
+			</a>
+		</li>
+		<li>
+			<a href="user.html">
+				<i><img src="images/menu_icon04.png"></i>
+				<span>我 的</span>
+			</a>
+		</li>
+	</ul>
+</div>
+</body>
+</html>
+<script type="text/javascript">
+page=0;
+arr=[]
+arrindex=0
+apiready = function () {
+$api.fixStatusBar(document.getElementById('headj'));
+document.getElementById('headj').style.height=(50+api.safeArea.top)+'px'
+document.getElementById('ge').style.marginTop=(5+api.safeArea.top)+'px'
+document.getElementById('tname').innerHTML=api.pageParam.name
+/*
+请求地址：/learun/adms/acs/getacs
+类型：GET
+请求参数：
+参数名称	类型	备注	必须
+loginMark	String	设备标识，必须具有唯一性	是
+token	String	验证码，从登录后返回信息中获取	是
+pageno	String	当前页码	是
+pagesize	String	每页记录数	是
+parkid	String	四个条件至少有一个是必填	是
+buildingid	String	四个条件至少有一个是必填	是
+floorid	String	四个条件至少有一个是必填	是
+roomid	String	四个条件至少有一个是必填	是
+*/
+
+
+$api.setStorage('j',0)
+showDefault()
+function zb(){
+
+page++
+if(page==1){
+//alert(riqi)
+//alert(api.pageParam.id)
+ api.ajax({
+	 url: yuming+'/learun/adms/acs/getdevice',
+			 method: 'get',
+			 data:{values: {
+
+
+"loginMark": api.deviceId,
+"token": $api.getStorage('token'),
+pageno:page,
+pagesize:10,
+roomid:api.pageParam.id
+						 }}
+			}, function(ret) {
+//alert(JSON.stringify(ret))
+api.refreshHeaderLoadDone()
+				for (var i = 0; i < document.getElementsByClassName('zhuan').length; i++) {
+				 document.getElementsByClassName('zhuan')[i].style.display='none'
+			 }
+			 if(ret){
+			 if(1){
+
+
+if(ret.data.list.length>0){
+var html='';
+for (var i = 0; i <ret.data.list.length; i++) {
+	arr.push(ret.data.list[i])
+	arrindex++
+	html+='	<li onclick="jk(arrindex)">'
+html+='<a >'
+  html+=   '<div>'
+  html+=    ' <div class="jktext">'
+    html+=     '<span class="xian"></span>'
+    html+=    ' <h3>360°广角监控</h3>'
+        html+=   '<b>'+ret.data.list[i].buildingname+'</b>'
+      html+=   '</div>'
+    html+=  '   <p>设备编号：'+ret.data.list[i].deviceuuid+'</p>'
+      html+=  ' <p>设备名称：'+ret.data.list[i].devicename+'</p>'
+    html+=  ' </div>'
+    html+=  ' <h4>'
+      html+=  ' <img src="images/jiankong2.png" /><br />'
+    html+=  '   <span class="chakan2">查看</span>'
+      html+= '</h4>'
+
+	html+=	'	</li>'
+}
+html+='<div class="xiala"></div>'
+document.getElementById('jmenjin').innerHTML=html;
+
+}else {
+ document.getElementById('jmenjin').innerHTML='<img src="../image/zanwu.png"style="width:100px;height:100px;display:block;margin:0 auto;margin-top:160px;margin-bottom:100px;">'
+}
+
+			 }else {
+
+		 toast.hide()
+			 }
+
+
+		 }else {
+
+			/* api.toast({
+			 msg: '网络错误',
+			 duration: 2000,
+			 location: 'middle'
+	 });*/
+		 }
+toast.hide()
+			})
+}else {
+ api.ajax({
+	 url: yuming+'/learun/adms/acs/getdevice',
+ 			method: 'get',
+ 			data:{values: {
+
+
+ "loginMark": api.deviceId,
+ "token": $api.getStorage('token'),
+ pageno:page,
+ pagesize:10,
+ roomid:api.pageParam.id
+					}}
+}, function(ret) {
+				for (var i = 0; i < document.getElementsByClassName('zhuan').length; i++) {
+				 document.getElementsByClassName('zhuan')[i].style.display='none'
+			 }
+			 if(ret){
+			 if(1){
+
+
+				 if(ret.data.list.length>0){
+				 var html='';
+				 for (var i = 0; i <ret.data.list.length; i++) {
+					 arr.push(ret.data.list[i])
+ 					arrindex++
+ 					html+='	<li onclick="jk(arrindex)">'
+         html+='<a >'
+           html+=   '<div>'
+           html+=    ' <div class="jktext">'
+             html+=     '<span class="xian"></span>'
+             html+=    ' <h3>360°广角监控</h3>'
+                 html+=   '<b>'+ret.data.list[i].buildingname+'</b>'
+               html+=   '</div>'
+             html+=  '   <p>设备编号：'+ret.data.list[i].deviceuuid+'</p>'
+               html+=  ' <p>设备名称：'+ret.data.list[i].devicename+'</p>'
+             html+=  ' </div>'
+             html+=  ' <h4>'
+               html+=  ' <img src="images/jiankong2.png" /><br />'
+             html+=  '   <span class="chakan2">查看</span>'
+               html+= '</h4>'
+
+           html+=	'	</li>'
+				 }
+
+html+='<div class="xiala"></div>'
+document.getElementsByClassName('xiala')[page-2].innerHTML=html
+	$api.setStorage('j',0)
+
+}else {
+ //document.getElementById('content').innerHTML='<img src="../image/zanwu.png"style="width:100px;height:100px;display:block;margin:0 auto;margin-top:100px;">'
+}
+
+			 }
+
+
+		 }else {
+
+			/* api.toast({
+			 msg: '网络错误',
+			 duration: 2000,
+			 location: 'middle'
+	 });*/
+		 }
+toast.hide()
+			})
+
+
+}
+
+}
+zb()
+api.addEventListener({
+name:'scrolltobottom',
+extra:{
+		threshold:0           //设置距离底部多少距离时触发，默认值为0，数字类型
+}
+}, function(ret, err){
+
+if($api.getStorage('j')==0){
+$api.setStorage('j',1)
+//alert(1)
+ var zhuan=document.getElementById('zhuan').cloneNode(true);
+ zhuan.style.display='block'
+ document.getElementById('ddd').appendChild(zhuan)
+
+zb()
+}
+});
+}
+function kaisuo(data1,data2){
+	api.actionSheet({
+	    title: '门禁控制',
+	    cancelTitle: '取消',
+	    //destructiveTitle: '红色警告按钮',
+	    buttons: ['常开', '常关', '关门','开门'],
+			style:{
+  //  layerColor:'',         //遮蔽层颜色，仅支持 rgba颜色，默认值：rgba（0, 0, 0, 0.4）
+  //  itemNormalColor:'',    //选项按钮正常状态背景颜色，支持#000、#000000、rgb、rgba，默认值：#F1F1F1
+  //  itemPressColor:'',     //选项按钮按下时背景颜色，支持#000、#000000、rgb、rgba，默认值：#E6E6E6
+  //  fontNormalColor:'',    //选项按钮正常状态文字颜色，支持#000、#000000、rgb、rgba，默认值：#007AFF
+  //  fontPressColor:'',     //选项按钮按下时文字颜色，支持#000、#000000、rgb、rgba，默认值：#0060F0
+    titleFontColor:'#F06424'      //标题文字颜色，支持#000、#000000、rgb、rgba，默认值：#8F8F8F
+}
+	}, function(ret, err) {
+	    var index = ret.buttonIndex;
+		//	alert(index)
+			/*
+			请求地址：/learun/adms/acs/controlacs
+			类型：POST
+			请求参数：
+			参数名称	类型	备注	必须
+			loginMark	String	设备标识，必须具有唯一性	是
+			token	String	验证码，从登录后返回信息中获取	是
+			acsid	String	门禁id	是
+			acsuuid	String	门禁uuid	是
+			command	String	反控命令码，0常开、1关门、2开门、3常关	是
+			*/
+			if(index<5){
+				//	alert(index)
+				ma=''
+				if(index==1){
+					ma=0
+				}
+				if(index==2){
+					ma=3
+				}
+				if(index==3){
+					ma=1
+				}
+				if(index==4){
+					ma=2
+				}
+				showDefault()
+				api.ajax({
+								 url: yuming+'/learun/adms/acs/controlacs',
+								 method: 'post',
+								 data:{values: {
+
+
+				"loginMark": api.deviceId,
+				"token": $api.getStorage('token'),
+				acsid	:data1,
+				acsuuid	:data2.getAttribute('data-id'),
+				command	:ma
+
+										}}
+						 }, function(ret) {
+
+		//	alert(JSON.stringify(ret))
+			toast.hide()
+						 if(ret){
+						 if(ret.code==200){
+							 api.toast({
+							 msg: ret.info,
+							 duration: 2000,
+							 location: 'middle'
+					 });
+							toast.hide()
+
+
+				 }else {
+					 toast.hide()
+					 api.toast({
+					 msg: ret.info,
+					 duration: 2000,
+					 location: 'middle'
+			 });
+				 }
+
+						 }else {
+
+								toast.hide()
+							 api.toast({
+							 msg: '网络错误',
+							 duration: 2000,
+							 location: 'middle'
+					 });
+						 }
+
+						 })
+			}
+	});
+}
+function jk(data){
+	/*var camhi = api.require('camhi');
+	camhi.connect({
+	   uid: arr[data-1].deviceuuid,
+	   username:arr[data-1].devicename,
+	   password:$api.getStorage('mm'),
+	   nickname: $api.getStorage('info').realName
+	},function(ret) {
+	    alert(JSON.stringify(ret));
+	});*/
+
+	/*api.openWin({
+	    name: 'jiankongxq',
+	    url: 'http://223.78.120.35:8802/bd/ttt.html',
+	    pageParam: {
+	        arr:arr[data-1]
+	    }
+	});*/
+api.openWin({
+	    name: 'jiankongxq',
+	    url: './jiankongxq.html',
+	    pageParam: {
+	        arr:arr[data-1]
+	    }
+	});
+
+}
+/*var demo = api.require('hkIvms');
+demo.openPlayer({
+    rect : {
+        x : 0,
+        y : api.frameHeight / 3,
+        w : api.frameWidth / 2 - 5,
+        h : api.frameHeight / 3
+    },
+    fixedOn : api.frameName,
+    fixed : true,
+    url : 'rtsp://47.104.142.44:554/pag://172.31.48.171:7302:97aed9d5afe84883be3cc8df9f50a994:0:MAIN:TCP'
+}, function(ret, err) {
+    alert(JSON.stringify(ret) + "  " + JSON.stringify(err));
+});
+*/
+</script>

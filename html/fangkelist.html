@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="format-detection" content="telephone=no"><!-- 禁止IPHONE识别手机号码 -->
+<meta name="viewport" content="width=device-width,user-scalable=no, initial-scale=1">
+<title>访客</title>
+<!-- css -->
+<link rel="stylesheet" type="text/css" href="css/index.css">
+<link rel="stylesheet" type="text/css" href="css/mui.min.css" />
+<link href="css/foundation-datepicker.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="../css/aui.css">
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/aui-toast.js"></script>
+<script type="text/javascript" src="../script/H.js"></script>
+<script type="text/javascript" src="../script/jquery.js"></script>
+<script type="text/javascript" src="../script/yuming.js"></script>
+<style>
+.module-content{padding-top: 44px;padding-bottom: 50px;}
+.fklist{margin: 10px;}
+.fklist li{background: #fff;border-radius:5px;padding: 10px;margin-bottom: 10px;}
+.fklist li a{display: flex;justify-content: space-between;}
+.fklist li span{width: 50px;font-size: 14px;}
+.fklist li h3{font-size: 14px;color: #000;margin-bottom: 10px;}
+.fklist li h4{color: #666;font-size: 12px;}
+.fklist li p{color: #999;font-size: 12px;border-top: 1px solid #f1f1f1;margin-top: 10px;padding-top: 10px;}
+.tianjia{position: fixed;right: 10px;width: 36px;height: 36px;bottom: 65px;}
+.tianjia img{width: 100%;}
+#sou{
+  position: absolute;
+  height: 20px;
+  width: 20px;
+  right: 10px;
+  bottom: 16px;
+}
+</style>
+</head>
+<body style="background: #f7f7f7;">
+	<header id="headj">
+		<a >
+			<img src="images/back_jt.png" onclick="api.closeWin()" />
+			<span onclick="api.closeWin()">访问记录</span> <img src="../image/sousuo.png" id="sou" >
+		</a>
+	</header>
+<div class="module-content" id="ge">
+	<ul class="fklist" id="jtcc">
+		<!--<li><a href="#">
+			<div>
+				<h3>业达物业集团</h3>
+				<h4>王经理</h4>
+			</div>
+			<span style="color: #00B168;">已通过</span>
+		</a>
+		<p>2019-12-12</p>
+		</li>
+		<li><a href="#">
+			<div>
+				<h3>业达物业集团</h3>
+				<h4>王经理</h4>
+			</div>
+			<span style="color: #FF3A5F;">待审核</span>
+		</a>
+		<p>2019-12-12</p>
+		</li>
+		<li><a href="#">
+			<div>
+				<h3>业达物业集团</h3>
+				<h4>王经理</h4>
+			</div>
+			<span style="color: #007AFF;">已结束</span>
+		</a>
+		<p>2019-12-12</p>
+	</li>-->
+	</ul>
+</div>
+<a class="tianjia" onclick="opw('fangkesq',1)"><img src="images/ad.png" /></a>
+<div class="foot_menu" style="display:none">
+	<ul>
+		<li>
+			<a href="index.html">
+				<i><img src="images/menu_icon01.png"></i>
+				<span>首 页</span>
+			</a>
+		</li>
+		<li class="cur">
+			<a href="shequ.html">
+				<i><img src="images/menu_icon02_r.png"></i>
+				<span>社 区</span>
+			</a>
+		</li>
+		<li>
+			<a href="news.html">
+				<i><img src="images/menu_icon03.png"></i>
+				<span>消 息</span>
+			</a>
+		</li>
+		<li>
+			<a href="user.html">
+				<i><img src="images/menu_icon04.png"></i>
+				<span>我 的</span>
+			</a>
+		</li>
+	</ul>
+</div>
+</body>
+</html>
+<script type="text/javascript">
+arr=[]
+apiready = function () {
+$api.fixStatusBar(document.getElementById('headj'));
+document.getElementById('headj').style.height=(50+api.safeArea.top)+'px'
+document.getElementById('ge').style.marginTop=(5+api.safeArea.top)+'px'
+document.getElementById('sou').onclick=function(){
+  api.openWin({
+      name: 'soufangke',
+      url: './soufangke.html',
+      pageParam: {
+        /*  id: api.pageParam.id,
+          name:api.pageParam.name*/
+      }
+  });
+
+}
+showDefault()
+function zb(){
+	api.ajax({
+					 url: yuming+'/learun/adms/visitormanagementList/getvm',
+					 method: 'get',
+					 data:{values: {
+
+
+	"loginMark": api.deviceId,
+	"token": $api.getStorage('token')
+
+
+							}}
+			 }, function(ret) {
+
+//alert(JSON.stringify(ret))
+toast.hide()
+			 if(ret){
+			 if(ret.code==200){
+arr=ret.data
+				toast.hide()
+var html=''
+for (var i = 0; i < ret.data.length; i++) {
+if(1){
+	html+='<li onclick="fwxq('+i+')"><a >'
+html+=	'	<div>'
+	html+=	'	<h3>'+ret.data[i].cf+'</h3>'
+	html+=	'	<h4>'+ret.data[i].F_RealName+'</h4>'
+		html+='</div>'
+//html+=	'	<span style="color: #00B168;">已通过</span>'
+html+='	</a>'
+html+=	'<p>'+ret.data[i].Dateofvisit.split(':')[0]+':'+ret.data[i].Dateofvisit.split(':')[1]+'</p>'
+html+='	</li>'
+
+
+}
+
+}
+document.getElementById('jtcc').innerHTML=html
+	 }else {
+		 toast.hide()
+		 api.toast({
+		 msg: ret.info,
+		 duration: 2000,
+		 location: 'middle'
+ });
+	 }
+
+			 }else {
+
+					toast.hide()
+				 api.toast({
+				 msg: '网络错误',
+				 duration: 2000,
+				 location: 'middle'
+		 });
+			 }
+
+			 })
+}
+zb()
+
+}
+function fwxq(data){
+	//alert(JSON.stringify(arr[data]))
+	api.openWin({
+	    name: 'fwxq',
+	    url: './fwxq.html',
+	    pageParam: {
+	        arr: arr[data]
+	    }
+	});
+
+}
+</script>

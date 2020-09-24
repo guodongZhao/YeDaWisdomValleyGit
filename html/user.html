@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="format-detection" content="telephone=no"><!-- 禁止IPHONE识别手机号码 -->
+<meta name="viewport" content="width=device-width,user-scalable=no, initial-scale=1">
+<title>个人中心</title>
+<!-- css -->
+<link rel="stylesheet" type="text/css" href="css/index.css">
+<link href="http://at.alicdn.com/t/font_1542633_vjfoldr9imp.css" />
+<link rel="stylesheet" type="text/css" href="../css/aui.css">
+<script src="http://at.alicdn.com/t/font_1542633_vjfoldr9imp.js"></script>
+<link rel="stylesheet" type="text/css" href="../css/aui.css">
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/aui-toast.js"></script>
+<script type="text/javascript" src="../script/H.js"></script>
+<script type="text/javascript" src="../script/jquery.js"></script>
+<script type="text/javascript" src="../script/yuming.js"></script>
+<style>
+	.userbg{position: fixed;width: 94%;left: 3%;top: 10px; box-shadow: 0px 6px 10px 0px #b3b3b3;border: 0.5px solid #dadada;border-radius:10px;overflow: hidden;}
+	.userin{background: #4083f6; padding:20px 20px 90px;display: flex;justify-content: space-between;align-items: center; border-bottom-left-radius: 10px;border-bottom-right-radius: 10px; border-bottom: 0.5px solid #dadada;}
+	.userbg img{width: 60px;height: 60px;border-radius: 40px;margin-left: 10px;margin-right: 10px;}
+	.user-text{width: 80%;}
+	.user-text p{font-size:20px ;color: #fff;margin-bottom: 14px;}
+	.user-text span{font-size: 14px;color: #fff;}
+	.userbg .icon{width: 20px;height: 20px;margin-right: 10px;color: #fff;}
+	.usergs{padding:20px 10px; display: flex;justify-content: space-between;align-items: center;}
+	.usergs span{color: #333;font-size: 14px;width: 70px;}
+	.usergs p{color: #333;font-size: 14px;width: 90%;text-align: right;}
+	.userjf{position: fixed;width: 94%;left: 3%;top: 244px; background: #fff;padding: 10px 0px;margin: 10px 0;border-radius: 5px;}
+	.jftitle{color: #000;font-size: 14px;line-height: 24px;margin-bottom: 10px;display: flex;justify-content: space-between;}
+	.jftitle a{color: #999;font-size: 12px;}
+	.userjf ul{display: flex;justify-content: space-around;}
+	.userjf ul li{text-align: center;}
+	.userjf ul li img{width: 36px;height: 36px;}
+	.userjf ul li p{margin: 8px 0;color: #666;font-size: 14px;}
+
+	.userlist{padding:0 10px;border-top: 10px solid #f9f9f9;	}
+	.userlist{background: #FFF;}
+	.userlist li{
+		margin: 0 10px;
+		border-bottom: 1px solid #f1f1f1;
+		height: 40px;
+		line-height: 40px;
+		padding: 10px 0;
+		background: url(images/gray_arr.png) #fff no-repeat center right 10px;
+		background-size: 8px;
+	}
+	.userlist li:last-child{border: none;}
+	.userlist li a{display: flex;align-items: center;}
+	.userlist li img{width: 26px;height:26px;margin-right: 10px;}
+	.userlist li p{color: #000;font-size: 15px;}
+
+	.userlist2{border-radius:10px;background: #fff;margin: 10px;padding: 10px;}
+	.userlist2 ul{display: flex;align-items: center;flex-wrap: wrap;}
+	.userlist2 li{width: 25%;text-align: center;margin-bottom: 20px;}
+	.userlist2 li img{width: 24px;height:24px;}
+	.userlist2 li p{color: #333;font-size: 14px;margin-top: 10px;}
+	.userbototm{top:270px;position: fixed;width: 100%;overflow-y: auto;bottom: 50px;}
+	.userbototm::-webkit-scrollbar{ display: none;}
+</style>
+</head>
+<body style="background: #f9f9f9;">
+
+<div class="module-content" id="headj">
+	<div id="gk" style="width:100%;height:24px;">
+
+	</div>
+	<div class="userbg" style="top:24px;"  id="g1">
+		<div class="userin">
+			<div class="user-text">
+				<p id="name"></p>
+				<span id="zhiwei"></span><br /><br />
+				<span id="phone"></span>
+			</div>
+			<img src="images/icon1.png" />
+		</div>
+		<div class="usergs" style="display:none">
+			<span>所属公司</span>
+			<p>烟台前创智能科技有限公司</p>
+		</div>
+	</div>
+	<div class="userjf" id="g2" style="display:block">
+		<!--<p class="jftitle">生活缴费<a href="#">查看全部</a></p>-->
+		<ul>
+			<li><a onclick="opw('zhangdanwo',1)">
+				<img src="images/shuifei.png" />
+				<p>水费</p>
+			</a></li>
+			<li><a onclick="opw('zhangdanwo',1)">
+				<img src="images/dianfei.png" />
+				<p>电费</p>
+			</a></li>
+			<li><a onclick="opw('zhangdanwo',1)">
+				<img src="images/fangfei.png" />
+				<p>房费</p>
+			</a></li>
+			<li><a onclick="opw('zhangdanwo',1)">
+				<img src="images/chefei.png" />
+				<p>车费</p>
+			</a></li>
+		</ul>
+	</div>
+
+	<div class="userbototm" id="ggg">
+	<div class="userlist">
+		<ul>
+			<li style="display:none"><a onclick="opw('yuyuechaxun',1)">
+				<img src="images/dingdan.png" />
+				<p>预约订单</p>
+			</a></li>
+			<li  style="display:none"><a onclick="opw('huiyi',1)">
+				<img src="images/huiyi.png" />
+				<p>会议管理</p>
+			</a></li>
+			<li  style="display:none"><a onclick="opw('bangong',1)">
+				<img src="images/bangong.png" />
+				<p>办公管理</p>
+			</a></li>
+			<li ><a onclick="opw('huodonglb',1)">
+				<img src="images/hudong.png" />
+				<p>活动中心</p>
+			</a></li>
+			<li  style="display:none"><a onclick="opw('baoxiulist',1)">
+				<img src="images/weixiubaoxiao.png" />
+				<p>报修消费</p>
+			</a></li>
+		</ul>
+	</div>
+	<div class="userlist" style="display:none">
+		<ul>
+
+			<li style="display:none"><a href="#">
+				<img src="images/wodefapiao.png" />
+				<p>我的发票</p>
+			</a></li>
+			<li onclick="opw('bangzhu',1)"><a href="#">
+				<img src="images/bangzhuzhongxin.png" />
+				<p>帮助中心</p>
+			</a></li>
+			<li style="display:none"><a href="#">
+				<img src="images/xiaoxizhongxin.png" />
+				<p>消息中心</p>
+			</a></li>
+		</ul>
+	</div>
+
+
+	<div class="userlist">
+		<ul>
+			<li style="display:none"><a href="#">
+				<img src="images/dizhi.png" />
+				<p>地址管理</p>
+			</a></li>
+			<li><a onclick="opw('xgmm',1)">
+				<img src="images/mima.png" />
+				<p>修改密码</p>
+			</a></li>
+			<li  onclick="opw('bangzhu',1)"><a >
+				<img src="images/bangzhuzhongxin.png" />
+				<p>帮助中心</p>
+			</a></li>
+			<li style="display:none" ><a href="#">
+				<img src="images/anquan.png" />
+				<p>安全设置</p>
+			</a></li>
+			<li><a onclick="tuichu()">
+				<img src="images/tuichudenglu.png" />
+				<p>退出</p>
+			</a></li>
+		</ul>
+	</div>
+
+	<div class="userlist2" style="display:none">
+		<p class="jftitle">应用工具<a href="#">查看全部</a></p>
+		<ul>
+			<li><a href="#">
+				<img src="images/dingdan.png" />
+				<p>预约订单</p>
+			</a></li>
+			<li><a href="#">
+				<img src="images/huiyi.png" />
+				<p>会议管理</p>
+			</a></li>
+			<li><a href="#">
+				<img src="images/bangong.png" />
+				<p>办公管理</p>
+			</a></li>
+			<li><a onclick="opw('huodonglb',1)">
+				<img src="images/hudong.png" />
+				<p>活动中心</p>
+			</a></li>
+			<li><a href="#">
+				<img src="images/weixiubaoxiao.png" />
+				<p>报修消费</p>
+			</a></li>
+			<li style="display:none"><a href="#">
+				<img src="images/wodefapiao.png" />
+				<p>我的发票</p>
+			</a></li>
+			<li><a href="#">
+				<img src="images/bangzhuzhongxin.png" />
+				<p>帮助中心</p>
+			</a></li>
+			<li><a href="#">
+				<img src="images/xiaoxizhongxin.png" />
+				<p>消息中心</p>
+			</a></li>
+		</ul>
+	</div>
+	<div class="userlist2" style="display:none">
+		<p class="jftitle">基础设置<a href="#">查看全部</a></p>
+		<ul>
+			<li><a href="#">
+				<img src="images/dizhi.png" />
+				<p>地址管理</p>
+			</a></li>
+			<li><a href="#">
+				<img src="images/gerenxinxi.png" />
+				<p>个人信息</p>
+			</a></li>
+			<li style="display:none"><a href="#">
+				<img src="images/anquan.png" />
+				<p>安全设置</p>
+			</a></li>
+			<li><a onclick="tuichu()">
+				<img src="images/tuichudenglu.png" />
+				<p>退出</p>
+			</a></li>
+		</ul>
+	</div>
+</div>
+	<!-- 底部导航 -->
+
+</div>
+<div style="height: 50px;"></div>
+<div class="foot_menu">
+	<ul>
+		<li onclick="opw('index')">
+			<a >
+				<i><img src="images/menu_icon01.png"></i>
+				<span>首 页</span>
+			</a>
+		</li>
+		<li onclick="opw('shequ')">
+			<a>
+				<i><img src="images/menu_icon02.png"></i>
+				<span>社区</span>
+			</a>
+		</li>
+		<li  onclick="opw('news')">
+			<a >
+				<i><img src="images/menu_icon03.png"></i>
+				<span>消 息</span>
+			</a>
+		</li>
+		<li class="cur"  onclick="opw('user')">
+			<a >
+				<i><img src="images/menu_icon04_r.png"></i>
+				<span>我 的</span>
+			</a>
+		</li>
+	</ul>
+	</div>
+</body>
+</html>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/aui-toast.js"></script>
+<script type="text/javascript" src="../script/yuming.js"></script>
+<script>
+apiready = function () {
+$api.fixStatusBar(document.getElementById('headj'));
+document.getElementById('gk').style.height=api.safeArea.top+'px'
+document.getElementById('g1').style.top=api.safeArea.top+'px'
+document.getElementById('g2').style.top=(190+api.safeArea.top)+'px'
+document.getElementById('ggg').style.top=(290+api.safeArea.top)+'px'
+jjj=0
+api.addEventListener({
+name: 'keyback'
+}, function(ret, err) {
+
+
+if(jjj==1){
+
+	api.toLauncher()
+	/*api.sendEvent({
+			name: 'gyy',
+			extra: {
+					key1: 'value1',
+					key2: 'value2'
+			}
+	});*/
+}
+
+if( jjj==0){
+
+api.toast({
+   msg: '再按一次将退出应用',
+   duration: 2000,
+   location: 'bottom'
+});
+jjj=1;
+setTimeout(function(){
+ jjj=0;
+},2000)
+
+
+}
+
+
+})
+/*
+realName	String	姓名
+nickName	String	昵称
+mobile	String	手机号
+*/
+//alert(JSON.stringify($api.getStorage('info')))
+function zb(){
+	document.getElementById('name').innerHTML=$api.getStorage('info').realName
+	document.getElementById('zhiwei').innerHTML=''
+	document.getElementById('phone').innerHTML=$api.getStorage('info').mobile
+
+}
+zb()
+
+}
+function tuichu(){
+	$api.clearStorage();
+	api.closeToWin({
+	    name: 'root'
+	});
+
+}
+</script>

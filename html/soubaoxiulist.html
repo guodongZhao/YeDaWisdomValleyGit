@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="format-detection" content="telephone=no"><!-- 禁止IPHONE识别手机号码 -->
+<meta name="viewport" content="width=device-width,user-scalable=no, initial-scale=1">
+<title>报修</title>
+<!-- css -->
+<link rel="stylesheet" type="text/css" href="css/index.css">
+<link rel="stylesheet" type="text/css" href="css/mui.min.css" />
+<link href="css/foundation-datepicker.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="../css/aui.css">
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/aui-toast.js"></script>
+<script type="text/javascript" src="../script/H.js"></script>
+<script type="text/javascript" src="../script/jquery.js"></script>
+<script type="text/javascript" src="../script/yuming.js"></script>
+<style>
+.module-content{padding-top: 44px;padding-bottom: 50px;}
+.fklist{margin: 10px;}
+.fklist li{background: #fff;border-radius:5px;padding: 10px;margin-bottom: 10px;}
+.fklist li a{display: flex;justify-content: space-between;line-height: 22px;}
+.fklist li h3{font-size: 14px;color: #000;margin-bottom: 10px;}
+.fklist li h4{color: #666;font-size: 12px;}
+.fklist li p{display: flex;justify-content: space-between; color: #999;font-size: 12px;border-top: 1px solid #f1f1f1;margin-top: 10px;padding-top: 10px;}
+.fklist li p img{width: 16px;height: 16px;}
+.tianjia{position: fixed;right: 10px;width: 36px;height: 36px;bottom: 65px;}
+.tianjia img{width: 100%;}
+.yincang{display: none; position: fixed;background: rgba(0,0,0,0.5);top: 0;bottom: 0;left: 0;right: 0;z-index: 9999;}
+.tanchuang{display: none;position: fixed;background: #fff; top: 35%;width: 80%;left: 10%;padding:15px 10px;border-radius: 10px; z-index: 10000;}
+.tanchuang h3{color: #fe2400;font-size: 16px;text-align: center;}
+.tcbtn{margin: 20px auto 10px;display: flex;justify-content: space-between;width: 60%;}
+.tcbtn span{font-size: 14px;text-align: center;width: 45%;border-radius: 5px;color: #fff;padding: 10px 0;}
+#sou{
+	height: 20px;
+	line-height: 20px;
+	position: absolute;
+	width: 60%;
+	left: 60px;
+	bottom: 16px;
+	display: none;
+}
+#sout{
+	height: 20px;
+width: 20px;;
+	position: absolute;
+
+	right: 5%;
+	bottom: 18px;
+
+}
+</style>
+</head>
+<body style="background: #f7f7f7;">
+	<header id="headj">
+		<div class="head">
+			<a >
+				<img src="images/back_jt.png" onclick="api.closeWin()" />
+					<span onclick="api.closeWin()">报修记录</span>
+			</a>
+			<div>
+				<input type="date" placeholder="查询" id="sou" />
+				<img src="images/search.png" id="sout"/>
+			</div>
+		</div>
+	</header>
+<div class="module-content" id="ge">
+	<ul class="fklist" id="xq">
+
+	<!--	<li>
+			<a href="baoxiuxq.html">
+				<div>
+					<h3>18栋电梯</h3>
+					<h4>王经理</h4>
+				</div>
+				<div style="text-align: right;">
+					<span style="color: #FF3A5F;font-size: 14px;">待修理</span><br />
+					<span style="color: #666;font-size: 12px;">受理人：王师傅</span>
+				</div>
+			</a>
+			<p>
+				<span>2019-12-12</span>
+			</p>
+		</li>
+		<li>
+			<a href="baoxiuxq.html">
+				<div>
+					<h3>18栋电梯</h3>
+					<h4>王经理</h4>
+				</div>
+				<div style="text-align: right;">
+					<span style="color: #007AFF;font-size: 14px;">已修理</span><br />
+					<span style="color: #666;font-size: 12px;">受理人：王师傅</span>
+				</div>
+			</a>
+			<p>
+				<span>2019-12-12</span>
+			</p>
+		</li>-->
+	</ul>
+</div>
+<a class="tianjia"  onclick="opw('baoxiu',1)"><img src="images/ad.png" /></a>
+<div class="foot_menu" style="display:none">
+	<ul>
+		<li>
+			<a href="index.html">
+				<i><img src="images/menu_icon01.png"></i>
+				<span>首 页</span>
+			</a>
+		</li>
+		<li class="cur">
+			<a href="wuye.html">
+				<i><img src="images/menu_icon02.png"></i>
+				<span>智 能</span>
+			</a>
+		</li>
+		<li>
+			<a href="news.html">
+				<i><img src="images/menu_icon03.png"></i>
+				<span>消 息</span>
+			</a>
+		</li>
+		<li>
+			<a href="user.html">
+				<i><img src="images/menu_icon04.png"></i>
+				<span>我 的</span>
+			</a>
+		</li>
+	</ul>
+</div>
+
+</body>
+
+</html>
+<script type="text/javascript">
+arr=[]
+arrindex=0
+apiready = function () {
+$api.fixStatusBar(document.getElementById('headj'));
+document.getElementById('headj').style.height=(50+api.safeArea.top)+'px'
+document.getElementById('ge').style.marginTop=(5+api.safeArea.top)+'px'
+document.getElementById('sout').onclick=function(){
+	api.openWin({
+	    name: 'soubaoxiu',
+	    url: './soubaoxiu.html',
+	    pageParam: {
+	        name: 'test'
+	    }
+	});
+
+}
+/*
+/learun/adms/devicerepair/devicerepairlist
+类型：GET
+请求参数：
+参数名称	类型	备注	必须
+loginMark	String	设备标识，必须具有唯一性	是
+token	String	验证码，从登录后返回信息中获取	是
+返回参数：
+参数名称	类型	备注
+code	String	结果响应码
+info	String	结果响应信息
+data	List<Map>	返回值
+data主要属性：
+参数名称	类型	备注
+deviceType	String	设备类型
+deviceName	String	设备名称
+devicePlace	String	设备地点
+faultDescription	String	故障描述
+reporter	String	报修人
+repairerTelephone	String	报修人电话
+repairTime	DateTime	报修时间
+inputPerson	String	录入人
+inputTime	DateTime	录入时间
+operationer	String	处理人
+operationTime	DateTime	处理时间
+operationDesc	String	处理描述
+operationResult	Int	处理结果 0:未处理完成，1:已处理完成
+*/
+
+showDefault()
+function zb(){
+	api.ajax({
+					 url: yuming+'/learun/adms/devicerepair/devicerepairbyrepairTime',
+					 method: 'get',
+					 data:{values: {
+
+
+	"loginMark": api.deviceId,
+	"token": $api.getStorage('token'),
+  starttime:api.pageParam.time1,
+  endtime:api.pageParam.time2
+
+
+							}}
+			 }, function(ret) {
+
+//alert(JSON.stringify(ret))
+
+			 if(ret){
+			 if(ret.code==200){
+
+				toast.hide()
+var html=''
+for (var i = 0; i < ret.data.length; i++) {
+  arr.push(ret.data[i])
+  arrindex++
+html+=	'<li onclick="bxxq('+arrindex+')">'
+html+=		'<a >'
+	html+=		'<div>'
+	html+=			'<h3>'+ret.data[i].deviceName+'</h3>'
+	html+=		'	<h4>'+ret.data[i].reporter+'</h4>'
+	html+=	'	</div>'
+	html+=	'	<div style="text-align: right;">'
+	if(ret.data[i].operationResult==0){
+			html+=		'<span style="color: #FF3A5F;font-size: 14px;">待修理</span><br />'
+	}else {
+			html+=		'<span style="color: #007AFF;font-size: 14px;">已修理</span><br />'
+	}
+
+		html+=	'	<span style="color: #666;font-size: 12px;">受理人：'+ret.data[i].operationer+'</span>'
+		html+='	</div>'
+	html+='	</a>'
+	html+='	<p>'
+	html+=	'	<span>'+ret.data[i].repairTime+'</span>'
+	html+=	'</p>'
+html+='	</li>'
+
+}
+document.getElementById('xq').innerHTML=html
+
+	 }else {
+		 toast.hide()
+		 api.toast({
+		 msg: ret.info,
+		 duration: 2000,
+		 location: 'middle'
+ });
+	 }
+
+			 }else {
+
+					toast.hide()
+				 api.toast({
+				 msg: '网络错误',
+				 duration: 2000,
+				 location: 'middle'
+		 });
+			 }
+
+			 })
+}
+zb()
+
+
+}
+function bxxq(data){
+	api.openWin({
+	    name: 'baoxiuxq',
+	    url: './baoxiuxq.html',
+	    pageParam: {
+	        arr: arr[data-1]
+	    }
+	});
+
+}
+</script>

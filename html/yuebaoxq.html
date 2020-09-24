@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="format-detection" content="telephone=no"><!-- 禁止IPHONE识别手机号码 -->
+<meta name="viewport" content="width=device-width,user-scalable=no, initial-scale=1">
+<title>报修</title>
+<!-- css -->
+<link rel="stylesheet" type="text/css" href="css/index.css">
+<link rel="stylesheet" type="text/css" href="css/mui.min.css" />
+<link href="css/foundation-datepicker.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="../css/aui.css">
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/aui-toast.js"></script>
+<script type="text/javascript" src="../script/H.js"></script>
+<script type="text/javascript" src="../script/jquery.js"></script>
+<script type="text/javascript" src="../script/yuming.js"></script>
+<style>
+.module-content{padding-top: 44px;padding-bottom: 50px;}
+.hybt{color: #000;font-size: 16px;line-height: 40px;}
+.hyxz{background: #f4f4f4;border-top-left-radius: 10px;border-top-right-radius: 10px;padding: 10px 15px;}
+
+.yyr{border-radius: 10px;overflow: hidden;}
+.yyr li{display: flex;background: #fff;align-items: center;padding:5px 10px;border-bottom: 1px solid #EDEDED;}
+.yyr li span{font-size: 14px;color: #333;width: 280px;font-weight: bold;}
+.yyr li select{font-size: 14px;}
+.yyr li input{border: 0;font-size: 14px;color: #000;text-align: right;}
+.yyr p{line-height: 44px;color: #000;font-size: 14px;}
+.hyxz textarea{border-radius: 10px;border: 0;color: #000;font-size: 14px;}
+.hyxz textarea::-webkit-input-placeholder{color: #333;}
+.tjsq{display: block;text-align: center; line-height: 40px;margin-top: 10px; color:#fff;font-size: 14px; border-radius: 10px;background: linear-gradient(to right, #367ff8 , #556dff);}
+</style>
+</head>
+<body style="background: #f7f7f7;">
+	<header  id="headj">
+		<a >
+			<img src="images/back_jt.png" onclick="api.closeWin()" />
+			<span onclick="api.closeWin()">详情</span>
+		</a>
+	</header>
+<div class="module-content" id="ge">
+	<div class="hyxz" >
+<div id="ct">
+
+</div>
+
+	<!--<a class="tjsq" onclick="tijiao()">提交</a>-->
+	</div>
+</div>
+
+<div class="foot_menu" style="display:none">
+	<ul>
+		<li>
+			<a href="index.html">
+				<i><img src="images/menu_icon01.png"></i>
+				<span>首 页</span>
+			</a>
+		</li>
+		<li class="cur">
+			<a href="shequ.html">
+				<i><img src="images/menu_icon02_r.png"></i>
+				<span>社 区</span>
+			</a>
+		</li>
+		<li>
+			<a href="news.html">
+				<i><img src="images/menu_icon03.png"></i>
+				<span>消 息</span>
+			</a>
+		</li>
+		<li>
+			<a href="user.html">
+				<i><img src="images/menu_icon04.png"></i>
+				<span>我 的</span>
+			</a>
+		</li>
+	</ul>
+</div>
+</body>
+<script src="js/jquery-1.11.3.min.js"></script>
+<script src="js/foundation-datepicker.js"></script>
+<script src="js/locales/foundation-datepicker.zh-CN.js"></script>
+<script>
+$('#demo-1').fdatepicker();
+$('#demo-2').fdatepicker();
+</script>
+</html>
+<script type="text/javascript">
+apiready = function () {
+$api.fixStatusBar(document.getElementById('headj'));
+document.getElementById('headj').style.height=(50+api.safeArea.top)+'px'
+document.getElementById('ge').style.marginTop=(5+api.safeArea.top)+'px'
+//alert(JSON.stringify(api.pageParam.arr))
+/*F_FullName	string	公司名称
+2.企业详细信息
+月报详细信息
+请求地址：/learun/adms/company/getybxxxx
+类型：Get
+请求参数：
+参数名称	类型	备注	必须
+loginMark	String	设备标识，必须具有唯一性	是
+token	String	验证码，从登录后返回信息中获取	是
+YBid	String	月报id	是
+返回参数：
+参数名称	类型	备注
+code	String	结果响应码
+info	String	结果响应信息
+data	String	返回值
+Data主要属性
+参数名称	类型	备注
+ID	String	主键
+AC_COMPANY_ID	String	公司id
+AC_COMPANY	String	公司名称
+AC_YEAR_MONTH	String	时间
+AC_YCCH1_C1/AC_YCCH1_C2	String	一、年初存货（本月止累计）/（上年同期累计）。单位：千元
+AC_ZCFZ2_C1/ AC_ZCFZ2_C2	String	二、资产负债（本月止累计）/（上年同期累计）。单位：千元
+AC_LDZCHJ2_C1/ AC_LDZCHJ2_C2	String	流动资产合计（本月止累计）/（上年同期累计）。单位：千元
+AC_YSZK2_C1/AC_YSZK2_C2	String	其中：应收账款（本月止累计）/（上年同期累计）。单位：千元11
+AC_CH2_C1/AC_CH2_C2	String	存货（本月止累计）/（上年同期累计）。单位：千元11
+AC_YCP2_C1/AC_YCP2_C2	String	其中：产成品（本月止累计）/（上年同期累计）。单位：千元11
+AC_ZCZJ2_C1/AC_ZCZJ2_C2	String	资产总计（本月止累计）/（上年同期累计）。单位：千元11
+AC_FZHJ2_C1/AC_FZHJ2_C2	String	负债合计（本月止累计）/（上年同期累计）。单位：千元11
+AC_SYJFP3_C1/AC_SYJFP3_C2	String	三、损益及分配（本月止累计）/（上年同期累计）。单位：千元11
+AC_YYSR3_C1/AC_YYSR3_C2	String	营业收入（本月止累计）/（上年同期累计）。单位：千元11
+AC_ZYYWSR3_C1/AC_ZYYWSR3_C2	String	其中：主营业务收入（本月止累计）/（上年同期累计）。单位：千元11
+AC_YYCB3_C1/AC_YYCB3_C2	String	营业成本（本月止累计）/（上年同期累计）。单位：千元11
+AC_ZYYWCB3_C1/AC_ZYYWCB3_C2	String	其中：主营业务成本（本月止累计）/（上年同期累计）。单位：千元11
+AC_YYSJJFJ3_C1/AC_YYSJJFJ3_C2	String	营业税金及附加（本月止累计）/（上年同期累计）。单位：千元11
+AC_ZYYWSJJFJ3_C1/AC_ZYYWSJJFJ3_C2	String	其中：主营业务税金及附加（本月止累计）/（上年同期累计）。单位：千元11
+AC_XSFY3_C1/AC_XSFY3_C2	String	销售费用（本月止累计）/（上年同期累计）。单位：千元11
+AC_GLFY3_C1/AC_GLFY3_C2	String	管理费用（本月止累计）/（上年同期累计）。单位：千元11
+AC_SJ3_C1/AC_SJ3_C2	String	其中：税金（本月止累计）/（上年同期累计）。单位：千元11
+AC_CWFY3_C1/AC_CWFY3_C2	String	财务费用（本月止累计）/（上年同期累计）。单位：千元11
+AC_LXSR3_C1/AC_LXSR3_C2	String	其中：利息收入（本月止累计）/（上年同期累计）。单位：千元11
+AC_LXZC3_C1/AC_LXZC3_C2	String	其中：利息支出（本月止累计）/（上年同期累计）。单位：千元11
+AC_ZCJZSS3_C1/AC_ZCJZSS3_C2	String	资产减值损失（本月止累计）/（上年同期累计）。单位：千元11
+AC_GYJZBDSY3_C1/AC_GYJZBDSY3_C2	String	公允价值变动收益(损失以'-'记) （本月止累计）/（上年同期累计）。单位：千元11
+AC_TZSY3_C1/AC_TZSY3_C2	String	投资收益(损失以'-'记) （本月止累计）/（上年同期累计）。单位：千元11
+AC_YYLR3_C1/AC_YYLR3_C2	String	营业利润（本月止累计）/（上年同期累计）。单位：千元11
+AC_YYWSR3_C1/AC_YYWSR3_C2	String	营业外收入（本月止累计）/（上年同期累计）。单位：千元11
+AC_BTSR3_C1/AC_BTSR3_C2	String	其中：补贴收入（本月止累计）/（上年同期累计）。单位：千元11
+AC_YYWZC3_C1/AC_YYWZC3_C2	String	营业外支出（本月止累计）/（上年同期累计）。单位：千元11
+AC_LRZE3_C1/AC_LRZE3_C1	String	利润总额（本月止累计）/（上年同期累计）。单位：千元141
+AC_YJZZS4_C1/AC_YJZZS4_C2	String	四、应交增值税（本月止累计）/（上年同期累计）。单位：千元11
+AC_PJYGRS5_C1/AC_PJYGRS5_C2	String	五、平均用工人数（本月止累计）/（上年同期累计）。单位：人11
+AC_User	String	填表人
+AC_Telephone	String	联系电话
+AC_Date	String	报出日期
+*/
+function zb(){
+  api.ajax({
+           url: yuming+'/learun/adms/company/getybxxxx',
+           method: 'get',
+           data:{values: {
+             "loginMark": api.deviceId,
+             "token": $api.getStorage('token'),
+
+            YBid	:api.pageParam.arr.ID,
+
+
+
+
+              }}
+       }, function(ret) {
+api.sendEvent({
+    name: 'sx',
+    extra: {
+        key1: 'value1',
+        key2: 'value2'
+    }
+});
+
+//alert(JSON.stringify(ret))
+ toast.hide()
+       if(ret){
+       if(ret.code==200){
+				 html=''
+				 html+=	'	<ul class="yyr">'
+				 	html+=		'	<li><span>公司名称</span><input type="text" value="'+ret.data[0].AC_COMPANY+'" placeholder="" readonly="readonly" id="name" value="'+api.pageParam.arr.name+'" /></li>'
+					html+=		'	<li><span>时间</span><input type="text" value="'+ret.data[0].AC_YEAR_MONTH+'" placeholder="" readonly="readonly" id="name" value="'+api.pageParam.arr.name+'" /></li>'
+					html+=		'	<li><span>年初存货（本月止累计）/（上年同期累计）</span><input type="text" value="'+ret.data[0].AC_YCCH1_C1+'/'+ret.data[0].AC_YCCH1_C2+'千元" placeholder="" readonly="readonly" id="name" value="'+api.pageParam.arr.name+'" /></li>'
+          html+=		'	<li><span>资产负债（本月止累计）/（上年同期累计）</span><input type="text" value="'+ret.data[0].AC_ZCFZ2_C1+'/'+ret.data[0].AC_ZCFZ2_C2+'千元" placeholder="" readonly="readonly" id="name" value="'+api.pageParam.arr.name+'" /></li>'
+          html+=		'	<li><span>流动资产合计（本月止累计）/（上年同期累计）</span><input type="text" value="'+ret.data[0].AC_LDZCHJ2_C1+'/'+ret.data[0].AC_LDZCHJ2_C2+'千元" placeholder="" readonly="readonly" id="name" value="'+api.pageParam.arr.name+'" /></li>'
+          html+=		'	<li><span>应收账款（本月止累计）/（上年同期累计）</span><input type="text" value="'+ret.data[0].AC_YSZK2_C1+'/'+ret.data[0].AC_YSZK2_C2+'千元" placeholder="" readonly="readonly" id="name" value="'+api.pageParam.arr.name+'" /></li>'
+          html+=		'	<li><span>存货（本月止累计）/（上年同期累计）</span><input type="text" value="'+ret.data[0].AC_CH2_C1+'/'+ret.data[0].AC_CH2_C2+'千元" placeholder="" readonly="readonly" id="name" value="'+api.pageParam.arr.name+'" /></li>'
+          html+=		'	<li><span>产成品（本月止累计）/（上年同期累计）</span><input type="text" value="'+ret.data[0].AC_YCP2_C1+'/'+ret.data[0].AC_YCP2_C2+'千元" placeholder="" readonly="readonly" id="name" value="'+api.pageParam.arr.name+'" /></li>'
+          html+=		'	<li><span>资产总计（本月止累计）/（上年同期累计）</span><input type="text" value="'+ret.data[0].AC_ZCZJ2_C1+'/'+ret.data[0].AC_ZCZJ2_C2+'千元" placeholder="" readonly="readonly" id="name" value="'+api.pageParam.arr.name+'" /></li>'
+          html+=		'	<li><span>负债合计（本月止累计）/（上年同期累计）</span><input type="text" value="'+ret.data[0].AC_FZHJ2_C1+'/'+ret.data[0].AC_FZHJ2_C2+'千元" placeholder="" readonly="readonly" id="name" value="'+api.pageParam.arr.name+'" /></li>'
+          html+=		'	<li><span>损益及分配（本月止累计）/（上年同期累计）</span><input type="text" value="'+ret.data[0].AC_SYJFP3_C1+'/'+ret.data[0].AC_SYJFP3_C2+'千元" placeholder="" readonly="readonly" id="name" value="'+api.pageParam.arr.name+'" /></li>'
+          html+=		'	<li><span>营业收入（本月止累计）/（上年同期累计）</span><input type="text" value="'+ret.data[0].AC_YYSR3_C1+'/'+ret.data[0].AC_YYSR3_C2+'千元" placeholder="" readonly="readonly" id="name" value="'+api.pageParam.arr.name+'" /></li>'
+          html+=		'	<li><span>主营业务收入（本月止累计）/（上年同期累计）</span><input type="text" value="'+ret.data[0].AC_ZYYWSR3_C1+'/'+ret.data[0].AC_ZYYWSR3_C2+'千元" placeholder="" readonly="readonly" id="name" value="'+api.pageParam.arr.name+'" /></li>'
+          html+=		'	<li><span>营业成本（本月止累计）/（上年同期累计）</span><input type="text" value="'+ret.data[0].AC_YYCB3_C1+'/'+ret.data[0].AC_YYCB3_C2+'千元" placeholder="" readonly="readonly" id="name" value="'+api.pageParam.arr.name+'" /></li>'
+          html+=		'	<li><span>主营业务成本（本月止累计）/（上年同期累计）</span><input type="text" value="'+ret.data[0].AC_ZYYWCB3_C1+'/'+ret.data[0].ZYYWCB3_C2+'千元" placeholder="" readonly="readonly" id="name" value="'+api.pageParam.arr.name+'" /></li>'
+          html+=		'	<li><span>营业税金及附加（本月止累计）/（上年同期累计）</span><input type="text" value="'+ret.data[0].AC_YYSJJFJ3_C1+'/'+ret.data[0].AC_YYSJJFJ3_C2+'千元" placeholder="" readonly="readonly" id="name" value="'+api.pageParam.arr.name+'" /></li>'
+          html+=		'	<li><span>主营业务税金及附加（本月止累计）/（上年同期累计）</span><input type="text" value="'+ret.data[0].AC_ZYYWSJJFJ3_C1+'/'+ret.data[0].AC_ZYYWSJJFJ3_C2+'千元" placeholder="" readonly="readonly" id="name" value="'+api.pageParam.arr.name+'" /></li>'
+          html+=		'	<li><span>销售费用（本月止累计）/（上年同期累计）</span><input type="text" value="'+ret.data[0].AC_XSFY3_C1+'/'+ret.data[0].AC_XSFY31_C2+'千元" placeholder="" readonly="readonly" id="name" value="'+api.pageParam.arr.name+'" /></li>'
+          html+=		'	<li><span>管理费用（本月止累计）/（上年同期累计）</span><input type="text" value="'+ret.data[0].AC_YGLFY3_C1+'/'+ret.data[0].AC_YGLFY3_C2+'千元" placeholder="" readonly="readonly" id="name" value="'+api.pageParam.arr.name+'" /></li>'
+          html+=		'	<li><span>税金（本月止累计）/（上年同期累计）</span><input type="text" value="'+ret.data[0].AC_SJ3_C1+'/'+ret.data[0].AC_SJ3_C2+'千元" placeholder="" readonly="readonly" id="name" value="'+api.pageParam.arr.name+'" /></li>'
+          html+=		'	<li><span>财务费用（本月止累计）/（上年同期累计）</span><input type="text" value="'+ret.data[0].AC_CWFY3_C1+'/'+ret.data[0].AC_CWFY3_C2+'千元" placeholder="" readonly="readonly" id="name" value="'+api.pageParam.arr.name+'" /></li>'
+          html+=		'	<li><span>利息收入（本月止累计）/（上年同期累计）</span><input type="text" value="'+ret.data[0].AC_LXSR3_C1+'/'+ret.data[0].AC_LXSR3_C2+'千元" placeholder="" readonly="readonly" id="name" value="'+api.pageParam.arr.name+'" /></li>'
+          html+=		'	<li><span>利息支出（本月止累计）/（上年同期累计）</span><input type="text" value="'+ret.data[0].AC_LXZC3_C1+'/'+ret.data[0].AC_LXZC3_C2+'千元" placeholder="" readonly="readonly" id="name" value="'+api.pageParam.arr.name+'" /></li>'
+          html+=		'	<li><span>资产减值损失（本月止累计）/（上年同期累计）</span><input type="text" value="'+ret.data[0].AC_ZCJZSS3_C1+'/'+ret.data[0].AC_ZCJZSS3_C2+'千元" placeholder="" readonly="readonly" id="name" value="'+api.pageParam.arr.name+'" /></li>'
+          html+=		'	<li><span>公允价值变动收益(损失以-记) （本月止累计）/（上年同期累计）</span><input type="text" value="'+ret.data[0].AC_GYJZBDSY3_C1+'/'+ret.data[0].AC_GYJZBDSY3_C2+'千元" placeholder="" readonly="readonly" id="name" value="'+api.pageParam.arr.name+'" /></li>'
+          html+=		'	<li><span>投资收益(损失以-记) （本月止累计）/（上年同期累计）</span><input type="text" value="'+ret.data[0].AC_TZSY3_C1+'/'+ret.data[0].AC_TZSY3_C2+'千元" placeholder="" readonly="readonly" id="name" value="'+api.pageParam.arr.name+'" /></li>'
+          html+=		'	<li><span>营业利润（本月止累计）/（上年同期累计）</span><input type="text" value="'+ret.data[0].AC_YYLR3_C1+'/'+ret.data[0].AC_YYLR3_C2+'千元" placeholder="" readonly="readonly" id="name" value="'+api.pageParam.arr.name+'" /></li>'
+          html+=		'	<li><span>营业外收入（本月止累计）/（上年同期累计）</span><input type="text" value="'+ret.data[0].AC_YYWSR3_C1+'/'+ret.data[0].AC_YYWSR3_C2+'千元" placeholder="" readonly="readonly" id="name" value="'+api.pageParam.arr.name+'" /></li>'
+
+          html+=		'	<li><span>补贴收入（本月止累计）/（上年同期累计）</span><input type="text" value="'+ret.data[0].AC_BTSR3_C1+'/'+ret.data[0].AC_BTSR3_C2+'千元" placeholder="" readonly="readonly" id="name" value="'+api.pageParam.arr.name+'" /></li>'
+          html+=		'	<li><span>营业外支出（本月止累计）/（上年同期累计）</span><input type="text" value="'+ret.data[0].AC_YYWZC3_C1+'/'+ret.data[0].AC_YYWZC3_C2+'千元" placeholder="" readonly="readonly" id="name" value="'+api.pageParam.arr.name+'" /></li>'
+          html+=		'	<li><span>利润总额（本月止累计）/（上年同期累计）</span><input type="text" value="'+ret.data[0].AC_LRZE3_C1+'/'+ret.data[0].AC_LRZE31_C2+'千元" placeholder="" readonly="readonly" id="name" value="'+api.pageParam.arr.name+'" /></li>'
+          html+=		'	<li><span>应交增值税（本月止累计）/（上年同期累计）</span><input type="text" value="'+ret.data[0].AC_YJZZS4_C1+'/'+ret.data[0].AC_YJZZS4_C2+'千元" placeholder="" readonly="readonly" id="name" value="'+api.pageParam.arr.name+'" /></li>'
+          html+=		'	<li><span>平均用工人数（本月止累计）/（上年同期累计）</span><input type="text" value="'+ret.data[0].AC_PJYGRS5_C1+'/'+ret.data[0].AC_PJYGRS5_C2+'千元" placeholder="" readonly="readonly" id="name" value="'+api.pageParam.arr.name+'" /></li>'
+          html+=		'	<li><span>填表人</span><input type="text" value="'+ret.data[0].AC_User+'" placeholder="" readonly="readonly" id="name" value="'+api.pageParam.arr.name+'" /></li>'
+
+          html+=		'	<li><span>联系电话</span><input type="text" value="'+ret.data[0].AC_Telephone+'" placeholder="" readonly="readonly" id="name" value="'+api.pageParam.arr.name+'" /></li>'
+          html+=		'	<li><span>报出日期</span><input type="text" value="'+ret.data[0].AC_Date+'" placeholder="" readonly="readonly" id="name" value="'+api.pageParam.arr.name+'" /></li>'
+
+				 	html+=	'	</ul>'
+
+
+				 document.getElementById('ct').innerHTML=html
+
+   }else {
+     jy=0
+     toast.hide()
+     api.toast({
+     msg: ret.info,
+     duration: 2000,
+     location: 'middle'
+ });
+   }
+
+       }else {
+
+          toast.hide()
+         api.toast({
+         msg: '网络错误',
+         duration: 2000,
+         location: 'middle'
+     });
+       }
+
+       })
+
+}
+zb()
+}
+jy=0
+function tijiao(){
+  //alert(document.getElementById('nyr').value)
+/*14.4修改房间租赁信息
+：/learun/adms/Parkinglease/postparkingleaseaddorupdate
+loginMark	String
+token	String
+id	String
+parkingid	int
+tenantryid	String
+starttime	String
+endtime	String
+remark	String
+*/
+
+	if(jy==0){
+		jy=1
+		showDefault()
+		api.ajax({
+						 url: yuming+'/learun/adms/Parkinglease/postparkingleaseaddorupdate',
+						 method: 'post',
+						 data:{values: {
+               "loginMark": api.deviceId,
+               "token": $api.getStorage('token'),
+							 id	:api.pageParam.arr.id,
+	 						parkingid		:api.pageParam.arr.parkingid	,
+	 						tenantryid:api.pageParam.arr.tenantryid,
+	 						starttime	:document.getElementById('starttime').value,
+	 						endtime	:document.getElementById('endtime').value,
+
+	 						remark:document.getElementById('bz').value,
+
+
+
+								}}
+				 }, function(ret) {
+
+	//alert(JSON.stringify(ret))
+	 toast.hide()
+				 if(ret){
+				 if(ret.code==200){
+					 api.sendEvent({
+					     name: 'sx',
+					     extra: {
+					         key1: 'value1',
+					         key2: 'value2'
+					     }
+					 });
+
+					 api.toast({
+					 msg: '提交成功!',
+					 duration: 2000,
+					 location: 'middle'
+					 });
+					toast.hide()
+jy=0
+		 }else {
+       jy=0
+			 toast.hide()
+			 api.toast({
+			 msg: ret.info,
+			 duration: 2000,
+			 location: 'middle'
+	 });
+		 }
+
+				 }else {
+
+						toast.hide()
+					 api.toast({
+					 msg: '网络错误',
+					 duration: 2000,
+					 location: 'middle'
+			 });
+				 }
+
+				 })
+	}
+}
+</script>

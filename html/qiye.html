@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="format-detection" content="telephone=no"><!-- 禁止IPHONE识别手机号码 -->
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+<title>一停车场</title>
+<!-- css -->
+<link rel="stylesheet" type="text/css" href="../css/frozenui.css">
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+<link rel="stylesheet" type="text/css" href="css/index.css">
+<link rel="stylesheet" type="text/css" href="css/mui.min.css" />
+<link rel="stylesheet" type="text/css" href="../css/aui.css">
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/aui-toast.js"></script>
+<script type="text/javascript" src="../script/H.js"></script>
+<script type="text/javascript" src="../script/jquery.js"></script>
+<script type="text/javascript" src="../script/yuming.js"></script>
+<style>
+
+.module-content{padding-top: 44px;padding-bottom: 50px;}
+.fklist{margin: 10px;}
+.fklist li{background: #fff;border-radius:5px;padding: 10px;margin-bottom: 10px;line-height: 22px;}
+.fklist li a{}
+.fklist li h3{display: block; font-size: 14px;color: #000;margin-bottom: 10px;width: 100%;font-size: 16px;font-weight: bold;}
+.fklist li div{width: 100%;color: #333;font-size: 14px;}
+.fklist li h4{color: #666;font-size: 13px;line-height: 22px;}
+.fklist li p{display: flex;justify-content: space-between; color: #999;font-size: 12px;border-top: 0px solid #f1f1f1;margin-top: 0px;padding-top: 0px;}
+.fklist li p img{width: 16px;height: 16px;}
+.tianjia{position: fixed;right: 10px;width: 36px;height: 36px;bottom: 65px;}
+.tianjia img{width: 100%;}
+.yincang{display: none;position: fixed;background: rgba(0,0,0,0.5);top: 0;bottom: 0;left: 0;right: 0;z-index: 9999;}
+.tanchuang{display: none;position: fixed;background: #fff; top: 35%;width: 80%;left: 10%;padding:15px 10px;border-radius: 10px; z-index: 10000;}
+.tanchuang h3{color: #fe2400;font-size: 16px;text-align: center;}
+.tcbtn{margin: 20px auto 10px;display: flex;justify-content: space-between;width: 60%;}
+.tcbtn span{font-size: 14px;text-align: center;width: 45%;border-radius: 5px;color: #fff;padding: 10px 0;}
+.zhuan{
+  display: none;
+  margin: 0 auto;
+}
+
+#sou{
+	height: 30px;
+	line-height: 30px;
+	position: absolute;
+	width: 80%;
+	right: 10%;
+	bottom: 14px;
+	font-size: 14px;
+	border-radius: 15px;
+  text-indent: 10px;
+  font-size: 14px;
+  background: #EEF2FB;
+  border: none;
+}
+#sout{
+	height: 20px;
+width: 20px;;
+	position: absolute;
+
+	right: 4%;
+	bottom: 18px;
+}
+.qd{
+  height: 40px;
+  width: 100%;
+  position: relative;
+  line-height: 40px;
+  font-size: 14px;
+  text-align: center;
+  color: #464646;
+  border-top: 0.5px solid #EDEDED;
+}
+.qd1{
+  width: 50%;
+  height: 40px;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+    border-right: 0.5px solid #EDEDED;
+}
+.qd2{
+  width: 50%;
+  height: 40px;
+  position: absolute;
+  right: 0;
+  bottom: 0
+}
+html,body{
+	background: #F7F7F7
+}
+</style>
+</head>
+<body>
+	<div class="ui-dialog" id="dialog">
+					<div class="ui-dialog-cnt">
+							<div class="ui-dialog-bd">
+									<p>确定要删除吗？</p>
+							</div>
+
+							<div class="qd">
+								<div class="qd1" onclick="quxiao()">
+取消
+								</div>
+								<div class="qd2"  onclick="queding()">
+确定
+								</div>
+							</div>
+					</div>
+			</div>
+	<header id="headj">
+		<a >
+			<img src="images/back_jt.png" onclick="api.closeWin()" />
+			<span  id="tname" onclick="api.closeWin()">企业广场</span>
+		</a>
+    <div style="display:none">
+      <input type="text" placeholder="请输入名称" id="sou" />
+      <img src="images/search.png" id="sout"/>
+    </div>
+    		<img src="./images/search.png" id="jgsou" style="height:20px;width:20px;position:absolute;right:5%;bottom:15px;">
+	</header>
+<div class="module-content slideTxtBox" id="ge">
+	<div class="hd" style="display:none">
+		<ul>
+			<li class="on">可用<p></p></li>
+			<li>已用<p></p></li>
+		</ul>
+	</div>
+	<div class="bd">
+		<ul class="fklist" id="jzuo" style="display:block">
+	<!--	  <li><a>
+        <h3>植被名称：A座东面冬青</h3>
+        <div>添加人：王迪车</div>
+        <h4>备注：</h4>
+      </a>
+      <p>
+        <span>添加时间：2019-12-12</span>
+        <img src="images/del.png" class="del" />
+      </p>
+    </li>
+-->
+		</ul>
+		<ul class="tcw" id="jyou">
+<!--			<li>
+				<div><span>楼层：b1</span><span>车位号：258</span></div>
+				<div>业达智慧园区一停车场</div>
+				<p>车牌号：鲁Y 525v5</p>
+			</li>
+-->
+
+		</ul>
+	</div>
+</div>
+<img src="../image/zhuan.gif" id="zhuan" style="height:20px;width:auto;margin-top:10px;margin-bottom:10px;" class="zhuan">
+<div id="ddd">
+
+</div>
+<div class="foot_menu" style="display:none">
+	<ul>
+		<li>
+			<a href="index.html">
+				<i><img src="images/menu_icon01.png"></i>
+				<span>首 页</span>
+			</a>
+		</li>
+		<li class="cur">
+			<a href="shequ.html">
+				<i><img src="images/menu_icon02_r.png"></i>
+				<span>社 区</span>
+			</a>
+		</li>
+		<li>
+			<a href="news.html">
+				<i><img src="images/menu_icon03.png"></i>
+				<span>消 息</span>
+			</a>
+		</li>
+		<li>
+			<a href="user.html">
+				<i><img src="images/menu_icon04.png"></i>
+				<span>我 的</span>
+			</a>
+		</li>
+	</ul>
+</div>
+
+</body>
+<script type="text/javascript" src="js/jquery.js" ></script>
+<script type="text/javascript" src="js/jquery.SuperSlide.2.1.1.js" ></script>
+<script>
+	$(".slideTxtBox").slide({trigger:"click"});
+</script>
+</html>
+<script type="text/javascript">
+//alert(1)
+page=0;
+str=''
+arr=[]
+arrindex=0
+apiready = function () {
+$api.fixStatusBar(document.getElementById('headj'));
+document.getElementById('headj').style.height=(50+api.safeArea.top)+'px'
+document.getElementById('ge').style.marginTop=(5+api.safeArea.top)+'px'
+
+document.getElementById('sou').oninput=function(){//alert(str)
+str=document.getElementById('sou').value
+
+}
+document.getElementById('jgsou').onclick=function(){
+	api.openWin({
+	    name: 'souqiye',
+	    url: './souqiye.html',
+	    pageParam: {
+	        tp: 1
+	    }
+	});
+
+}
+api.addEventListener({
+    name: 'sx'
+}, function(ret, err){
+	showDefault()
+	page=0
+	zb()
+});
+
+document.getElementById('sout').onclick=function(){
+showDefault()
+page=0
+zb()
+}
+$api.setStorage('j',0)
+showDefault()
+function zb(){
+/*
+请求地址：/learun/adms/company/getcompany
+类型：Get
+请求参数：
+参数名称	类型	备注	必须
+loginMark	String	设备标识，必须具有唯一性	是
+token	String	验证码，从登录后返回信息中获取	是
+pageno	String	当前页码	是
+pagesize	String	每页记录数	是
+F_FullName	String	公司名称
+F_Description	String	房间号
+IsHeightEnterprise	String	技术领域
+F_Address	String	公司地址
+StartTime	String	入住时间，这个两个参数只填一个没效果，必须两个都填。
+F_FullName	string	公司名称
+ID	string	主键
+IsHeightEnterprise	string	技术领域
+F_Nature	string	公司性质
+F_FoundedTime	string	成立时间
+F_Manager	String	负责人
+F_OuterPhone	String	电话
+RYSJ	string	入住时间
+F_Address	String	公司地址
+F_Description	string	公司房间号
+*/
+page++
+//alert(str)
+F_FullName=''
+F_Description=''
+IsHeightEnterprise=''
+F_Address=''
+StartTime=''
+if(api.pageParam.kk1){
+  F_FullName=api.pageParam.kk1
+}
+if(api.pageParam.kk2){
+F_Description=api.pageParam.kk2
+}
+if(api.pageParam.kk3){
+IsHeightEnterprise=api.pageParam.kk3
+}
+if(api.pageParam.kk4){
+  F_Address=api.pageParam.kk4
+}
+if(api.pageParam.kk5){
+  StartTime=api.pageParam.kk5
+}
+//alert(  F_FullName)
+if(page==1){
+//alert(riqi)
+
+ api.ajax({
+   url: yuming+'/learun/adms/company/getcompany',
+       method: 'get',
+       data:{values: {
+         "loginMark": api.deviceId,
+         "token": $api.getStorage('token'),
+
+         pageno	:page,
+         pagesize	:10,
+         F_FullName:F_FullName,
+         F_Description:F_Description,
+         IsHeightEnterprise:IsHeightEnterprise,
+         F_Address:F_Address,
+         StartTime:StartTime
+             }}
+      }, function(ret) {
+//alert(JSON.stringify(ret))
+api.refreshHeaderLoadDone()
+        for (var i = 0; i < document.getElementsByClassName('zhuan').length; i++) {
+         document.getElementsByClassName('zhuan')[i].style.display='none'
+       }
+       if(ret){
+       if(ret.code==200){
+				 arr=[]
+				 arrindex=0
+document.getElementById('jzuo').innerHTML=''
+if(ret.data.list.length>0){
+var html='';
+for (var i = 0; i <ret.data.list.length; i++) {
+//  ' <div class="d" onclick="sjxq(1)">'+
+arr.push(ret.data.list[i])
+arrindex++
+  if(1){
+     html= '	<li onclick="cwxq('+arrindex+')"><a>'
+			html+='	 <h3>'+ret.data.list[i].F_FullName+'</h3>'
+			html+=	 '<p>技术领域:'+ret.data.list[i].IsHeightEnterprise+'</p>'
+		//		html+=' <h4>'+ret.data.list[i].ZCDZ+'</h4>'
+		html+=	 '</a>'
+			html+= '<p>'
+			if(ret.data.list[i].F_FoundedTime){	html+=' <span>成立时间:'+ret.data.list[i].F_FoundedTime.split(' ')[0]+'</span>'}else {
+				html+=' <span>成立时间:</span>'
+			}
+			//	html+='	<img src="images/del.png" class="del vv" data-id="'+ret.data.list[i].id+'" onclick="shanchu('+ret.data.list[i].id+')" />'
+			 html+='</p>'
+		 html+='</li>'
+
+      $('#jzuo').append(html)
+			$('.vv').click(function(e){
+
+			　　e.stopPropagation();
+
+			})
+    }else {
+      html= '	<li>'+
+      '<div><span>楼层：'+ret.data.list[i].floorName+'</span><span>车位号：'+ret.data.list[i].plotNo+'</span></div>'+
+    '	<div>'+ret.data.list[i].parkName+'</div>'+
+    	'<p>车牌号：'+ret.data.list[i].plateNo+'</p>'+
+ 			'</li>'
+       $('#jyou').append(html)
+    }
+
+        $api.setStorage('j',0)
+
+}
+
+//html+='<div class="xiala"></div>'
+//document.getElementById('content1').innerHTML=html;
+
+}else {
+// document.getElementById('content1').innerHTML='<img src="../../image/zanwu.png"style="width:100px;height:100px;display:block;margin:0 auto;margin-top:160px;margin-bottom:100px;">'
+}
+
+       }else {
+         api.toast({
+          msg:ret.info,
+          duration: 2000,
+          location: 'middle'
+         });
+     toast.hide()
+       }
+
+
+     }else {
+
+      /* api.toast({
+       msg: '网络错误',
+       duration: 2000,
+       location: 'middle'
+   });*/
+     }
+toast.hide()
+      })
+}else {
+	api.ajax({
+    url: yuming+'/learun/adms/company/getcompany',
+        method: 'get',
+        data:{values: {
+          "loginMark": api.deviceId,
+          "token": $api.getStorage('token'),
+
+          pageno	:page,
+          pagesize	:10,
+          F_FullName:F_FullName,
+          F_Description:F_Description,
+          IsHeightEnterprise:IsHeightEnterprise,
+          F_Address:F_Address,
+          StartTime:StartTime
+              }}
+       }, function(ret) {
+ //alert(JSON.stringify(ret))
+ api.refreshHeaderLoadDone()
+         for (var i = 0; i < document.getElementsByClassName('zhuan').length; i++) {
+          document.getElementsByClassName('zhuan')[i].style.display='none'
+        }
+        if(ret){
+        if(ret.code==200){
+
+ if(ret.data.list.length>0){
+ var html='';
+ for (var i = 0; i <ret.data.list.length; i++) {
+   //  ' <div class="d" onclick="sjxq(1)">'+
+   arr.push(ret.data.list[i])
+   arrindex++
+     if(1){
+        html= '	<li onclick="cwxq('+arrindex+')"><a>'
+   			html+='	 <h3>'+ret.data.list[i].Name+'</h3>'
+   			html+=	 '<p>技术领域:'+ret.data.list[i].IsHeightEnterprise+'</p>'
+   			//	html+=' <h4>'+ret.data.list[i].ZCDZ+'</h4>'
+   		html+=	 '</a>'
+   			html+= '<p>'
+   			if(ret.data.list[i].F_FoundedTime){	html+=' <span>成立时间:'+ret.data.list[i].F_FoundedTime.split(' ')[0]+'</span>'}else {
+   				html+=' <span>成立时间:</span>'
+   			}
+   			//	html+='	<img src="images/del.png" class="del vv" data-id="'+ret.data.list[i].id+'" onclick="shanchu('+ret.data.list[i].id+')" />'
+   			 html+='</p>'
+   		 html+='</li>'
+
+         $('#jzuo').append(html)
+   			$('.vv').click(function(e){
+
+   			　　e.stopPropagation();
+
+   			})
+     }else {
+       html= '	<li>'+
+       '<div><span>楼层：'+ret.data.list[i].floorName+'</span><span>车位号：'+ret.data.list[i].plotNo+'</span></div>'+
+     '	<div>'+ret.data.list[i].parkName+'</div>'+
+     	'<p>车牌号：'+ret.data.list[i].plateNo+'</p>'+
+  			'</li>'
+        $('#jyou').append(html)
+     }
+
+         $api.setStorage('j',0)
+
+ }
+
+ //html+='<div class="xiala"></div>'
+ //document.getElementById('content1').innerHTML=html;
+
+ }else {
+ // document.getElementById('content1').innerHTML='<img src="../../image/zanwu.png"style="width:100px;height:100px;display:block;margin:0 auto;margin-top:160px;margin-bottom:100px;">'
+ }
+
+        }else {
+          api.toast({
+           msg:ret.info,
+           duration: 2000,
+           location: 'middle'
+          });
+      toast.hide()
+        }
+
+
+      }else {
+
+       /* api.toast({
+        msg: '网络错误',
+        duration: 2000,
+        location: 'middle'
+    });*/
+      }
+ toast.hide()
+       })
+
+
+}
+
+}
+zb()
+$("#sou").on('keypress', function(e) {
+  //  alert(1)
+      var keycode = e.keyCode;
+      //获取搜索框的值
+      var neirong = $(this).val();
+
+      if (keycode == '13') {
+          e.preventDefault();
+          //请求搜索接口
+          if(0){
+            api.toast({
+            msg: '请输入搜索内容',
+            duration: 2000,
+            location: 'middle'
+        });
+          }else {
+  str=neirong
+page=0
+showDefault()
+$api.setStorage('j', 0);
+zb()
+              api.sendEvent({
+                  name: 'sx',
+                  extra: {
+                    neirong: neirong
+                  }
+              });
+            }
+
+          }
+
+  });
+api.addEventListener({
+name:'scrolltobottom',
+extra:{
+    threshold:0           //设置距离底部多少距离时触发，默认值为0，数字类型
+}
+}, function(ret, err){
+
+if($api.getStorage('j')==0){
+$api.setStorage('j',1)
+//alert(1)
+ var zhuan=document.getElementById('zhuan').cloneNode(true);
+ zhuan.style.display='block'
+ document.getElementById('ddd').appendChild(zhuan)
+
+zb()
+}
+});
+}
+function shanchu(data){
+
+  id=data
+    $("#dialog").addClass("show");
+}
+function quxiao(data){
+
+  //id=data
+    $("#dialog").removeClass("show");
+}
+function queding(data){
+/*
+/learun/adms/Roomlease/deleleroomlease
+*/
+showDefault()
+//alert(id)
+      $("#dialog").removeClass("show");
+		if(1){	api.ajax({
+		    url: yuming+'/learun/adms/plant/postplantcheckdelete',
+		        method: 'post',
+		        data:{values: {
+		          "loginMark": api.deviceId,
+		          "token": $api.getStorage('token'),
+		        id	:id,
+
+		              }}
+		       }, function(ret) {
+		 //alert(JSON.stringify(ret))
+toast.hide()
+		         for (var i = 0; i < document.getElementsByClassName('zhuan').length; i++) {
+		          document.getElementsByClassName('zhuan')[i].style.display='none'
+		        }
+		        if(ret){
+		        if(ret.code==200){
+							api.toast({
+							 msg:'删除成功!',
+							 duration: 2000,
+							 location: 'middle'
+							});
+api.sendEvent({
+    name: 'sx',
+    extra: {
+        key1: 'value1',
+        key2: 'value2'
+    }
+});
+
+
+
+		        }else {
+		          api.toast({
+		           msg:ret.info,
+		           duration: 2000,
+		           location: 'middle'
+		          });
+		      toast.hide()
+		        }
+
+
+		      }else {
+
+		       /* api.toast({
+		        msg: '网络错误',
+		        duration: 2000,
+		        location: 'middle'
+		    });*/
+		      }
+		 toast.hide()
+	 })}else {
+		 api.ajax({
+ 		    url: yuming+'/learun/adms/Roomdistribution/deleleroomdistribution',
+ 		        method: 'post',
+ 		        data:{values: {
+ 		          "loginMark": api.deviceId,
+ 		          "token": $api.getStorage('token'),
+ 		        id	:id,
+
+ 		              }}
+ 		       }, function(ret) {
+ 		 //alert(JSON.stringify(ret))
+ toast.hide()
+ 		         for (var i = 0; i < document.getElementsByClassName('zhuan').length; i++) {
+ 		          document.getElementsByClassName('zhuan')[i].style.display='none'
+ 		        }
+ 		        if(ret){
+ 		        if(ret.code==200){
+ 							api.toast({
+ 							 msg:'删除成功!',
+ 							 duration: 2000,
+ 							 location: 'middle'
+ 							});
+ api.sendEvent({
+     name: 'sx',
+     extra: {
+         key1: 'value1',
+         key2: 'value2'
+     }
+ });
+
+
+
+ 		        }else {
+ 		          api.toast({
+ 		           msg:ret.info,
+ 		           duration: 2000,
+ 		           location: 'middle'
+ 		          });
+ 		      toast.hide()
+ 		        }
+
+
+ 		      }else {
+
+ 		       /* api.toast({
+ 		        msg: '网络错误',
+ 		        duration: 2000,
+ 		        location: 'middle'
+ 		    });*/
+ 		      }
+ 		 toast.hide()
+ 	 })
+	 }
+}
+function bianji(data){
+	api.openWin({
+	    name: 'editfangwu',
+	    url: './editfangwu.html',
+	    pageParam: {
+	        arr:arr[data-1]
+	    }
+	});
+
+}
+function cwxq(data){
+  api.openWin({
+      name: 'qiyexq',
+      url: './qiyexq.html',
+      pageParam: {
+          arr:arr[data-1]
+      }
+  });
+
+}
+</script>

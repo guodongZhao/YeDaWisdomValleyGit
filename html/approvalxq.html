@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="format-detection" content="telephone=no"><!-- 禁止IPHONE识别手机号码 -->
+<meta name="viewport" content="width=device-width,user-scalable=no, initial-scale=1">
+<title>审批详情</title>
+<!-- css -->
+<link rel="stylesheet" type="text/css" href="css/index.css">
+<link rel="stylesheet" type="text/css" href="css/mui.min.css" />
+<link href="css/foundation-datepicker.css" rel="stylesheet" type="text/css">
+<style>
+.module-content{padding-top: 44px;padding-bottom: 50px;}
+.hybt{color: #000;font-size: 16px;line-height: 40px;}
+.hyxz{background: #f4f4f4;border-top-left-radius: 10px;border-top-right-radius: 10px;padding: 10px 15px;}
+
+.yyr{border-radius: 10px;overflow: hidden;}
+.yyr li{display: flex;background: #fff;align-items: center;padding:10px;border-bottom: 1px solid #f1f1f1;line-height: 24px;font-size: 14px;color: #333;}
+.yyr li:last-child{border-bottom: 0;}
+.yyr li span{font-size: 14px;color: #666;width: 80px;}
+.yyr p{line-height: 44px;color: #000;font-size: 14px;}
+.hyxz textarea{border-radius: 10px;border: 0;color: #000;font-size: 14px;}
+.hyxz textarea::-webkit-input-placeholder{color: #333;}
+.pizhun{display: flex;justify-content: space-around;padding: 20px 30px;}
+.pzbtn{width: 45%;border-radius: 10px;text-align: center;padding: 10px;color: #fff;border: none;font-size: 15px;}
+</style>
+</head>
+<body style="background: #f7f7f7;">
+	<header>
+		<a href="javascript:history.back(-1)">
+			<img src="images/back_jt.png" />
+			<span onclick="api.closeWin()">审批详情</span>
+		</a>
+	</header>
+<div class="module-content">
+	<div class="hyxz">
+		<ul class="yyr">
+			<li><span>审核事项</span>会议室预约</li>
+			<li><span>申请地点</span>10栋18楼1号会议室</li>
+			<li><span>申请公司</span>业达物业公司</li>
+			<li><span>申请人员</span>王经理</li>
+			<li><span>联系电话</span>18558599865</li>
+			<li><span>申请时间</span>2019-12-12 08:30-10:30</li>
+			<li><span>备注</span>2019年信息化项目总结会</li>
+		</ul>
+	</div>
+	<div class="pizhun">
+		<button class="pzbtn" style="background: #F04124;">通过</button>
+		<button class="pzbtn" style="background: #0C83F9;">拒绝</button>
+	</div>
+</div>
+
+<div class="foot_menu">
+	<ul>
+		<li>
+			<a href="index.html">
+				<i><img src="images/menu_icon01.png"></i>
+				<span>首 页</span>
+			</a>
+		</li>
+		<li class="cur">
+			<a href="wuye.html">
+				<i><img src="images/menu_icon02.png"></i>
+				<span>智 能</span>
+			</a>
+		</li>
+		<li>
+			<a href="news.html">
+				<i><img src="images/menu_icon03.png"></i>
+				<span>消 息</span>
+			</a>
+		</li>
+		<li>
+			<a href="user.html">
+				<i><img src="images/menu_icon04.png"></i>
+				<span>我 的</span>
+			</a>
+		</li>
+	</ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="format-detection" content="telephone=no"><!-- 禁止IPHONE识别手机号码 -->
+<meta name="viewport" content="width=device-width,user-scalable=no, initial-scale=1">
+<title>公寓详情</title>
+<!-- css -->
+<link rel="stylesheet" type="text/css" href="../css/frozenui.css">
+<link rel="stylesheet" type="text/css" href="css/index.css">
+<link rel="stylesheet" type="text/css" href="css/mui.min.css" />
+<link href="http://at.alicdn.com/t/font_1542633_vjfoldr9imp.css" />
+<link rel="stylesheet" type="text/css" href="../css/aui.css">
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/aui-toast.js"></script>
+<script type="text/javascript" src="../script/H.js"></script>
+<script type="text/javascript" src="../script/jquery.js"></script>
+<script type="text/javascript" src="../script/yuming.js"></script>
+<script src="http://at.alicdn.com/t/font_1542633_vjfoldr9imp.js"></script>
+<style>
+
+.m-slider {
+    overflow-x: hidden;
+    width: 100%;
+    position: relative;
+}
+.slider-wrapper {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    -webkit-transform: translate3d(0px, 0px, 0px);
+    transform: translate3d(0px, 0px, 0px);
+    position: relative;
+    z-index: 1;
+    -webkit-transition-property: -webkit-transform;
+    transition-property: -webkit-transform;
+    transition-property: transform;
+    transition-property: transform, -webkit-transform;
+}
+
+.slider-item {
+    width: 100%;
+    height: 100%;
+    -webkit-flex-shrink: 0;
+    -ms-flex-negative: 0;
+    flex-shrink: 0;
+    background: #f6f6f6;
+}
+
+.slider-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border: none;
+}
+.slider-pagination {
+    text-align: right;
+    position: absolute;
+    width: 100%;
+    z-index: 2;
+    right: 0;
+    bottom: 10px;
+    pointer-events: none;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: end;
+    -webkit-align-items: flex-end;
+    -ms-flex-align: end;
+    align-items: flex-end;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+.del{width: 26px;height: 26px;}
+.slider-pagination > .slider-pagination-item { margin: 0 5px; width: 7px; height: 7px; display: inline-block; border-radius: 100%; background-color: rgba(255,255,255,0.4);}
+.slider-pagination > .slider-pagination-item.slider-pagination-item-active { background-color: #fff;width:15px; border-radius: 33px;}
+.module-content{padding-top: 44px;padding-bottom: 50px;}
+.banner{border-radius: 10px;overflow: hidden;}
+.banner img{display: block;margin: 0;padding: 0; width: 100%;}
+.hys{display: flex;align-items: center;justify-content: space-between;padding: 10px;}
+.hys img{width: 20px;margin-right: 8px;}
+.hys h3{color: #333;font-size: 14px;color: #000; display: flex;align-items: center;width: 80%;}
+.hys p{color: #333;font-size: 12px;display: flex;align-items: center;width: 25%;justify-content: flex-end;}
+.hybt{color: #000;font-size: 16px;line-height: 40px;margin-left: 15px;}
+.hyxz{border-top:10px solid #f1f1f1 ;}
+.gongyuxx{background: #fff;padding: 10px 0;border-bottom:10px solid #f1f1f1 ;}
+.gongyuxx ul{padding:0 10px;}
+.gongyuxx li{font-size: 14px;padding:10px 0;border-bottom: 1px solid #f1f1f1;}
+.sbxz{margin-top: 10px;background: #fff;border-radius: 10px;padding: 10px 0;}
+.sbxz ul{display: flex;align-items: center;flex-wrap: wrap;}
+.sbxz ul li{width: 20%;text-align: center;background: #fff;margin: 0px 2.5%;padding: 10px 0;border-radius: 10px;}
+.sbxz ul li img{width: 30px;height: 30px;}
+.sbxz ul li p{font-size: 12px;margin-top: 8px;}
+
+.zhuan{
+	display: none;
+	margin: 0 auto;
+}
+#fenpeij{
+  width: 50px;
+  height: 26px;
+  line-height: 26px;
+  text-align: center;
+  border-radius: 4px;
+  color: white;
+  position: absolute;
+  right: 3%;
+  bottom: 12px;
+color: white;
+background: #4083F6;
+font-size: 14px;
+}
+
+.qd{
+  height: 40px;
+  width: 100%;
+  position: relative;
+  line-height: 40px;
+  font-size: 14px;
+  text-align: center;
+  color: #464646;
+  border-top: 0.5px solid #EDEDED;
+}
+.qd1{
+  width: 50%;
+  height: 40px;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+    border-right: 0.5px solid #EDEDED;
+}
+.qd2{
+  width: 50%;
+  height: 40px;
+  position: absolute;
+  right: 0;
+  bottom: 0
+}
+</style>
+</head>
+<div class="ui-dialog" id="dialog">
+        <div class="ui-dialog-cnt">
+            <div class="ui-dialog-bd">
+                <p>确定要删除吗？</p>
+            </div>
+
+            <div class="qd">
+              <div class="qd1" onclick="quxiao()">
+取消
+              </div>
+              <div class="qd2"  onclick="queding()">
+确定
+              </div>
+            </div>
+        </div>
+    </div>
+<body style="background: #fff;">
+  <header id="headj">
+		<a >
+			<img src="images/back_jt.png" onclick="api.closeWin()" />
+		<span onclick="api.closeWin()">公寓详情</span>
+	</a>
+  <div id="fenpeij">
+    分配
+  </div>
+</header>
+<div class="module-content" id="ge">
+	<section class="aui-scrollView">
+		<div class="m-slider" data-ydui-slider="">
+			<div class="slider-wrapper" >
+				<div class="slider-item">
+					<a id="gyt">
+						<img src="images/gongyu.jpg">
+					</a>
+				</div>
+
+			</div>
+			<div class="slider-pagination">
+			</div>
+		</div>
+	</section>
+	<div class="hys">
+		<h3 id="louceng"></span></h3>
+		<p><span style="color: #0c83f9;" id="zhuangtai"></span></p>
+	</div>
+	<div class="hyxz">
+		<div class="gongyuxx">
+			<p class="hybt" id="name"></p>
+			<ul>
+				<li id="louyu"></li>
+				<li id="louceng2"></li>
+				<li id="geju"></li>
+			<!--	<li id="shuju"></li>-->
+        <li id="beizhu"></li>
+			</ul>
+		</div>
+		<div class="sbxz" style="display:none">
+			<p class="hybt">公寓配置</p>
+			<ul>
+				<li>
+					<img src="images/chuanghu.png" />
+					<p>窗</p>
+				</li>
+				<li>
+					<img src="images/shafa.png" />
+					<p>沙发</p>
+				</li>
+				<li>
+					<img src="images/kongtiao.png" />
+					<p>空调</p>
+				</li>
+				<li>
+					<img src="images/nuanqi.png" />
+					<p>暖气</p>
+				</li>
+				<li>
+					<img src="images/weishengjian.png" />
+					<p>卫生间</p>
+				</li>
+				<li>
+					<img src="images/linyu.png" />
+					<p>淋浴</p>
+				</li>
+				<li>
+					<img src="images/chufang.png" />
+					<p>厨房</p>
+				</li>
+				<li>
+					<img src="images/yanttai.png" />
+					<p>阳台</p>
+				</li>
+			</ul>
+		</div>
+    <div class="gongyuxx">
+      <p class="hybt" >分配信息</p>
+      <ul id="fenpei">
+      <!--  <li ></li>-->
+
+      </ul>
+      <img src="../image/zhuan.gif" id="zhuan" style="height:20px;width:auto;margin-top:10px;margin-bottom:10px;" class="zhuan">
+      <div id="ddd">
+
+      </div>
+    </div>
+	</div>
+</div>
+<div class="foot_menu" style="display:none">
+	<ul>
+		<li class="cur">
+			<a href="index.html">
+				<i><img src="images/menu_icon01_r.png"></i>
+				<span>首 页</span>
+			</a>
+		</li>
+		<li>
+			<a href="shequ.html">
+				<i><img src="images/menu_icon02.png"></i>
+				<span>社 区</span>
+			</a>
+		</li>
+		<li>
+			<a href="news.html">
+				<i><img src="images/menu_icon03.png"></i>
+				<span>消 息</span>
+			</a>
+		</li>
+		<li>
+			<a href="user.html">
+				<i><img src="images/menu_icon04.png"></i>
+				<span>我 的</span>
+			</a>
+		</li>
+	</ul>
+</div>
+</body>
+<script src="js/jquery.js" type="text/javascript"></script>
+<script type="text/javascript" src="js/slider.js"></script>
+<script>
+    var box1,box2;
+    $('.date_').click(function() {
+        $('.date_').removeClass('checked');
+        $(this).addClass('checked');
+    });
+
+    $(".slot_").on("click", function () {
+        var $this = $(this);
+        var $boxes = $this.parent().children();
+
+        if ($this.hasClass('disable'))
+            return;
+
+        if (!box1) {
+            // 点击第一个盒子的时候清空所有box的checked状态
+            // 移除之前存储的box2变量
+            // 只给当前盒子增加checked
+            box1 = $this;
+            $boxes.removeClass('checked');
+            $this.addClass('checked');
+            box2 = null;
+        } else if (!box2) {
+            // 点击第二个盒子的时候
+            // 计算从哪个盒子开始到哪个盒子结束需要增加checked状态
+            box2 = $this;
+            var box1Index = box1.index();
+            var box2Index = box2.index();
+
+            // 这里从“第一个盒子”、“第二个盒子”的概念切换到“开始盒子”和“结束盒子”
+            var startBoxIndex = Math.min(box1Index, box2Index);
+            var endBoxIndex = Math.max(box1Index, box2Index);
+
+            // 重复点击第一个盒子时，不计算为第二个盒子
+            if (startBoxIndex === endBoxIndex) {
+                box2 = null;
+            }
+
+            // 开始盒子和结束盒子之间所有的盒子
+            var $startEndBoxRange = $boxes.filter(function () {
+                var index = $(this).index();
+                return index >= startBoxIndex && index <= endBoxIndex;
+            });
+            var $disableBoxes = $startEndBoxRange.filter(function () {
+                return $(this).hasClass('disable');
+            });
+
+            // 用户选择的区间是否包含禁用的盒子
+            if ($disableBoxes.length) {
+                // 包含禁用盒子则提示，并重置第二盒子
+                alert('disabled in range');
+                box2 = null;
+            } else {
+                // 不包含禁用盒子
+                $boxes.removeClass('checked');
+                $startEndBoxRange.addClass('checked');
+
+                // 到这里用户选择完了开始和结束区间
+            }
+        } else {
+            // 当已经选择了第二个盒子后重新点击，意味着刚才选过的一系列盒子作废
+            // 用户期望重新选择盒子区间
+            // 和选择第一个盒子后的逻辑相同
+            box1 = $this;
+            $boxes.removeClass('checked');
+            $this.addClass('checked');
+            box2 = null;
+        }
+
+    })
+
+    $("#submitOrder").on('click',function(){
+        if(box1 && box2){
+            var startTime = box1.attr("data-time");
+            var endTime = box2.attr("data-time");
+            if(startTime && endTime){
+                alert("预约成功")
+            }else{
+                alert("请选择预约时间")
+            }
+        }else{
+            alert("请选择两个时间点")
+        }
+
+
+
+    })
+
+</script>
+</html>
+<script type="text/javascript">
+page=0
+arr=[]
+arrindex=0
+apiready = function () {
+$api.fixStatusBar(document.getElementById('headj'));
+document.getElementById('headj').style.height=(50+api.safeArea.top)+'px'
+document.getElementById('ge').style.marginTop=(5+api.safeArea.top)+'px'
+//alert(JSON.stringify(api.pageParam.arr))
+document.getElementById('fenpeij').onclick=function(){
+  api.openWin({
+      name: 'gyfp',
+      url: './gyfp.html',
+      pageParam: {
+          id:api.pageParam.arr.id
+      }
+  });
+
+}
+function zb(){
+  if(api.pageParam.arr.imagepath){
+    document.getElementById('gyt').innerHTML='<img src="'+api.pageParam.arr.imagepath+'">'
+
+  }
+    document.getElementById('louceng').innerHTML=api.pageParam.arr.floorid+'楼'
+      document.getElementById('zhuangtai').innerHTML=api.pageParam.arr.ztname
+      document.getElementById('louyu').innerHTML='所属楼宇：'+api.pageParam.arr.lyname
+      document.getElementById('louceng2').innerHTML='所在楼层：'+api.pageParam.arr.floorid+'层'
+      //数据区分序号
+      document.getElementById('geju').innerHTML='公寓格局：'+api.pageParam.arr.HousingPattern
+        //  document.getElementById('shuju').innerHTML='数据区分序号：'+api.pageParam.arr.companyid
+          document.getElementById('name').innerHTML=api.pageParam.arr.name
+          document.getElementById('beizhu').innerHTML='备注：'+api.pageParam.arr.remark
+          /*地址：/learun/adms/ apartmentdistribution/ getapartmentdistribution
+类型：GET
+请求参数：
+参数名称	类型	备注	必须
+loginMark	String	设备标识，必须具有唯一性	是
+token	String	验证码，从登录后返回信息中获取	是
+pageno	String	当前页码	是
+pagesize	String	每页记录数	是
+Roomid	int	房间id
+          */
+
+}
+zb()
+$api.setStorage('j', 0);
+api.addEventListener({
+    name: 'sx'
+}, function(ret, err){
+    page=0
+    zb()
+    zb1()
+});
+
+showDefault()
+function zb1(){
+/*
+公寓分配
+请求地址：/learun/adms/ apartmentdistribution/ getapartmentdistribution
+类型：GET
+请求参数：
+参数名称	类型	备注	必须
+loginMark	String	设备标识，必须具有唯一性	是
+token	String	验证码，从登录后返回信息中获取	是
+pageno	String	当前页码	是
+pagesize	String	每页记录数	是
+Roomid	int	房间id
+floorid	String	楼层id	
+*/
+page++
+if(page==1){
+//alert(riqi)
+//alert()
+
+ api.ajax({
+   url: yuming+'/learun/adms/apartmentdistribution/getapartmentdistribution',
+       method: 'get',
+       data:{values: {
+"loginMark": api.deviceId,
+"token": $api.getStorage('token'),
+pageno:page,
+pagesize:10,
+Roomid:api.pageParam.arr.id
+						 }}
+			}, function(ret) {
+//alert(JSON.stringify(ret))
+api.refreshHeaderLoadDone()
+	 toast.hide()
+				for (var i = 0; i < document.getElementsByClassName('zhuan').length; i++) {
+				 document.getElementsByClassName('zhuan')[i].style.display='none'
+			 }
+			 if(ret){
+			 if(1){
+
+         arr=[]
+         arrindex=0
+if(ret.data&&ret.data.list.length>0){
+var html='';
+for (var i = 0; i <ret.data.list.length; i++) {
+  arr.push(ret.data.list[i])
+  arrindex++
+    html+='<div onclick="fpxq('+arrindex+')">'
+  html+='<li style="border:none">'+
+  '	房间序号：'+ret.data.list[i].roomid+
+  '	</li>'
+/*  html+=	'	<li style="border:none">'+
+  '	数据区分序号：'+ret.data.list[i].companyid+
+
+  '	</li>'*/
+  html+=	'	<li style="border:none">'+
+  '	用房企业：'+ret.data.list[i].F_FullName+
+
+  '	</li>'
+  html+=	'	<li style="border:none">'+
+  '	开始时间：'+ret.data.list[i].starttime.split(' ')[0]+
+
+  '	</li>'
+  html+=	'	<li style="border:none">'+
+  '	结束时间：'+ret.data.list[i].endtime.split(' ')[0]+
+
+  '	</li>'
+  html+=	'	<li >'+
+  '	备注：'+ret.data.list[i].remark+
+
+  '	</li>'
+  html+= '<li>'
+  html+='	<img style="opacity:0" src="images/del.png" class="del "  />'
+
+    html+='	<img style="float:right" src="images/del.png" class="del vv" data-id="'+ret.data.list[i].id+'" onclick="shanchu('+ret.data.list[i].id+')" />'
+   html+='</li>'
+html+='</div>'
+}
+html+='<div class="xiala"></div>'
+document.getElementById('fenpei').innerHTML=html;
+$('.vv').click(function(e){
+
+　　e.stopPropagation();
+
+})
+}else {
+// document.getElementById('jmenjin').innerHTML='<img src="../image/zanwu.png"style="width:100px;height:100px;display:block;margin:0 auto;margin-top:160px;margin-bottom:100px;">'
+}
+
+			 }else {
+
+		 toast.hide()
+			 }
+
+
+		 }else {
+
+			/* api.toast({
+			 msg: '网络错误',
+			 duration: 2000,
+			 location: 'middle'
+	 });*/
+		 }
+toast.hide()
+			})
+}else {
+ api.ajax({
+   url: yuming+'/learun/adms/apartmentdistribution/getapartmentdistribution',
+       method: 'get',
+       data:{values: {
+"loginMark": api.deviceId,
+"token": $api.getStorage('token'),
+pageno:page,
+pagesize:10,
+Roomid:api.pageParam.arr.id
+					}}
+}, function(ret) {
+				for (var i = 0; i < document.getElementsByClassName('zhuan').length; i++) {
+				 document.getElementsByClassName('zhuan')[i].style.display='none'
+			 }
+			 if(ret){
+			 if(1){
+
+
+         if(ret.data.list&&ret.data.list.length>0){
+         var html='';
+         for (var i = 0; i <ret.data.list.length; i++) {
+           arr.push(ret.data.list[i])
+           arrindex++
+             html+='<div onclick="fpxq('+arrindex+')">'
+           html+='<li style="border:none">'+
+           '	房间序号：'+ret.data.list[i].roomid+
+           '	</li>'
+         /*  html+=	'	<li style="border:none">'+
+           '	数据区分序号：'+ret.data.list[i].companyid+
+
+           '	</li>'*/
+           html+=	'	<li style="border:none">'+
+        '	用房企业：'+ret.data.list[i].F_FullName+
+
+           '	</li>'
+           html+=	'	<li style="border:none">'+
+           '	开始时间：'+ret.data.list[i].starttime.split(' ')[0]+
+
+           '	</li>'
+           html+=	'	<li style="border:none">'+
+           '	结束时间：'+ret.data.list[i].endtime.split(' ')[0]+
+
+           '	</li>'
+           html+=	'	<li >'+
+           '	备注：'+ret.data.list[i].remark+
+
+           '	</li>'
+           html+= '<li>'
+           html+='	<img style="opacity:0" src="images/del.png" class="del "  />'
+
+             html+='	<img style="float:right" src="images/del.png" class="del vv" data-id="'+ret.data.list[i].id+'" onclick="shanchu('+ret.data.list[i].id+')" />'
+            html+='</li>'
+  html+='</div>'
+         }
+
+html+='<div class="xiala"></div>'
+document.getElementsByClassName('xiala')[page-2].innerHTML=html
+	$api.setStorage('j',0)
+  $('.vv').click(function(e){
+
+  　　e.stopPropagation();
+
+  })
+}else {
+ //document.getElementById('content').innerHTML='<img src="../image/zanwu.png"style="width:100px;height:100px;display:block;margin:0 auto;margin-top:100px;">'
+}
+
+			 }
+
+
+		 }else {
+
+			/* api.toast({
+			 msg: '网络错误',
+			 duration: 2000,
+			 location: 'middle'
+	 });*/
+		 }
+toast.hide()
+			})
+
+
+}
+
+}
+zb1()
+api.addEventListener({
+name:'scrolltobottom',
+extra:{
+		threshold:0           //设置距离底部多少距离时触发，默认值为0，数字类型
+}
+}, function(ret, err){
+
+if($api.getStorage('j')==0){
+$api.setStorage('j',1)
+//alert(1)
+ var zhuan=document.getElementById('zhuan').cloneNode(true);
+ zhuan.style.display='block'
+ document.getElementById('ddd').appendChild(zhuan)
+
+zb1()
+}
+});
+
+}
+function shanchu(data){
+
+  id=data
+    $("#dialog").addClass("show");
+}
+function quxiao(data){
+
+  //id=data
+    $("#dialog").removeClass("show");
+}
+function queding(data){
+/*
+/learun/adms/Roomlease/deleleroomlease
+*/
+showDefault()
+//alert(id)
+      $("#dialog").removeClass("show");
+		if(1){	api.ajax({
+		    url: yuming+'/learun/adms/apartmentdistribution/postapartmentdistributiondelete',
+		        method: 'post',
+		        data:{values: {
+		          "loginMark": api.deviceId,
+		          "token": $api.getStorage('token'),
+		        id	:id,
+
+		              }}
+		       }, function(ret) {
+		 //alert(JSON.stringify(ret))
+toast.hide()
+		         for (var i = 0; i < document.getElementsByClassName('zhuan').length; i++) {
+		          document.getElementsByClassName('zhuan')[i].style.display='none'
+		        }
+		        if(ret){
+		        if(ret.code==200){
+							api.toast({
+							 msg:'删除成功!',
+							 duration: 2000,
+							 location: 'middle'
+							});
+api.sendEvent({
+    name: 'sx',
+    extra: {
+        key1: 'value1',
+        key2: 'value2'
+    }
+});
+
+
+
+		        }else {
+		          api.toast({
+		           msg:ret.info,
+		           duration: 2000,
+		           location: 'middle'
+		          });
+		      toast.hide()
+		        }
+
+
+		      }else {
+
+		       /* api.toast({
+		        msg: '网络错误',
+		        duration: 2000,
+		        location: 'middle'
+		    });*/
+		      }
+		 toast.hide()
+	 })}else {
+
+	 }
+}
+function fpxq(data){
+  api.openWin({
+      name: 'fpxq',
+      url: './fpxq.html',
+      pageParam: {
+          arr: arr[data-1]
+      }
+  });
+
+}
+</script>
